@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* NAVBAR */
+
+.navbar {
+  background-color: #d7c6a1a9;
+}
+
+#admin {
+    margin-left: 4px;
+    font-size: large;
+}
+
+#cardit{
+    font-size: medium;
+}
