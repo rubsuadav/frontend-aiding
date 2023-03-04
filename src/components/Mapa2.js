@@ -33,7 +33,7 @@ export default function Mapa2() {
         <MapContainer
            center={[37.358342303352885, -5.986570537333228]}
            zoom = {100}
-           style = {{ width: '80vw', height: '60vh', margin: '8vw'}} >
+           style = {{ width: '20vw', height: '60vh', margin: '8vw'}} >
             <TileLayer url={"https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=4Qg1CBLvuefoRWUOrqlJ"} attribution={"https://api.maptiler.com/resources/logo.svg"}/>
             <Marker position={[37.358342303352885, -5.986570537333228]}>
               <Popup>
