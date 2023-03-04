@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { VscAccount } from "react-icons/vsc";
 
-const BasicExample = ({navLinks, logo}) => {
+const NavigationBar = ({navLinks, logo}) => {
   
   return (
     <Navbar className='navbar' expand="sm">
@@ -38,4 +38,4 @@ const BasicExample = ({navLinks, logo}) => {
   );
 }
 
-export default BasicExample;
+export default NavigationBar;
