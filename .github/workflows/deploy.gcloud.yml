@@ -1,0 +1,35 @@
+name: Deploy gcloud
+
+on:
+  push:
+    branches:
+      - main
+
+jobs: 
+  deploy:
+    name: Deploying to Google Cloud
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Local config
+      run: |
+        echo ${{ secrets.LOCAL_CONFIG }} >> .env
+
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.GCLOUD_CREDENTIALS }}'
+
+    - name: Deploy to App Engine
+      id: deploy
+      uses: google-github-actions/deploy-appengine@v1
+      with:
+        deliverables: app.yaml
+        version: v1
+
+    - name: Test deploy works
+      run: curl "${{ steps.deploy.outputs.url }}"
