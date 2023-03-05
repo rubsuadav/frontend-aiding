@@ -1,8 +1,6 @@
 name: Deploy gcloud
 
-on: 
-  push:
-    - main
+on: push
 
 jobs: 
   deploy:
@@ -12,6 +10,10 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Local config
+      run: |
+        echo ${{ secrets.LOCAL_CONFIG }} >> .env
 
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
