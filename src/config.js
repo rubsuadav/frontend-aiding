@@ -8,7 +8,6 @@
  * @author José María Delgado Sánchez
  */
 
-
 module.exports = global.config = {
     // Backend url
     backendUrl: process.env.REACT_APP_BACKEND_URL,
