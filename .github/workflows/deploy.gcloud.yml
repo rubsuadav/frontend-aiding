@@ -1,11 +1,6 @@
-name: Deploy
+name: Deploy gcloud
 
-on:
-  push:
-    branches: [develop]
-
-  pull_request:
-    branches: [develop]
+on: push
 
 jobs: 
   deploy:
