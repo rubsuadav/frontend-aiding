@@ -1,6 +1,8 @@
 name: Deploy gcloud
 
-on: push
+on: 
+  push:
+    - main
 
 jobs: 
   deploy:
