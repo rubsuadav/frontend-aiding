@@ -1,10 +1,12 @@
 import './App.css';
 import React from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import { MapContainer } from "react-leaflet";
 import ResourcesList from './components/ResourcesList.js';
 import Map from './components/Map.js';
 import Table from 'react-bootstrap/Table';
+import Tutorial from './components/Tutorial.js';
+import ResourcesListItemAdmin from './components/ResourcesListItemAdmin.js';
+import ResourcesListAdmin from './components/ResourcesListAdmin.js';
 
 export default function App() {
   return (
