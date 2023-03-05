@@ -2,8 +2,8 @@ import './App.css';
 import React from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { MapContainer } from "react-leaflet";
-import ListadoRecursos from './components/ListadoRecursos.js';
-import Mapa2 from './components/Mapa2.js';
+import ResourcesList from './components/ResourcesList.js';
+import Map from './components/Map.js';
 import Table from 'react-bootstrap/Table';
 
 export default function App() {
@@ -12,14 +12,14 @@ export default function App() {
       <Table striped bordered hover>
       <thead>
         <tr>
-          <th>Mapa</th>
-          <th>Recursos</th>
+          <th><h4>Mapa</h4></th>
+          <th><h4>Recursos</h4></th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><Mapa2/></td>
-          <td><ListadoRecursos/></td>
+          <td><Map/></td>
+          <td><ResourcesList/></td>
           </tr>
       </tbody>
     </Table>

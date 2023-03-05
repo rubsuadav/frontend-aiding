@@ -1,8 +1,10 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import  React, { useState } from "react";
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
 
-export default function Mapa2() {
+export default function Map() {
+
     const [direccion, setDireccion] = useState(''); // [37.358342303352885, -5.986570537333228]
     const [coordenadas, setCoordenadas] = useState(null);
 
@@ -26,9 +28,9 @@ export default function Mapa2() {
   return (
     <div>
         <div>
-          <label htmlFor="direccion">Dirección: </label>
+          <label htmlFor="direccion"><h5>Dirección: </h5></label><br/>
           <input type="text" id="direccion" value={direccion} onChange={handleDireccionChange} />
-          <button onClick={handleBuscarClick}>Buscar</button>
+          <Button variant="dark" onClick={handleBuscarClick} size="sm" style={{margin:'10px'}}><h6>Buscar</h6></Button>
         </div>
         <MapContainer
            center={[37.358342303352885, -5.986570537333228]}
