@@ -2,3 +2,7 @@
     width: 550px; 
     height: auto;
 }
+
+.izquierda {
+    text-align: left;
+}

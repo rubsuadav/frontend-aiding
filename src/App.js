@@ -6,8 +6,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // importamos los componentes creados
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-import Home from "./pages/partners/Home";
-import Items from "./pages/partners/Items";
 
 import MapResource from './pages/information/map/index.js';
 import EditResource from './components/EditResource.js';
@@ -22,6 +20,10 @@ var navLinks= [
     {
       title: "Socios",
       path: "partners"
+    },
+    {
+      title: "Recursos",
+      path: "information/map-resource"
     }
   ];
 
@@ -35,8 +37,6 @@ export default function App() {
     <Router>
       <Navbar navLinks={navLinks} logo={logo}/>
       <Routes>
-        <Route path="/home" element={ <Home/>} />
-        <Route path="/partners" element={ <Items/>} />
         <Route exact path='/information/map-resource' element={<MapResource/>} />
         <Route exact path='/information/edit-resource' element={<EditResource/>} />
         <Route exact path='/information/create-resource' element={<AddResource/>} />

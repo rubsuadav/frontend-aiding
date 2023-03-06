@@ -4,8 +4,6 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { Link, useNavigate } from "react-router-dom";
-import swal from "sweetalert";
 
 // Css
 import '../css/mapResources.css';
@@ -35,7 +33,7 @@ export default function ResourcesList() {
           {data.map(item => (
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <div key={item.id}>
+              <div key={item.id} class="izquierda" >
               <DropdownButton variant="light" id="dropdown-item-button" title={item.title}>
                 <div class="custom-dropdown-item">
                 <Dropdown.Item as="button"><h5>Ciudad:</h5><p class="text-wrap">{item.body}</p></Dropdown.Item>
