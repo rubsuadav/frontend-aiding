@@ -3,8 +3,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+//import imgLocation from "src/images/marker.png";
+
 
 export default function Map() {
+
   const [direccion, setDireccion] = useState(""); // [37.358342303352885, -5.986570537333228]
   const [coordenadas, setCoordenadas] = useState(null);
 
@@ -27,6 +31,13 @@ export default function Map() {
       console.log(error);
     }
   };
+
+  const customIcon = new L.Icon({ 
+    iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png', //CAMBIAR POR NUESTRO MARKER (import no vale )
+    iconSize: [25, 35],
+    iconAnchor: [22, 94]
+  });
+
   return (
     <div>
       {/* <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" /> */}
@@ -60,7 +71,7 @@ export default function Map() {
             "https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=4Qg1CBLvuefoRWUOrqlJ"
           }
         />
-        <Marker position={[37.358342303352885, -5.986570537333228]}>
+        <Marker icon={customIcon} position={[37.358342303352885, -5.986570537333228]}>
           <Popup>Este es el recurso buscado.</Popup>
         </Marker>
       </MapContainer>

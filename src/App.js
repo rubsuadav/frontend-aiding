@@ -8,9 +8,10 @@ import Tutorial from './components/Tutorial.js';
 import ResourcesListItemAdmin from './components/ResourcesListItemAdmin.js';
 import ResourcesListAdmin from './components/ResourcesListAdmin.js';
 
+
 export default function App() {
   return (
-    
+
     <div style={{ margin: '40px', padding: '40px'}}>
       <Table striped bordered hover>
       <thead>

@@ -27,35 +27,6 @@ export default function ResourcesList() {
           .catch(error => console.log(error));
       }, []);
 
-      /* const deleteResource = async (id) => {
-        await axios.delete(`https://localhost:8000/information/resources/${id}`);
-        //navigate("/");
-      };
-    
-      const showAlert = async () => {
-        swal({
-          title: "Mensaje de confirmación",
-          text: "Te confirmamos que el recurso se ha borrado correctamente",
-          icon: "success",
-          button: "Aceptar",
-          timer: "2000",
-        });
-      };
-    
-      const showAlert2 = async () => {
-        swal({
-          title: "Eliminar recurso",
-          text: "Estás seguro que desea eliminar el recurso?",
-          icon: "warning",
-          buttons: ["No", "Sí"],
-        }).then((res) => {
-          if (res) {
-            deleteResource(data.id);
-            showAlert();
-          }
-        });
-      }; */
-
   return (
     <div>
        <Card style={{ width: '40rem' }}>
@@ -74,20 +45,6 @@ export default function ResourcesList() {
                 <Dropdown.Item  as="button"><h5>Comentarios adicionales:</h5><p>{item.additionals_comments}</p></Dropdown.Item>
                  */}</div>              
               </DropdownButton>
-             {/*  <Link
-            className="btn btn-outline-primary mx-2"
-            to={`/editresource/${data.id}`}
-          >
-            Edit
-          </Link>
-          <button
-            className="btn btn-danger mx-2"
-            onClick={() => {
-              showAlert2();
-            }}
-          >
-            Delete
-          </button> */}
               </div>
             </ListGroup.Item>
          </ListGroup>
