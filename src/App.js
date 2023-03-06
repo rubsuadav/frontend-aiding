@@ -6,6 +6,7 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/partners/Home";
 import Items from "./pages/partners/Items";
+import Details from "./pages/partners/Details";
 import CreateUpdatePartner from "./pages/partners/createUpdatePartner";
 
 var navLinks= [
@@ -29,6 +30,7 @@ function App() {
       <Routes>
         <Route path="/home" element={ <Home/>} />
         <Route path="/partners" element={ <Items/>} />
+        <Route path="/partners/:id" element={ <Details/>} />
         <Route path="/partners/create" element={ <CreateUpdatePartner/>} />
       </Routes>
     </Router>
