@@ -217,7 +217,6 @@ const Partners = () => {
   return (
     <div className='container'>
         <h1>Socios</h1>
-        <Button id="boton-socio">Crear socio</Button>
         <Table 
         onRow={(record, rowIndex) => {
           return {

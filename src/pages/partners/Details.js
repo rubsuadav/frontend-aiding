@@ -18,6 +18,7 @@ import {
   MDBListGroup,
   MDBListGroupItem
 } from 'mdb-react-ui-kit';
+import Table from 'react-bootstrap/Table';
 import partnersApi from "./services/backend.js";
 
 export default function Details() {
@@ -28,14 +29,21 @@ export default function Details() {
         last_name: "",
         email: "",
         state: "",
-        phone:"",
+        phone1:"",
         province:"",
         iban:"",
+        phone2:"", 
+        birthdate:"", 
+        sex:"", 
+        address:"", 
+        postal_code:"", 
+        township:"", 
+        language:"",  
+        account_holder:"", 
+        state:"",
       });
     
     const { id } = useParams();
-    
-    console.log(id);
 
     useEffect(() => {
         loadUser();
@@ -46,198 +54,242 @@ export default function Details() {
         setUser(result.data);
       };
 
+
+
   return (
     <section>
       <MDBContainer className="py-5">
         <MDBRow>
-          <MDBCol lg="6">
-            <MDBCard className="mb-4">
-              <MDBCardBody>
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Nombre</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{user.name}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Apellidos</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{user.last_name}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Email</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{user.email}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Teléfono 1</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{user.phone}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Teléfono 2</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">(098) 765-4321</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr /><MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>DNI</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{user.dni}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr /><MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Nacimiento</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">12/02/1990</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr /><MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Sexo</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">Hombre</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr /><MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Dirección</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">Avenida Reina Mercedes, 14</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                
-              </MDBCardBody>
-            </MDBCard>
+            <MDBCol lg="5">
+                <MDBCard className="mb-4">
+                <MDBCardBody>
+                    <MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Nombre</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.name}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Apellidos</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.last_name}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Email</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.email}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Teléfono 1</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.phone1}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Teléfono 2</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.phone2}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr /><MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>DNI</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.dni}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr /><MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Fecha de Nacimiento</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.birthdate}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr /><MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Sexo</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.sex}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr /><MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Dirección</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.address}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    
+                </MDBCardBody>
+                </MDBCard>
 
 
-          </MDBCol>
-          <MDBCol lg="6">
-            <MDBCard className="mb-4">
-              <MDBCardBody>
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Código Postal</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">40900</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Municipio</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">Sevilla</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Provincia</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{user.province}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Idioma</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">Español </MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>IBAN</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">ES56 7586 8576 4857 4758</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Titular cuenta</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">Johnatan Smith</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Importe</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">10€</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Periodicidad</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">Semestral</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Registro Donación</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">Activo</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
+            </MDBCol>
+            <MDBCol lg="5">
+                <MDBCard className="mb-4">
+                <MDBCardBody>
+                    <MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Código Postal</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.postal_code}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Municipio</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.township}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Provincia</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.province}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Idioma</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.language}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>IBAN</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.iban}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Titular cuenta</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">J{user.account_holder}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Importe</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">---</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Periodicidad</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">---</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="3">
+                        <MDBCardText>Registro Donación</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">{user.state}</MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                </MDBCardBody>
+                </MDBCard>
+            </MDBCol>
+            <MDBCol lg="2">
+                <MDBCard className="mb-4">
+                <MDBCardBody>
+                    <MDBRow>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">    
+                        <a href="" type="button" class="btn btn-light">Generar recibo</a>
+                        </MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">    
+                        <a href="" type="button" class="btn btn-light">Generar certificado</a>
+                        </MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">    
+                        <a href="" type="button" class="btn btn-light">Editar socio</a>
+                        </MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                    <MDBCol sm="9">
+                        <MDBCardText className="text-muted">    
+                        <a href="" type="button" class="btn btn-light">Añadir nueva comunicación</a>
+                        </MDBCardText>
+                    </MDBCol>
+                    </MDBRow>
+                </MDBCardBody>
+                </MDBCard>
+            </MDBCol>
         </MDBRow>
         <MDBRow>
             <MDBCol md="12">
             <MDBCard className="mb-4 mb-md-0">
                 <MDBCardBody>
-                <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">COMUNICACIONES</span> ...</MDBCardText>
-                <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>...</MDBCardText>
-                <MDBProgress className="rounded">
-                    <MDBProgressBar width={80} valuemin={0} valuemax={100} />
-                </MDBProgress>
-
-                <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>...</MDBCardText>
-                <MDBProgress className="rounded">
-                    <MDBProgressBar width={72} valuemin={0} valuemax={100} />
-                </MDBProgress>
-
-
+                <MDBCardText className="mb-4">COMUNICACIONES</MDBCardText>
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                        <th>Fecha</th>
+                        <th>Tipo</th>
+                        <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td>12/02/2021</td>
+                        <td>Telefónica</td>
+                        <td>Hablamos sobre sus donaciones.</td>
+                        </tr>
+                    </tbody>
+                </Table>
                 </MDBCardBody>
             </MDBCard>
             </MDBCol>
