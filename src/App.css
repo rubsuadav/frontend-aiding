@@ -1,3 +1,22 @@
+/*COLORES BOSCO*/
+:root {
+  --beigeB: #F5EDDC;
+  --gris: #CFD2CF;
+  --rosa: #FA9494;
+  --rojo: #EB1D36;
+
+}
+
+/*COLORES DOÑA MARÍA*/
+:root {
+  --verde: #698269;
+  --marron: #B99B6B;
+  --beigeM: #F1DBBF;
+  --rojo-oscuro: #AA5656;
+
+}
+
+
 .App {
   text-align: center;
 }
@@ -35,4 +54,36 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+/* NAVBAR */
+
+.navbar {
+  background-color: var(--beigeB);
+}
+
+#admin {
+    margin-left: 4px;
+    font-size: large;
+}
+
+#cardit{
+    font-size: medium;
+}
+
+/* PARTNERS */
+
+#boton-socio {
+  background-color: var(--gris);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  font-size: medium;
+  display: flex;
+}
+
+:where(.css-dev-only-do-not-override-10ed4xt).ant-btn-default:not(:disabled):hover {
+  color: var(--rosa);
+  border-color: var(--rosa);
 }
