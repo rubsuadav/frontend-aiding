@@ -1,7 +1,8 @@
 import React from 'react'
 
-import ResourcesList from 'src/components/ResourcesList.js';
-import Map from 'src/components/Map.js';
+import ResourcesList from '../../../components/ResourcesList.js';
+import Map from '../../../components/Map.js'
+import { Table } from 'react-bootstrap';
 
 export default function Index() {
   return (
