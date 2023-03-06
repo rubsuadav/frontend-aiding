@@ -9,7 +9,7 @@ const NavigationBar = ({navLinks, logo}) => {
   return (
     <Navbar className='navbar' expand="sm">
       <Container>
-        <Navbar.Brand as={Link} to="/Home">
+        <Navbar.Brand as={Link} to="/home">
           <img
                 src={logo}
                 width="130"
@@ -22,8 +22,8 @@ const NavigationBar = ({navLinks, logo}) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end">
           <Nav className="me-auto">
-            {navLinks.map((link,index) => (
-              <Nav.Link as={Link} to={link}>{link}</Nav.Link>
+            {navLinks.map((link) => (
+              <Nav.Link as={Link} to={link.path}>{link.title}</Nav.Link>
             ))}
               {/* <Nav.Link as={Link} to="/Home">Home</Nav.Link>
               <Nav.Link as={Link} to="/Items">Items</Nav.Link> */}

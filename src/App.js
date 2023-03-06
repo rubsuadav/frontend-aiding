@@ -7,7 +7,17 @@ import Footer from "./components/layout/Footer";
 import Home from "./components/pages/partners/Home";
 import Items from "./components/pages/partners/Items";
 
-var navLinks= ["Home","Items"]
+var navLinks= [
+    {
+      title: "Inicio",
+      path: "home"
+    },
+    {
+      title: "Socios",
+      path: "partners"
+    }
+  ];
+
 var logo=["./boscoglobal-logo.png"]
 
 function App() {
@@ -16,8 +26,8 @@ function App() {
     <Router>
       <Navbar navLinks={navLinks} logo={logo}/>
       <Routes>
-        <Route path="/Home" element={ <Home/>} />
-        <Route path="/Items" element={ <Items/>} />
+        <Route path="/home" element={ <Home/>} />
+        <Route path="/partners" element={ <Items/>} />
       </Routes>
     </Router>
     <Footer/>

@@ -80,6 +80,7 @@
   padding: 5px;
   margin: 5px;
   font-size: medium;
+  display: flex;
 }
 
 :where(.css-dev-only-do-not-override-10ed4xt).ant-btn-default:not(:disabled):hover {
