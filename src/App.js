@@ -6,6 +6,7 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/partners/Home";
 import Items from "./pages/partners/Items";
+import Advertisement from './pages/information/advertisement/Advertisement';
 import CreateUpdatePartner from "./pages/partners/createUpdatePartner";
 
 var navLinks= [
@@ -20,6 +21,10 @@ var navLinks= [
     {
       title: "Crear Socio",
       path: "partners/create"
+    }
+    {
+      title: "Noticias",
+      path: "information/advertisements"
     }
   ];
 

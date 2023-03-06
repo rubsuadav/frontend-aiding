@@ -2,7 +2,7 @@ import axios from "axios";
 import { backendUrl } from "../../../config";
 
 const partners = axios.create({
-    baseURL: String(backendUrl + "partners/"),
+    baseURL: String(backendUrl + "information/"),
     timeout: 1000
   });
 
