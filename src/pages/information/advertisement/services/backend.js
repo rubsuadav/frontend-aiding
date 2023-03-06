@@ -1,9 +1,9 @@
 import axios from "axios";
-import { backendUrl } from "../../../config";
+import { backendUrl } from "../../../../config";
 
-const partners = axios.create({
-    baseURL: String(backendUrl + "information/"),
+const advertisement = axios.create({
+    baseURL: String(backendUrl + "information/advertisements/"),
     timeout: 1000
   });
 
-export default partners
+export default advertisement

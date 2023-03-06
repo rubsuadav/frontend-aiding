@@ -13,6 +13,7 @@
   --marron: #B99B6B;
   --beigeM: #F1DBBF;
   --rojo-oscuro: #AA5656;
+  --verde-fondo: #F6F8F6;
 
 }
 
@@ -86,4 +87,12 @@
 :where(.css-dev-only-do-not-override-10ed4xt).ant-btn-default:not(:disabled):hover {
   color: var(--rosa);
   border-color: var(--rosa);
+}
+
+.adv-card {
+  background-color: var(--verde-fondo);
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }

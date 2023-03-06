@@ -21,7 +21,7 @@ var navLinks= [
     {
       title: "Crear Socio",
       path: "partners/create"
-    }
+    },
     {
       title: "Noticias",
       path: "information/advertisements"
@@ -39,7 +39,7 @@ function App() {
         <Route path="/home" element={ <Home/>} />
         <Route path="/partners" element={ <Items/>} />
         <Route path="/partners/create" element={ <CreateUpdatePartner/>} />
-        <Route path="/advertisements" element={ <Advertisement/>} />
+        <Route path="information/advertisements" element={ <Advertisement/>} />
       </Routes>
     </Router>
     <Footer/>

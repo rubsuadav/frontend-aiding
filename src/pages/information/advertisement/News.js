@@ -5,7 +5,7 @@ export default function News(advertisement) {
     let description = advertisement.advertisement.description;
 
   return (
-    <div class="card">
+    <div class="adv-card">
         <h3 class="title">{title}</h3>
     <br></br>
     <p>{description}</p>
