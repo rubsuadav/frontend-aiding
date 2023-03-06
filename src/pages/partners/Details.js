@@ -50,7 +50,7 @@ export default function Details() {
     <section>
       <MDBContainer className="py-5">
         <MDBRow>
-          <MDBCol lg="6">
+          <MDBCol lg="5">
             <MDBCard className="mb-4">
               <MDBCardBody>
                 <MDBRow>
@@ -220,6 +220,9 @@ export default function Details() {
                 </MDBRow>
               </MDBCardBody>
             </MDBCard>
+          </MDBCol>
+          <MDBCol lg="1">
+            <a href={`${user.id}/receipt`} type="button" class="btn btn-light">Generar recibo</a>
           </MDBCol>
         </MDBRow>
         <MDBRow>
