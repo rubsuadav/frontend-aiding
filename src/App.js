@@ -6,8 +6,9 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Home from "./components/pages/partners/Home";
 import Items from "./components/pages/partners/Items";
+import Advertisement from './components/pages/information/advertisement/Advertisement';
 
-var navLinks= ["Home","Items"]
+var navLinks= ["Home","Items","Advertisements"]
 var logo=["./boscoglobal-logo.png"]
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/Home" element={ <Home/>} />
         <Route path="/Items" element={ <Items/>} />
+        <Route path="/Advertisements" element={ <Advertisement/>} />
       </Routes>
     </Router>
     <Footer/>

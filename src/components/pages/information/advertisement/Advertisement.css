@@ -1,0 +1,23 @@
+/*COLORES BOSCO*/
+:root {
+    --beigeB: #F5EDDC;
+    --gris: #CFD2CF;
+    --rosa: #FA9494;
+    --rojo: #EB1D36;
+  
+  }
+  
+  /*COLORES DOÑA MARÍA*/
+  :root {
+    --verde: #698269;
+    --marron: #B99B6B;
+    --beigeM: #F1DBBF;
+    --rojo-oscuro: #AA5656;
+    --verde_fondo: #f6f8f6;
+  
+  }
+
+.card {
+    background-color: var(--verde_fondo);
+    
+  }
