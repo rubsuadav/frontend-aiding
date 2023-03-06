@@ -96,3 +96,14 @@
   align-items: center;
   text-align: center;
 }
+.link-black{ 
+  color: black !important;
+}
+.column-2 {
+  float: left;
+  width: 50%;
+}
+#sections{
+  display: flex;
+  font-size: larger;
+}
