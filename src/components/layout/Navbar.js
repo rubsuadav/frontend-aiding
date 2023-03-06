@@ -23,7 +23,7 @@ const NavigationBar = ({navLinks, logo}) => {
         <Navbar.Collapse className="justify-content-end">
           <Nav className="me-auto">
             {navLinks.map((link) => (
-              <Nav.Link as={Link} to={link.path}>{link.title}</Nav.Link>
+              <Nav.Link key={link.path} as={Link} to={link.path}>{link.title}</Nav.Link>
             ))}
               {/* <Nav.Link as={Link} to="/Home">Home</Nav.Link>
               <Nav.Link as={Link} to="/Items">Items</Nav.Link> */}

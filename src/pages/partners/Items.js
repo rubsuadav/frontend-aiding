@@ -221,14 +221,14 @@ const Partners = () => {
   }
   
   return (
-    <div className='container'>
-        <h1>Socios</h1>
+    <div className='container my-5'>
+        <h1 className="pt-3">Socios</h1>
         <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
-        <Table 
+        <Table
         onRow={(record, rowIndex) => {
           return {
             onClick: event => {
-              window.location.href = "/partners/" + record.id;
+              navigate("/partners/" + record.id);
             },
           };
         }}

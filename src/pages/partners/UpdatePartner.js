@@ -1,8 +1,32 @@
+import React from "react";
+import partnersApi from "./services/backend.js";
+import swal from "sweetalert";
+import { useNavigate, useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function UpdateCreatePartnerForm({ data, request, feature }) {
+const successMsg = {
+  title: "Mensaje de confirmación",
+  text: "Te confirmamos que el socio se ha actualizado correctamente",
+  icon: "success",
+  button: "Aceptar",
+  timer: "5000",
+};
+
+const errorMsg = {
+  title: "Mensaje de error",
+  text: "Se ha producido un error al actualizar el socio",
+  icon: "error",
+  button: "Aceptar",
+  timer: "5000",
+};
+
+function UpdatePartner() {
+  let navigate = useNavigate();
+
+  const { id } = useParams();
+
   const [partner, setPartner] = useState({
     name: "",
     last_name: "",
@@ -21,7 +45,6 @@ function UpdateCreatePartnerForm({ data, request, feature }) {
     account_holder: "",
     state: "active",
   });
-
 
   const {
     name,
@@ -42,18 +65,41 @@ function UpdateCreatePartnerForm({ data, request, feature }) {
     state,
   } = partner;
 
+  useEffect(() => {
+    loadPartner();
+  }, []);
+
+  const loadPartner = async () => {
+    const result = await partnersApi.get(`/${id}`);
+    setPartner(result.data);
+  };
+
+  function putPartner(partner) {
+    const aux = partnersApi
+      .put(`/${id}`, partner)
+      .then((response) => {
+        console.log(response);
+        swal(successMsg);
+        navigate(`/partners/${id}`);
+      })
+      .catch((error) => {
+        console.log(error);
+        swal(errorMsg);
+      });
+  }
+
   const onInputChange = (e) => {
     setPartner({ ...partner, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await request(partner);
+    putPartner(partner);
   };
 
   return (
     <div className="container my-5 shadow">
-      <h1 className="pt-3">{feature}</h1>
+      <h1 className="pt-3">Actualizando socio [{id}] {partner.name} {partner.last_name}</h1>
       <Form className="" onSubmit={(e) => onSubmit(e)}>
         <div className="row justify-content-evenly">
           <div className="col-md-5">
@@ -153,7 +199,7 @@ function UpdateCreatePartnerForm({ data, request, feature }) {
                 name="birthdate"
               />
             </Form.Group>
-            
+
             <Form.Group className="mb-3">
               <Form.Label>Dirección</Form.Label>
               <Form.Control
@@ -238,4 +284,4 @@ function UpdateCreatePartnerForm({ data, request, feature }) {
   );
 }
 
-export default UpdateCreatePartnerForm;
+export default UpdatePartner;
