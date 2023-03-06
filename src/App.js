@@ -4,11 +4,25 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // importamos los componentes creados
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-import Home from "./components/pages/partners/Home";
-import Items from "./components/pages/partners/Items";
-import Advertisement from './components/pages/information/advertisement/Advertisement';
+import Home from "./pages/partners/Home";
+import Items from "./pages/partners/Items";
+import CreateUpdatePartner from "./pages/partners/createUpdatePartner";
 
-var navLinks= ["Home","Items","Advertisements"]
+var navLinks= [
+    {
+      title: "Inicio",
+      path: "home"
+    },
+    {
+      title: "Socios",
+      path: "partners"
+    },
+    {
+      title: "Crear Socio",
+      path: "partners/create"
+    }
+  ];
+
 var logo=["./boscoglobal-logo.png"]
 
 function App() {
@@ -17,9 +31,10 @@ function App() {
     <Router>
       <Navbar navLinks={navLinks} logo={logo}/>
       <Routes>
-        <Route path="/Home" element={ <Home/>} />
-        <Route path="/Items" element={ <Items/>} />
-        <Route path="/Advertisements" element={ <Advertisement/>} />
+        <Route path="/home" element={ <Home/>} />
+        <Route path="/partners" element={ <Items/>} />
+        <Route path="/partners/create" element={ <CreateUpdatePartner/>} />
+        <Route path="/advertisements" element={ <Advertisement/>} />
       </Routes>
     </Router>
     <Footer/>
