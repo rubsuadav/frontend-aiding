@@ -1,69 +1,76 @@
-/* import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import axios from 'axios';
-import {item} from './components/ResourcesListItemAdmin.js';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import { Link, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
-export default function ResourcesListAdmin({ item }) {
+// Css
+import "../css/mapResources.css";
 
-    const handleDelete = (itemId) => {
-        axios.delete(`https://api.example.com/items/${itemId}`)
-          .then(() => {
-            const updatedItems = items.filter(item => item.id !== itemId);
-            setItems(updatedItems);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      };
-    
-      const handleEdit = (itemId) => {
-        const itemToEdit = items.find(item => item.id === itemId);
-        setEditingItem(itemToEdit);
-      };
-    
-      const handleCancelEdit = () => {
-        setEditingItem(null);
-      };
-    
-  const handleCreate = (itemData) => {
-    axios.post('https://api.example.com/items', itemData)
-      .then(response => {
-        setItems([...items, response.data]);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  };
+export default function ResourcesList() {
+  const [data, setData] = useState([]);
 
-  const handleUpdate = (itemId, itemData) => {
-    axios.put(`https://api.example.com/items/${itemId}`, itemData)
-      .then(response => {
-        const updatedItem = response.data;
-        const updatedItems = items.map(item => {
-          if (item.id === updatedItem.id) {
-            return updatedItem;
-          } else {
-            return item;
-          }
-        });
-        setItems(updatedItems);
-        setEditingItemId(null);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  };
+  // titulo, descripción, calle, numero, ciudad, comentarios adicionales, coordenadas x e y, y sección
 
-    return (
-      <li>
-        {item.name} - {item.description}
-        <button onClick={handleEdit}>Editar</button>
-        <button onClick={handleDelete}>Eliminar</button>
-        <button onClick={handleUpdate}>Actualizar</button>
-        <button onClick={handleCreate}>Crear</button>
-      </li>
-    );
-  }
-  
+  // https://localhost:8000/information/resources/
+  // https://jsonplaceholder.typicode.com/posts
 
- */
+  // onChange={handleDireccionChange} onClick={handleBuscarClick}
+
+  useEffect(() => {
+    axios
+      .get("https://jsonplaceholder.typicode.com/posts")
+      .then((response) => setData(response.data))
+      .catch((error) => console.log(error));
+  }, []);
+
+  return (
+    <div>
+      <Card style={{ width: "40rem" }}>
+        <Card.Header>
+          Haz click sobre cada uno para ver más información.
+        </Card.Header>
+        {data.map((item) => (
+          <ListGroup variant="flush">
+            <ListGroup.Item>
+              <div key={item.id}>
+                <DropdownButton
+                  variant="light"
+                  id="dropdown-item-button"
+                  title={item.title}
+                >
+                  <Link  className="btn btn-outline-primary mx-2" to={`/editResource/${resource.id}`}>
+                    Edit
+                  </Link>
+                  <button
+                    className="btn btn-danger mx-2"
+                    onClick={() => {
+                      deleteResource();
+                    }}
+                  >
+                    Eliminar usuario
+                  </button>
+                  <div class="custom-dropdown-item">
+                    <Dropdown.Item as="button">
+                      <h5>Ciudad:</h5>
+                      <p class="text-wrap">{item.body}</p>
+                    </Dropdown.Item>
+                     <Dropdown.Item  as="button"><h5>Descripción:</h5><p>{item.body}</p></Dropdown.Item>
+                <Dropdown.Item  as="button"><h5>Calle:</h5><p>{item.body}</p></Dropdown.Item>
+                <Dropdown.Item  as="button"><h5>Número:</h5><p>{item.body}</p></Dropdown.Item>
+                <Dropdown.Item  as="button"><h5>Ciudad:</h5><p>{item.body}</p></Dropdown.Item>
+                <Dropdown.Item  as="button"><h5>Comentarios adicionales:</h5><p>{item.body}</p></Dropdown.Item>
+                 
+                  </div>
+                </DropdownButton>
+              </div>
+            </ListGroup.Item>
+          </ListGroup>
+        ))}
+      </Card>
+    </div>
+  );
+}

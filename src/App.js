@@ -1,32 +1,21 @@
 import './App.css';
 import React from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import ResourcesList from './components/ResourcesList.js';
-import Map from './components/Map.js';
-import Table from 'react-bootstrap/Table';
-import Tutorial from './components/Tutorial.js';
-import ResourcesListItemAdmin from './components/ResourcesListItemAdmin.js';
-import ResourcesListAdmin from './components/ResourcesListAdmin.js';
 
+import MapResource from './information/map/index.js';
+import MapResourceAdmin from './components/ResourcesListAdmin';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 export default function App() {
   return (
-
-    <div style={{ margin: '40px', padding: '40px'}}>
-      <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th><h4>Mapa</h4></th>
-          <th><h4>Recursos</h4></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><Map/></td>
-          <td><ResourcesList/></td>
-          </tr>
-      </tbody>
-    </Table>
+    <div>
+      <Router>
+      <Routes>
+        <Route exact path='/' element={<Inicio/>} />
+        <Route exact path='/information/map-resource' element={<MapResource/>} />
+        <Route exact path='/information/resource-admin' element={<MapResourceAdmin/>} />
+      </Routes>
+      </Router>
     </div>
   );
 }

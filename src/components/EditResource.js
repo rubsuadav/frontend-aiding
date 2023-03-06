@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert";
 
-export default function EditUser() {
- // let navigate = useNavigate();
+export default function EditResource() {
+ 
+  let navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -41,7 +42,7 @@ export default function EditUser() {
     e.preventDefault();
     showAlert();
     await axios.put(
-      `https://localhost:8000/information/resources/${id}`,
+      `https://localhost:8000/information/resources/${id}`, 
       resource
     );
     navigate("/");
@@ -89,12 +90,68 @@ export default function EditUser() {
                 required="true"
               />
             </div>
+            <div className="mb-3">
+              <label htmlFor="Street" className="form-label">
+               Street
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter street"
+                name="street"
+                value={street}
+                onChange={(e) => onInputChange(e)}
+                required="true"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="Number" className="form-label">
+               Number
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter number"
+                name="number"
+                value={number}
+                onChange={(e) => onInputChange(e)}
+                required="true"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="City" className="form-label">
+                City
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter city"
+                name="city"
+                value={city}
+                onChange={(e) => onInputChange(e)}
+                required="true"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="Additionals_comments" className="form-label">
+                  Additionals_comments
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter city"
+                name="additionals_comments"
+                value={additionals_comments}
+                onChange={(e) => onInputChange(e)}
+                required="true"
+              />
+            </div>
             <button type="submit" className="btn btn-outline-primary">
               Submit
             </button>
             <Link
               className="btn btn-outline-danger mx-2"
-              to={`/viewuser/${user.id}`}
+              to={`/resources/${resource.id}`}
             >
               Cancel
             </Link>

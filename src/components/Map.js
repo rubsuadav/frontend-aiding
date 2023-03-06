@@ -40,27 +40,6 @@ export default function Map() {
 
   return (
     <div>
-      {/* <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" /> */}
-      <div>
-        <label htmlFor="direccion">
-          <h5>Dirección: </h5>
-        </label>
-        <br />
-        <input
-          type="text"
-          id="direccion"
-          value={direccion}
-          onChange={handleDireccionChange}
-        />
-        <Button
-          variant="dark"
-          onClick={handleBuscarClick}
-          size="sm"
-          style={{ margin: "10px" }}
-        >
-          <h6>Buscar</h6>
-        </Button>
-      </div>
       <MapContainer
         center={[37.358342303352885, -5.986570537333228]}
         zoom={50}

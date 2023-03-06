@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
 // Css
@@ -29,6 +29,7 @@ export default function ResourcesList() {
 
   return (
     <div>
+
        <Card style={{ width: '40rem' }}>
           <Card.Header>Haz click sobre cada uno para ver más información.</Card.Header>
           {data.map(item => (
@@ -50,6 +51,7 @@ export default function ResourcesList() {
          </ListGroup>
       ))}
       </Card>
+  
     </div>
   )
 }

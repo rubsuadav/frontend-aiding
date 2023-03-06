@@ -5,7 +5,7 @@ import swal from "sweetalert";
 
 export default function AddResource() {
   
-  //  let navigate = useNavigate();
+  let navigate = useNavigate();
 
   const [resource, setResource] = useState({
     title: "",
@@ -25,7 +25,7 @@ export default function AddResource() {
   const onSubmit = async (e) => {
     e.preventDefault();
     showAlert();
-    await axios.post("https://pruebamysql.pythonanywhere.com/persons/", resource);
+    await axios.post("https://localhost:8000/information/resources/", resource);
     navigate("/");
   };
 
@@ -47,7 +47,7 @@ export default function AddResource() {
 
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
-              <label htmlFor="Title" className="form-label">
+            <label htmlFor="Title" className="form-label">
                 Title
               </label>
               <input
@@ -70,6 +70,62 @@ export default function AddResource() {
                 placeholder="Enter your e-mail address"
                 name="description"
                 value={description}
+                onChange={(e) => onInputChange(e)}
+                required="true"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="Street" className="form-label">
+               Street
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter street"
+                name="street"
+                value={street}
+                onChange={(e) => onInputChange(e)}
+                required="true"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="Number" className="form-label">
+               Number
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter number"
+                name="number"
+                value={number}
+                onChange={(e) => onInputChange(e)}
+                required="true"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="City" className="form-label">
+                City
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter city"
+                name="city"
+                value={city}
+                onChange={(e) => onInputChange(e)}
+                required="true"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="Additionals_comments" className="form-label">
+                  Additionals_comments
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter city"
+                name="additionals_comments"
+                value={additionals_comments}
                 onChange={(e) => onInputChange(e)}
                 required="true"
               />
