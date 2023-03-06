@@ -7,6 +7,7 @@ import Footer from "./components/layout/Footer";
 import Home from "./pages/partners/Home";
 import Items from "./pages/partners/Items";
 import Details from "./pages/partners/Details";
+import CreateUpdatePartner from "./pages/partners/createUpdatePartner";
 
 var navLinks= [
     {
@@ -16,6 +17,10 @@ var navLinks= [
     {
       title: "Socios",
       path: "partners"
+    },
+    {
+      title: "Crear Socio",
+      path: "partners/create"
     }
   ];
 
@@ -30,6 +35,7 @@ function App() {
         <Route path="/home" element={ <Home/>} />
         <Route path="/partners" element={ <Items/>} />
         <Route path="/partners/:id" element={ <Details/>} />
+        <Route path="/partners/create" element={ <CreateUpdatePartner/>} />
       </Routes>
     </Router>
     <Footer/>
