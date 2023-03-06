@@ -66,7 +66,7 @@ export default function ResourcesList() {
               <div key={item.id}>
               <DropdownButton variant="light" id="dropdown-item-button" title={item.title}>
                 <div class="custom-dropdown-item">
-                <Dropdown.Item  as="button"><h5>Ciudad:</h5><p>{item.body}</p></Dropdown.Item>
+                <Dropdown.Item as="button"><h5>Ciudad:</h5><p class="text-wrap">{item.body}</p></Dropdown.Item>
                 {/* <Dropdown.Item  as="button"><h5>Descripción:</h5><p>{item.description}</p></Dropdown.Item>
                 <Dropdown.Item  as="button"><h5>Calle:</h5><p>{item.street}</p></Dropdown.Item>
                 <Dropdown.Item  as="button"><h5>Número:</h5><p>{item.number}</p></Dropdown.Item>

@@ -61,7 +61,7 @@ export default function Map() {
           }
         />
         <Marker position={[37.358342303352885, -5.986570537333228]}>
-          <Popup>{direccion}</Popup>
+          <Popup>Este es el recurso buscado.</Popup>
         </Marker>
       </MapContainer>
     </div>
