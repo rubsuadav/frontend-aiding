@@ -10,6 +10,7 @@ import Footer from "./components/layout/Footer";
 import MapResource from './pages/information/map/index.js';
 import EditResource from './components/EditResource.js';
 import AddResource from './components/AddResource.js';
+import AdminTableResources from './components/PaginationTable.js';
 //import MapResourceAdmin from './components/ResourcesListAdmin';
 
 var navLinks= [
@@ -24,6 +25,10 @@ var navLinks= [
     {
       title: "Recursos",
       path: "information/map-resource"
+    },
+    {
+      title: "Admin Resources",
+      path: "/information/admin"
     }
   ];
 
@@ -40,6 +45,7 @@ export default function App() {
         <Route exact path='/information/map-resource' element={<MapResource/>} />
         <Route exact path='/information/edit-resource' element={<EditResource/>} />
         <Route exact path='/information/create-resource' element={<AddResource/>} />
+        <Route exact path='/information/admin' element={<AdminTableResources/>} />
       </Routes>
     </Router>
     <Footer/>
