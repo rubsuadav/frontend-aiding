@@ -2,14 +2,15 @@ import React from "react";
 import UpdateCreatePartnerForm from "../../components/forms/updateCreatePartnerForm";
 import backendApi from "./services/backend.js";
 import swal from 'sweetalert';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function CreateUpdatePartner() {
     let navigate = useNavigate();
 
     function postPartner(partner){
-        const aux = backendApi.post('',partner).then(() => {
+        const aux = backendApi.post('',partner).then((response) => {
+            console.log(response);
             showAlert();
             navigate("/partners");
         });
@@ -27,7 +28,7 @@ function CreateUpdatePartner() {
 
   return (
     <div>
-      <UpdateCreatePartnerForm request={postPartner} />
+      <UpdateCreatePartnerForm request={postPartner} feature={"Crear socio"} />
     </div>
   );
 }

@@ -17,10 +17,6 @@ var navLinks= [
       title: "Socios",
       path: "partners"
     },
-    {
-      title: "Crear Socio",
-      path: "partners/create"
-    }
   ];
 
 var logo=["./boscoglobal-logo.png"]

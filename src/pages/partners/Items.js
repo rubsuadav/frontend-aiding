@@ -1,9 +1,10 @@
 import React from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { Table, Badge, Button, Input, Space} from 'antd';
+import { Table, Button, Input, Space} from 'antd';
 import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
 import partnersApi from "./services/backend.js";
+import { useNavigate } from "react-router-dom";
 
 /*DATOS DE LA TABLA*/
 /*
@@ -51,6 +52,7 @@ const onChange = (pagination, filters, sorter, extra) => {
 
 
 const Partners = () => {
+  let navigate = useNavigate();
 
   /*BUSCADOR*/
   const [searchText, setSearchText] = useState('');
@@ -221,12 +223,14 @@ const Partners = () => {
     console.log(partnersApi.get())
   }, []);
 
-
+  function createPartnerRedirect(){
+    navigate("/partners/create");
+  }
   
   return (
     <div className='container'>
         <h1>Socios</h1>
-        <Button id="boton-socio">Crear socio</Button>
+        <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
         <Table columns={columns} dataSource={partners_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
     </div>
   );
