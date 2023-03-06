@@ -192,16 +192,14 @@ const Partners = () => {
       filters: [
         {
           text: 'Activo',
-          value: 'ACTIVE',
+          value: 'Activo',
         },
         {
           text: 'Inactivo',
-          value: 'INACTIVE',
+          value: 'Inactivo',
         },
       ],
-      filterMode: 'tree',
-      filterSearch: true,
-      onFilter: (value, record) => record.name.startsWith(value),
+      onFilter: (value, record) => record.state.includes(value),
       width: '30%',
     },
   ];

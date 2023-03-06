@@ -1,5 +1,5 @@
 import axios from "axios";
-import { backendUrl } from "../../../../config";
+import { backendUrl } from "../../../config";
 
 const partners = axios.create({
     baseURL: String(backendUrl + "partners/"),
