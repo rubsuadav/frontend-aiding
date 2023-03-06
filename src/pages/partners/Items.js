@@ -88,7 +88,10 @@ const Partners = () => {
           <Button
             type="primary"
             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
+            icon={<SearchOutlined style={{
+              alignItems: 'center',
+              display: 'inline-grid',
+            }}/>}
             size="small"
             style={{
               width: 90,
@@ -118,22 +121,13 @@ const Partners = () => {
           >
             Filter
           </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              close();
-            }}
-          >
-            close
-          </Button>
         </Space>
       </div>
     ),
     filterIcon: (filtered) => (
       <SearchOutlined
         style={{
-          color: filtered ? '#1890ff' : undefined,
+          color: filtered ? '#FA9494' : undefined,
         }}
       />
     ),
@@ -148,7 +142,7 @@ const Partners = () => {
       searchedColumn === dataIndex ? (
         <Highlighter
           highlightStyle={{
-            backgroundColor: '#ffc069',
+            backgroundColor: '#FA9494',
             padding: 0,
           }}
           searchWords={[searchText]}
@@ -218,16 +212,21 @@ const Partners = () => {
 
   useEffect(() => {
     const getPartnersData = partnersApi.get().then((response) => {setPartnersData(response.data);});
-    console.log(partnersApi.get())
   }, []);
-
-
   
   return (
     <div className='container'>
         <h1>Socios</h1>
         <Button id="boton-socio">Crear socio</Button>
-        <Table columns={columns} dataSource={partners_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
+        <Table 
+        onRow={(record, rowIndex) => {
+          return {
+            onClick: event => {
+              window.location.href = "/partners/" + record.id;
+            },
+          };
+        }}
+        columns={columns} dataSource={partners_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
     </div>
   );
 }
