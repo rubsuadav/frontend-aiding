@@ -1,12 +1,10 @@
 import React from 'react'
-
 export default function Section(section) {
 
-
     let name =section.section.name;
-
+    let id = section.section.id;
 
   return (
-    <div class="column-2"><a class="link-black" href={`/information/sections/${section.section.id}`}> {name}</a></div>
+    <div class="col" ><a href={`/information/sections/${id}`} class="link-black" > {name}</a></div>
   )
 }

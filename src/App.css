@@ -91,19 +91,26 @@
 
 .adv-card {
   background-color: var(--verde-fondo);
-
+  margin-left: auto;
+  margin-right: auto;
   justify-content: center;
   align-items: center;
   text-align: center;
+  width: 30em;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid #c2bfbf;
+  border-radius: 4px;
 }
 .link-black{ 
   color: black !important;
 }
-.column-2 {
-  float: left;
-  width: 50%;
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+  grid-gap: 10px;
 }
-#sections{
-  display: flex;
+#sections{  
   font-size: larger;
 }

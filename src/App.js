@@ -8,6 +8,8 @@ import Home from "./pages/partners/Home";
 import Items from "./pages/partners/Items";
 import Advertisement from './pages/information/advertisement/Advertisement';
 import CreateUpdatePartner from "./pages/partners/createUpdatePartner";
+import NewInfo from './pages/information/advertisement/NewInfo';
+
 
 var navLinks= [
     {
@@ -24,7 +26,7 @@ var navLinks= [
     },
     {
       title: "Noticias",
-      path: "information/advertisements"
+      path: "information/sections"
     }
   ];
 
@@ -39,7 +41,8 @@ function App() {
         <Route path="/home" element={ <Home/>} />
         <Route path="/partners" element={ <Items/>} />
         <Route path="/partners/create" element={ <CreateUpdatePartner/>} />
-        <Route path="information/advertisements" element={ <Advertisement/>} />
+        <Route path="information/sections" element={ <Advertisement/>} />
+        <Route path="information/advertisements/:id" element={ <NewInfo/>} />
       </Routes>
     </Router>
     <Footer/>
