@@ -87,3 +87,10 @@
   color: var(--rosa);
   border-color: var(--rosa);
 }
+
+#map {
+  position: relative;
+  bottom: 0;
+  top: 0;
+  width: 95%;
+}

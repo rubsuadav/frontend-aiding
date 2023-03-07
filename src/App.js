@@ -8,9 +8,10 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 
 import MapResource from './pages/information/map/index.js';
-import EditResource from './components/EditResource.js';
-import AddResource from './components/AddResource.js';
-import AdminTableResources from './components/PaginationTable.js';
+import UpdateResource from './pages/information/map/UpdateResource.js';
+import CreateResource from './pages/information/map/CreateResource.js';
+import ShowResource from './pages/information/map/ShowResource.js';
+import AdminTableResources from './pages/information/map/ResourcesTable.js';
 //import MapResourceAdmin from './components/ResourcesListAdmin';
 
 var navLinks= [
@@ -43,9 +44,10 @@ export default function App() {
       <Navbar navLinks={navLinks} logo={logo}/>
       <Routes>
         <Route exact path='/information/map-resource' element={<MapResource/>} />
-        <Route exact path='/information/edit-resource' element={<EditResource/>} />
-        <Route exact path='/information/create-resource' element={<AddResource/>} />
+        <Route exact path='/information/edit-resource/:id' element={<UpdateResource/>} />
+        <Route exact path='/information/create-resource' element={<CreateResource/>} />
         <Route exact path='/information/admin' element={<AdminTableResources/>} />
+        <Route path="/information/resources/:id" element={ <ShowResource/>} />
       </Routes>
     </Router>
     <Footer/>

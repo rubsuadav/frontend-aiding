@@ -32,10 +32,16 @@ export default function Map() {
     }
   };
 
-  const customIcon = new L.Icon({ 
-    iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png', //CAMBIAR POR NUESTRO MARKER (import no vale )
-    iconSize: [25, 35],
-    iconAnchor: [22, 94]
+  const customIcon = new L.Icon({
+    iconUrl: require("../images/marker.png"),
+    iconRetinaUrl: require("../images/marker.png"),
+    //iconAnchor: null,
+    //popupAnchor: null,
+    //shadowUrl: null,
+    //shadowSize: null,
+    shadowAnchor: null,
+    iconSize: new L.Point(20, 30),
+    //className: 'leaflet-div-icon'
   });
 
   return (
