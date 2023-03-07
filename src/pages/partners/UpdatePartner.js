@@ -99,7 +99,7 @@ function UpdatePartner() {
 
   return (
     <div className="container my-5 shadow">
-      <h1 className="pt-3">Actualizando socio [{id}] {partner.name} {partner.last_name}</h1>
+      <h1 className="pt-3">Actualizando socio Nº{id} {partner.name} {partner.last_name}</h1>
       <Form className="" onSubmit={(e) => onSubmit(e)}>
         <div className="row justify-content-evenly">
           <div className="col-md-5">
