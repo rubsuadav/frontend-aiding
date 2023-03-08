@@ -74,7 +74,7 @@ export default function UpdateResource() {
     <div className="container my-5">
       <div className="row justify-content-center">
         <div className="col-lg-6 shadow">
-          <h1 className="pt-3">Crear recurso</h1>
+          <h1 className="pt-3">Actualizar recurso</h1>
           <Form className="" onSubmit={(e) => onSubmit(e)}>
             <div className="row justify-content-evenly">
               <Form.Group className="mb-3">
