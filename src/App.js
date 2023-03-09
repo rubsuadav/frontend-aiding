@@ -7,12 +7,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 
-import MapResource from './pages/information/map/index.js';
 import UpdateResource from './pages/information/map/UpdateResource.js';
 import CreateResource from './pages/information/map/CreateResource.js';
 import ShowResource from './pages/information/map/ShowResource.js';
-import AdminTableResources from './pages/information/map/ResourcesTable.js';
-//import MapResourceAdmin from './components/ResourcesListAdmin';
+import ResourcesTable from './pages/information/map/ResourcesTable.js';
+import ResourcesListEdit from './components/ResourcesListEdit';
+import ResourcesList from './components/ResourcesList';
 
 var navLinks= [
     {
@@ -43,10 +43,10 @@ export default function App() {
     <Router>
       <Navbar navLinks={navLinks} logo={logo}/>
       <Routes>
-        <Route exact path='/information/map-resource' element={<MapResource/>} />
+        <Route exact path='/information/map-resource' element={<ResourcesListEdit/>} />
         <Route exact path='/information/edit-resource/:id' element={<UpdateResource/>} />
         <Route exact path='/information/create-resource' element={<CreateResource/>} />
-        <Route exact path='/information/admin' element={<AdminTableResources/>} />
+        <Route exact path='/information/admin' element={<ResourcesTable/>} />
         <Route path="/information/resources/:id" element={ <ShowResource/>} />
       </Routes>
     </Router>

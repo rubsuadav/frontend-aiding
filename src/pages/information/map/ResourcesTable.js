@@ -250,7 +250,6 @@ const ResourcesTable = () => {
     const getResourceData = resourcesApi.get().then((response) => {
       setResourceData(response.data);
     });
-    console.log(resourcesApi.get());
   }, []);
 
   return (
