@@ -1,47 +1,19 @@
 import React from 'react';
-import { SearchOutlined } from '@ant-design/icons';
+import { ConsoleSqlOutlined, SearchOutlined } from '@ant-design/icons';
 import { Table, Button, Input, Space} from 'antd';
 import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
 import partnersApi from "./services/backend.js";
-import { useNavigate } from "react-router-dom";
 
 /*DATOS DE LA TABLA*/
-/*
+
 var data = [
   {
-    key: '1',
-    dni: '12345678A',
-    nombre: 'John',
-    apellidos: 'Brown',
-    email: 'john@email.com',
-    reg: 'true',
+    date: '12/02/2021',
+    communication_type: 'TELEFÓNICA',
+    description: 'PRUEBA PRUEBA'
   },
-  {
-    key: '2',
-    dni: '12345678A',
-    nombre: 'Jim',
-    apellidos: 'Brown',
-    email: 'jim@email.com',
-    reg: 'true',
-  },
-  {
-    key: '3',
-    dni: '12345678A',
-    nombre: 'Adala',
-    apellidos: 'Brown',
-    email: 'adala@email.com',
-    reg: 'true',
-  },
-  {
-    key: '4',
-    dni: '12345678A',
-    nombre: 'John',
-    apellidos: 'Brown',
-    email: 'john@email.com',
-    reg: 'true',
-  },
-];*/
+];
 
 
 
@@ -51,8 +23,22 @@ const onChange = (pagination, filters, sorter, extra) => {
 
 
 
-const Partners = () => {
-  let navigate = useNavigate();
+const Communication = ({user_id}) =>{
+
+    /**Establecer las comunicaciones */
+    const [communications_data, setCommunications] = React.useState([
+        {
+            date: '...',
+            communication_type: '...',
+            description: '...',
+        }
+        ]);
+
+  useEffect(() => {
+    const getCommunications = partnersApi.get(`/${user_id}/communication/`).then((response) => {setCommunications(response.data);});
+  }, []);
+
+  console.log(communications_data);
 
   /*BUSCADOR*/
   const [searchText, setSearchText] = useState('');
@@ -157,84 +143,46 @@ const Partners = () => {
   });
   const columns = [
     {
-      title: 'Nº de socio',
-      dataIndex: 'id',
-      sorter: {
-        compare: (a, b) => a.id - b.id,
-        multiple: 1,
-      },
+      title: 'Fecha',
+      dataIndex: 'date',
+      ...getColumnSearchProps('date'),
     },
     {
-      title: 'DNI',
-      dataIndex: 'dni',
-      ...getColumnSearchProps('dni'),
-    },
-    {
-      title: 'Nombre',
-      dataIndex: 'name',
-      ...getColumnSearchProps('name'),
-    },
-    {
-      title: 'Apellidos',
-      dataIndex: 'last_name',
-    },
-    {
-      title: 'Email',
-      dataIndex: 'email',
-    },
-    {
-      title: 'Registro Donación',
-      dataIndex: 'state',
+      title: 'Tipo de comunicación',
+      dataIndex: 'communication_type',
       filters: [
         {
-          text: 'Activo',
-          value: 'Activo',
+          text: 'TELEFÓNICA',
+          value: 'TELEFÓNICA',
         },
         {
-          text: 'Inactivo',
-          value: 'Inactivo',
+          text: 'TELEMÁTICA',
+          value: 'TELEMÁTICA',
+        },
+        {
+          text: 'PERSONAL',
+          value: 'PERSONAL',
+        },
+        {
+          text: 'EMAIL',
+          value: 'EMAIL',
         },
       ],
-      onFilter: (value, record) => record.state.includes(value),
+      onFilter: (value, record) => record.communication_type.includes(value),
       width: '30%',
+    },
+    {
+      title: 'Descripción',
+      dataIndex: 'description',
+      ...getColumnSearchProps('description'),
     },
   ];
 
-  /*DATOS*/
-  const [partners_data, setPartnersData] = React.useState([
-    {
-      id: '...',
-      dni: '...',
-      name: '...',
-      last_name: '...',
-      email: '...',
-      state: '...',
-    }
-  ]);
-
-  useEffect(() => {
-    const getPartnersData = partnersApi.get().then((response) => {setPartnersData(response.data);});
-  }, []);
-
-  function createPartnerRedirect(){
-    navigate("/partners/create");
-  }
-  
   return (
     <div className='container my-5'>
-        <h1 className="pt-3">Socios</h1>
-        <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
-        <Table
-        onRow={(record, rowIndex) => {
-          return {
-            onClick: event => {
-              navigate("/partners/" + record.id);
-            },
-          };
-        }}
-        columns={columns} dataSource={partners_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
+        <Table columns={columns} dataSource={communications_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 6,}}/>
     </div>
   );
 }
 
-export default Partners;
+export default Communication;

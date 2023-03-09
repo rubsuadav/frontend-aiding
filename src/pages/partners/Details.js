@@ -18,12 +18,14 @@ import {
   MDBListGroup,
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
-import Table from "react-bootstrap/Table";
 import partnersApi from "./services/backend.js";
+import Communication from "./Communications.js";
 
 
 export default function Details() {
   let navigate = useNavigate();
+
+  /**Establecer usuario */
   const [user, setUser] = useState({
     dni: "",
     name: "",
@@ -54,7 +56,6 @@ export default function Details() {
     const result = await partnersApi.get(`/${id}`);
     setUser(result.data);
   };
-
 
   return (
     <section>
@@ -315,22 +316,9 @@ export default function Details() {
             <MDBCard className="mb-4 mb-md-0">
               <MDBCardBody>
                 <MDBCardText className="mb-4">COMUNICACIONES</MDBCardText>
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>Fecha</th>
-                      <th>Tipo</th>
-                      <th>Descripción</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>12/02/2021</td>
-                      <td>Telefónica</td>
-                      <td>Hablamos sobre sus donaciones.</td>
-                    </tr>
-                  </tbody>
-                </Table>
+
+                <Communication user_id={id}/>
+
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
