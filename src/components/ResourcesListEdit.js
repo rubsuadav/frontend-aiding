@@ -30,6 +30,8 @@ export default function ResourcesList() {
       number: "...",
       city: "...",
       additionals_comments: "...",
+      latitude: "...",
+      longitude: "..."
     },
   ]);
   useEffect(() => {
@@ -51,7 +53,7 @@ export default function ResourcesList() {
     //className: 'leaflet-div-icon'
   });
 
-  const markers = [
+  /* const markers = [
     { position: [37.37819890742758, -5.986237173442225], title: "Marcador 1"},
     { position: [37.36389157436658, -5.98052205673053], title: "Marcador 2" },
     { position: [37.38551392139047, -5.972622733550851], title: "Marcador 3" },
@@ -59,7 +61,7 @@ export default function ResourcesList() {
     { position: [37.357317735050124, -5.984544892507049], title: "Marcador 5" },
     { position: [37.3652312981789, -5.992698807621536], title: "Marcador 6" },
     { position: [37.35124555623236, -5.989008088148664], title: "Marcador 7" }
-  ];
+  ]; */
   
   return (
     <div>
@@ -85,11 +87,8 @@ export default function ResourcesList() {
                             "https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=4Qg1CBLvuefoRWUOrqlJ"
                           }
                         />
-                        {/* <Marker icon={customIcon} position={[37.358342303352885, -5.986570537333228]}>
-                          <Popup>Marcador</Popup>
-                        </Marker> */}
-                         {markers.map((marker, index) => (
-                          <Marker key={index} icon={customIcon} position={marker.position}> <Popup>{marker.title}</Popup>
+                        {resources_data.map(item => ( 
+                          <Marker icon={customIcon} position={[item.latitude, item.longitude]}> <Popup>{item.title}</Popup>
                           </Marker>
                           ))}
                       </MapContainer>
