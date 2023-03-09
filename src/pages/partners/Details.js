@@ -266,7 +266,7 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a href="" type="button" className="btn btn-light w-100">
+                      <a href="" type="button" id="button" className="btn btn-light w-100">
                         Generar recibo
                       </a>
                     </MDBCardText>
@@ -276,7 +276,7 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a href="" type="button" className="btn btn-light w-100">
+                      <a href="" type="button" id="button" className="btn btn-light w-100">
                         Generar certificado
                       </a>
                     </MDBCardText>
@@ -288,7 +288,7 @@ export default function Details() {
                     <MDBCardText className="text-muted w-auto">
                       <a
                         onClick={() => {navigate(`/partners/update/${id}`)}}
-                        type="button"
+                        type="button" id="button" 
                         className="btn btn-light w-100"
                       >
                         Editar socio
@@ -300,7 +300,7 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a href="" type="button" className="btn btn-light w-100">
+                      <a href="" type="button" id="button" className="btn btn-light w-100">
                         Añadir nueva comunicación
                       </a>
                     </MDBCardText>

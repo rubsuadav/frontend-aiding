@@ -12,8 +12,8 @@ const NavigationBar = ({navLinks, logo}) => {
         <Navbar.Brand as={Link} to="/home">
           <img
                 src={logo}
-                width="130"
-                height="60"
+                width="180"
+                height="80"
                 className="d-inline-block align-top"
                 alt="Logo"
               />

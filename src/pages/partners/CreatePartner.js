@@ -265,7 +265,7 @@ function CreatePartner() {
           </div>
   
           <div className="row justify-content-evenly">
-            <Button className="col mb-4 mx-5" variant="primary" type="submit">
+            <Button className="col mb-4 mx-5" variant="outline-success" type="submit">
               Guardar socio
             </Button>
           </div>

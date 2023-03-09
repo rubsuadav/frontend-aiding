@@ -21,7 +21,7 @@ var navLinks= [
     },
   ];
 
-var logo=["./boscoglobal-logo.png"]
+var logo=["./logo.png"]
 
 function App() {
   return (

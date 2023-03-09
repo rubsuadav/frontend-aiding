@@ -1,24 +1,14 @@
-/*COLORES BOSCO*/
+/*COLORES DE LA APLICACIÓN*/
 :root {
-  --beigeB: #F5EDDC;
-  --gris: #CFD2CF;
-  --rosa: #FA9494;
-  --rojo: #EB1D36;
-
-}
-
-/*COLORES DOÑA MARÍA*/
-:root {
-  --verde: #698269;
-  --marron: #B99B6B;
-  --beigeM: #F1DBBF;
-  --rojo-oscuro: #AA5656;
-
+  --nav: #b6afee;
+  --fondo: rgb(252, 252, 252);
+  --boton: #7600dd;
+  --color: #678edf;
 }
 
 .App {
   text-align: center;
-  background-color: rgb(252, 252, 252);
+  background-color: var(--fondo);
 }
 
 .App-logo {
@@ -44,7 +34,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--color);
 }
 
 @keyframes App-logo-spin {
@@ -56,11 +46,25 @@
   }
 }
 
+/*HOME*/
+
+#div-home{
+  height: 485px;
+}
+
+#welcome{
+  font-weight: bold;
+  margin-top: 50px;
+}
 
 /* NAVBAR */
 
 .navbar {
-  background-color: var(--beigeB);
+  background-color: var(--nav);
+}
+
+.me-auto {
+  font-size: large;
 }
 
 #admin {
@@ -84,6 +88,15 @@
 }
 
 :where(.css-dev-only-do-not-override-10ed4xt).ant-btn-default:not(:disabled):hover {
-  color: var(--rosa);
-  border-color: var(--rosa);
+  color: var(--boton);
+  border-color: var(--boton);
 }
+
+/*ID BUTTON*/
+
+#button:hover {
+  color: var(--boton);
+  background-color: var(--bs-btn-hover-bg);
+  border-color: var(--boton);
+}
+
