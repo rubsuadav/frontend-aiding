@@ -19,6 +19,9 @@ import {
 import resourcesApi from "../pages/information/map/services/backend.js";
 import L from "leaflet";
 
+import Accordion from "react-bootstrap/Accordion";
+import { AccordionBody, AccordionHeader } from "reactstrap";
+
 export default function ResourcesList() {
 
   const [resources_data, setResourceData] = React.useState([
@@ -104,10 +107,11 @@ export default function ResourcesList() {
                   <MDBCol sm="12">
                     <MDBRow>
                     {resources_data.map(item => (
-                      <ListGroup variant="flush">
-                        <ListGroup.Item>
+                      <Accordion defaultActiveKey={0}>
+                        <Accordion.Item eventKey="0">
                           <div key={item.id} class="izquierda" >
-                          <DropdownButton variant="light" id="dropdown-item-button" width="auto" title={item.title}>
+                          <AccordionHeader>{item.title}</AccordionHeader>  
+                          <Accordion.Body>
                             <div class="custom-dropdown-item">
                             <Dropdown.Item  as="button"><h5>Descripción:</h5><p>{item.description}</p></Dropdown.Item>
                             <Dropdown.Item  as="button"><h5>Calle:</h5><p>{item.street}</p></Dropdown.Item>
@@ -115,10 +119,10 @@ export default function ResourcesList() {
                             <Dropdown.Item  as="button"><h5>Ciudad:</h5><p>{item.city}</p></Dropdown.Item>
                             <Dropdown.Item  as="button"><h5>Comentarios adicionales:</h5><p>{item.additionals_comments}</p></Dropdown.Item>
                             </div>              
-                          </DropdownButton>
+                            </Accordion.Body>
                           </div>
-                        </ListGroup.Item>
-                    </ListGroup>
+                        </Accordion.Item>
+                      </Accordion>
                     ))}
                     </MDBRow>
                   </MDBCol>
