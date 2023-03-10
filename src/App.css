@@ -1,4 +1,4 @@
-/* COLORES DE LA APLICACIÓN*/
+/* COLORES DE LA APLICACIÓN */
 :root {
   --nav: #b6afee;
   --fondo: rgb(252, 252, 252);
@@ -46,7 +46,7 @@
   }
 }
 
-/* HOME*/
+/* HOME */
 
 #div-home {
   height: 485px;
@@ -94,7 +94,7 @@
   border-color: var(--boton);
 }
 
-/* ID BUTTON*/
+/* ID BUTTON */
 
 #button:hover {
   color: var(--boton);
