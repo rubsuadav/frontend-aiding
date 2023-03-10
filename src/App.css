@@ -1,4 +1,4 @@
-/*COLORES DE LA APLICACIÓN*/
+/* COLORES DE LA APLICACIÓN */
 :root {
   --nav: #b6afee;
   --fondo: rgb(252, 252, 252);
@@ -46,13 +46,13 @@
   }
 }
 
-/*HOME*/
+/* HOME */
 
-#div-home{
+#div-home {
   height: 485px;
 }
 
-#welcome{
+#welcome {
   font-weight: bold;
   margin-top: 50px;
 }
@@ -68,12 +68,12 @@
 }
 
 #admin {
-    margin-left: 4px;
-    font-size: large;
+  margin-left: 4px;
+  font-size: large;
 }
 
-#cardit{
-    font-size: medium;
+#cardit {
+  font-size: medium;
 }
 
 /* PARTNERS */
@@ -92,7 +92,7 @@
   border-color: var(--boton);
 }
 
-/*ID BUTTON*/
+/* ID BUTTON */
 
 #button:hover {
   color: var(--boton);
