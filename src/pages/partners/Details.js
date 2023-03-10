@@ -57,6 +57,10 @@ export default function Details() {
     setUser(result.data);
   };
 
+  function createCommunicationRedirect(){
+    navigate(`/partners/${id}/communication/create`);
+  }
+
   return (
     <section>
       <MDBContainer className="py-5">
@@ -301,7 +305,7 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a href="" type="button" id="button" className="btn btn-light w-100">
+                      <a onClick={createCommunicationRedirect} type="button" id="button" className="btn btn-light w-100">
                         Añadir nueva comunicación
                       </a>
                     </MDBCardText>

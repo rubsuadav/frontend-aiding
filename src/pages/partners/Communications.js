@@ -25,14 +25,14 @@ const onChange = (pagination, filters, sorter, extra) => {
 
 const Communication = ({user_id}) =>{
 
-    /**Establecer las comunicaciones */
-    const [communications_data, setCommunications] = React.useState([
-        {
-            date: '...',
-            communication_type: '...',
-            description: '...',
-        }
-        ]);
+  /**Establecer las comunicaciones */
+  const [communications_data, setCommunications] = React.useState([
+      {
+          date: '...',
+          communication_type: '...',
+          description: '...',
+      }
+      ]);
 
   useEffect(() => {
     const getCommunications = partnersApi.get(`/${user_id}/communication/`).then((response) => {setCommunications(response.data);});
