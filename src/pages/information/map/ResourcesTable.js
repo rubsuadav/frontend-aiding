@@ -229,7 +229,7 @@ const ResourcesTable = () => {
     },
     {
       title: "Comentarios adicionales",
-      dataIndex: "additionals_comments",
+      dataIndex: "additional_comments",
     },
   ];
 
@@ -242,7 +242,7 @@ const ResourcesTable = () => {
       street: "...",
       number: "...",
       city: "...",
-      additionals_comments: "...",
+      additional_comments: "...",
     },
   ]);
 

@@ -108,10 +108,13 @@ export default function Details() {
     <section>
       <MDBContainer className="py-5">
         <MDBRow>
+
           <MDBCol lg="6">
             <MDBCard className="mb-4">
+
               <MDBCardBody>
                 <MDBRow>
+                  
                   <MDBCol sm="12">
                     <MDBRow>
                       
@@ -168,15 +171,19 @@ export default function Details() {
                           </a>
                         </MDBCardText>
                       </MDBCol>
+                      
                     </MDBRow>
                   </MDBCol>
+
                 </MDBRow>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
+
           <MDBCol lg="6">
             <MDBCard className="mb-4">
               <MDBCardBody>
+
                 <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Título</MDBCardText>
@@ -186,6 +193,7 @@ export default function Details() {
                   </MDBCol>
                 </MDBRow>
                 <hr />
+
                 <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Descripción</MDBCardText>
@@ -197,6 +205,7 @@ export default function Details() {
                   </MDBCol>
                 </MDBRow>
                 <hr />
+
                 <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Calle</MDBCardText>
@@ -206,6 +215,7 @@ export default function Details() {
                   </MDBCol>
                 </MDBRow>
                 <hr />
+
                 <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Número</MDBCardText>
@@ -215,6 +225,7 @@ export default function Details() {
                   </MDBCol>
                 </MDBRow>
                 <hr />
+
                 <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Ciudad</MDBCardText>
@@ -224,6 +235,7 @@ export default function Details() {
                   </MDBCol>
                 </MDBRow>
                 <hr />
+
                 <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Comentarios adicionales</MDBCardText>
@@ -235,6 +247,7 @@ export default function Details() {
                   </MDBCol>
                 </MDBRow>
                 <hr />
+
                 <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Latitud</MDBCardText>
@@ -244,6 +257,7 @@ export default function Details() {
                   </MDBCol>
                 </MDBRow>
                 <hr />
+
                 <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Longitud</MDBCardText>
@@ -254,6 +268,7 @@ export default function Details() {
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
+
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

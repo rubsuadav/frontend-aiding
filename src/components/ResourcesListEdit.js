@@ -18,6 +18,8 @@ import {
 } from "mdb-react-ui-kit";
 import resourcesApi from "../pages/information/map/services/backend.js";
 import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+
 
 import Accordion from "react-bootstrap/Accordion";
 import { AccordionBody, AccordionHeader } from "reactstrap";
@@ -67,15 +69,19 @@ export default function ResourcesListEdit() {
   ]; */
   
   return (
-    <div>
-      
+    <section>
       <MDBContainer className="py-5">
         <MDBRow>
+
           <MDBCol lg="6">
             <MDBCard className="mb-4">
+
               <MDBCardBody>
+                <MDBRow>
+                  
                   <MDBCol sm="12">
                     <MDBRow>
+
                       <MapContainer
                         center={[37.358342303352885, -5.986570537333228]}
                         zoom={13}
@@ -97,34 +103,30 @@ export default function ResourcesListEdit() {
                       </MapContainer>
                     </MDBRow>
                   </MDBCol>
+                </MDBRow>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
 
-            <MDBCol lg="6">
-            <MDBCard className="mb-4">
-              <MDBCardBody>
-                  <MDBCol sm="12">
+              {/* <MDBCol lg="6">
+                <MDBCard className="mb-4">
+                  <MDBCardBody>
+                  
+                     
                     <MDBRow>
-                    {resources_data.map(item => (
-                      <Accordion defaultActiveKey={0}>
-                        <Accordion.Item eventKey="0">
-                          <div key={item.id} class="izquierda" >
-                          <AccordionHeader>{item.title}</AccordionHeader>  
-                          <Accordion.Body>
-                           <p>Pruebaaaaaaaaaa</p>          
-                            </Accordion.Body>
-                          </div>
-                        </Accordion.Item>
-                      </Accordion>
-                    ))}
+                      <MDBCol sm="9">
+                      {resources_data.map(item => (
+                        <MDBCardText className="text-muted">{item.title}</MDBCardText>
+                      </MDBCol>
                     </MDBRow>
-                  </MDBCol>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
+                    <hr />
+                     )}
+                  </MDBCardBody>
+                </MDBCard>
+             </MDBCol> */}
+            
         </MDBRow>
       </MDBContainer>
-  </div>
+    </section>
   );
 }
