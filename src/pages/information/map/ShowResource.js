@@ -14,6 +14,9 @@ import resourcesApi from "./services/backend.js";
 import L from "leaflet";
 import swal from "sweetalert";
 
+// CSS
+import "leaflet/dist/leaflet.css";
+
 const successMsg = {
   title: "Mensaje de confirmación",
   text: "Te confirmamos que el recurso se ha borrado correctamente",

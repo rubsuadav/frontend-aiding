@@ -14,6 +14,10 @@ import resourcesApi from "./services/backend.js";
 import L from "leaflet";
 import swal from "sweetalert";
 
+// CSS
+import "leaflet/dist/leaflet.css";
+import '../../../css/mapResources.css';
+
 export default function DetailsUser() {
 
   let navigate = useNavigate();

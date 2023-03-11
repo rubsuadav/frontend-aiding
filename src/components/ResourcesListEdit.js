@@ -35,10 +35,13 @@ export default function ResourcesListEdit() {
       number: "...",
       city: "...",
       additional_comments: "...",
-      latitude: 37.37819890742758,
-      longitude: -5.986237173442225
+      latitude: "...",
+      longitude: "..."
     },
   ]);
+
+ /*  latitude: 37.37819890742758,
+  longitude: -5.986237173442225 */
   
   const {
     title,
@@ -88,6 +91,10 @@ export default function ResourcesListEdit() {
   //[item.latitude, item.longitude]
   // {item.title}
 
+  const positions = resources_data.map( item => (
+    {id: item.id, position: [item.latitude, item.longitude]}
+  ))
+
   return (
     <section>
       <MDBContainer className="py-5">
@@ -119,7 +126,7 @@ export default function ResourcesListEdit() {
 
                         {resources_data.map(item => ( 
                           
-                           <Marker icon={customIcon} position={[item.latitude, item.longitude]}> <Popup>{item.title}</Popup>
+                           <Marker icon={customIcon} position={positions[item.id].position}> <Popup>{item.title}</Popup>
                           </Marker>
                           ))}
                           
