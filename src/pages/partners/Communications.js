@@ -1,44 +1,31 @@
 import React from 'react';
-import { ConsoleSqlOutlined, SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined } from '@ant-design/icons';
 import { Table, Button, Input, Space} from 'antd';
 import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
 import partnersApi from "./services/backend.js";
-
-/*DATOS DE LA TABLA*/
-
-var data = [
-  {
-    date: '12/02/2021',
-    communication_type: 'TELEFÓNICA',
-    description: 'PRUEBA PRUEBA'
-  },
-];
-
-
+import { useNavigate } from "react-router-dom";
 
 const onChange = (pagination, filters, sorter, extra) => {
   console.log('params', pagination, filters, sorter, extra);
 };
 
-
-
 const Communication = ({user_id}) =>{
+
+  let navigate = useNavigate();
 
   /**Establecer las comunicaciones */
   const [communications_data, setCommunications] = React.useState([
       {
-          date: '...',
-          communication_type: '...',
-          description: '...',
+          date: "",
+          communication_type: "",
+          description: "",
       }
       ]);
 
   useEffect(() => {
-    const getCommunications = partnersApi.get(`/${user_id}/communication/`).then((response) => {setCommunications(response.data);});
+    const getCommunications = partnersApi.get(`/${user_id}/communication/`).then((response) => {setCommunications(response.data);}); 
   }, []);
-
-  console.log(communications_data);
 
   /*BUSCADOR*/
   const [searchText, setSearchText] = useState('');
@@ -180,7 +167,16 @@ const Communication = ({user_id}) =>{
 
   return (
     <div className='container my-5'>
-        <Table columns={columns} dataSource={communications_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 6,}}/>
+        <Table 
+        onRow={(record, rowIndex) => {
+          return {
+            onClick: event => {
+              navigate("/partners/" + user_id + "/communication/update/" + record.id);
+            },
+          };
+        }}
+        
+        columns={columns} dataSource={communications_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 6,}}/>
     </div>
   );
 }

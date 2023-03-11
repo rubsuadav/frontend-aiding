@@ -78,12 +78,10 @@ function UpdatePartner() {
     const aux = partnersApi
       .put(`/${id}`, partner)
       .then((response) => {
-        console.log(response);
         swal(successMsg);
         navigate(`/partners/${id}`);
       })
       .catch((error) => {
-        console.log(error);
         swal(errorMsg);
       });
   }

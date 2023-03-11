@@ -10,6 +10,7 @@ import Details from "./pages/partners/Details";
 import CreatePartner from "./pages/partners/CreatePartner";
 import UpdatePartner from "./pages/partners/UpdatePartner";
 import CreateCommunication from "./pages/partners/CreateCommunication";
+import UpdateCommunication from './pages/partners/UpdateCommunication';
 
 var navLinks= [
     {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/partners/create" element={ <CreatePartner/>} />
         <Route path="/partners/update/:id" element={ <UpdatePartner/>} />
         <Route path="/partners/:id/communication/create" element={ <CreateCommunication/>} />
+        <Route path="/partners/:id/communication/update/:idc" element={ <UpdateCommunication/>} />
       </Routes>
     </Router>
     <Footer/>
