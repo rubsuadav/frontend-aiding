@@ -1,5 +1,14 @@
+/* COLORES DE LA APLICACIÓN */
+:root {
+  --nav: #b6afee;
+  --fondo: rgb(252, 252, 252);
+  --boton: #7600dd;
+  --color: #678edf;
+}
+
 .App {
   text-align: center;
+  background-color: var(--fondo);
 }
 
 .App-logo {
@@ -25,7 +34,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--color);
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +44,60 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* HOME */
+
+#div-home {
+  height: 485px;
+}
+
+#welcome {
+  font-weight: bold;
+  margin-top: 50px;
+}
+
+/* NAVBAR */
+
+.navbar {
+  background-color: var(--nav);
+}
+
+.me-auto {
+  font-size: large;
+}
+
+#admin {
+  margin-left: 4px;
+  font-size: large;
+}
+
+#cardit {
+  font-size: medium;
+}
+
+/* PARTNERS */
+
+#boton-socio {
+  background-color: var(--gris);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  font-size: medium;
+  display: flex;
+}
+
+:where(.css-dev-only-do-not-override-10ed4xt).ant-btn-default:not(
+    :disabled
+  ):hover {
+  color: var(--boton);
+  border-color: var(--boton);
+}
+
+/* ID BUTTON */
+
+#button:hover {
+  color: var(--boton);
+  background-color: var(--bs-btn-hover-bg);
+  border-color: var(--boton);
 }
