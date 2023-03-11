@@ -12,7 +12,7 @@ import {
 } from "mdb-react-ui-kit";
 
 import resourcesApi from "../pages/information/map/services/backend.js";
-import L from "leaflet";
+import L, { marker } from "leaflet";
 
 // CSS
 import "leaflet/dist/leaflet.css";
@@ -35,11 +35,22 @@ export default function ResourcesListEdit() {
       number: "...",
       city: "...",
       additional_comments: "...",
-      latitude: "...",
-      longitude: "..."
+      latitude: 37.37819890742758,
+      longitude: -5.986237173442225
     },
   ]);
   
+  const {
+    title,
+    description,
+    street,
+    number,
+    city,
+    additional_comments,
+    latitude,
+    longitude,
+  } = resources_data;
+
   useEffect(() => {
     const getResourceData = resourcesApi.get().then((response) => {
       setResourceData(response.data);
@@ -73,7 +84,6 @@ export default function ResourcesListEdit() {
     { position: [37.3652312981789, -5.992698807621536], title: "Marcador 6" },
     { position: [37.35124555623236, -5.989008088148664], title: "Marcador 7" }
   ];
-  
 
   //[item.latitude, item.longitude]
   // {item.title}
@@ -108,7 +118,8 @@ export default function ResourcesListEdit() {
                         />
 
                         {resources_data.map(item => ( 
-                          <Marker icon={customIcon} position={[item.latitude, item.longitude]}> <Popup>{item.title}</Popup>
+                          
+                           <Marker icon={customIcon} position={[item.latitude, item.longitude]}> <Popup>{item.title}</Popup>
                           </Marker>
                           ))}
                           
@@ -131,8 +142,9 @@ export default function ResourcesListEdit() {
                               <h3> LISTADO DE RECURSOS </h3>
 
                               <div>
-                              <Accordion defaultActiveKey="0">
                               {resources_data.map(item => ( 
+                              <Accordion defaultActiveKey="0">
+                             
                                 <Accordion.Item eventKey="0">
                                   <Accordion.Header>{item.title}
                             
@@ -155,8 +167,9 @@ export default function ResourcesListEdit() {
                                     </div>
                                   </Accordion.Body>
                                 </Accordion.Item>
-                              ))}
+                              
                             </Accordion>
+                            ))}
                               </div>
                         
                       </MDBRow>
