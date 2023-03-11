@@ -310,7 +310,7 @@ export default function Details() {
           <MDBCol md="12">
             <MDBCard className="mb-4 mb-md-0">
               <MDBCardBody>
-                <MDBCardText className="mb-4">COMUNICACIONES</MDBCardText>
+                <MDBCardText><h4>COMUNICACIONES</h4></MDBCardText>
 
                 <Communication user_id={id}/>
 
