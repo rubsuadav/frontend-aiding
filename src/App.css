@@ -17,6 +17,10 @@
 
 }
 
+p {
+  text-align: justify;
+  text-justify: inter-word;
+}
 
 .App {
   text-align: center;
