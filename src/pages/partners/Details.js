@@ -309,6 +309,9 @@ export default function Details() {
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
+          <MDBCol lg="1">
+            <a href={`${user.id}/receipt`} type="button" class="btn btn-light">Generar recibo</a>
+          </MDBCol>
         </MDBRow>
         <MDBRow>
           <MDBCol md="12">
