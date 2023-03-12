@@ -1,20 +1,3 @@
-/* COLORES BOSCO */
-:root {
-  --beigeB: #f5eddc;
-  --gris: #cfd2cf;
-  --rosa: #fa9494;
-  --rojo: #eb1d36;
-}
-
-/* COLORES DOÑA MARÍA */
-:root {
-  --verde: #698269;
-  --marron: #b99b6b;
-  --beigeM: #f1dbbf;
-  --rojo-oscuro: #aa5656;
-  --verde_fondo: #f6f8f6;
-}
-
 .adv-card {
   background-color: var(--verde_fondo);
 }
