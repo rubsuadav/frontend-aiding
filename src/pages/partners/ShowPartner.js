@@ -10,8 +10,7 @@ import {
   MDBCardBody,
 } from "mdb-react-ui-kit";
 import Communication from "./Communications.js";
-import {partners, donations} from "./services/backend.js";
-
+import {partners, fileUrl} from "./services/backend.js";
 
 export default function Details() {
   let navigate = useNavigate();
@@ -58,12 +57,15 @@ export default function Details() {
   function createCommunicationRedirect(){
     navigate(`/partners/${id}/communication/create`);
   }
+
+  function createDonationRedirect(){
+    navigate(`/partners/${id}/donation/create`);
+  }
   
   const loadDonation = async () => {
-    const result = await donations.get(`/${id}`);
+    const result = await partners.get(`/${id}/donation`);
     setDonation(result.data);
   };
-
 
   return (
     <section>
@@ -233,7 +235,7 @@ export default function Details() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      J{user.account_holder}
+                      {user.account_holder}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -243,7 +245,7 @@ export default function Details() {
                     <MDBCardText>Importe</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">---</MDBCardText>
+                    <MDBCardText className="text-muted">{donation.amount}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -252,7 +254,7 @@ export default function Details() {
                     <MDBCardText>Periodicidad</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">---</MDBCardText>
+                    <MDBCardText className="text-muted">{donation.periodicity}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -275,7 +277,7 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a href="" type="button" id="button" className="btn btn-light w-100">
+                      <a  href={fileUrl + `/partners/${user.id}/receipt`} type="button" id="button" className="btn btn-light w-100">
                         Generar recibo
                       </a>
                     </MDBCardText>
@@ -311,6 +313,16 @@ export default function Details() {
                     <MDBCardText className="text-muted w-auto">
                       <a onClick={createCommunicationRedirect} type="button" id="button" className="btn btn-light w-100">
                         Añadir nueva comunicación
+                      </a>
+                    </MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol>
+                    <MDBCardText className="text-muted w-auto">
+                      <a onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
+                        Gestionar Donación
                       </a>
                     </MDBCardText>
                   </MDBCol>

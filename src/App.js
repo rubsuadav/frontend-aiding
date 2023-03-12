@@ -16,6 +16,7 @@ import CreatePartner from "./pages/partners/CreatePartner";
 import UpdatePartner from "./pages/partners/UpdatePartner";
 import CreateCommunication from "./pages/partners/CreateCommunication";
 import UpdateCommunication from './pages/partners/UpdateCommunication';
+import CreateDonation from './pages/partners/CreateDonation';
 
 
 
@@ -85,6 +86,7 @@ export default function App() {
         <Route path="/partners/update/:id" element={ <UpdatePartner/>} />
         <Route path="/partners/:id/communication/create" element={ <CreateCommunication/>} />
         <Route path="/partners/:id/communication/update/:idc" element={ <UpdateCommunication/>} />
+        <Route path="/partners/:id/donation/create" element={ <CreateDonation/>} />
       </Routes>
     </Router>
     <Footer/>
