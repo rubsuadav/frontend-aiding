@@ -3,46 +3,8 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Table, Button, Input, Space} from 'antd';
 import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
-import partnersApi from "./services/backend.js";
+import {partners} from "./services/backend.js";
 import { useNavigate } from "react-router-dom";
-
-/*DATOS DE LA TABLA*/
-/*
-var data = [
-  {
-    key: '1',
-    dni: '12345678A',
-    nombre: 'John',
-    apellidos: 'Brown',
-    email: 'john@email.com',
-    reg: 'true',
-  },
-  {
-    key: '2',
-    dni: '12345678A',
-    nombre: 'Jim',
-    apellidos: 'Brown',
-    email: 'jim@email.com',
-    reg: 'true',
-  },
-  {
-    key: '3',
-    dni: '12345678A',
-    nombre: 'Adala',
-    apellidos: 'Brown',
-    email: 'adala@email.com',
-    reg: 'true',
-  },
-  {
-    key: '4',
-    dni: '12345678A',
-    nombre: 'John',
-    apellidos: 'Brown',
-    email: 'john@email.com',
-    reg: 'true',
-  },
-];*/
-
 
 
 const onChange = (pagination, filters, sorter, extra) => {
@@ -213,7 +175,7 @@ const Partners = () => {
   ]);
 
   useEffect(() => {
-    const getPartnersData = partnersApi.get().then((response) => {setPartnersData(response.data);});
+    const getPartnersData = partners.get().then((response) => {setPartnersData(response.data);});
   }, []);
 
   function createPartnerRedirect(){

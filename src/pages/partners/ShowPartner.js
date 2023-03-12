@@ -9,8 +9,8 @@ import {
   MDBCardText,
   MDBCardBody,
 } from "mdb-react-ui-kit";
-import partnersApi from "./services/backend.js";
 import Communication from "./Communications.js";
+import {partners} from "./services/backend.js";
 
 
 export default function Details() {
@@ -37,20 +37,33 @@ export default function Details() {
     state: "",
   });
 
+  const [donation, setDonation] = useState({
+    date: "",
+    amount: "",
+    periodicity: "",
+  });
+
   const { id } = useParams();
 
   useEffect(() => {
     loadUser();
+    loadDonation();
   }, []);
 
   const loadUser = async () => {
-    const result = await partnersApi.get(`/${id}`);
+    const result = await partners.get(`/${id}`);
     setUser(result.data);
   };
 
   function createCommunicationRedirect(){
     navigate(`/partners/${id}/communication/create`);
   }
+  
+  const loadDonation = async () => {
+    const result = await donations.get(`/${id}`);
+    setDonation(result.data);
+  };
+
 
   return (
     <section>

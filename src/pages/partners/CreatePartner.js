@@ -1,5 +1,5 @@
 import React from "react";
-import partnersApi from "./services/backend.js";
+import {partners,donations} from "./services/backend.js";
 import swal from 'sweetalert';
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
@@ -28,7 +28,7 @@ function CreatePartner() {
     let navigate = useNavigate();
 
     function postPartner(partner){
-        const aux = partnersApi.post('',partner).then((response) => {
+        const aux = partners.post('',partner).then((response) => {
             console.log(response);
             swal(successMsg);
             navigate("/partners");
