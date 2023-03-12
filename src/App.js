@@ -8,6 +8,7 @@ import Home from "./pages/partners/Home";
 import Items from "./pages/partners/Items";
 import ListAdvertisement from './pages/information/advertisement/ListAdvertisement';
 import ShowAdvertisement from './pages/information/advertisement/ShowAdvertisement';
+import CreateAdvertisement from './pages/information/advertisement/CreateAdvertisement';
 import CreateUpdatePartner from "./pages/partners/createUpdatePartner";
 
 
@@ -28,6 +29,10 @@ var navLinks= [
     {
       title: "Noticias",
       path: "information/sections"
+    },
+    {
+      title: "Crear Noticia",
+      path: "information/advertisements/create"
     }
   ];
 
@@ -45,6 +50,7 @@ function App() {
         <Route path="information/sections/:id" element={ <ListAdvertisement/>} />
         <Route path="information/sections" element={ <ListAdvertisement/>} />
         <Route path="information/advertisements/:id" element={ <ShowAdvertisement/>} />
+        <Route path="information/advertisements/create" element={ <CreateAdvertisement/>} />
       </Routes>
     </Router>
     <Footer/>
