@@ -83,8 +83,8 @@ export default function Details() {
 
   const deleteConfirmationAlert = async () => {
     swal({
-      title: "Eliminar usuario",
-      text: "Estás seguro que desea eliminar el usuario?",
+      title: "Eliminar recurso",
+      text: "¿Estás seguro que desea eliminar el recurso?",
       icon: "warning",
       buttons: ["No", "Sí"],
     }).then((res) => {

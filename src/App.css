@@ -1,21 +1,18 @@
-/*COLORES BOSCO*/
+/* COLORES BOSCO */
 :root {
-  --beigeB: #F5EDDC;
-  --gris: #CFD2CF;
-  --rosa: #FA9494;
-  --rojo: #EB1D36;
-
+  --beigeB: #f5eddc;
+  --gris: #cfd2cf;
+  --rosa: #fa9494;
+  --rojo: #eb1d36;
 }
 
-/*COLORES DOÑA MARÍA*/
+/* COLORES DOÑA MARÍA */
 :root {
   --verde: #698269;
-  --marron: #B99B6B;
-  --beigeM: #F1DBBF;
+  --marron: #b99b6b;
+  --beigeM: #f1dbbf;
   --rojo-oscuro: #AA5656;
-
 }
-
 
 .App {
   text-align: center;
@@ -68,7 +65,7 @@
     font-size: large;
 }
 
-#cardit{
+#cardit {
     font-size: medium;
 }
 

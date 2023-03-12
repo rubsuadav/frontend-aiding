@@ -17,7 +17,7 @@ export default function Map() {
   };
 
   const handleBuscarClick = async () => {
-    try {
+   
       const response = await axios.get(
         `https://nominatim.openstreetmap.org/search?q=${direccion}&format=json`
       );
@@ -27,9 +27,7 @@ export default function Map() {
       } else {
         alert("Dirección no encontrada");
       }
-    } catch (error) {
-      console.log(error);
-    }
+    
   };
 
   const customIcon = new L.Icon({
