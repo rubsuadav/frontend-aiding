@@ -4,7 +4,8 @@
   --gris: #cfd2cf;
   --rosa: #fa9494;
   --rojo: #eb1d36;
-/* COLORES DOÑA MARÍA */
+
+  /* COLORES DOÑA MARÍA */
   --verde: #698269;
   --marron: #b99b6b;
   --beigeM: #f1dbbf;
@@ -57,12 +58,12 @@
 }
 
 #admin {
-    margin-left: 4px;
-    font-size: large;
+  margin-left: 4px;
+  font-size: large;
 }
 
 #cardit {
-    font-size: medium;
+  font-size: medium;
 }
 
 /* PARTNERS */
@@ -76,7 +77,9 @@
   display: flex;
 }
 
-:where(.css-dev-only-do-not-override-10ed4xt).ant-btn-default:not(:disabled):hover {
+:where(.css-dev-only-do-not-override-10ed4xt).ant-btn-default:not(
+    :disabled
+  ):hover {
   color: var(--rosa);
   border-color: var(--rosa);
 }
