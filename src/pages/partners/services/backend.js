@@ -10,3 +10,5 @@ export const donations = axios.create({
   baseURL: String(backendUrl + "partners/donation/"),
   timeout: 1000,
 });
+
+export const fileUrl = backendUrl;
