@@ -1,10 +1,10 @@
 import React from "react";
-import partnersApi from "./services/backend.js";
+import {partners,donations} from "./services/backend.js";
 import swal from 'sweetalert';
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 
 const successMsg = {
@@ -28,7 +28,7 @@ function CreatePartner() {
     let navigate = useNavigate();
 
     function postPartner(partner){
-        const aux = partnersApi.post('',partner).then((response) => {
+        const aux = partners.post('',partner).then((response) => {
             console.log(response);
             swal(successMsg);
             navigate("/partners");

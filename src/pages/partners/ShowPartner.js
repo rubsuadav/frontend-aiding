@@ -8,22 +8,15 @@ import {
   MDBCard,
   MDBCardText,
   MDBCardBody,
-  MDBCardImage,
-  MDBBtn,
-  MDBBreadcrumb,
-  MDBBreadcrumbItem,
-  MDBProgress,
-  MDBProgressBar,
-  MDBIcon,
-  MDBListGroup,
-  MDBListGroupItem,
 } from "mdb-react-ui-kit";
-import Table from "react-bootstrap/Table";
-import partnersApi from "./services/backend.js";
+import Communication from "./Communications.js";
+import {partners, donations} from "./services/backend.js";
 
 
 export default function Details() {
   let navigate = useNavigate();
+
+  /**Establecer usuario */
   const [user, setUser] = useState({
     dni: "",
     name: "",
@@ -44,15 +37,31 @@ export default function Details() {
     state: "",
   });
 
+  const [donation, setDonation] = useState({
+    date: "",
+    amount: "",
+    periodicity: "",
+  });
+
   const { id } = useParams();
 
   useEffect(() => {
     loadUser();
+    loadDonation();
   }, []);
 
   const loadUser = async () => {
-    const result = await partnersApi.get(`/${id}`);
+    const result = await partners.get(`/${id}`);
     setUser(result.data);
+  };
+
+  function createCommunicationRedirect(){
+    navigate(`/partners/${id}/communication/create`);
+  }
+  
+  const loadDonation = async () => {
+    const result = await donations.get(`/${id}`);
+    setDonation(result.data);
   };
 
 
@@ -300,7 +309,7 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a href="" type="button" id="button" className="btn btn-light w-100">
+                      <a onClick={createCommunicationRedirect} type="button" id="button" className="btn btn-light w-100">
                         Añadir nueva comunicación
                       </a>
                     </MDBCardText>
@@ -317,23 +326,10 @@ export default function Details() {
           <MDBCol md="12">
             <MDBCard className="mb-4 mb-md-0">
               <MDBCardBody>
-                <MDBCardText className="mb-4">COMUNICACIONES</MDBCardText>
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>Fecha</th>
-                      <th>Tipo</th>
-                      <th>Descripción</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>12/02/2021</td>
-                      <td>Telefónica</td>
-                      <td>Hablamos sobre sus donaciones.</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                <MDBCardText><h4>COMUNICACIONES</h4></MDBCardText>
+
+                <Communication user_id={id}/>
+
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
