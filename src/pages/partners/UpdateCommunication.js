@@ -1,5 +1,5 @@
 import React from "react";
-import partnersApi from "./services/backend.js";
+import {partners} from "./services/backend.js";
 import swal from 'sweetalert';
 import { useNavigate, useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
@@ -58,13 +58,13 @@ function UpdateCommunication() {
   } = communication;
 
   useEffect(() => {
-    const getCommunication = partnersApi.get(`/${id}/communication/${idc}`).then((response) => {setCommunication(response.data[0]);});
+    const getCommunication = partners.get(`/${id}/communication/${idc}`).then((response) => {setCommunication(response.data[0]);});
   }, []);
 
   console.log(communication)
 
   function putCommunication(communication) {
-    const aux = partnersApi
+    const aux = partners
       .put(`/${id}/communication/${idc}`, communication)
       .then((response) => {
         swal(successMsg);
@@ -87,7 +87,7 @@ function UpdateCommunication() {
   /** BORRADO */
 
   const deleteResouce = async () => {
-    const result = await partnersApi
+    const result = await partners
       .delete(`/${id}/communication/${idc}`)
       .then((res) => {
         swal(successMsgDelete);

@@ -1,5 +1,5 @@
 import React from "react";
-import partnersApi from "./services/backend.js";
+import {partners} from "./services/backend.js";
 import swal from 'sweetalert';
 import { useNavigate, useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
@@ -29,7 +29,7 @@ function CreateCommunication() {
     const { id } = useParams();
 
     function postCommunication(){
-        const aux = partnersApi.post(`/${id}/communication/`,communication).then((response) => {
+        const aux = partners.post(`/${id}/communication/`,communication).then((response) => {
             console.log(response);
             swal(successMsg);
             navigate(`/partners/${id}`);

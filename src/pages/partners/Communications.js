@@ -3,7 +3,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Table, Button, Input, Space} from 'antd';
 import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
-import partnersApi from "./services/backend.js";
+import {partners} from "./services/backend.js";
 import { useNavigate } from "react-router-dom";
 
 const onChange = (pagination, filters, sorter, extra) => {
@@ -24,7 +24,7 @@ const Communication = ({user_id}) =>{
       ]);
 
   useEffect(() => {
-    const getCommunications = partnersApi.get(`/${user_id}/communication/`).then((response) => {setCommunications(response.data);}); 
+    const getCommunications = partners.get(`/${user_id}/communication/`).then((response) => {setCommunications(response.data);}); 
   }, []);
 
   /*BUSCADOR*/

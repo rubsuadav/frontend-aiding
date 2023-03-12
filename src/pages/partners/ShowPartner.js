@@ -10,7 +10,7 @@ import {
   MDBCardBody,
 } from "mdb-react-ui-kit";
 import Communication from "./Communications.js";
-import {partners} from "./services/backend.js";
+import {partners, donations} from "./services/backend.js";
 
 
 export default function Details() {
