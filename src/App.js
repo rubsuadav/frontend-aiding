@@ -22,21 +22,21 @@ var navLinks= [
       title: "Socios",
       path: "partners"
     },
-    {
+    /* {
       title: "Crear Socio",
       path: "partners/create"
-    },
+    }, */
     {
       title: "Noticias",
       path: "information/sections"
     },
-    {
+    /* {
       title: "Crear Noticia",
       path: "information/advertisements/create"
-    }
+    } */
   ];
 
-var logo=["./boscoglobal-logo.png"]
+var logo=["./logo.png"]
 
 function App() {
   return (

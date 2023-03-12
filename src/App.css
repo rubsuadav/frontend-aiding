@@ -1,29 +1,14 @@
-/*COLORES BOSCO*/
+/* COLORES DE LA APLICACIÓN */
 :root {
-  --beigeB: #F5EDDC;
-  --gris: #CFD2CF;
-  --rosa: #FA9494;
-  --rojo: #EB1D36;
-
-}
-
-/*COLORES DOÑA MARÍA*/
-:root {
-  --verde: #698269;
-  --marron: #B99B6B;
-  --beigeM: #F1DBBF;
-  --rojo-oscuro: #AA5656;
-  --verde-fondo: #F6F8F6;
-
-}
-
-p {
-  text-align: justify;
-  text-justify: inter-word;
+  --nav: #b6afee;
+  --fondo: rgb(252, 252, 252);
+  --boton: #7600dd;
+  --color: #678edf;
 }
 
 .App {
   text-align: center;
+  background-color: var(--fondo);
 }
 
 .App-logo {
@@ -49,7 +34,7 @@ p {
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--color);
 }
 
 @keyframes App-logo-spin {
@@ -61,20 +46,34 @@ p {
   }
 }
 
+/* HOME */
+
+#div-home {
+  height: 485px;
+}
+
+#welcome {
+  font-weight: bold;
+  margin-top: 50px;
+}
 
 /* NAVBAR */
 
 .navbar {
-  background-color: var(--beigeB);
+  background-color: var(--nav);
+}
+
+.me-auto {
+  font-size: large;
 }
 
 #admin {
-    margin-left: 4px;
-    font-size: large;
+  margin-left: 4px;
+  font-size: large;
 }
 
-#cardit{
-    font-size: medium;
+#cardit {
+  font-size: medium;
 }
 
 /* PARTNERS */
@@ -88,33 +87,17 @@ p {
   display: flex;
 }
 
-:where(.css-dev-only-do-not-override-10ed4xt).ant-btn-default:not(:disabled):hover {
-  color: var(--rosa);
-  border-color: var(--rosa);
+:where(.css-dev-only-do-not-override-10ed4xt).ant-btn-default:not(
+    :disabled
+  ):hover {
+  color: var(--boton);
+  border-color: var(--boton);
 }
 
-.adv-card {
-  background-color: var(--verde-fondo);
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 30em;
-  padding: 0.6rem;
-  margin-bottom: 1rem;
-  border: 1px solid #c2bfbf;
-  border-radius: 4px;
-}
-.link-black{ 
-  color: black !important;
-}
+/* ID BUTTON */
 
-.wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, 2fr);
-  grid-gap: 10px;
-}
-#sections{  
-  font-size: larger;
+#button:hover {
+  color: var(--boton);
+  background-color: var(--bs-btn-hover-bg);
+  border-color: var(--boton);
 }
