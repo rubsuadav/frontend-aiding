@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
 import partnersApi from "./services/backend.js";
 import { useNavigate } from "react-router-dom";
+import { Excel } from "antd-table-saveas-excel";
 
 /*DATOS DE LA TABLA*/
 /*
@@ -219,11 +220,26 @@ const Partners = () => {
   function createPartnerRedirect(){
     navigate("/partners/create");
   }
+
+  /*EXPORTACIÓN DE SOCIOS */
+
+  const handleClick = () => {
+    const excel = new Excel();
+    excel
+      .addSheet("test")
+      .addColumns(columns)
+      .addDataSource(partners_data, {
+        str2Percent: true
+      })
+      .saveAs("Excel.xlsx");
+  };
   
   return (
     <div className='container my-5'>
         <h1 className="pt-3">Socios</h1>
         <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
+        <br></br>
+        <Button onClick={handleClick} id="boton-socio">Exportar socios</Button>
         <Table
         onRow={(record, rowIndex) => {
           return {
