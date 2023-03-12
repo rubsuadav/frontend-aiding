@@ -44,7 +44,7 @@ export default function UpdateResource() {
   
     const loadResouce = async () => {
       const result = await resourcesApi.get(`/${id}`);
-      setResource(result.data[0]);
+      setResource(result.data);
     };
 
   const onInputChange = (e) => {

@@ -66,7 +66,7 @@ export default function Details() {
 
   const loadResouce = async () => {
     const result = await resourcesApi.get(`/${id}`);
-    setResource(result.data[0]);
+    setResource(result.data);
   };
 
   const deleteResouce = async () => {
@@ -276,6 +276,11 @@ export default function Details() {
             </MDBCard>
           </MDBCol>
         </MDBRow>
+        <a onClick={() => {navigate(`/information/admin`);}}
+                            type="button"
+                            className="btn btn-light w-100"> Volver al listado</a>
+                            
+                            <hr/>
       </MDBContainer>
     </section>
   );

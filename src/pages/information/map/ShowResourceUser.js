@@ -52,7 +52,7 @@ export default function DetailsUser() {
 
   const loadResouce = async () => {
     const result = await resourcesApi.get(`/${id}`);
-    setResource(result.data[0]);
+    setResource(result.data);
   };
 
   const customIcon = new L.Icon({
@@ -72,8 +72,9 @@ export default function DetailsUser() {
     <section>
       <MDBContainer className="py-5">
         <MDBRow>
-
+        
           <MDBCol lg="6">
+          
             <MDBCard className="mb-4">
 
               <MDBCardBody>
@@ -203,9 +204,16 @@ export default function DetailsUser() {
                 </MDBRow>
 
               </MDBCardBody>
+
+              
             </MDBCard>
           </MDBCol>
         </MDBRow>
+        <a onClick={() => {navigate(`/information/map-resources`);}}
+                            type="button"
+                            className="btn btn-light w-100"> Volver al listado</a>
+                            
+                            <hr/>
       </MDBContainer>
     </section>
   );

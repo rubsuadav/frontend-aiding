@@ -39,9 +39,6 @@ export default function ResourcesListEdit() {
       longitude: "..."
     },
   ]);
-
- /*  latitude: 37.37819890742758,
-  longitude: -5.986237173442225 */
   
   const {
     title,
@@ -60,12 +57,6 @@ export default function ResourcesListEdit() {
     });
   }, []);
 
-/* 
-  useEffect(() => {
-    const getResourceData = resourcesApi.get();
-      setResourceData(getResourceData.data);
-  }, []); */
-
   const customIcon = new L.Icon({
     iconUrl: require("../images/marker.png"),
     iconRetinaUrl: require("../images/marker.png"),
@@ -79,21 +70,13 @@ export default function ResourcesListEdit() {
   });
 
   const markers = [
-    { position: [37.37819890742758, -5.986237173442225], title: "Marcador 1"},
-    { position: [37.36389157436658, -5.98052205673053], title: "Marcador 2" },
-    { position: [37.38551392139047, -5.972622733550851], title: "Marcador 3" },
-    { position: [37.39455877755949, -5.989694735085925], title: "Marcador 4" },
-    { position: [37.357317735050124, -5.984544892507049], title: "Marcador 5" },
-    { position: [37.3652312981789, -5.992698807621536], title: "Marcador 6" },
-    { position: [37.35124555623236, -5.989008088148664], title: "Marcador 7" }
+    { position: [37.3910271, -5.994537], title: "Centro de costura"},
+    { position: [36.7195609, -4.4214742], title: "Merienda con nosotros" },
+    { position: [36.7128403, -6.1034092], title: "¿Juegas a la petanca?" },
+    { position: [40.402842872713414, -3.6873832954404344], title: "Artesanía para mayores" }
   ];
 
-  //[item.latitude, item.longitude]
-  // {item.title}
-
-  const positions = resources_data.map( item => (
-    {id: item.id, position: [item.latitude, item.longitude]}
-  ))
+  const positions = resources_data.map(item => ({ position: [item.latitude, item.longitude] }));
 
   return (
     <section>
@@ -124,11 +107,11 @@ export default function ResourcesListEdit() {
                           }
                         />
 
-                        {resources_data.map(item => ( 
-                          
-                           <Marker icon={customIcon} position={positions[item.id].position}> <Popup>{item.title}</Popup>
-                          </Marker>
-                          ))}
+                       {markers.map((item, index) => (
+                        <Marker key={item.id} icon={customIcon} position={item.position}>
+                          <Popup>{item.title}</Popup>
+                        </Marker>
+                      ))}
                           
                       </MapContainer>
 
