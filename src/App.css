@@ -4,14 +4,11 @@
   --gris: #cfd2cf;
   --rosa: #fa9494;
   --rojo: #eb1d36;
-}
-
 /* COLORES DOÑA MARÍA */
-:root {
   --verde: #698269;
   --marron: #b99b6b;
   --beigeM: #f1dbbf;
-  --rojo-oscuro: #AA5656;
+  --rojo-oscuro: #aa5656;
 }
 
 .App {
@@ -52,7 +49,6 @@
     transform: rotate(360deg);
   }
 }
-
 
 /* NAVBAR */
 
