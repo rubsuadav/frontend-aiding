@@ -6,6 +6,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // importamos los componentes creados
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import Home from "./pages/partners/Home";
+import Items from "./pages/partners/Items";
+import ListAdvertisement from './pages/information/advertisement/ListAdvertisement';
+import ShowAdvertisement from './pages/information/advertisement/ShowAdvertisement';
+import CreateAdvertisement from './pages/information/advertisement/CreateAdvertisement';
+import CreateUpdatePartner from "./pages/partners/createUpdatePartner";
+
+
 
 import UpdateResource from './pages/information/map/UpdateResource.js';
 import CreateResource from './pages/information/map/CreateResource.js';
@@ -24,6 +32,18 @@ var navLinks= [
       title: "Socios",
       path: "partners"
     },
+    /* {
+      title: "Crear Socio",
+      path: "partners/create"
+    }, */
+    {
+      title: "Noticias",
+      path: "information/sections"
+    },
+    /* {
+      title: "Crear Noticia",
+      path: "information/advertisements/create"
+    } */
     {
       title: "Recursos",
       path: "information/map-resources"
@@ -34,7 +54,7 @@ var navLinks= [
     }
   ];
 
-var logo=["./boscoglobal-logo.png"]
+var logo=["./logo.png"]
 
 
 
@@ -44,6 +64,13 @@ export default function App() {
     <Router>
       <Navbar navLinks={navLinks} logo={logo}/>
       <Routes>
+        <Route path="/home" element={ <Home/>} />
+        <Route path="/partners" element={ <Items/>} />
+        <Route path="/partners/create" element={ <CreateUpdatePartner/>} />
+        <Route path="information/sections/:id" element={ <ListAdvertisement/>} />
+        <Route path="information/sections" element={ <ListAdvertisement/>} />
+        <Route path="information/advertisements/:id" element={ <ShowAdvertisement/>} />
+        <Route path="information/advertisements/create" element={ <CreateAdvertisement/>} />
         <Route exact path='/information/map-resources' element={<ResourcesListEdit/>} />
         <Route path="/information/map-resources/:id" element={ <ShowResourceUser/>} />
 
