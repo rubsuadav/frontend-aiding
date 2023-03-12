@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // importamos los componentes creados
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-import Home from "./pages/partners/Home";
-import Items from "./pages/partners/Items";
-import Details from "./pages/partners/Details";
+import Home from "./pages/Home";
+import ListPartner from "./pages/partners/ListPartner";
+import ShowPartner from "./pages/partners/ShowPartner";
 import CreatePartner from "./pages/partners/CreatePartner";
 import UpdatePartner from "./pages/partners/UpdatePartner";
 
@@ -30,8 +30,8 @@ function App() {
       <Navbar navLinks={navLinks} logo={logo}/>
       <Routes>
         <Route path="/home" element={ <Home/>} />
-        <Route path="/partners" element={ <Items/>} />
-        <Route path="/partners/:id" element={ <Details/>} />
+        <Route path="/partners" element={ <ListPartner/>} />
+        <Route path="/partners/:id" element={ <ShowPartner/>} />
         <Route path="/partners/create" element={ <CreatePartner/>} />
         <Route path="/partners/update/:id" element={ <UpdatePartner/>} />
       </Routes>
