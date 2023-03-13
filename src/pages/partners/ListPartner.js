@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
 import {partners} from "./services/backend.js";
 import { useNavigate } from "react-router-dom";
-
+import * as XLSX from 'xlsx';
 
 const onChange = (pagination, filters, sorter, extra) => {
   console.log('params', pagination, filters, sorter, extra);
@@ -181,12 +181,23 @@ const Partners = () => {
   function createPartnerRedirect(){
     navigate("/partners/create");
   }
+
+  /*EXPORTACIÓN DE SOCIOS */
+
+  const exportToExcel = (table, fileName) => {
+    const sheetName = 'Sheet1';
+    const workbook = XLSX.utils.book_new();
+    const worksheetData = XLSX.utils.table_to_sheet(table);
+    XLSX.utils.book_append_sheet(workbook, worksheetData, sheetName);
+    XLSX.writeFile(workbook, `${fileName}.xlsx`);
+  };
   
   return (
     <div className='container my-5'>
         <h1 className="pt-3">Socios</h1>
         <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
-        <Table
+        <br></br>
+        <Table id='table'
         onRow={(record, rowIndex) => {
           return {
             onClick: event => {
@@ -195,6 +206,9 @@ const Partners = () => {
           };
         }}
         columns={columns} dataSource={partners_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
+        <Button  id="boton-socio" onClick={() => exportToExcel(document.getElementById('table'), 'myTable')}>
+          Exportar a Excel
+        </Button>
     </div>
   );
 }
