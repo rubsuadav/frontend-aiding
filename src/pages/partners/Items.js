@@ -1,11 +1,15 @@
 import React from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import { Table, Button, Input, Space} from 'antd';
+import ButtonR from "react-bootstrap/Button";
 import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
 import partnersApi from "./services/backend.js";
 import { useNavigate } from "react-router-dom";
-
+import 'bootstrap/dist/css/bootstrap.css';
+import {Modal} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
+import Form from "react-bootstrap/Form";
 /*DATOS DE LA TABLA*/
 /*
 var data = [
@@ -220,10 +224,54 @@ const Partners = () => {
     navigate("/partners/create");
   }
   
+  const body = (
+    <div id='modal-partner' align = 'center'>
+      <div id='modal-partner-content'>
+        <div>
+          <h2> Importar socios </h2>
+        </div>
+        <Form className="">
+          <Form.Group>
+              <Form.Control
+                onChange={(e) => onInputChange(e)}
+                value={name}
+                name="name"
+              />
+            <div id="modal-partner-content">
+              <input id="input-file" type="file" class="custom-file-input" />
+            </div>
+          </Form.Group>
+          <div id='modal-button-right'>
+              <ButtonR variant="outline-success" className="col mb-4 mx-5" type="submit"> Importar </ButtonR>
+          </div>
+          
+        </Form>
+        <div id='modal-button-left'>
+          <ButtonR variant="outline-danger" className="col mb-4 mx-5" onClick={()=>openCloseModal()}> Cancelar </ButtonR>
+        </div>
+        
+      </div>
+    </div>
+  )
+
+  const [modal, setModal] = useState(false);
+
+  const openCloseModal = () => {
+    setModal(!modal);
+  }
+
   return (
     <div className='container my-5'>
         <h1 className="pt-3">Socios</h1>
-        <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
+        <div id="botones-socios">
+          <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
+          <Button onClick={()=>openCloseModal()} id="boton-importar" >Importar socios</Button>
+        </div>
+
+        <Modal id = 'modal-container' open = {modal} onClose = {openCloseModal}>
+          {body}
+        </Modal>
+
         <Table
         onRow={(record, rowIndex) => {
           return {
