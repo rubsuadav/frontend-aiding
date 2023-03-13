@@ -5,8 +5,7 @@ import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
 import {partners} from "./services/backend.js";
 import { useNavigate } from "react-router-dom";
-import { Excel } from "antd-table-saveas-excel";
-
+import * as XLSX from 'xlsx';
 
 const onChange = (pagination, filters, sorter, extra) => {
   console.log('params', pagination, filters, sorter, extra);
@@ -185,15 +184,12 @@ const Partners = () => {
 
   /*EXPORTACIÓN DE SOCIOS */
 
-  const handleClick = () => {
-    const excel = new Excel();
-    excel
-      .addSheet("test")
-      .addColumns(columns)
-      .addDataSource(partners_data, {
-        str2Percent: true
-      })
-      .saveAs("Excel.xlsx");
+  const exportToExcel = (table, fileName) => {
+    const sheetName = 'Sheet1';
+    const workbook = XLSX.utils.book_new();
+    const worksheetData = XLSX.utils.table_to_sheet(table);
+    XLSX.utils.book_append_sheet(workbook, worksheetData, sheetName);
+    XLSX.writeFile(workbook, `${fileName}.xlsx`);
   };
   
   return (
@@ -201,8 +197,7 @@ const Partners = () => {
         <h1 className="pt-3">Socios</h1>
         <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
         <br></br>
-        <Button onClick={handleClick} id="boton-socio">Exportar socios</Button>
-        <Table
+        <Table id='table'
         onRow={(record, rowIndex) => {
           return {
             onClick: event => {
@@ -211,6 +206,9 @@ const Partners = () => {
           };
         }}
         columns={columns} dataSource={partners_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
+        <Button  id="boton-socio" onClick={() => exportToExcel(document.getElementById('table'), 'myTable')}>
+          Exportar a Excel
+        </Button>
     </div>
   );
 }
