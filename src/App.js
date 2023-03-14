@@ -9,7 +9,6 @@ import Items from "./pages/partners/Items";
 import Details from "./pages/partners/Details";
 import CreatePartner from "./pages/partners/CreatePartner";
 import UpdatePartner from "./pages/partners/UpdatePartner";
-import ImportPartners from "./pages/partners/ImportPartners";
 
 var navLinks= [
     {
@@ -35,7 +34,6 @@ function App() {
         <Route path="/partners/:id" element={ <Details/>} />
         <Route path="/partners/create" element={ <CreatePartner/>} />
         <Route path="/partners/update/:id" element={ <UpdatePartner/>} />
-        <Route path="/partners/import" element={ <ImportPartners/>} />
 
       </Routes>
     </Router>

@@ -232,11 +232,6 @@ const Partners = () => {
         </div>
         <Form className="">
           <Form.Group>
-              <Form.Control
-                onChange={(e) => onInputChange(e)}
-                value={name}
-                name="name"
-              />
             <div id="modal-partner-content">
               <input id="input-file" type="file" class="custom-file-input" />
             </div>
