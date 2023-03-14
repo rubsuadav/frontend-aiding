@@ -1,5 +1,5 @@
 import React from "react";
-import partnersApi from "./services/backend.js";
+import {partners} from "./services/backend.js";
 import swal from "sweetalert";
 import { useNavigate, useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
@@ -70,20 +70,18 @@ function UpdatePartner() {
   }, []);
 
   const loadPartner = async () => {
-    const result = await partnersApi.get(`/${id}`);
+    const result = await partners.get(`/${id}`);
     setPartner(result.data);
   };
 
   function putPartner(partner) {
-    const aux = partnersApi
+    const aux = partners
       .put(`/${id}`, partner)
       .then((response) => {
-        console.log(response);
         swal(successMsg);
         navigate(`/partners/${id}`);
       })
       .catch((error) => {
-        console.log(error);
         swal(errorMsg);
       });
   }
@@ -275,7 +273,7 @@ function UpdatePartner() {
         </div>
 
         <div className="row justify-content-evenly">
-          <Button className="col mb-4 mx-5" variant="primary" type="submit">
+          <Button className="col mb-4 mx-5" variant="outline-success" type="submit">
             Guardar socio
           </Button>
         </div>

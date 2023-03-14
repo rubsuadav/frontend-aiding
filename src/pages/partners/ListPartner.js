@@ -4,50 +4,13 @@ import { Table, Button, Input, Space} from 'antd';
 import ButtonR from "react-bootstrap/Button";
 import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
-import partnersApi from "./services/backend.js";
+import {fileUrl, partners} from "./services/backend.js";
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
-import {Modal} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
+import Modal from 'react-bootstrap/Modal';
 import Form from "react-bootstrap/Form";
-/*DATOS DE LA TABLA*/
-/*
-var data = [
-  {
-    key: '1',
-    dni: '12345678A',
-    nombre: 'John',
-    apellidos: 'Brown',
-    email: 'john@email.com',
-    reg: 'true',
-  },
-  {
-    key: '2',
-    dni: '12345678A',
-    nombre: 'Jim',
-    apellidos: 'Brown',
-    email: 'jim@email.com',
-    reg: 'true',
-  },
-  {
-    key: '3',
-    dni: '12345678A',
-    nombre: 'Adala',
-    apellidos: 'Brown',
-    email: 'adala@email.com',
-    reg: 'true',
-  },
-  {
-    key: '4',
-    dni: '12345678A',
-    nombre: 'John',
-    apellidos: 'Brown',
-    email: 'john@email.com',
-    reg: 'true',
-  },
-];*/
-
-
+import * as XLSX from 'xlsx';
+import axios from 'axios';
 
 const onChange = (pagination, filters, sorter, extra) => {
   console.log('params', pagination, filters, sorter, extra);
@@ -133,7 +96,7 @@ const Partners = () => {
     filterIcon: (filtered) => (
       <SearchOutlined
         style={{
-          color: filtered ? '#FA9494' : undefined,
+          color: filtered ? '#678edf' : undefined,
         }}
       />
     ),
@@ -148,7 +111,7 @@ const Partners = () => {
       searchedColumn === dataIndex ? (
         <Highlighter
           highlightStyle={{
-            backgroundColor: '#FA9494',
+            backgroundColor: '#678edf',
             padding: 0,
           }}
           searchWords={[searchText]}
@@ -217,13 +180,23 @@ const Partners = () => {
   ]);
 
   useEffect(() => {
-    const getPartnersData = partnersApi.get().then((response) => {setPartnersData(response.data);});
+    partners.get().then((response) => {setPartnersData(response.data);});
   }, []);
 
   function createPartnerRedirect(){
     navigate("/partners/create");
   }
-  
+
+  /*EXPORTACIÓN DE SOCIOS */
+
+  const exportToExcel = (table, fileName) => {
+    const sheetName = 'Sheet1';
+    const workbook = XLSX.utils.book_new();
+    const worksheetData = XLSX.utils.table_to_sheet(table);
+    XLSX.utils.book_append_sheet(workbook, worksheetData, sheetName);
+    XLSX.writeFile(workbook, `${fileName}.xlsx`);
+  };
+  /*
   const body = (
     <div id='modal-partner' align = 'center'>
       <div id='modal-partner-content'>
@@ -248,26 +221,70 @@ const Partners = () => {
       </div>
     </div>
   )
+  */
+  const [show, setShow] = useState(false);
 
-  const [modal, setModal] = useState(false);
+  const [selectedFile, setSelectedFile] = React.useState(null);
 
-  const openCloseModal = () => {
-    setModal(!modal);
+  const handleSubmit = async(event) => {
+    event.preventDefault()
+    const formData = new FormData();
+    formData.append("selectedFile", selectedFile);
+    try {
+      const response = await axios({
+        method: "post",
+        url: fileUrl+"partners/import/",
+        data: formData,
+      });
+    } catch(error) {
+      console.log(error)
+    }
+    setShow(false);
+    partners.get().then((response) => {setPartnersData(response.data);});
   }
+
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files[0])
+  }
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div className='container my-5'>
         <h1 className="pt-3">Socios</h1>
         <div id="botones-socios">
           <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
-          <Button onClick={()=>openCloseModal()} id="boton-importar" >Importar socios</Button>
+          <Button onClick={handleShow} id="boton-importar" >Importar socios</Button>
         </div>
 
-        <Modal id = 'modal-container' open = {modal} onClose = {openCloseModal}>
-          {body}
-        </Modal>
+        <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Importar socios</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form className="" id='modal-partner-content'> 
+            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <div id="modal-partner-content">
+              <input name="file" id="input-file" type="file" class="custom-file-input" onChange={handleFileSelect} />
+            </div>
+            </Form.Group>
+            <div id='modal-button-right'>
+              <ButtonR variant="outline-success" className="col mb-4 mx-5" type="submit" onClick={handleSubmit}> Importar </ButtonR>
+            </div>
+          </Form>
+          <div id='modal-button-left'>
+            <ButtonR variant="outline-danger" className="col mb-4 mx-5" onClick={handleClose}> Cancelar </ButtonR>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
 
-        <Table
+
+        </Modal.Footer>
+      </Modal>
+        
+        <br></br>
+        <Table id='table'
         onRow={(record, rowIndex) => {
           return {
             onClick: event => {
@@ -276,6 +293,9 @@ const Partners = () => {
           };
         }}
         columns={columns} dataSource={partners_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
+        <Button  id="boton-socio" onClick={() => exportToExcel(document.getElementById('table'), 'myTable')}>
+          Exportar a Excel
+        </Button>
     </div>
   );
 }
