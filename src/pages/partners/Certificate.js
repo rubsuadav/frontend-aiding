@@ -13,6 +13,32 @@ import Communication from "./Communications.js";
 import {partners, fileUrl} from "./services/backend.js";
 import { Document, Page, PDFViewer, Text } from "@react-pdf/renderer";
 
+function generateCertificate(user, language){
+  
+  if(language == "Español")
+    return(
+      <Document>
+          <Page>
+            <Text>español</Text>
+            <Text>{user.name}</Text>
+            <Text>{user.dni}</Text>
+          </Page>
+      </Document>
+    )
+  else
+  return(
+    <Document>
+        <Page>
+          <Text>Catalán</Text>
+          <Text>{user.name}</Text>
+          <Text>{user.dni}</Text>
+        </Page>
+    </Document>
+  )
+
+
+}
+
 export default function Certificate() {
   let navigate = useNavigate();
 
@@ -68,16 +94,20 @@ export default function Certificate() {
     setDonation(result.data);
   };
 
+  
+
+
 
   return (
     <section>
+      <div>
+      <button onClick={generateCertificate(user, "Español")}>Español</button>
+    </div>
+    <div>
+      <button onClick={generateCertificate(user, "Catalán")}>Catalán</button>
+    </div>
       <PDFViewer>
-            <Document>
-                <Page>
-                    <Text>{user.name}</Text>
-                    <Text>{user.dni}</Text>
-                </Page>
-            </Document>
+        {generateCertificate(user,"Español")}         
       </PDFViewer>
     </section>
   );
