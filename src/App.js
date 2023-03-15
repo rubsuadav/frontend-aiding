@@ -6,12 +6,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // importamos los componentes creados
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-import Home from "./pages/partners/Home";
-import Items from "./pages/partners/Items";
 import ListAdvertisement from './pages/information/advertisement/ListAdvertisement';
 import ShowAdvertisement from './pages/information/advertisement/ShowAdvertisement';
 import CreateAdvertisement from './pages/information/advertisement/CreateAdvertisement';
-import CreateUpdatePartner from "./pages/partners/createUpdatePartner";
 import Home from "./pages/Home";
 import ListPartner from "./pages/partners/ListPartner";
 import ShowPartner from "./pages/partners/ShowPartner";
