@@ -287,7 +287,11 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a href="" type="button" id="button" className="btn btn-light w-100">
+                    <a
+                        onClick={() => {navigate(`/partners/${id}/certificate`)}}
+                        type="button" id="button" 
+                        className="btn btn-light w-100"
+                      >
                         Generar certificado
                       </a>
                     </MDBCardText>

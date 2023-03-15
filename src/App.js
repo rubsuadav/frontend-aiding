@@ -12,6 +12,7 @@ import UpdatePartner from "./pages/partners/UpdatePartner";
 import CreateCommunication from "./pages/partners/CreateCommunication";
 import UpdateCommunication from './pages/partners/UpdateCommunication';
 import CreateDonation from './pages/partners/CreateDonation';
+import Certificate from './pages/partners/Certificate';
 
 var navLinks= [
     {
@@ -40,6 +41,7 @@ function App() {
         <Route path="/partners/:id/communication/create" element={ <CreateCommunication/>} />
         <Route path="/partners/:id/communication/update/:idc" element={ <UpdateCommunication/>} />
         <Route path="/partners/:id/donation/create" element={ <CreateDonation/>} />
+        <Route path="/partners/:id/certificate" element={ <Certificate/>} />
       </Routes>
     </Router>
     <Footer/>
