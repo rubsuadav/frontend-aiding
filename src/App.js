@@ -62,7 +62,6 @@ var navLinks= [
 var logo=["./logo.png"]
 
 
-
 export default function App() {
   return (
     <div className="App">
