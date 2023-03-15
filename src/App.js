@@ -12,6 +12,14 @@ import ListAdvertisement from './pages/information/advertisement/ListAdvertiseme
 import ShowAdvertisement from './pages/information/advertisement/ShowAdvertisement';
 import CreateAdvertisement from './pages/information/advertisement/CreateAdvertisement';
 import CreateUpdatePartner from "./pages/partners/createUpdatePartner";
+import Home from "./pages/Home";
+import ListPartner from "./pages/partners/ListPartner";
+import ShowPartner from "./pages/partners/ShowPartner";
+import CreatePartner from "./pages/partners/CreatePartner";
+import UpdatePartner from "./pages/partners/UpdatePartner";
+import CreateCommunication from "./pages/partners/CreateCommunication";
+import UpdateCommunication from './pages/partners/UpdateCommunication';
+import CreateDonation from './pages/partners/CreateDonation';
 
 
 
@@ -65,8 +73,6 @@ export default function App() {
       <Navbar navLinks={navLinks} logo={logo}/>
       <Routes>
         <Route path="/home" element={ <Home/>} />
-        <Route path="/partners" element={ <Items/>} />
-        <Route path="/partners/create" element={ <CreateUpdatePartner/>} />
         <Route path="information/sections/:id" element={ <ListAdvertisement/>} />
         <Route path="information/sections" element={ <ListAdvertisement/>} />
         <Route path="information/advertisements/:id" element={ <ShowAdvertisement/>} />
@@ -78,6 +84,13 @@ export default function App() {
         <Route exact path='/information/create-resource' element={<CreateResource/>} />
         <Route exact path='/information/admin' element={<ResourcesTable/>} />
         <Route path="/information/resources/:id" element={ <ShowResource/>} />
+        <Route path="/partners" element={ <ListPartner/>} />
+        <Route path="/partners/:id" element={ <ShowPartner/>} />
+        <Route path="/partners/create" element={ <CreatePartner/>} />
+        <Route path="/partners/update/:id" element={ <UpdatePartner/>} />
+        <Route path="/partners/:id/communication/create" element={ <CreateCommunication/>} />
+        <Route path="/partners/:id/communication/update/:idc" element={ <UpdateCommunication/>} />
+        <Route path="/partners/:id/donation/create" element={ <CreateDonation/>} />
       </Routes>
     </Router>
     <Footer/>
