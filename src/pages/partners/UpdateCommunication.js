@@ -133,8 +133,8 @@ function UpdateCommunication() {
                 value={communication_type}
                 name="communication_type"
               >
-                <option value="TELEPHONIC">Telefónica</option>
-                <option value="TELEMATIC">Telemática</option>
+                <option value="TELEFÓNICA">Telefónica</option>
+                <option value="TELEMÁTICA">Telemática</option>
                 <option value="PERSONAL">Personal</option>
                 <option value="EMAIL">Email</option>
               </Form.Select>

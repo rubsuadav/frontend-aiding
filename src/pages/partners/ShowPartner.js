@@ -67,6 +67,60 @@ export default function Details() {
     setDonation(result.data);
   };
 
+  // FORMATEADOR DE LOS ENUMERADOS
+  function partnerFormatter(value) {
+    var formattedValue = value;
+    switch (value) {
+      case "men":
+        formattedValue = "Hombre";
+        return `${formattedValue}`;
+        break;
+      case "women":
+        formattedValue = "Mujer";
+        return `${formattedValue}`;
+        break;
+      case "none":
+        formattedValue = "Ninguno";
+        return `${formattedValue}`;
+        break;
+      case "spanish":
+        formattedValue = "Español";
+        return `${formattedValue}`;
+        break;
+      case "catalan":
+        formattedValue = "Catalán";
+        return `${formattedValue}`;
+        break;
+    }
+  }
+
+  function donationFormatter(value) {
+    var formattedValue = value;
+    switch (value) {
+      case "MENSUAL":
+        formattedValue = "Mensual";
+        return `${formattedValue}`;
+        break;
+      case "TRIMESTRAL":
+        formattedValue = "Trimestral";
+        return `${formattedValue}`;
+        break;
+      case "SEMESTRAL":
+        formattedValue = "Semestral";
+        return `${formattedValue}`;
+        break;
+    
+      case "ANUAL":
+        formattedValue = "Anual";
+        return `${formattedValue}`;
+        break; 
+      }
+    }
+
+  const sex = partnerFormatter(user.sex);
+  const language = partnerFormatter(user.language);
+  const periodicity = donationFormatter(donation.periodicity);
+
   return (
     <section>
       <MDBContainer className="py-5">
@@ -154,7 +208,7 @@ export default function Details() {
                     <MDBCardText>Sexo</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{user.sex}</MDBCardText>
+                    <MDBCardText className="text-muted">{sex}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -213,7 +267,7 @@ export default function Details() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      {user.language}
+                      {language}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -254,7 +308,7 @@ export default function Details() {
                     <MDBCardText>Periodicidad</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{donation.periodicity}</MDBCardText>
+                    <MDBCardText className="text-muted">{periodicity}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -330,9 +384,6 @@ export default function Details() {
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
-          <MDBCol lg="1">
-            <a href={`${user.id}/receipt`} type="button" class="btn btn-light">Generar recibo</a>
-          </MDBCol>
         </MDBRow>
         <MDBRow>
           <MDBCol md="12">
@@ -350,3 +401,4 @@ export default function Details() {
     </section>
   );
 }
+

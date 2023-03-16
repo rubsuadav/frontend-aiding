@@ -38,7 +38,6 @@ function CreatePartner() {
         });
     };
 
-
     const [partner, setPartner] = useState({
       name: "",
       last_name: "",
@@ -257,8 +256,8 @@ function CreatePartner() {
                   value={state}
                   name="state"
                 >
-                  <option value="ACTIVE">Activo</option>
-                  <option value="INACTIVE">Inactivo</option>
+                  <option value="active">Activo</option>
+                  <option value="inactive">Inactivo</option>
                 </Form.Select>
               </Form.Group>
             </div>

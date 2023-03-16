@@ -1,6 +1,6 @@
 import React from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { Table, Button, Input, Space} from 'antd';
+import { Table, Button, Input, Space, Tag} from 'antd';
 import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
 import {partners} from "./services/backend.js";
@@ -10,8 +10,6 @@ import { useNavigate } from "react-router-dom";
 const onChange = (pagination, filters, sorter, extra) => {
   console.log('params', pagination, filters, sorter, extra);
 };
-
-
 
 const Partners = () => {
   let navigate = useNavigate();
