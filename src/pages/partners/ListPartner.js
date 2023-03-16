@@ -184,10 +184,10 @@ const Partners = () => {
 
   /*EXPORTACIÓN DE SOCIOS */
 
-  const exportToExcel = (table, fileName) => {
+  const exportToExcel = (fileName) => {
     const sheetName = 'Sheet1';
     const workbook = XLSX.utils.book_new();
-    const worksheetData = XLSX.utils.table_to_sheet(table);
+    const worksheetData = XLSX.utils.json_to_sheet(partners_data);
     XLSX.utils.book_append_sheet(workbook, worksheetData, sheetName);
     XLSX.writeFile(workbook, `${fileName}.xlsx`);
   };
@@ -206,7 +206,7 @@ const Partners = () => {
           };
         }}
         columns={columns} dataSource={partners_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
-        <Button  id="boton-socio" onClick={() => exportToExcel(document.getElementById('table'), 'myTable')}>
+        <Button  id="boton-socio" onClick={() => exportToExcel('myTable')}>
           Exportar a Excel
         </Button>
     </div>
