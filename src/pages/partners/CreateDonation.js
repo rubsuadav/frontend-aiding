@@ -34,6 +34,7 @@ function CreateDonation() {
             swal(successMsg);
             navigate(`/partners/${id}`);
         }).catch((error) => {
+            console.log(donation)
             console.log(error);
             swal(errorMsg);
         });
@@ -57,6 +58,7 @@ function CreateDonation() {
   
     const onSubmit = async (e) => {
       e.preventDefault();
+      console.log(donation);
       postDonation(donation);
     };
   
@@ -78,21 +80,20 @@ function CreateDonation() {
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Periodicidad</Form.Label>
+                <Form.Label>Cantidad</Form.Label>
                 <Form.Select
                   onChange={(e) => onInputChange(e)}
                   value={periodicity}
-                  name="periodicity"
-                >
-                  <option value="MONTHLY">Mensual</option>
-                  <option value="QUARTERLY">Trimestral</option>
-                  <option value="SEMIANNUAL">Semestral</option>
-                  <option value="ANNUAL">Anual</option>
+                  name="periodicity">
+                  <option value="MENSUAL">Mensual</option>
+                  <option value="TRIMESTRAL">Trimestral</option>
+                  <option value="SEMESTRAL">Semestral</option>
+                  <option value="ANUAL">Anual</option>
                 </Form.Select>
               </Form.Group>
               
               <Form.Group className="mb-3">
-                <Form.Label>Cantidad</Form.Label>
+                <Form.Label>Descripción</Form.Label>
                 <Form.Control
                   onChange={(e) => onInputChange(e)}
                   value={amount}
