@@ -12,7 +12,7 @@ import {
 import Communication from "./Communications.js";
 import {partners, fileUrl} from "./services/backend.js";
 import { generateCertificate, styles} from "./Certificate.js";
-import { PDFViewer, PDFDownloadLink} from "@react-pdf/renderer";
+import { PDFViewer} from "@react-pdf/renderer";
 import { Fade } from "react-bootstrap";
 
 export default function Details() {
