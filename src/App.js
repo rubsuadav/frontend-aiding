@@ -10,6 +10,8 @@ import ListAdvertisement from './pages/information/advertisement/ListAdvertiseme
 import AdminListAdvertisement from './pages/information/advertisement/AdminListAdvertisement';
 import ShowAdvertisement from './pages/information/advertisement/ShowAdvertisement';
 import AdminCreateAdvertisement from './pages/information/advertisement/AdminCreateAdvertisement';
+import AdminUpdateAdvertisement from './pages/information/advertisement/AdminUpdateAdvertisement';
+
 import Home from "./pages/Home";
 import ListPartner from "./pages/partners/ListPartner";
 import ShowPartner from "./pages/partners/ShowPartner";
@@ -76,6 +78,7 @@ export default function App() {
         <Route path="information/sections" element={ <ListAdvertisement/>} />
         <Route path="information/advertisements/:id" element={ <ShowAdvertisement/>} />
         <Route path="admin/information/advertisements/create" element={ <AdminCreateAdvertisement/>} />
+        <Route path="admin/information/advertisements/:id/update" element={ <AdminUpdateAdvertisement/>} />
         <Route path="admin/information/advertisements" element={ <AdminListAdvertisement/>} />
         <Route exact path='/information/map-resources' element={<ResourcesListEdit/>} />
         <Route path="/information/map-resources/:id" element={ <ShowResourceUser/>} />

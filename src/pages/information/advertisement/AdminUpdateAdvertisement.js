@@ -9,7 +9,7 @@ import Text from "@tiptap/extension-text";
 import React, { useState } from "react";
 import { advertisementBE, sectionBE } from "./services/backend.js";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -40,7 +40,7 @@ const errorMsg = {
   timer: "5000",
 };
 
-const AdminCreateAdvertisement = () => {
+const AdminUpdateAdvertisement = () => {
   let navigate = useNavigate();
 
   /* Editor */
@@ -55,15 +55,11 @@ const AdminCreateAdvertisement = () => {
         types: ["heading", "paragraph"],
       }),
     ],
-    content: `
-            <p>Empieza a escribir aquí el articulo de hasta 5000 caractéres</p>
-            <p></p>
-            <p></p>
-            <p></p>
-          `,
+
   });
 
   /* Data */
+  const { id } = useParams();
   const [advertisement, setAdvertisement] = useState({
     title: "",
     abstract: "",
@@ -106,7 +102,7 @@ const AdminCreateAdvertisement = () => {
       formData.append("section_id", section_id);
       formData.append("front_page", front_page);
 
-      postAdvertisement(formData);
+      putAdvertisement(formData);
     }
   };
 
@@ -150,9 +146,9 @@ const AdminCreateAdvertisement = () => {
   }
 
   /* Functions */
-  function postAdvertisement(advertisement) {
+  function putAdvertisement(advertisement) {
     advertisementBE
-      .post("", advertisement, {
+      .put(`${id}`, advertisement, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -179,9 +175,23 @@ const AdminCreateAdvertisement = () => {
       });
   }
 
+  function getAdvertisement() {
+    advertisementBE
+      .get(`${id}`)
+      .then((response) => {
+        setAdvertisement(response.data);
+        editor.commands.setContent(response.data.body);
+      })
+      .catch((error) => {
+        /* navigate("/information/sections"); */
+      });
+  }
+
   React.useEffect(() => {
+    getAdvertisement();
     getSections();
   }, []);
+
 
   return (
     <>
@@ -301,7 +311,7 @@ const AdminCreateAdvertisement = () => {
   );
 };
 
-export default AdminCreateAdvertisement;
+export default AdminUpdateAdvertisement;
 
 const EditButtons = ({ editor }) => {
   if (!editor) {
