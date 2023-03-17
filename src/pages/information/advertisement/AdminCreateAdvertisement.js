@@ -163,8 +163,12 @@ const AdminCreateAdvertisement = () => {
         navigate("/information/sections");
       })
       .catch((error) => {
-        console.log(error);
-        swal(errorMsg);
+        if (error.response && error.response.status === 409) {
+          let error_msgs = {title: "Ya existe un artículo con ese título"};
+          setErrors(error_msgs);
+        }else {
+          swal(errorMsg);
+        }
       });
   }
 

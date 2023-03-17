@@ -1,17 +1,16 @@
 import React from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { Table, Button, Input, Space} from 'antd';
+import { Table, Button, Input, Space, Tag} from 'antd';
 import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
 import {partners} from "./services/backend.js";
 import { useNavigate } from "react-router-dom";
-
+import * as XLSX from 'xlsx';
+import {MDBCol,MDBRow} from "mdb-react-ui-kit";
 
 const onChange = (pagination, filters, sorter, extra) => {
   console.log('params', pagination, filters, sorter, extra);
 };
-
-
 
 const Partners = () => {
   let navigate = useNavigate();
@@ -181,12 +180,30 @@ const Partners = () => {
   function createPartnerRedirect(){
     navigate("/partners/create");
   }
+
+  /*EXPORTACIÓN DE SOCIOS */
+
+  const exportToExcel = (fileName) => {
+    const sheetName = 'Sheet1';
+    const workbook = XLSX.utils.book_new();
+    const worksheetData = XLSX.utils.json_to_sheet(partners_data);
+    XLSX.utils.book_append_sheet(workbook, worksheetData, sheetName);
+    XLSX.writeFile(workbook, `${fileName}.xlsx`);
+  };
   
   return (
     <div className='container my-5'>
         <h1 className="pt-3">Socios</h1>
-        <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
-        <Table
+        <MDBRow className='g-0'>
+          <MDBCol md='1'>
+          <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
+          </MDBCol>
+          <MDBCol md='1'>
+          <Button  id="boton-socio" onClick={() => exportToExcel('myTable')}>Exportar a Excel</Button>
+          </MDBCol>
+        </MDBRow>
+        <br></br>
+        <Table id='table'
         onRow={(record, rowIndex) => {
           return {
             onClick: event => {
