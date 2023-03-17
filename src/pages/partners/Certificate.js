@@ -11,7 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 import Communication from "./Communications.js";
 import {partners, fileUrl} from "./services/backend.js";
-import { Document, Page, PDFViewer, Text, Image, StyleSheet} from "@react-pdf/renderer";
+import { Document, Page, PDFViewer, Text, Image, StyleSheet, View} from "@react-pdf/renderer";
 
 function generateCertificate(user, language, periodicity){
   const styles = StyleSheet.create({
@@ -22,26 +22,26 @@ function generateCertificate(user, language, periodicity){
       position: "absolute"
     },
     image:{
-      height:70,
-      width: 180
+      height:80,
+      width: 180,
     },
     footer:{
       position: "absolute",
       bottom: "30",
       textAlign: "center",
-      fontSize: 10,
+      fontSize: 8,
       fontFamily:"Courier",
       alignSelf: "center"
     },
     stamp:{
-      height:120,
-      width: 210,
+      height:70,
+      width: 130,
       alignSelf: "center"
     },
     text:{
       fontSize: 10,
       paddingHorizontal: 10,
-      paddingVertical: 10
+      paddingVertical: 5
     },
     textSp:{
       fontSize: 10,
@@ -55,6 +55,55 @@ function generateCertificate(user, language, periodicity){
       fontSize: 10,
       paddingVertical: 20,
       alignSelf: "center"
+    },
+    textBtm:{
+      fontSize: 10,
+      alignSelf: "center"
+    },
+    textTop:{
+      fontSize: 10,
+      paddingTop: 40,
+      paddingBottom: 10,
+      alignSelf: "center"
+    },
+    section: {
+      margin: 10,
+      padding: 10,
+    },
+    table: {
+      display: "table",
+      width: "auto",
+      borderStyle: "solid",
+      borderBottomWidth: 2,
+      borderLeftWidth:2,
+      borderColor: "#000000",
+      borderStyle: "solid",
+      borderColor: "#000000",
+    },
+    tableRow: {
+      flexDirection: "row",
+      borderStyle: "solid",
+      borderTopWidth: 2,
+      borderColor: "#000000",
+      width: "100%"
+    },
+    tableCol: {
+      borderStyle: "solid",
+      borderRightWidth:2,
+      borderColor: "#000000",
+      width: "100%"
+      
+    },
+    tableCellHeader: {
+      margin: "auto",
+      borderBottomColor: "#000000",
+      borderBottomWidth: 1,
+      textAlign: "center",
+      fontWeight: "bold"
+    },
+    tableCell: {
+      margin: "auto",
+      textAlign: "center",
     }
 
 
@@ -64,22 +113,61 @@ function generateCertificate(user, language, periodicity){
       <Document>
           <Page style={styles.body}>
             <Image src="http://localhost:3000/boscoglobal-logo.png" height="50" style={styles.image}></Image>
-            <Text style={styles.text}>Francisco Antonio Echeto Zubiri con DNI 15.801.110 H, Tesorero de la Fundación Bosco Global, con domicilio social en Sevilla, c/ Salesianos 3 A y CIF G-90.196.072</Text>
+            <Text style={styles.textTop}>Francisco Antonio Echeto Zubiri con DNI 15.801.110 H, Tesorero de la Fundación Bosco Global, con domicilio social en Sevilla, c/ Salesianos 3 A y CIF G-90.196.072</Text>
             <Text style={styles.textSp}>DECLARA</Text>
             <Text style={styles.text}>Que la <Text style={styles.textSp}>Fundación Bosco Global</Text> se encuentra incluida entre las acogidas al régimen de deducciones establecido por la Ley 49/2002, de 23 de diciembre de régimen fiscal de las entidades sin fines lucrativos y de los incentivos fiscales al mecenazgo.</Text>
             <Text style={styles.text}>Que se ha recibido de:</Text>
-            <Text>Nombre: {user.name}</Text>
-            <Text>Apellido: {user.last_name}</Text>
-            <Text>NIF: {user.dni}</Text>
-            <Text>Provincia: {user.province}</Text>
-            <Text>Perioicidad: {periodicity}</Text>
+            <View style={styles.section}>
+                <View style={styles.table}> 
+                  <View style={styles.tableRow}>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.text}>Nombre </Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.text}>{user.name}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.text}>Apellido</Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.text}>{user.last_name}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.text}>NIF</Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.text}>{user.dni}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.text}>Provincia </Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.text}>{user.province}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.tableRow}>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.text}>Perioicidad </Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.text}>{periodicity}</Text>
+                    </View>
+                  </View>
+                </View>
+            </View>
             <Text style={styles.text}>Que esta cantidad ha sido entregada con carácter de donación pura, simple e irrevocable.</Text>
             <Text style={styles.text}>Que el donativo recibido se ha destinado para el apoyo a los proyectos que la Entidad desarrolla para el cumplimiento de sus fines.</Text>
             <Text style={styles.text}>Sirva el presente documento para que surta los efectos fiscales oportunos.</Text>
             <Text style={styles.textStp}>Sevilla, abril de 2023</Text>
             <Image src="http://localhost:3000/Bosco-sello.png" height="50" style={styles.stamp}></Image>
-            <Text style={styles.textStp}>Francisco Antonio Echeto Zubiri</Text>
-            <Text style={styles.textStp}>Tesorero de la Fundación Bosco Global</Text>
+            <Text style={styles.textBtm}>Francisco Antonio Echeto Zubiri</Text>
+            <Text style={styles.textBtm}>Tesorero de la Fundación Bosco Global</Text>
             <Text style={styles.footer}>C/Salesianos,3A. 41008 Sevilla (España) · T. 954 53 28 27 · info@boscoglobal.org · boscoglobal.org</Text>
           </Page>
       </Document>
