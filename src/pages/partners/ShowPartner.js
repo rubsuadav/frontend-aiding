@@ -11,6 +11,9 @@ import {
 } from "mdb-react-ui-kit";
 import Communication from "./Communications.js";
 import {partners, fileUrl} from "./services/backend.js";
+import { generateCertificate, styles} from "./Certificate.js";
+import { PDFViewer, PDFDownloadLink} from "@react-pdf/renderer";
+import { Fade } from "react-bootstrap";
 
 export default function Details() {
   let navigate = useNavigate();
@@ -67,8 +70,23 @@ export default function Details() {
     setDonation(result.data);
   };
 
+  const [verCertificado, setVerCertificado] = useState(false);
+  const [idioma, setIdioma] = useState("Español");
+
+  function handleClick(lan){
+    setVerCertificado(true);
+    setIdioma(lan);
+  }
+
   return (
     <section>
+      {verCertificado ? (
+        <div style={styles.cont}>
+          <button onClick={()=>  setVerCertificado(false)}> Cerrar </button>
+          <PDFViewer  height={"1000"}>{generateCertificate(user,idioma, donation.amount)}</PDFViewer>
+        </div>
+
+      ): null}
       <MDBContainer className="py-5">
         <MDBRow>
           <MDBCol lg="5">
@@ -288,11 +306,25 @@ export default function Details() {
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
                     <a
-                        onClick={() => {navigate(`/partners/${id}/certificate`)}}
+                        onClick={()=> handleClick("Español")}
                         type="button" id="button" 
                         className="btn btn-light w-100"
                       >
                         Generar certificado
+                      </a>
+                    </MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol>
+                    <MDBCardText className="text-muted w-auto">
+                    <a
+                       onClick={()=> handleClick("Catalán")}
+                        type="button" id="button" 
+                        className="btn btn-light w-100"
+                      >
+                        Generar certificado catalán
                       </a>
                     </MDBCardText>
                   </MDBCol>

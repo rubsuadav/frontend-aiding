@@ -1,113 +1,111 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import {
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-  MDBCard,
-  MDBCardText,
-  MDBCardBody,
-} from "mdb-react-ui-kit";
-import Communication from "./Communications.js";
-import {partners, fileUrl} from "./services/backend.js";
-import { Document, Page, PDFViewer, Text, Image, StyleSheet, View} from "@react-pdf/renderer";
+import { Document, Page, Text, Image, StyleSheet, View} from "@react-pdf/renderer";
 
-function generateCertificate(user, language, amount){
-  const styles = StyleSheet.create({
-    body:{
-      paddingTop: 60,
-      paddingBotom: 60,
-      paddingHorizontal: 60,
-      position: "absolute"
-    },
-    image:{
-      height:80,
-      width: 180,
-    },
-    footer:{
-      position: "absolute",
-      bottom: "30",
-      textAlign: "center",
-      fontSize: 8,
-      fontFamily:"Courier",
-      alignSelf: "center"
-    },
-    stamp:{
-      height:70,
-      width: 130,
-      alignSelf: "center"
-    },
-    text:{
-      fontSize: 10,
-      paddingHorizontal: 10,
-      paddingVertical: 5
-    },
-    textSp:{
-      fontSize: 10,
-      paddingHorizontal: 10,
-      paddingVertical: 20,
-      alignSelf: "center",
-      fontFamily:"Helvetica-Bold"
-      
-    },
-    textStp:{
-      fontSize: 10,
-      paddingVertical: 20,
-      alignSelf: "center"
-    },
-    textBtm:{
-      fontSize: 10,
-      alignSelf: "center"
-    },
-    textTop:{
-      fontSize: 10,
-      paddingTop: 40,
-      paddingBottom: 10,
-      alignSelf: "center"
-    },
-    section: {
-      margin: 10,
-      padding: 10,
-    },
-    table: {
-      display: "table",
-      width: "auto",
-      borderStyle: "solid",
-      borderBottomWidth: 2,
-      borderLeftWidth:2,
-      borderColor: "#000000",
-      borderStyle: "solid",
-      borderColor: "#000000",
-    },
-    tableRow: {
-      flexDirection: "row",
-      borderStyle: "solid",
-      borderTopWidth: 2,
-      borderColor: "#000000",
-      width: "100%"
-    },
-    tableCol: {
-      borderStyle: "solid",
-      borderRightWidth:2,
-      borderColor: "#000000",
-      width: "100%"
-      
-    },
-    tableCellHeader: {
-      margin: "auto",
-      borderBottomColor: "#000000",
-      borderBottomWidth: 1,
-      textAlign: "center",
-      fontWeight: "bold"
-    },
-    tableCell: {
-      margin: "auto",
-      textAlign: "center",
-    }
+export const styles = StyleSheet.create({
+  body:{
+    paddingTop: 60,
+    paddingBotom: 60,
+    paddingHorizontal: 60,
+    position: "absolute"
+  },
+  image:{
+    height:80,
+    width: 180,
+  },
+  footer:{
+    position: "absolute",
+    bottom: "30",
+    textAlign: "center",
+    fontSize: 8,
+    fontFamily:"Courier",
+    alignSelf: "center"
+  },
+  stamp:{
+    height:70,
+    width: 130,
+    alignSelf: "center"
+  },
+  text:{
+    fontSize: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 5
+  },
+  textSp:{
+    fontSize: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 20,
+    alignSelf: "center",
+    fontFamily:"Helvetica-Bold"
+    
+  },
+  textStp:{
+    fontSize: 10,
+    paddingVertical: 20,
+    alignSelf: "center"
+  },
+  textBtm:{
+    fontSize: 10,
+    alignSelf: "center"
+  },
+  textTop:{
+    fontSize: 10,
+    paddingTop: 40,
+    paddingBottom: 10,
+    alignSelf: "center"
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+  },
+  table: {
+    display: "table",
+    width: "auto",
+    borderStyle: "solid",
+    borderBottomWidth: 2,
+    borderLeftWidth:2,
+    borderColor: "#000000",
+    borderStyle: "solid",
+    borderColor: "#000000",
+  },
+  tableRow: {
+    flexDirection: "row",
+    borderStyle: "solid",
+    borderTopWidth: 2,
+    borderColor: "#000000",
+    width: "100%"
+  },
+  tableCol: {
+    borderStyle: "solid",
+    borderRightWidth:2,
+    borderColor: "#000000",
+    width: "100%"
+    
+  },
+  tableCellHeader: {
+    margin: "auto",
+    borderBottomColor: "#000000",
+    borderBottomWidth: 1,
+    textAlign: "center",
+    fontWeight: "bold"
+  },
+  tableCell: {
+    margin: "auto",
+    textAlign: "center",
+  },
+  cont:{
+    display: "flex",
+    flexDirection: "column",
+    zIndex: 900,
+    width: "100%",
+    position: "absolute",
+    alignSelf:"center",
+    paddingBottom: "10%"
+  }
 
 
-  });
+});
+
+export function generateCertificate(user, language, amount){
   const text =[]
   if(language == "Español"){
     text[0] = "Francisco Antonio Echeto Zubiri con DNI 15.801.110 H, Tesorero de la Fundación Bosco Global, con domicilio social en Sevilla, c/ Salesianos 3 A y CIF G-90.196.072"
@@ -191,78 +189,6 @@ function generateCertificate(user, language, amount){
 }
 
 export default function Certificate() {
-  let navigate = useNavigate();
-
-  /**Establecer usuario */
-  const [user, setUser] = useState({
-    dni: "",
-    name: "",
-    last_name: "",
-    email: "",
-    state: "",
-    phone1: "",
-    province: "",
-    iban: "",
-    phone2: "",
-    birthdate: "",
-    sex: "",
-    address: "",
-    postal_code: "",
-    township: "",
-    language: "",
-    account_holder: "",
-    state: "",
-  });
-
-  const [donation, setDonation] = useState({
-    date: "",
-    amount: "",
-    periodicity: "",
-  });
-
-  const { id } = useParams();
-
-  useEffect(() => {
-    loadUser();
-    loadDonation();
-  }, []);
-
-  const loadUser = async () => {
-    const result = await partners.get(`/${id}`);
-    setUser(result.data);
-  };
-
-  function createCommunicationRedirect(){
-    navigate(`/partners/${id}/communication/create`);
-  }
-
-  function createDonationRedirect(){
-    navigate(`/partners/${id}/donation/create`);
-  }
   
-  const loadDonation = async () => {
-    const result = await partners.get(`/${id}/donation`);
-    setDonation(result.data);
-  };
-
   
-
-
-
-  return (
-    <section>
-      <div>
-      <button onClick={generateCertificate(user, "Español")}>Español</button>
-    </div>
-    <div>
-      <button onClick={generateCertificate(user, "Catalán")}>Catalán</button>
-    </div>
-      <PDFViewer height={"450"}>
-        {generateCertificate(user,"Español", donation.amount)}         
-      </PDFViewer>
-      <PDFViewer height={"450"}>
-        {generateCertificate(user,"Catalá", donation.amount)}         
-      </PDFViewer>
-    </section>
-  );
 }

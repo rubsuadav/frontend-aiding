@@ -41,7 +41,6 @@ function App() {
         <Route path="/partners/:id/communication/create" element={ <CreateCommunication/>} />
         <Route path="/partners/:id/communication/update/:idc" element={ <UpdateCommunication/>} />
         <Route path="/partners/:id/donation/create" element={ <CreateDonation/>} />
-        <Route path="/partners/:id/certificate" element={ <Certificate/>} />
       </Routes>
     </Router>
     <Footer/>
