@@ -7,12 +7,13 @@ import Heading from "@tiptap/extension-heading";
 import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
 import React, { useState } from "react";
-import { advertisementBE, sectionBE } from "./services/backend.js";
+import { advertisementBE, sectionBE, mediaUrl } from "./services/backend.js";
 
 import { Link, useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
 
 import { BsJustifyRight } from "react-icons/bs";
 import { BiAlignJustify } from "react-icons/bi";
@@ -55,7 +56,6 @@ const AdminUpdateAdvertisement = () => {
         types: ["heading", "paragraph"],
       }),
     ],
-
   });
 
   /* Data */
@@ -66,6 +66,7 @@ const AdminUpdateAdvertisement = () => {
     body: "",
     url: "",
     section_id: "",
+    section_id__name: "",
     front_page: "",
   });
 
@@ -76,7 +77,15 @@ const AdminUpdateAdvertisement = () => {
     },
   ]);
 
-  const { title, abstract, body, url, section_id, front_page } = advertisement;
+  const {
+    title,
+    abstract,
+    body,
+    url,
+    section_id,
+    section_id__name,
+    front_page,
+  } = advertisement;
 
   /* Events */
   const onInputChange = (e) => {
@@ -100,7 +109,10 @@ const AdminUpdateAdvertisement = () => {
       formData.append("body", editor.getHTML());
       formData.append("url", url);
       formData.append("section_id", section_id);
-      formData.append("front_page", front_page);
+
+      if (front_page !== "" && front_page !== null) {
+        formData.append("front_page", front_page);
+      }
 
       putAdvertisement(formData);
     }
@@ -130,10 +142,6 @@ const AdminUpdateAdvertisement = () => {
 
     if (section_id === "" || section_id === null) {
       error_msgs.section_id = "Hay un error con la sección";
-    }
-
-    if (front_page === "" || front_page === null) {
-      error_msgs.front_page = "El artículo debe tener una imagen de portada";
     }
 
     setErrors(error_msgs);
@@ -180,6 +188,7 @@ const AdminUpdateAdvertisement = () => {
       .get(`${id}`)
       .then((response) => {
         setAdvertisement(response.data);
+        console.log(response.data);
         editor.commands.setContent(response.data.body);
       })
       .catch((error) => {
@@ -187,11 +196,35 @@ const AdminUpdateAdvertisement = () => {
       });
   }
 
+  function deleteAdvertisement() {
+    advertisementBE
+      .delete(`${id}`)
+      .then(() => {
+        navigate("/admin/information/advertisements");
+        swal(successMsg);
+      })
+      .catch((error) => {
+        swal(errorMsg);
+      });
+  }
+
+  const deleteConfirmationAlert = async () => {
+    swal({
+      title: "Eliminar recurso",
+      text: "¿Estás seguro que desea eliminar el articulo?",
+      icon: "warning",
+      buttons: ["No", "Sí"],
+    }).then((res) => {
+      if (res) {
+        deleteAdvertisement();
+      }
+    });
+  };
+
   React.useEffect(() => {
     getAdvertisement();
     getSections();
   }, []);
-
 
   return (
     <>
@@ -253,9 +286,12 @@ const AdminUpdateAdvertisement = () => {
                   <Form.Select
                     onChange={(e) => onInputChange(e)}
                     name="section_id"
+                    defaultValue={section_id}
                     required
                   >
-                    <option>Seleciona una sección</option>
+                    <option value={section_id}>
+                      {section_id__name} (actual)
+                    </option>
                     {sections.map((section) => (
                       <option value={section.id}>{section.name}</option>
                     ))}
@@ -267,12 +303,29 @@ const AdminUpdateAdvertisement = () => {
                   {errors.front_page && (
                     <p className="text-danger">{errors.front_page}</p>
                   )}
-                  <Form.Control
-                    onChange={(e) => onInputChange(e)}
-                    type="file"
-                    name="front_page"
-                    required
-                  />
+                  <Row className="align-items-center">
+                    <Col sm={3} className="d-flex justify-content-center">
+                      <Image
+                        style={{
+                          display: "block",
+                          width: "auto",
+                          height: "auto",
+                          maxHeight: "8rem",
+                        }}
+                        className="mb-2 border border-2"
+                        fluid={true}
+                        src={`${mediaUrl}${front_page}`}
+                      />
+                    </Col>
+                    <Col sm={9}>
+                      <Form.Control
+                        onChange={(e) => onInputChange(e)}
+                        type="file"
+                        name="front_page"
+                        required
+                      />
+                    </Col>
+                  </Row>
                 </Form.Group>
               </div>
 
@@ -291,6 +344,14 @@ const AdminUpdateAdvertisement = () => {
                 >
                   Cancelar
                 </Link>
+
+                <Button
+                  className="col-4 mb-4 mx-2"
+                  variant="danger"
+                  onClick={() => deleteConfirmationAlert()}
+                >
+                  Eliminar artículo
+                </Button>
               </div>
             </Form>
             <Container>

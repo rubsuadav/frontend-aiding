@@ -3,8 +3,38 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Table, Button, Input, Space } from "antd";
 import { useRef, useState, useEffect } from "react";
 import Highlighter from "react-highlight-words";
-import { advertisementBE } from "./services/backend.js";
+import { advertisementBE, sectionBE } from "./services/backend.js";
 import { useNavigate } from "react-router-dom";
+
+import swal from "sweetalert";
+import TableReact from "react-bootstrap/Table";
+import ButtonReact from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { Col, Container, Row } from "react-bootstrap";
+
+const successMsg_delete = {
+  title: "Mensaje de confirmación",
+  text: "Te confirmamos que la sección se ha eliminado correctamente",
+  icon: "success",
+  button: "Aceptar",
+  timer: "5000",
+};
+
+const successMsg_create = {
+  title: "Mensaje de confirmación",
+  text: "Te confirmamos que la sección se ha eliminado correctamente",
+  icon: "success",
+  button: "Aceptar",
+  timer: "5000",
+};
+
+const errorMsg_create = {
+  title: "Mensaje de error",
+  text: "Se ha producido un error al crear la sección",
+  icon: "error",
+  button: "Aceptar",
+  timer: "5000",
+};
 
 const onChange = (pagination, filters, sorter, extra) => {
   console.log("params", pagination, filters, sorter, extra);
@@ -13,7 +43,7 @@ const onChange = (pagination, filters, sorter, extra) => {
 const AdminListAdvertisement = () => {
   let navigate = useNavigate();
 
-  /*BUSCADOR*/
+  /* Filters */
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
@@ -142,13 +172,14 @@ const AdminListAdvertisement = () => {
       title: "Fecha de creación",
       dataIndex: "creation_date",
       sorter: {
-        compare: (a, b) => compareDates(a.creation_date, b.creation_date) ,
+        compare: (a, b) => compareDates(a.creation_date, b.creation_date),
         multiple: 1,
       },
     },
   ];
 
-  /*DATOS*/
+  /* Data */
+  const [event, setEvent] = React.useState(true);
   const [advertisements, setAdvertisements] = React.useState([
     {
       title: "",
@@ -160,54 +191,209 @@ const AdminListAdvertisement = () => {
     },
   ]);
 
+  const [sections, setSections] = React.useState([
+    {
+      id: "",
+      name: "",
+    },
+  ]);
+
+  const [section, setSection] = React.useState({
+    name: "",
+  });
+
+  const { name } = section;
+
+  /* Validator */
+  const [errors, setErrors] = useState({});
+
+  function validateForm() {
+    let error_msgs = {};
+
+    if (name === "" || name === null) {
+      error_msgs.name = "El nombre no puede estar vacío";
+    }
+
+    setErrors(error_msgs);
+
+    if (Object.keys(error_msgs).length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /* Events */
+  const onInputChange = (e) => {
+    setSection({ ...section, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      sectionBE
+        .post("", section)
+        .then((response) => {
+          swal(successMsg_create).then((res) => {
+            if (res) {
+              setEvent(!event);
+              setSection({ name: "" });
+            }
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          swal(errorMsg_create);
+        });
+    }
+  };
+
+  /* Functions */
+  const deleteConfirmationAlert = async (id) => {
+    swal({
+      title: "Eliminar recurso",
+      text: "¿Estás seguro que desea eliminar la sección?",
+      icon: "warning",
+      buttons: ["No", "Sí"],
+    }).then((res) => {
+      if (res) {
+        sectionBE.delete(`${id}`).then((response) => {
+          swal(successMsg_delete).then((res) => {
+            if (res) {
+              setEvent(!event);
+            }
+          });
+        });
+      }
+    });
+  };
+
+  useEffect(() => {
+    sectionBE.get("").then((response) => {
+      setSections(response.data);
+    });
+  }, [event]);
+
   useEffect(() => {
     advertisementBE.get().then((response) => {
       setAdvertisements(response.data);
-    console.log(response.data);
+    });
+    sectionBE.get("").then((response) => {
+      setSections(response.data);
     });
   }, []);
 
   return (
-    <div className="container my-5">
-      <h1 className="pt-3">Artículos</h1>
-      <Button
-        onClick={() => {
-          navigate("/admin/information/advertisements/create");
-        }}
-        id="boton-socio"
-      >
-        Crear artículo
-      </Button>
-      <Table
-        onRow={(record) => {
-          return {
-            onClick: () => {
-              navigate("/information/advertisements/" + record.id);
-            },
-          };
-        }}
-        columns={columns}
-        dataSource={advertisements}
-        onChange={onChange}
-        scroll={{ y: 400 }}
-        pagination={{ pageSize: 20 }}
-      />
-    </div>
+    <>
+      <Container className="my-5">
+        <Row>
+          <h1 className="py-1">Artículos y secciones</h1>
+        </Row>
+
+        <Row>
+          <Col>
+            <Button
+              onClick={() => {
+                navigate("/admin/information/advertisements/create");
+              }}
+              id="boton-socio"
+            >
+              Crear artículo
+            </Button>
+            <Table
+              onRow={(record) => {
+                return {
+                  onClick: () => {
+                    navigate("/information/advertisements/" + record.id);
+                  },
+                };
+              }}
+              columns={columns}
+              dataSource={advertisements}
+              onChange={onChange}
+              scroll={{ y: 400 }}
+              pagination={{ pageSize: 20 }}
+            />
+          </Col>
+        </Row>
+
+        <hr></hr>
+
+        <Row className="mb-4">
+          <Col sm>
+            <h3>Secciones</h3>
+            <TableReact striped bordered hover>
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {sections.map((section) => (
+                  <tr>
+                    <td>{section.name}</td>
+                    <td>
+                      <ButtonReact
+                        className=""
+                        variant="danger"
+                        onClick={() => deleteConfirmationAlert(section.id)}
+                      >
+                        Eliminar
+                      </ButtonReact>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </TableReact>
+          </Col>
+          <Col sm>
+            <h3>Crear sección</h3>
+            <Form
+              className=""
+              onSubmit={(e) => onSubmit(e)}
+              noValidate
+              validated={false}
+            >
+              <Row className="justify-content-evenly">
+                <Form.Group className="mb-3">
+                  {errors.name && <p className="text-danger">{errors.name}</p>}
+                  <Form.Control
+                    onChange={(e) => onInputChange(e)}
+                    value={name}
+                    name="name"
+                    required
+                    placeholder="Nombre de la sección"
+                  />
+                </Form.Group>
+              </Row>
+              <ButtonReact
+                className="col mb-4 mx-2"
+                variant="primary"
+                onClick={(e) => onSubmit(e)}
+              >
+                Crear sección
+              </ButtonReact>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 
 export default AdminListAdvertisement;
 
-
 function compareDates(dateString1, dateString2) {
-    const date1 = new Date(dateString1);
-    const date2 = new Date(dateString2);
-  
-    if (date1 < date2) {
-      return -1;
-    } else if (date1 > date2) {
-      return 1;
-    } else {
-      return 0;
-    }
+  const date1 = new Date(dateString1);
+  const date2 = new Date(dateString2);
+
+  if (date1 < date2) {
+    return -1;
+  } else if (date1 > date2) {
+    return 1;
+  } else {
+    return 0;
   }
+}

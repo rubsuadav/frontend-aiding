@@ -4,11 +4,10 @@ import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import swal from "sweetalert";
 import { advertisementBE, mediaUrl } from "./services/backend.js";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import SafeHTML from "../../../components/SanitizeHTML";
-import { Button } from "react-bootstrap";
+
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -45,31 +44,6 @@ export default function ShowAdvertisement() {
     advertisement;
 
   /* Functions */
-  function deleteAdvertisement() {
-    advertisementBE
-      .delete(`${id}`)
-      .then(() => {
-        navigate("/admin/information/advertisements");
-        swal(successMsg);
-      })
-      .catch((error) => {
-        swal(errorMsg);
-      });
-  }
-
-  const deleteConfirmationAlert = async () => {
-    swal({
-      title: "Eliminar recurso",
-      text: "¿Estás seguro que desea eliminar el articulo?",
-      icon: "warning",
-      buttons: ["No", "Sí"],
-    }).then((res) => {
-      if (res) {
-        deleteAdvertisement();
-      }
-    });
-  };
-
   useEffect(() => {
     const getAdvertisement = advertisementBE.get(`${id}`).then((response) => {
       setAdvertisement(response.data);
@@ -79,19 +53,6 @@ export default function ShowAdvertisement() {
   return (
     <Container>
       <Row className="justify-content-center mt-5">
-        <Link
-          className="btn btn-outline-primary col-4 mb-4 mx-2"
-          to={`admin/information/advertisements/${id}/update`}
-        >
-          Modificar artículo
-        </Link>
-        <Button
-          className="col-4 mb-4 mx-2"
-          variant="danger"
-          onClick={() => deleteConfirmationAlert()}
-        >
-          Eliminar artículo
-        </Button>
         <Col lg={6} className="align-self-center shadow mb-5">
           <Row className="">
             <h1 className="title" style={{ textAlign: "left" }}>
@@ -143,6 +104,14 @@ export default function ShowAdvertisement() {
             <SafeHTML html={body} />
           </Row>
         </Col>
+      </Row>
+      <Row className="justify-content-center">
+        <Link
+          className="btn btn-outline-primary col-4 mb-4 mx-2"
+          to={`/admin/information/advertisements/${id}/update`}
+        >
+          Modificar artículo
+        </Link>
       </Row>
     </Container>
   );
