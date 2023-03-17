@@ -6,14 +6,7 @@ import Highlighter from 'react-highlight-words';
 import {partners} from "./services/backend.js";
 import { useNavigate } from "react-router-dom";
 import * as XLSX from 'xlsx';
-import {
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-  MDBCard,
-  MDBCardText,
-  MDBCardBody,
-} from "mdb-react-ui-kit";
+import {MDBCol,MDBRow} from "mdb-react-ui-kit";
 
 const onChange = (pagination, filters, sorter, extra) => {
   console.log('params', pagination, filters, sorter, extra);

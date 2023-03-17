@@ -7,7 +7,6 @@ import Heading from "@tiptap/extension-heading";
 import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
 import React, { useState, useEffect } from "react";
-
 import { BsJustifyLeft } from "react-icons/bs";
 import { BsJustifyRight } from "react-icons/bs";
 import { BiAlignJustify } from "react-icons/bi";

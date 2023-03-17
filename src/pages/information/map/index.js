@@ -1,7 +1,4 @@
 import React from 'react'
-
-import ResourcesList from '../../../components/ResourcesList.js';
-import Map from '../../../components/Map.js';
 import { Table } from 'react-bootstrap';
 import ResourcesListEdit from '../../../components/ResourcesListEdit.js';
 
