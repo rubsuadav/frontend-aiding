@@ -13,7 +13,8 @@ import Communication from "./Communications.js";
 import {partners, fileUrl} from "./services/backend.js";
 import { generateCertificate, styles} from "./Certificate.js";
 import { PDFViewer} from "@react-pdf/renderer";
-import { Fade } from "react-bootstrap";
+import {Dropdown} from 'react-bootstrap';
+
 
 export default function Details() {
   let navigate = useNavigate();
@@ -77,6 +78,43 @@ export default function Details() {
     setVerCertificado(true);
     setIdioma(lan);
   }
+
+  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <a
+      href=""
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+      type="button" id="button" className="btn btn-light w-100"
+    >
+      {children}
+      &#x25bc;
+    </a>
+  ));
+  
+  const CustomMenu = React.forwardRef(
+    ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+      const [value, setValue] = useState('');
+  
+      return (
+        <div
+          ref={ref}
+          style={style}
+          className={className}
+          aria-labelledby={labeledBy}
+        >
+          <ul className="list-unstyled">
+            {React.Children.toArray(children).filter(
+              (child) =>
+                !value || child.props.children.toLowerCase().startsWith(value),
+            )}
+          </ul>
+        </div>
+      );
+    },
+  );
 
   return (
     <section>
@@ -305,31 +343,20 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                    <a
-                        onClick={()=> handleClick("Español")}
-                        type="button" id="button" 
-                        className="btn btn-light w-100"
-                      >
-                        Generar certificado
-                      </a>
+                      <Dropdown>
+                        <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+                          Certificado 
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu as={CustomMenu}>
+                          <Dropdown.Item  onClick={()=> handleClick("Español")} type="button" id="button" className="btn btn-light w-100">Español</Dropdown.Item>
+                          <Dropdown.Item onClick={()=> handleClick("Catalán")} type="button" id="button" className="btn btn-light w-100">Català</Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>                      
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol>
-                    <MDBCardText className="text-muted w-auto">
-                    <a
-                       onClick={()=> handleClick("Catalán")}
-                        type="button" id="button" 
-                        className="btn btn-light w-100"
-                      >
-                        Generar certificado catalán
-                      </a>
-                    </MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
+                <hr />    
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">

@@ -103,6 +103,20 @@ export const styles = StyleSheet.create({
     position: "absolute",
     alignSelf:"center",
     paddingBottom: "10%"
+  },
+   buttonStyle: {
+    backgroundColor: 'red',
+    color: '#fff',
+    border: '1px solid black',
+    borderRadius: '5px',
+    padding: '10px'
+  },
+    menuStyle: {
+    backgroundColor: '#fff',
+    color: 'black',
+    border: '1px solid red',
+    borderRadius: '5px',
+    padding: '10px'
   }
 
 
