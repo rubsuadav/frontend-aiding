@@ -5,29 +5,12 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { advertisementBE, mediaUrl } from "./services/backend.js";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import SafeHTML from "../../../components/SanitizeHTML";
 
 
-const successMsg = {
-  title: "Mensaje de confirmación",
-  text: "Te confirmamos que el artículo se ha eliminado correctamente",
-  icon: "success",
-  button: "Aceptar",
-  timer: "5000",
-};
-
-const errorMsg = {
-  title: "Mensaje de error",
-  text: "Se ha producido un error al eliminar el artículo",
-  icon: "error",
-  button: "Aceptar",
-  timer: "5000",
-};
 
 export default function ShowAdvertisement() {
-  let navigate = useNavigate();
-
   /* Data */
   const { id } = useParams();
   const [advertisement, setAdvertisement] = useState({
@@ -40,12 +23,12 @@ export default function ShowAdvertisement() {
     front_page: "default.jpg",
   });
 
-  const { title, abstract, body, creation_date, url, section, front_page } =
+  const { title, abstract, body, creation_date, url, front_page } =
     advertisement;
 
   /* Functions */
   useEffect(() => {
-    const getAdvertisement = advertisementBE.get(`${id}`).then((response) => {
+    advertisementBE.get(`${id}`).then((response) => {
       setAdvertisement(response.data);
     });
   }, []);

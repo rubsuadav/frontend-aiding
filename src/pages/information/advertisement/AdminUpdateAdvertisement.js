@@ -56,11 +56,13 @@ const AdminUpdateAdvertisement = () => {
         types: ["heading", "paragraph"],
       }),
     ],
+    content: '',
   });
 
   /* Data */
   const { id } = useParams();
   const [advertisement, setAdvertisement] = useState({
+    id: "",
     title: "",
     abstract: "",
     body: "",
@@ -110,7 +112,7 @@ const AdminUpdateAdvertisement = () => {
       formData.append("url", url);
       formData.append("section_id", section_id);
 
-      if (front_page !== "" && front_page !== null) {
+      if (front_page instanceof File) {
         formData.append("front_page", front_page);
       }
 
@@ -167,8 +169,12 @@ const AdminUpdateAdvertisement = () => {
         navigate("/information/sections");
       })
       .catch((error) => {
-        console.log(error);
-        swal(errorMsg);
+        if (error.response && error.response.status === 409) {
+          let error_msgs = {title: "Ya existe un artículo con ese título"};
+          setErrors(error_msgs);
+        }else {
+          swal(errorMsg);
+        }
       });
   }
 
@@ -188,8 +194,6 @@ const AdminUpdateAdvertisement = () => {
       .get(`${id}`)
       .then((response) => {
         setAdvertisement(response.data);
-        console.log(response.data);
-        editor.commands.setContent(response.data.body);
       })
       .catch((error) => {
         /* navigate("/information/sections"); */
@@ -226,12 +230,20 @@ const AdminUpdateAdvertisement = () => {
     getSections();
   }, []);
 
+  React.useEffect(() => {
+    if (editor === null) {
+      return;
+    }else{
+      editor.commands.setContent(body);
+    }
+  }, [advertisement]);
+
   return (
     <>
       <div className="container my-5">
         <div className="row justify-content-center">
           <div className="col-lg-10 shadow">
-            <h1 className="pt-3">Redactar artículo</h1>
+            <h1 className="pt-3">Editar artículo</h1>
             <Form
               className=""
               onSubmit={(e) => onSubmit(e)}
@@ -336,7 +348,7 @@ const AdminUpdateAdvertisement = () => {
                   variant="primary"
                   onClick={(e) => onSubmit(e)}
                 >
-                  Publicar artículo
+                  Actualizar artículo
                 </Button>
                 <Link
                   className="btn btn-outline-danger col mb-4 mx-2"
@@ -362,6 +374,7 @@ const AdminUpdateAdvertisement = () => {
                     className="border border-bottom-0 border-2 mt-3"
                     editor={editor}
                   />
+                  <hr></hr>
                 </Col>
               </Row>
             </Container>
