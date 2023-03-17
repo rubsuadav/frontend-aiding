@@ -13,7 +13,7 @@ import Communication from "./Communications.js";
 import {partners, fileUrl} from "./services/backend.js";
 import { Document, Page, PDFViewer, Text, Image, StyleSheet, View} from "@react-pdf/renderer";
 
-function generateCertificate(user, language, periodicity){
+function generateCertificate(user, language, amount){
   const styles = StyleSheet.create({
     body:{
       paddingTop: 60,
@@ -108,77 +108,81 @@ function generateCertificate(user, language, periodicity){
 
 
   });
-  if(language == "Español")
-    return(
-      <Document>
-          <Page style={styles.body}>
-            <Image src="http://localhost:3000/boscoglobal-logo.png" height="50" style={styles.image}></Image>
-            <Text style={styles.textTop}>Francisco Antonio Echeto Zubiri con DNI 15.801.110 H, Tesorero de la Fundación Bosco Global, con domicilio social en Sevilla, c/ Salesianos 3 A y CIF G-90.196.072</Text>
-            <Text style={styles.textSp}>DECLARA</Text>
-            <Text style={styles.text}>Que la <Text style={styles.textSp}>Fundación Bosco Global</Text> se encuentra incluida entre las acogidas al régimen de deducciones establecido por la Ley 49/2002, de 23 de diciembre de régimen fiscal de las entidades sin fines lucrativos y de los incentivos fiscales al mecenazgo.</Text>
-            <Text style={styles.text}>Que se ha recibido de:</Text>
-            <View style={styles.section}>
-                <View style={styles.table}> 
-                  <View style={styles.tableRow}>
-                    <View style={styles.tableCol}>
-                      <Text style={styles.text}>Nombre </Text>
-                    </View>
-                    <View style={styles.tableCol}>
-                      <Text style={styles.text}>{user.name}</Text>
-                    </View>
-                  </View>
-                  <View style={styles.tableRow}>
-                    <View style={styles.tableCol}>
-                      <Text style={styles.text}>Apellido</Text>
-                    </View>
-                    <View style={styles.tableCol}>
-                      <Text style={styles.text}>{user.last_name}</Text>
-                    </View>
-                  </View>
-                  <View style={styles.tableRow}>
-                    <View style={styles.tableCol}>
-                      <Text style={styles.text}>NIF</Text>
-                    </View>
-                    <View style={styles.tableCol}>
-                      <Text style={styles.text}>{user.dni}</Text>
-                    </View>
-                  </View>
-                  <View style={styles.tableRow}>
-                    <View style={styles.tableCol}>
-                      <Text style={styles.text}>Provincia </Text>
-                    </View>
-                    <View style={styles.tableCol}>
-                      <Text style={styles.text}>{user.province}</Text>
-                    </View>
-                  </View>
-                  <View style={styles.tableRow}>
-                    <View style={styles.tableCol}>
-                      <Text style={styles.text}>Perioicidad </Text>
-                    </View>
-                    <View style={styles.tableCol}>
-                      <Text style={styles.text}>{periodicity}</Text>
-                    </View>
-                  </View>
-                </View>
-            </View>
-            <Text style={styles.text}>Que esta cantidad ha sido entregada con carácter de donación pura, simple e irrevocable.</Text>
-            <Text style={styles.text}>Que el donativo recibido se ha destinado para el apoyo a los proyectos que la Entidad desarrolla para el cumplimiento de sus fines.</Text>
-            <Text style={styles.text}>Sirva el presente documento para que surta los efectos fiscales oportunos.</Text>
-            <Text style={styles.textStp}>Sevilla, abril de 2023</Text>
-            <Image src="http://localhost:3000/Bosco-sello.png" height="50" style={styles.stamp}></Image>
-            <Text style={styles.textBtm}>Francisco Antonio Echeto Zubiri</Text>
-            <Text style={styles.textBtm}>Tesorero de la Fundación Bosco Global</Text>
-            <Text style={styles.footer}>C/Salesianos,3A. 41008 Sevilla (España) · T. 954 53 28 27 · info@boscoglobal.org · boscoglobal.org</Text>
-          </Page>
-      </Document>
-    )
-  else
+  const text =[]
+  if(language == "Español"){
+    text[0] = "Francisco Antonio Echeto Zubiri con DNI 15.801.110 H, Tesorero de la Fundación Bosco Global, con domicilio social en Sevilla, c/ Salesianos 3 A y CIF G-90.196.072"
+    text[1] = "DECLARA"
+    text[2] = "Que la "
+    text[3] = "Fundación Bosco Global"
+    text[4] = "se encuentra incluida entre las acogidas al régimen de deducciones establecido por la Ley 49/2002, de 23 de diciembre de régimen fiscal de las entidades sin fines lucrativos y de los incentivos fiscales al mecenazgo."
+    text[5] = "Que se ha recibido de:"
+    text[6] = "Nombre"
+    text[7] = "Importe total del donativo en 2022 (euros) "
+    text[8] = "Que esta cantidad ha sido entregada con carácter de donación pura, simple e irrevocable."
+    text[9] = "Que el donativo recibido se ha destinado para el apoyo a los proyectos que la Entidad desarrolla para el cumplimiento de sus fines."
+    text[10] = "Sirva el presente documento para que surta los efectos fiscales oportunos."
+    text[11] = "abril de 2023"
+    text[12] = "Tesorero de la Fundación Bosco Global"
+  }
+  else{
+    text[0] = "Francisco Antonio Echeto Zubiri amb DNI 15.801.110 H, Tresorer de la Fundació Bosco Global, amb domicili social a Sevilla, c/ Salesians 3 A i CIF G-90.196.072"
+    text[1] = "DECLARA"
+    text[2] = "Que la "
+    text[3] = "Fundació Bosco Global "
+    text[4] = "està inclosa entre les acollides al règim de deduccions establert per la Llei 49/2002, de 23 de desembre de règim fiscal de les entitats sense fins lucratius i dels incentius fiscals al mecenatge."
+    text[5] = "Que s'ha rebut de:"
+    text[6] = "Nom"
+    text[7] = "Import total del donatiu el 2022 (euros)	"
+    text[8] = "Que aquesta quantitat ha estat lliurada amb caràcter de donació pura, simple i irrevocable."
+    text[9] = "Que el donatiu rebut s'ha destinat per al suport als projectes que l'Entitat desenvolupa per al compliment dels seus fins."
+    text[10] = "Serveixi aquest document perquè tingui els efectes fiscals oportuns."
+    text[11] = "abril de 2023"
+    text[12] = "Tresorer de la Fundació Bosco Global"
+  }
   return(
     <Document>
-        <Page>
-          <Text>Catalán</Text>
-          <Text>{user.name}</Text>
-          <Text>{user.dni}</Text>
+        <Page style={styles.body}>
+          <Image src="http://localhost:3000/boscoglobal-logo.png" height="50" style={styles.image}></Image>
+          <Text style={styles.textTop}>{text[0]}</Text>
+          <Text style={styles.textSp}>{text[1]}</Text>
+          <Text style={styles.text}>{text[2]}<Text style={styles.textSp}>{text[3]}</Text>{text[4]}</Text>
+          <Text style={styles.text}>{text[5]}</Text>
+          <View style={styles.section}>
+              <View style={styles.table}> 
+                <View style={styles.tableRow}>
+                  <View style={styles.tableCol}>
+                    <Text style={styles.text}>{text[6]}</Text>
+                  </View>
+                  <View style={styles.tableCol}>
+                    <Text style={styles.text}>{user.name} {user.last_name}</Text>
+                  </View>
+                </View>
+                <View style={styles.tableRow}>
+                  <View style={styles.tableCol}>
+                    <Text style={styles.text}>NIF</Text>
+                  </View>
+                  <View style={styles.tableCol}>
+                    <Text style={styles.text}>{user.dni}</Text>
+                  </View>
+                </View>
+                <View style={styles.tableRow}>
+                  <View style={styles.tableCol}>
+                    <Text style={styles.text}>{text[7]}</Text>
+                  </View>
+                  <View style={styles.tableCol}>
+                    <Text style={styles.text}>{amount}</Text>
+                  </View>
+                </View>
+              </View>
+          </View>
+          <Text style={styles.text}>{text[8]}</Text>
+          <Text style={styles.text}>{text[9]}</Text>
+          <Text style={styles.text}>{text[10]}</Text>
+          <Text style={styles.textStp}>Sevilla, {text[11]} </Text>
+          <Image src="http://localhost:3000/Bosco-sello.png" height="50" style={styles.stamp}></Image>
+          <Text style={styles.textBtm}>Francisco Antonio Echeto Zubiri</Text>
+          <Text style={styles.textBtm}>{text[12]}</Text>
+          <Text style={styles.footer}>C/Salesianos,3A. 41008 Sevilla (España) · T. 954 53 28 27 · info@boscoglobal.org · boscoglobal.org</Text>
         </Page>
     </Document>
   )
@@ -254,7 +258,10 @@ export default function Certificate() {
       <button onClick={generateCertificate(user, "Catalán")}>Catalán</button>
     </div>
       <PDFViewer height={"450"}>
-        {generateCertificate(user,"Español", donation.periodicity)}         
+        {generateCertificate(user,"Español", donation.amount)}         
+      </PDFViewer>
+      <PDFViewer height={"450"}>
+        {generateCertificate(user,"Catalá", donation.amount)}         
       </PDFViewer>
     </section>
   );
