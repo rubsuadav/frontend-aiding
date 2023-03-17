@@ -80,7 +80,7 @@ function CreateDonation() {
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Cantidad</Form.Label>
+                <Form.Label>Periodicidad</Form.Label>
                 <Form.Select
                   onChange={(e) => onInputChange(e)}
                   value={periodicity}
@@ -93,7 +93,7 @@ function CreateDonation() {
               </Form.Group>
               
               <Form.Group className="mb-3">
-                <Form.Label>Descripción</Form.Label>
+                <Form.Label>Cantidad</Form.Label>
                 <Form.Control
                   onChange={(e) => onInputChange(e)}
                   value={amount}
