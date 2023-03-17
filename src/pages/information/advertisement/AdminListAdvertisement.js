@@ -243,8 +243,12 @@ const AdminListAdvertisement = () => {
           });
         })
         .catch((error) => {
-          console.log(error);
-          swal(errorMsg_create);
+          if (error.response && error.response.status === 409) {
+            let error_msgs = {name: "Ya existe una sección con ese título"};
+            setErrors(error_msgs);
+          }else {
+            swal(errorMsg_create);
+          }
         });
     }
   };
