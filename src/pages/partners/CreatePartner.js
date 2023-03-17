@@ -1,5 +1,5 @@
 import React from "react";
-import {partners,donations} from "./services/backend.js";
+import {partners} from "./services/backend.js";
 import swal from 'sweetalert';
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
