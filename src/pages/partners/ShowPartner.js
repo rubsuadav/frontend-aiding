@@ -11,6 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 import Communication from "./Communications.js";
 import {partners, fileUrl} from "./services/backend.js";
+import { Button } from "react-bootstrap";
 
 export default function Details() {
   let navigate = useNavigate();
@@ -33,7 +34,6 @@ export default function Details() {
     township: "",
     language: "",
     account_holder: "",
-    state: "",
   });
 
   const [donation, setDonation] = useState({
@@ -74,23 +74,18 @@ export default function Details() {
       case "men":
         formattedValue = "Hombre";
         return `${formattedValue}`;
-        break;
       case "women":
         formattedValue = "Mujer";
         return `${formattedValue}`;
-        break;
       case "none":
         formattedValue = "Ninguno";
         return `${formattedValue}`;
-        break;
       case "spanish":
         formattedValue = "Español";
         return `${formattedValue}`;
-        break;
       case "catalan":
         formattedValue = "Catalán";
         return `${formattedValue}`;
-        break;
     }
   }
 
@@ -100,20 +95,16 @@ export default function Details() {
       case "MENSUAL":
         formattedValue = "Mensual";
         return `${formattedValue}`;
-        break;
       case "TRIMESTRAL":
         formattedValue = "Trimestral";
         return `${formattedValue}`;
-        break;
       case "SEMESTRAL":
         formattedValue = "Semestral";
         return `${formattedValue}`;
-        break;
     
       case "ANUAL":
         formattedValue = "Anual";
         return `${formattedValue}`;
-        break; 
       }
     }
 
@@ -331,9 +322,9 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a  href={fileUrl + `/partners/${user.id}/receipt`} type="button" id="button" className="btn btn-light w-100">
+                      <Button  href={fileUrl + `/partners/${user.id}/receipt`} type="button" id="button" className="btn btn-light w-100">
                         Generar recibo
-                      </a>
+                      </Button>
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -341,9 +332,9 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a href="" type="button" id="button" className="btn btn-light w-100">
+                      <Button href="" type="button" id="button" className="btn btn-light w-100">
                         Generar certificado
-                      </a>
+                      </Button>
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -351,13 +342,13 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a
+                      <Button
                         onClick={() => {navigate(`/partners/update/${id}`)}}
                         type="button" id="button" 
                         className="btn btn-light w-100"
                       >
                         Editar socio
-                      </a>
+                      </Button>
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -365,9 +356,9 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a onClick={createCommunicationRedirect} type="button" id="button" className="btn btn-light w-100">
+                      <Button onClick={createCommunicationRedirect} type="button" id="button" className="btn btn-light w-100">
                         Añadir nueva comunicación
-                      </a>
+                      </Button>
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -375,9 +366,9 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
+                      <Button onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
                         Gestionar Donación
-                      </a>
+                      </Button>
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
