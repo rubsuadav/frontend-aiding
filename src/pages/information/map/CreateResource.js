@@ -27,13 +27,15 @@ export default function CreateResource() {
   const [resource, setResource] = useState({
     title: "",
     description: "",
+    contact_phone: "",
     street: "",
     number: "",
     city: "",
     additional_comments: "",
+    resource_type:""
   });
 
-  const { title, description, street, number, city, additional_comments } =
+  const { title, description, contact_phone, street, number, city, additional_comments, resource_type } =
     resource;
 
   const onInputChange = (e) => {
@@ -86,6 +88,17 @@ export default function CreateResource() {
                 />
               </Form.Group>
 
+              
+              <Form.Group className="mb-3">
+                <Form.Label>Teléfono</Form.Label>
+                <Form.Control
+                  onChange={(e) => onInputChange(e)}
+                  value={contact_phone}
+                  name="contact_phone"
+                  placeholder="Teléfono de contacto"
+                />
+              </Form.Group>
+
               <Form.Group className="mb-3">
                 <Form.Label>Calle</Form.Label>
                 <Form.Control
@@ -123,6 +136,16 @@ export default function CreateResource() {
                   value={additional_comments}
                   name="additional_comments"
                   placeholder="Comentarios adicionales"
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Tipo de recurso</Form.Label>
+                <Form.Control
+                  onChange={(e) => onInputChange(e)}
+                  value={resource_type}
+                  name="resource_type"
+                  placeholder="Tipo de recurso"
                 />
               </Form.Group>
             </div>

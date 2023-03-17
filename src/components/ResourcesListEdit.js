@@ -27,14 +27,16 @@ export default function ResourcesListEdit() {
   const [resources_data, setResourceData] = React.useState([
     {
       id: "...",
-      title: "...",
-      description: "...",
-      street: "...",
-      number: "...",
-      city: "...",
-      additional_comments: "...",
-      latitude: "...",
-      longitude: "...",
+      title: "",
+      description: "",
+      contact_phone: "",
+      street: "",
+      number: "",
+      city: "",
+      additional_comments: "",
+      latitude: "",
+      longitude: "",
+      resource_type: "",
     },
   ]);
 
@@ -124,6 +126,7 @@ export default function ResourcesListEdit() {
                           <Accordion.Body>
                             <div class="izquierda">
                               <h5>Descripción: </h5> <p> {item.description}</p>
+                              <h5>Teléfono de contacto: </h5> <p> {item.contact_phone}</p>
                               <h5>Dirección : </h5>{" "}
                               <p>
                                 {" "}

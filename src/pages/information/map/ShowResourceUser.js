@@ -25,23 +25,27 @@ export default function DetailsUser() {
   const [resource, setResource] = useState({
     title: "",
     description: "",
+    contact_phone: "",
     street: "",
     number: "",
     city: "",
     additional_comments: "",
     latitude: "",
     longitude: "",
+    resource_type: "",
   });
 
   const {
     title,
     description,
+    contact_phone,
     street,
     number,
     city,
     additional_comments,
     latitude,
     longitude,
+    resource_type,
   } = resource;
 
   const { id } = useParams();
@@ -132,6 +136,18 @@ export default function DetailsUser() {
 
                 <MDBRow>
                   <MDBCol sm="3">
+                    <MDBCardText>Teléfono de contacto</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">
+                      {contact_phone}
+                    </MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+
+                <MDBRow>
+                  <MDBCol sm="3">
                     <MDBCardText>Calle</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
@@ -156,6 +172,18 @@ export default function DetailsUser() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">{city}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Tipo de recurso</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">
+                      {resource_type}
+                    </MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
