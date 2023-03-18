@@ -6,6 +6,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import IBAN from 'iban';
+import { parseISO, differenceInYears } from 'date-fns';
+
+
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -33,17 +36,13 @@ function CreatePartner() {
             swal(successMsg);
             navigate("/partners");
         }).catch((error) => {
-          if (error.response) {
-            // el servidor respondió con un código de estado diferente de 2xx
-            let error_msgs = {};
-            error_msgs.error = error.response;
-            setErrors(error_msgs);
-          } else {
-            // error de red u otro error
-            console.log(error);
-            swal(errorMsg);
-          }
-        });
+            if (error.response && error.response.status === 409) {
+              let error_msgs = {general: "Ya existe un socio con ese DNI, teléfono, email o IBAN"};
+              setErrors(error_msgs);
+            }else {
+              swal(errorMsg);
+            }
+          });
     };
 
     /* Validator */
@@ -66,12 +65,23 @@ function CreatePartner() {
     return expectedLetter === actualLetter;
   }
 
+
   function validateIBAN(iban) {
     if (IBAN.isValid(iban)) {
       return true;
     } else {
       return false;
     }
+  }
+
+  function validateAge(birthdate) {
+    const eighteenYearsAgo = new Date();
+    eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+  
+    const parsedBirthdate = parseISO(birthdate);
+    const age = differenceInYears(new Date(), parsedBirthdate);
+  
+    return age >= 18;
   }
 
   function validateForm() {
@@ -97,6 +107,8 @@ function CreatePartner() {
 
     if (birthdate === "" || birthdate === null) {
       error_msgs.birthdate = "El cumpleaños no puede estar vacío";
+    } else if (!validateAge(birthdate)) {
+      error_msgs.birthdate = "El socio debe ser mayor de edad";
     }
 
     if (address === "" || address === null) {
@@ -191,6 +203,18 @@ function CreatePartner() {
         formData.append("last_name", last_name);
         formData.append("dni", dni);
         formData.append("phone1", phone1);
+        formData.append("phone2", phone2);
+        formData.append("birthdate", birthdate);
+        formData.append("sex", sex);
+        formData.append("email", email);
+        formData.append("address", address);
+        formData.append("postal_code", postal_code);
+        formData.append("township", township);
+        formData.append("province", province);
+        formData.append("language", language);
+        formData.append("iban", iban);
+        formData.append("account_holder", account_holder);
+        formData.append("state", state);
 
         postPartner(partner);
       }
@@ -200,7 +224,6 @@ function CreatePartner() {
     return (
       <div className="container my-5 shadow">
         <h1 className="pt-3">Crear socio</h1>
-        {errors.error && (<p className="text-danger">{errors.error}</p>)}
         <Form className="" onSubmit={(e) => onSubmit(e)}>
           <div className="row justify-content-evenly">
             <div className="col-md-5">
@@ -235,7 +258,7 @@ function CreatePartner() {
                   onChange={(e) => onInputChange(e)}
                   value={dni}
                   name="dni"
-                  placeholder="DNI del socio"
+                  placeholder="DNI del socio. Debe ser único."
                 />
               </Form.Group>
               {errors.dni && (
@@ -247,7 +270,7 @@ function CreatePartner() {
                   onChange={(e) => onInputChange(e)}
                   value={phone1}
                   name="phone1"
-                  placeholder="Teléfono del socio"
+                  placeholder="Teléfono del socio. Debe ser único."
                 />
               </Form.Group>
                   {errors.phone1 && (
@@ -390,7 +413,7 @@ function CreatePartner() {
                   onChange={(e) => onInputChange(e)}
                   value={iban}
                   name="iban"
-                  placeholder="Iban del socio"
+                  placeholder="Iban del socio. Debe ser único."
                 />
               </Form.Group>
               {errors.iban && (
@@ -410,7 +433,7 @@ function CreatePartner() {
               </Form.Group>
             </div>
           </div>
-  
+          {errors.general && (<p className="text-danger">{errors.general}</p>)}
           <div className="row justify-content-evenly">
             <Button className="col mb-4 mx-5" variant="outline-success" type="submit">
               Guardar socio
