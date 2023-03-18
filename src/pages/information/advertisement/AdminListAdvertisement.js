@@ -256,7 +256,7 @@ const AdminListAdvertisement = () => {
   /* Functions */
   const deleteConfirmationAlert = async (id) => {
     swal({
-      title: "Eliminar recurso",
+      title: "Eliminar sección",
       text: "¿Estás seguro que desea eliminar la sección?",
       icon: "warning",
       buttons: ["No", "Sí"],

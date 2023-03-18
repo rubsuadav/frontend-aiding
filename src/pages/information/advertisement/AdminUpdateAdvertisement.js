@@ -56,7 +56,7 @@ const AdminUpdateAdvertisement = () => {
         types: ["heading", "paragraph"],
       }),
     ],
-    content: '',
+    content: "",
   });
 
   /* Data */
@@ -170,9 +170,9 @@ const AdminUpdateAdvertisement = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 409) {
-          let error_msgs = {title: "Ya existe un artículo con ese título"};
+          let error_msgs = { title: "Ya existe un artículo con ese título" };
           setErrors(error_msgs);
-        }else {
+        } else {
           swal(errorMsg);
         }
       });
@@ -233,7 +233,7 @@ const AdminUpdateAdvertisement = () => {
   React.useEffect(() => {
     if (editor === null) {
       return;
-    }else{
+    } else {
       editor.commands.setContent(body);
     }
   }, [advertisement]);
@@ -369,9 +369,11 @@ const AdminUpdateAdvertisement = () => {
             <Container>
               <Row className="justify-content-center">
                 <Col sm={10} className="pt-5">
+                  <h2>Cuerpo de artículo</h2>
                   <EditButtons editor={editor} />
                   <EditorContent
-                    className="border border-bottom-0 border-2 mt-3"
+                    className="mt-3"
+                    style={{ minHeight: "400px", border: "2px solid #000" }}
                     editor={editor}
                   />
                   <hr></hr>
@@ -393,119 +395,125 @@ const EditButtons = ({ editor }) => {
   }
   return (
     <>
-      <div className="btn-group me-2" role="group">
-        <button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 1 }).run()
-          }
-          className={
-            (editor.isActive("heading", { level: 1 }) ? "is-active" : "") +
-            " " +
-            "btn btn-outline-dark"
-          }
-        >
-          <BsTypeH1 />
-        </button>
-        <button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 2 }).run()
-          }
-          className={
-            (editor.isActive("heading", { level: 2 }) ? "is-active" : "") +
-            " " +
-            "btn btn-outline-dark"
-          }
-        >
-          <BsTypeH2 />
-        </button>
-        <button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 3 }).run()
-          }
-          className={
-            (editor.isActive("heading", { level: 3 }) ? "is-active" : "") +
-            " " +
-            "btn btn-outline-dark"
-          }
-        >
-          <BsTypeH3 />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().setParagraph().run()}
-          className={
-            (editor.isActive("paragraph") ? "is-active" : "") +
-            " " +
-            "btn btn-outline-dark"
-          }
-        >
-          paragraph
-        </button>
-        <button
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          className={
-            (editor.isActive("bold") ? "is-active" : "") +
-            " " +
-            "btn btn-outline-dark"
-          }
-        >
-          <BsTypeBold />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={
-            (editor.isActive("italic") ? "is-active" : "") +
-            " " +
-            "btn btn-outline-dark"
-          }
-        >
-          <BsTypeItalic />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().toggleStrike().run()}
-          className={
-            (editor.isActive("strike") ? "is-active" : "") +
-            " " +
-            "btn btn-outline-dark"
-          }
-        >
-          <BsTypeStrikethrough />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().setTextAlign("center").run()}
-          className={
-            (editor.isActive({ textAlign: "center" }) ? "is-active" : "") +
-            " " +
-            "btn btn-outline-dark"
-          }
-        >
-          <BiAlignJustify />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().setTextAlign("right").run()}
-          className={
-            (editor.isActive({ textAlign: "right" }) ? "is-active" : "") +
-            " " +
-            "btn btn-outline-dark"
-          }
-        >
-          <BsJustifyRight />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().setTextAlign("justify").run()}
-          className={
-            (editor.isActive({ textAlign: "justify" }) ? "is-active" : "") +
-            " " +
-            "btn btn-outline-dark"
-          }
-        >
-          <BsJustify />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().unsetTextAlign().run()}
-          className="btn btn-outline-dark"
-        >
-          unsetTextAlign
-        </button>
+      <div className="me-2">
+        <Row className="justify-content-center">
+          <Col className="col-auto">
+            <button
+              onClick={() =>
+                editor.chain().focus().toggleHeading({ level: 1 }).run()
+              }
+              className={
+                (editor.isActive("heading", { level: 1 }) ? "is-active" : "") +
+                " " +
+                "btn btn-outline-dark"
+              }
+            >
+              <BsTypeH1 />
+            </button>
+            <button
+              onClick={() =>
+                editor.chain().focus().toggleHeading({ level: 2 }).run()
+              }
+              className={
+                (editor.isActive("heading", { level: 2 }) ? "is-active" : "") +
+                " " +
+                "btn btn-outline-dark"
+              }
+            >
+              <BsTypeH2 />
+            </button>
+            <button
+              onClick={() =>
+                editor.chain().focus().toggleHeading({ level: 3 }).run()
+              }
+              className={
+                (editor.isActive("heading", { level: 3 }) ? "is-active" : "") +
+                " " +
+                "btn btn-outline-dark"
+              }
+            >
+              <BsTypeH3 />
+            </button>
+            <button
+              onClick={() => editor.chain().focus().setParagraph().run()}
+              className={
+                (editor.isActive("paragraph") ? "is-active" : "") +
+                " " +
+                "btn btn-outline-dark"
+              }
+            >
+              párrafo
+            </button>
+          </Col>
+          <Col className="col-auto">
+            <button
+              onClick={() => editor.chain().focus().toggleBold().run()}
+              className={
+                (editor.isActive("bold") ? "is-active" : "") +
+                " " +
+                "btn btn-outline-dark"
+              }
+            >
+              <BsTypeBold />
+            </button>
+            <button
+              onClick={() => editor.chain().focus().toggleItalic().run()}
+              className={
+                (editor.isActive("italic") ? "is-active" : "") +
+                " " +
+                "btn btn-outline-dark"
+              }
+            >
+              <BsTypeItalic />
+            </button>
+            <button
+              onClick={() => editor.chain().focus().toggleStrike().run()}
+              className={
+                (editor.isActive("strike") ? "is-active" : "") +
+                " " +
+                "btn btn-outline-dark"
+              }
+            >
+              <BsTypeStrikethrough />
+            </button>
+          </Col>
+          <Col className="col-auto">
+            <button
+              onClick={() =>
+                editor.chain().focus().setTextAlign("center").run()
+              }
+              className={
+                (editor.isActive({ textAlign: "center" }) ? "is-active" : "") +
+                " " +
+                "btn btn-outline-dark"
+              }
+            >
+              <BiAlignJustify />
+            </button>
+            <button
+              onClick={() => editor.chain().focus().setTextAlign("right").run()}
+              className={
+                (editor.isActive({ textAlign: "right" }) ? "is-active" : "") +
+                " " +
+                "btn btn-outline-dark"
+              }
+            >
+              <BsJustifyRight />
+            </button>
+            <button
+              onClick={() =>
+                editor.chain().focus().setTextAlign("justify").run()
+              }
+              className={
+                (editor.isActive({ textAlign: "justify" }) ? "is-active" : "") +
+                " " +
+                "btn btn-outline-dark"
+              }
+            >
+              <BsJustify />
+            </button>
+          </Col>
+        </Row>
       </div>
     </>
   );
