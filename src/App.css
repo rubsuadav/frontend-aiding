@@ -94,23 +94,21 @@
   margin: 5px;
   font-size: medium;
   float: right;
-  
 }
 
-#modal-container{
+#modal-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 #modal-partner {
-  background-color: #ffffff;
+  background-color: #fff;
   width: 40%;
   height: 35%;
-
 }
 
-#modal-partner-content{
+#modal-partner-content {
   margin-top: 5%;
   margin-left: 5%;
   margin-right: 5%;
@@ -122,11 +120,11 @@
 }
 
 #modal-button-left {
-  float:left;
+  float: left;
 }
 
 .window-notice {
-  background: rgba(33, 41, 52, .85);
+  background: rgba(33, 41, 52, 0.85);
   left: 0;
   bottom: 0;
   right: 0;
@@ -139,7 +137,7 @@
 .window-notice .content {
   background: #fff;
   border-radius: 2px;
-  box-shadow: 0 1px 3px rgba(33, 41, 52, .75);
+  box-shadow: 0 1px 3px rgba(33, 41, 52, 0.75);
   box-sizing: content-box;
   display: flex;
   flex-direction: column;
