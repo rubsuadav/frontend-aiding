@@ -11,6 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 import Communication from "./Communications.js";
 import {partners, fileUrl} from "./services/backend.js";
+import { Button } from "react-bootstrap";
 
 export default function Details() {
   let navigate = useNavigate();
@@ -33,7 +34,6 @@ export default function Details() {
     township: "",
     language: "",
     account_holder: "",
-    state: "",
   });
 
   const [donation, setDonation] = useState({
@@ -66,6 +66,51 @@ export default function Details() {
     const result = await partners.get(`/${id}/donation`);
     setDonation(result.data);
   };
+
+  // FORMATEADOR DE LOS ENUMERADOS
+  function partnerFormatter(value) {
+    var formattedValue = value;
+    switch (value) {
+      case "men":
+        formattedValue = "Hombre";
+        return `${formattedValue}`;
+      case "women":
+        formattedValue = "Mujer";
+        return `${formattedValue}`;
+      case "none":
+        formattedValue = "Ninguno";
+        return `${formattedValue}`;
+      case "spanish":
+        formattedValue = "Español";
+        return `${formattedValue}`;
+      case "catalan":
+        formattedValue = "Catalán";
+        return `${formattedValue}`;
+    }
+  }
+
+  function donationFormatter(value) {
+    var formattedValue = value;
+    switch (value) {
+      case "MENSUAL":
+        formattedValue = "Mensual";
+        return `${formattedValue}`;
+      case "TRIMESTRAL":
+        formattedValue = "Trimestral";
+        return `${formattedValue}`;
+      case "SEMESTRAL":
+        formattedValue = "Semestral";
+        return `${formattedValue}`;
+    
+      case "ANUAL":
+        formattedValue = "Anual";
+        return `${formattedValue}`;
+      }
+    }
+
+  const sex = partnerFormatter(user.sex);
+  const language = partnerFormatter(user.language);
+  const periodicity = donationFormatter(donation.periodicity);
 
   return (
     <section>
@@ -154,7 +199,7 @@ export default function Details() {
                     <MDBCardText>Sexo</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{user.sex}</MDBCardText>
+                    <MDBCardText className="text-muted">{sex}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -213,7 +258,7 @@ export default function Details() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      {user.language}
+                      {language}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -254,7 +299,7 @@ export default function Details() {
                     <MDBCardText>Periodicidad</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{donation.periodicity}</MDBCardText>
+                    <MDBCardText className="text-muted">{periodicity}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -277,9 +322,9 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a  href={fileUrl + `/partners/${user.id}/receipt`} type="button" id="button" className="btn btn-light w-100">
+                      <Button  href={fileUrl + `/partners/${user.id}/receipt`} type="button" id="button" className="btn btn-light w-100">
                         Generar recibo
-                      </a>
+                      </Button>
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -287,9 +332,9 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a href="" type="button" id="button" className="btn btn-light w-100">
+                      <Button href="" type="button" id="button" className="btn btn-light w-100">
                         Generar certificado
-                      </a>
+                      </Button>
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -297,13 +342,13 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a
+                      <Button
                         onClick={() => {navigate(`/partners/update/${id}`)}}
                         type="button" id="button" 
                         className="btn btn-light w-100"
                       >
                         Editar socio
-                      </a>
+                      </Button>
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -311,9 +356,9 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a onClick={createCommunicationRedirect} type="button" id="button" className="btn btn-light w-100">
+                      <Button onClick={createCommunicationRedirect} type="button" id="button" className="btn btn-light w-100">
                         Añadir nueva comunicación
-                      </a>
+                      </Button>
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -321,17 +366,14 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <a onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
+                      <Button onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
                         Gestionar Donación
-                      </a>
+                      </Button>
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
             </MDBCard>
-          </MDBCol>
-          <MDBCol lg="1">
-            <a href={`${user.id}/receipt`} type="button" class="btn btn-light">Generar recibo</a>
           </MDBCol>
         </MDBRow>
         <MDBRow>

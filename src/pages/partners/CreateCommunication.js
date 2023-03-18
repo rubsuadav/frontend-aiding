@@ -29,6 +29,7 @@ function CreateCommunication() {
     const { id } = useParams();
 
     function postCommunication(){
+      console.log(communication)
         const aux = partners.post(`/${id}/communication/`,communication).then((response) => {
             console.log(response);
             swal(successMsg);
@@ -41,7 +42,7 @@ function CreateCommunication() {
 
     const [communication, setCommunication] = useState({
       date: "",
-      communication_type: "",
+      communication_type: "TELEFÓNICA",
       description: "",
     });
   
@@ -84,10 +85,10 @@ function CreateCommunication() {
                   value={communication_type}
                   name="communication_type"
                 >
-                  <option value="TELEPHONIC">Telefónica</option>
-                  <option value="TELEMATIC">Telemática</option>
-                  <option value="PERSONAL">Personal</option>
+                  <option value="TELEFÓNICA">Telefónica</option>
                   <option value="EMAIL">Email</option>
+                  <option value="TELEMÁTICA">Telemática</option>
+                  <option value="PERSONAL">Personal</option>
                 </Form.Select>
               </Form.Group>
               
