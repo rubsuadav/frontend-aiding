@@ -247,7 +247,7 @@ const ResourcesTable = () => {
   ]);
 
   useEffect(() => {
-    const getResourceData = resourcesApi.get().then((response) => {
+    resourcesApi.get().then((response) => {
       setResourceData(response.data);
     });
   }, []);
@@ -255,11 +255,18 @@ const ResourcesTable = () => {
   return (
     <div className="container">
       <h1>Recursos</h1>
-      <Button onClick={() => {navigate("/information/create-resource")}} id="boton-socio">Crear recurso</Button>
+      <Button
+        onClick={() => {
+          navigate("/information/create-resource");
+        }}
+        id="boton-socio"
+      >
+        Crear recurso
+      </Button>
       <Table
         onRow={(record, rowIndex) => {
           return {
-            onClick: (event) => {
+            onClick: () => {
               navigate("/information/resources/" + record.id);
             },
           };

@@ -16,6 +16,7 @@
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
     "dompurify": "^3.0.1",
+    "date-fns": "^2.29.3",
     "iban": "^0.0.14",
     "leaflet": "^1.9.3",
     "mdb-react-ui-kit": "^5.1.0",
