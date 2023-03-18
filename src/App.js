@@ -28,6 +28,9 @@ import ResourcesTable from './pages/information/map/ResourcesTable.js';
 import ResourcesListEdit from './components/ResourcesListEdit';
 import ShowResourceUser from './pages/information/map/ShowResourceUser.js';
 
+import ListContact from "./pages/base/ListContact";
+
+
 var navLinks= [
     {
       title: "Inicio",
@@ -56,6 +59,10 @@ var navLinks= [
     {
       title: "Admin Resources",
       path: "/information/admin"
+    },
+    {
+      title: "Atención al cliente",
+      path: "/base/contact"
     }
   ];
 
@@ -87,6 +94,8 @@ export default function App() {
         <Route path="/partners/:id/communication/create" element={ <CreateCommunication/>} />
         <Route path="/partners/:id/communication/update/:idc" element={ <UpdateCommunication/>} />
         <Route path="/partners/:id/donation/create" element={ <CreateDonation/>} />
+
+        <Route path="/base/contact" element={ <ListContact/>} />
       </Routes>
     </Router>
     <Footer/>
