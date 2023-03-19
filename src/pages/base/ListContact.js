@@ -1,14 +1,15 @@
 import React from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { Table, Button, Input, Space, Tag} from 'antd';
+import { Table, Button, Input, Space} from 'antd';
 import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
 import { useNavigate } from "react-router-dom";
 import {contacts} from "./services/backend.js";
+import {MDBCol,MDBRow} from "mdb-react-ui-kit";
 
-function onChange(pagination, filters, sorter, extra) {
+const onChange = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);
-}
+};
 
 const Contacts = () => {
     let navigate = useNavigate();
@@ -116,36 +117,39 @@ const Contacts = () => {
      ),
  });
 
- const columns = [
-    {
-      title: 'id',
-      dataIndex: 'id',
-      sorter: {
-        compare: (a, b) => a.id - b.id,
-        multiple: 1,
-      },
+const columns = [
+  {
+    title: 'id',
+    dataIndex: 'id',
+    sorter: {
+      compare: (a, b) => a.id - b.id,
+      multiple: 1,
     },
-    {
-      title: 'Nombre',
-      dataIndex: 'name',
-    },
-    {
-      title: 'Email',
-      dataIndex: 'email',
-    },
-    {
-        title: 'Asunto',
-        dataIndex: 'subject',
-    },
-    {
-        title: 'Fecha',
-        dataIndex: 'datetime',
-    },
-    {
-        title: 'Respondido',
-        dataIndex: 'isAnswered',
-        render:(isAnswered) => isAnswered ? 'No' : 'Sí'
-    },
+  },
+  {
+    title: 'Nombre',
+    dataIndex: 'name',
+    ...getColumnSearchProps('name'),
+  },
+  {
+    title: 'Email',
+    dataIndex: 'email',
+    ...getColumnSearchProps('email'),
+  },
+  {
+    title: 'Asunto',
+    dataIndex: 'subject',
+  },
+  {
+    title: 'Fecha',
+    dataIndex: 'datetime',
+  },
+  {
+    title: 'Respondido',
+    dataIndex: 'isAnswered',
+    render:(isAnswered) => isAnswered ? 'Sí' : 'No',
+  },
+  
 ];
 
 /*DATOS*/
@@ -155,13 +159,15 @@ const [contact_data, setContactData] = React.useState([
     email: '...',
     subject: '...',
     datetime: '...',
-    isAnswered: '...'}
+    isAnswered: '...',
+  }
 ]);
 
 /*CARGA DE DATOS*/
 useEffect(() => {
     contacts.get().then((response) => 
-    {setContactData(response.data)});  
+    {setContactData(response.data)
+    });  
 },[]);
 
 return (

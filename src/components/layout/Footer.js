@@ -6,7 +6,7 @@ export const Footer = () => {
             <div className="container text-center">
                 <small>Copyright &copy; {new Date().getFullYear()} Aiding</small>
                 <div className="container">
-                <a href="/base/contact/CreateContact">Contacta con nosotros</a> 
+                <a href="base/contacts/CreateContact">Contacta con nosotros</a> 
             </div>
             </div>
         </footer>

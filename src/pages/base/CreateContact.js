@@ -78,7 +78,7 @@ function CreateContact(){
         message: "",
     });
 
-    const{ name, email, subject, message } = contact;
+    const{ name, email, subject, message, } = contact;
     
     const onInputChange = (e) => {
         setContact({ ...contact, [e.target.name]: e.target.value });
@@ -92,7 +92,7 @@ function CreateContact(){
           formData.append("email", email);
           formData.append("subject", subject);
           formData.append("message", message);
-          postContact(formData);
+          postContact(contact);
           swal(successMsg);
           navigate("/home");
           

@@ -2,7 +2,7 @@ import axios from "axios";
 import { backendUrl } from "../../../config";
 
 export const contacts = axios.create({
-  baseURL: String(backendUrl + "contact/"),
+  baseURL: String(backendUrl + "base/contacts/"),
   timeout: 1000,
 });
 

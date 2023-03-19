@@ -64,7 +64,7 @@ var navLinks= [
     },
     {
       title: "Atención al cliente",
-      path: "/base/contact"
+      path: "/base/contacts"
     }
   ];
 
@@ -97,9 +97,9 @@ export default function App() {
         <Route path="/partners/:id/communication/update/:idc" element={ <UpdateCommunication/>} />
         <Route path="/partners/:id/donation/create" element={ <CreateDonation/>} />
 
-        <Route path="/base/contact" element={ <ListContact/>} />
-        <Route path ="/base/contact/:id" element={ <ContactDetail/>} />
-        <Route path ="/base/contact/CreateContact" element={ <CreateContact/>} />
+        <Route path="/base/contacts" element={ <ListContact/>} />
+        <Route path ="/base/contacts/:id" element={ <ContactDetail/>} />
+        <Route path ="/base/contacts/CreateContact" element={ <CreateContact/>} />
       </Routes>
     </Router>
     <Footer/>
