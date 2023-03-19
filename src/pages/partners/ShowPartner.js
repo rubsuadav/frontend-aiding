@@ -115,32 +115,12 @@ export default function Details() {
   return (
     <section>
       <MDBContainer className="py-5">
+        <center><h2>{user.name} {user.last_name}</h2></center>
+        <hr />
         <MDBRow>
           <MDBCol lg="5">
             <MDBCard className="mb-4">
               <MDBCardBody>
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Nombre</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      {user.name}
-                    </MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Apellidos</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      {user.last_name}
-                    </MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
                 <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Email</MDBCardText>
@@ -202,7 +182,33 @@ export default function Details() {
                     <MDBCardText className="text-muted">{sex}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
+              </MDBCardBody>
+            </MDBCard>
+            <MDBCard className="mb-4">
+              <MDBCardBody>
+              <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Importe</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">{donation.amount}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
                 <hr />
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Periodicidad</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">{periodicity}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+          <MDBCol lg="5">
+            <MDBCard className="mb-4">
+              <MDBCardBody>
                 <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Dirección</MDBCardText>
@@ -213,12 +219,7 @@ export default function Details() {
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-          <MDBCol lg="5">
-            <MDBCard className="mb-4">
-              <MDBCardBody>
+                <hr />
                 <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Código Postal</MDBCardText>
@@ -276,30 +277,12 @@ export default function Details() {
                 <hr />
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Titular cuenta</MDBCardText>
+                    <MDBCardText>Titular de la cuenta</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
                       {user.account_holder}
                     </MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Importe</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{donation.amount}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Periodicidad</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{periodicity}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
