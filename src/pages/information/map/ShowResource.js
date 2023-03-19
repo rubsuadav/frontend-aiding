@@ -14,6 +14,8 @@ import resourcesApi from "./services/backend.js";
 import L from "leaflet";
 import swal from "sweetalert";
 
+import { Button } from "react-bootstrap";
+
 // CSS
 import "leaflet/dist/leaflet.css";
 
@@ -106,50 +108,43 @@ export default function Details() {
     //className: 'leaflet-div-icon'
   });
 
-
   return (
     <section>
       <MDBContainer className="py-5">
         <MDBRow>
-
           <MDBCol lg="6">
             <MDBCard className="mb-4">
-
               <MDBCardBody>
                 <MDBRow>
-                  
                   <MDBCol sm="12">
                     <MDBRow>
-                      
-                        <MapContainer
-                          center={[37.358342303352885, -5.986570537333228]}
-                          zoom={13}
-                          id="map"
-                          style={{
-                            
-                            height: "70vh",
-                            margin: "1vw",
-                          }}
+                      <MapContainer
+                        center={[37.358342303352885, -5.986570537333228]}
+                        zoom={13}
+                        id="map"
+                        style={{
+                          height: "70vh",
+                          margin: "1vw",
+                        }}
+                      >
+                        <TileLayer
+                          url={
+                            "https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=4Qg1CBLvuefoRWUOrqlJ"
+                          }
+                        />
+                        <Marker
+                          icon={customIcon}
+                          position={[latitude, longitude]}
                         >
-                          <TileLayer
-                            url={
-                              "https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=4Qg1CBLvuefoRWUOrqlJ"
-                            }
-                          />
-                          <Marker
-                            icon={customIcon}
-                            position={[latitude, longitude]}
-                          >
-                            <Popup>{title}</Popup>
-                          </Marker>
-                        </MapContainer>
-                      
+                          <Popup>{title}</Popup>
+                        </Marker>
+                      </MapContainer>
                     </MDBRow>
 
                     <MDBRow>
                       <MDBCol>
                         <MDBCardText className="text-muted w-auto">
-                          <a
+                          <Button
                             onClick={() => {
                               navigate(`/information/edit-resource/${id}`);
                             }}
@@ -157,13 +152,13 @@ export default function Details() {
                             className="btn btn-light w-100"
                           >
                             Editar recurso
-                          </a>
+                          </Button>
                         </MDBCardText>
                       </MDBCol>
 
                       <MDBCol>
                         <MDBCardText className="text-muted w-auto">
-                          <a
+                          <Button
                             onClick={() => {
                               deleteConfirmationAlert();
                             }}
@@ -171,13 +166,11 @@ export default function Details() {
                             className="btn btn-danger w-100"
                           >
                             Borrar
-                          </a>
+                          </Button>
                         </MDBCardText>
                       </MDBCol>
-                      
                     </MDBRow>
                   </MDBCol>
-
                 </MDBRow>
               </MDBCardBody>
             </MDBCard>
@@ -186,7 +179,6 @@ export default function Details() {
           <MDBCol lg="6">
             <MDBCard className="mb-4">
               <MDBCardBody>
-
                 <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Título</MDBCardText>
@@ -271,16 +263,22 @@ export default function Details() {
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
-
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
         </MDBRow>
-        <a onClick={() => {navigate(`/information/admin`);}}
-                            type="button"
-                            className="btn btn-light w-100"> Volver al listado</a>
-                            
-                            <hr/>
+        <Button
+          onClick={() => {
+            navigate(`/information/admin`);
+          }}
+          type="button"
+          className="btn btn-light w-100"
+        >
+          {" "}
+          Volver al listado
+        </Button>
+
+        <hr />
       </MDBContainer>
     </section>
   );
