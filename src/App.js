@@ -29,6 +29,8 @@ import ResourcesListEdit from './components/ResourcesListEdit';
 import ShowResourceUser from './pages/information/map/ShowResourceUser.js';
 
 import ListContact from "./pages/base/ListContact";
+import ContactDetail from './pages/base/ShowContact';
+import CreateContact from './pages/base/CreateContact';
 
 
 var navLinks= [
@@ -96,6 +98,8 @@ export default function App() {
         <Route path="/partners/:id/donation/create" element={ <CreateDonation/>} />
 
         <Route path="/base/contact" element={ <ListContact/>} />
+        <Route path ="/base/contact/:id" element={ <ContactDetail/>} />
+        <Route path ="/base/contact/CreateContact" element={ <CreateContact/>} />
       </Routes>
     </Router>
     <Footer/>

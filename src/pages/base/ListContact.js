@@ -160,13 +160,13 @@ const [contact_data, setContactData] = React.useState([
 
 /*CARGA DE DATOS*/
 useEffect(() => {
-    const getContactData = contacts.get().then((response) => 
+    contacts.get().then((response) => 
     {setContactData(response.data)});  
 },[]);
 
 return (
     <div className='container my-5'>
-        <h1 className="pt-3">Con</h1>
+        <h1 className="pt-3">Mensajes</h1>
         <br></br>
         <Table id='table'
         onRow={(record, rowIndex) => {
