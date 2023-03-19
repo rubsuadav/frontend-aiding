@@ -32,7 +32,7 @@ export default function CreateResource() {
     number: "",
     city: "",
     additional_comments: "",
-    resource_type:""
+    resource_type:"seniors_association"
   });
 
   const { title, description, contact_phone, street, number, city, additional_comments, resource_type } =
@@ -141,12 +141,16 @@ export default function CreateResource() {
 
               <Form.Group className="mb-3">
                 <Form.Label>Tipo de recurso</Form.Label>
-                <Form.Control
+                <Form.Select
                   onChange={(e) => onInputChange(e)}
                   value={resource_type}
                   name="resource_type"
-                  placeholder="Tipo de recurso"
-                />
+                >
+                  <option value="neighborhood_association">Asociación de vecinos</option>
+                  <option value="seniors_association">Asociación de mayores</option>
+                  <option value="nursing_home">Residencia</option>
+                 
+                </Form.Select>
               </Form.Group>
             </div>
 

@@ -41,23 +41,27 @@ export default function Details() {
   const [resource, setResource] = useState({
     title: "",
     description: "",
+    contact_phone: "",
     street: "",
     number: "",
     city: "",
     additional_comments: "",
     latitude: "",
     longitude: "",
+    resource_type: "",
   });
 
   const {
     title,
     description,
+    contact_phone,
     street,
     number,
     city,
     additional_comments,
     latitude,
     longitude,
+    resource_type,
   } = resource;
 
   const { id } = useParams();
@@ -107,6 +111,24 @@ export default function Details() {
     iconSize: new L.Point(20, 30),
     //className: 'leaflet-div-icon'
   });
+
+  // FORMATEADOR DE LOS ENUMERADOS
+  function resourceFormatter(value) {
+    var formattedValue = value;
+    switch (value) {
+      case "neighborhood_association":
+        formattedValue = "Asociación de vecinos";
+        return `${formattedValue}`;
+      case "seniors_association":
+        formattedValue = "Asociación de mayores";
+        return `${formattedValue}`;
+      case "nursing_home":
+        formattedValue = "Residencia";
+        return `${formattedValue}`;
+      }
+    }
+
+  const formatted_resource_type = resourceFormatter(resource.resource_type);
 
   return (
     <section>
@@ -260,6 +282,30 @@ export default function Details() {
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
                       {longitude}
+                    </MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Tipo de recurso</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">
+                      {resource_type}
+                    </MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Teléfono de contacto</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">
+                      {contact_phone}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>

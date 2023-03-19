@@ -71,6 +71,26 @@ export default function DetailsUser() {
     //className: 'leaflet-div-icon'
   });
 
+  // FORMATEADOR DE LOS ENUMERADOS
+  function resourceFormatter(value) {
+    var formattedValue = value;
+    switch (value) {
+      case "neighborhood_association":
+        formattedValue = "Asociación de vecinos";
+        return `${formattedValue}`;
+      case "seniors_association":
+        formattedValue = "Asociación de mayores";
+        return `${formattedValue}`;
+      case "nursing_home":
+        formattedValue = "Residencia";
+        return `${formattedValue}`;
+      
+    }
+  }
+
+  const formatted_resource_type = resourceFormatter(resource.resource_type);
+
+
   return (
     <section>
       <MDBContainer className="py-5">
@@ -220,6 +240,7 @@ export default function DetailsUser() {
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
+
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
