@@ -28,6 +28,7 @@ import ResourcesTable from './pages/information/map/ResourcesTable.js';
 
 import ResourcesListEdit from './components/ResourcesListEdit';
 import ShowResourceUser from './pages/information/map/ShowResourceUser.js';
+import Login from './pages/base/Login';
 
 var navLinks= [
     {
@@ -94,6 +95,7 @@ export default function App() {
         <Route path="/partners/:id/communication/create" element={ <CreateCommunication/>} />
         <Route path="/partners/:id/communication/update/:idc" element={ <UpdateCommunication/>} />
         <Route path="/partners/:id/donation/create" element={ <CreateDonation/>} />
+        <Route path="/base/login" element={ <Login/>} />
       </Routes>
     </Router>
     <Footer/>
