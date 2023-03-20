@@ -168,7 +168,7 @@ function CreatePartner() {
       language: "spanish",
       iban: "",
       account_holder: "",
-      state: "active",
+      state: "Activo",
     });
   
   
@@ -198,25 +198,7 @@ function CreatePartner() {
     const onSubmit = async (e) => {
       e.preventDefault();
       if (validateForm()) {
-        const formData = new FormData();
-        formData.append("name", name);
-        formData.append("last_name", last_name);
-        formData.append("dni", dni);
-        formData.append("phone1", phone1);
-        formData.append("phone2", phone2);
-        formData.append("birthdate", birthdate);
-        formData.append("sex", sex);
-        formData.append("email", email);
-        formData.append("address", address);
-        formData.append("postal_code", postal_code);
-        formData.append("township", township);
-        formData.append("province", province);
-        formData.append("language", language);
-        formData.append("iban", iban);
-        formData.append("account_holder", account_holder);
-        formData.append("state", state);
-
-        postPartner(formData);
+        postPartner(partner);
       }
       
     };
