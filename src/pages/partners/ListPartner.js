@@ -157,7 +157,11 @@ const Partners = () => {
         },
       ],
       onFilter: (value, record) => record.state.includes(value),
-      width: '30%',
+      render: (state) => (
+        <Tag color={state === 'Activo' ? 'green' : 'red'} key={state}>
+          {state.toUpperCase()}
+        </Tag>
+      ),
     },
   ];
 

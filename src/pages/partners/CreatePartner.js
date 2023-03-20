@@ -216,7 +216,7 @@ function CreatePartner() {
         formData.append("account_holder", account_holder);
         formData.append("state", state);
 
-        postPartner(partner);
+        postPartner(formData);
       }
       
     };
@@ -387,7 +387,7 @@ function CreatePartner() {
                   onChange={(e) => onInputChange(e)}
                   value={email}
                   name="email"
-                  placeholder="E-mail del socio"
+                  placeholder="E-mail del socio. Debe ser único."
                 />
               </Form.Group>
               {errors.email && (
@@ -427,8 +427,8 @@ function CreatePartner() {
                   value={state}
                   name="state"
                 >
-                  <option value="active">Activo</option>
-                  <option value="inactive">Inactivo</option>
+                  <option value="Activo">Activo</option>
+                  <option value="Inactivo">Inactivo</option>
                 </Form.Select>
               </Form.Group>
             </div>
