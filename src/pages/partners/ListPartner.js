@@ -1,17 +1,21 @@
 import React from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { Table, Button, Input, Space} from 'antd';
+import ButtonR from "react-bootstrap/Button";
+import { Table, Button, Input, Space, Tag} from 'antd';
 import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
-import {partners} from "./services/backend.js";
+import {fileUrl, partners} from "./services/backend.js";
 import { useNavigate } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.css';
+import Modal from 'react-bootstrap/Modal';
+import Form from "react-bootstrap/Form";
 import * as XLSX from 'xlsx';
+import axios from 'axios';
+import {MDBCol,MDBRow} from "mdb-react-ui-kit";
 
 const onChange = (pagination, filters, sorter, extra) => {
   console.log('params', pagination, filters, sorter, extra);
 };
-
-
 
 const Partners = () => {
   let navigate = useNavigate();
@@ -158,7 +162,11 @@ const Partners = () => {
         },
       ],
       onFilter: (value, record) => record.state.includes(value),
-      width: '30%',
+      render: (state) => (
+        <Tag color={state === 'Activo' ? 'green' : 'red'} key={state}>
+          {state.toUpperCase()}
+        </Tag>
+      ),
     },
   ];
 
@@ -175,7 +183,7 @@ const Partners = () => {
   ]);
 
   useEffect(() => {
-    const getPartnersData = partners.get().then((response) => {setPartnersData(response.data);});
+    partners.get().then((response) => {setPartnersData(response.data);});
   }, []);
 
   function createPartnerRedirect(){
@@ -191,11 +199,83 @@ const Partners = () => {
     XLSX.utils.book_append_sheet(workbook, worksheetData, sheetName);
     XLSX.writeFile(workbook, `${fileName}.xlsx`);
   };
+  const [show, setShow] = useState(false);
+
+  const [selectedFile, setSelectedFile] = React.useState(null);
+
+  var [errors, setErrors] = useState({});
+
+  const handleSubmit = async(event) => {
+    event.preventDefault()
+    const formData = new FormData();
+    formData.append("selectedFile", selectedFile);
+    try {
+      const response = await axios({
+        method: "post",
+        url: fileUrl+"partners/import/",
+        data: formData,
+      });
+      setShow(false);
+    } catch(error) {
+      setErrors(error.response.data["error"]);
+      console.log(errors);
+    }
+    partners.get().then((response) => {setPartnersData(response.data);});
+  }
+
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files[0])
+  }
+
+  const handleClose = () => setShow(false);
+
+  const handleShow = () => {
+    setErrors("");
+    setShow(true);
+  }
   
   return (
     <div className='container my-5'>
         <h1 className="pt-3">Socios</h1>
-        <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
+        <div id="botones-socios">
+          <Button onClick={handleShow} id="boton-importar" >Importar socios</Button>
+        </div>
+
+        <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Importar socios</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form className="" id='modal-partner-content'> 
+            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <div id="modal-partner-content">
+              <input name="file" id="input-file" type="file" class="custom-file-input" onChange={handleFileSelect} />
+            </div>
+            </Form.Group>
+            <div id='modal-button-right'>
+              <ButtonR variant="outline-success" className="col mb-4 mx-5" type="submit" onClick={handleSubmit}> Importar </ButtonR>
+            </div>
+          </Form>
+          <div id='modal-button-left'>
+            <ButtonR variant="outline-danger" className="col mb-4 mx-5" onClick={handleClose}> Cancelar </ButtonR>
+          </div>
+
+        </Modal.Body>
+        <Modal.Footer>
+
+              <p className="text-danger">{errors.toString()}</p>
+
+        </Modal.Footer>
+      </Modal>
+        
+        <MDBRow className='g-0'>
+          <MDBCol md='1'>
+          <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
+          </MDBCol>
+          <MDBCol md='1'>
+          <Button  id="boton-socio" onClick={() => exportToExcel('myTable')}>Exportar a Excel</Button>
+          </MDBCol>
+        </MDBRow>
         <br></br>
         <Table id='table'
         onRow={(record, rowIndex) => {
@@ -206,9 +286,6 @@ const Partners = () => {
           };
         }}
         columns={columns} dataSource={partners_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
-        <Button  id="boton-socio" onClick={() => exportToExcel('myTable')}>
-          Exportar a Excel
-        </Button>
     </div>
   );
 }

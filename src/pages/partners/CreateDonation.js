@@ -34,10 +34,17 @@ function CreateDonation() {
             swal(successMsg);
             navigate(`/partners/${id}`);
         }).catch((error) => {
-            console.log(error);
+          if (error.response && error.response.status === 400) {
+            let error_msgs = {general: "Actualmente el socio esta inactivo. Para crear una donación debe estar activo."};
+            setErrors(error_msgs);
+          }else {
             swal(errorMsg);
+          }
         });
     };
+    
+    const [errors, setErrors] = useState({});
+
 
     const [donation, setDonation] = useState({
       date: "",
@@ -54,10 +61,40 @@ function CreateDonation() {
     const onInputChange = (e) => {
       setDonation({ ...donation, [e.target.name]: e.target.value });
     };
+
+    function validateForm() {
+      let error_msgs = {};
+  
+      if (date === "" || date === null) {
+        error_msgs.date = "La fecha no puede estar vacía";
+      }
+  
+      if (amount === "" || amount === null) {
+        error_msgs.amount = "La cantidad no puede estar vacía";
+      }
+
+      if (periodicity === "" || periodicity === null) {
+        error_msgs.periodicity = "La periodicidad no puede estar vacía";
+      }
+  
+      setErrors(error_msgs);
+  
+      if (Object.keys(error_msgs).length === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   
     const onSubmit = async (e) => {
       e.preventDefault();
-      postDonation(donation);
+      if (validateForm()) {
+        const formData = new FormData(); 
+        formData.append("date", date);
+        formData.append("amount", amount);
+        formData.append("periodicity", periodicity);
+        postDonation(FormData);
+      }
     };
   
     return (
@@ -68,41 +105,44 @@ function CreateDonation() {
             <div className="col-md-6">
               
                 <Form.Group className="mb-3">
-                <Form.Label>Fecha de la comunicación</Form.Label>
+                <Form.Label>Fecha</Form.Label>
                 <Form.Control
                   onChange={(e) => onInputChange(e)}
                   value={date}
                   type="date"
                   name="date"
                 />
+               {errors.date && (<p className="text-danger">{errors.date}</p>)}
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Cantidad</Form.Label>
+                <Form.Label>Periodicidad</Form.Label>
                 <Form.Select
                   onChange={(e) => onInputChange(e)}
                   value={periodicity}
-                  name="periodicity"
-                >
-                  <option value="MONTHLY">Mensual</option>
-                  <option value="QUARTERLY">Trimestral</option>
-                  <option value="SEMIANNUAL">Semestral</option>
-                  <option value="ANNUAL">Anual</option>
+                  name="periodicity">
+                  <option value="MENSUAL">Mensual</option>
+                  <option value="TRIMESTRAL">Trimestral</option>
+                  <option value="SEMESTRAL">Semestral</option>
+                  <option value="ANUAL">Anual</option>
                 </Form.Select>
+                {errors.periodicity && (<p className="text-danger">{errors.periodicity}</p>)}
               </Form.Group>
               
               <Form.Group className="mb-3">
-                <Form.Label>Descripción</Form.Label>
+                <Form.Label>Cantidad</Form.Label>
                 <Form.Control
                   onChange={(e) => onInputChange(e)}
                   value={amount}
                   name="amount"
                 />
+                {errors.amount && (<p className="text-danger">{errors.amount}</p>)}
               </Form.Group>
             </div>
           </div>
   
           <div className="row justify-content-evenly">
+          {errors.general && (<p className="text-danger">{errors.general}</p>)}
             <Button className="col mb-4 mx-5" variant="outline-success" type="submit">
               Crear donación
             </Button>
