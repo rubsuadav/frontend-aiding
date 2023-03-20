@@ -20,6 +20,7 @@ import UpdatePartner from "./pages/partners/UpdatePartner";
 import CreateCommunication from "./pages/partners/CreateCommunication";
 import UpdateCommunication from './pages/partners/UpdateCommunication';
 import CreateDonation from './pages/partners/CreateDonation';
+import Certificate from './pages/partners/Certificate';
 
 import UpdateResource from './pages/information/map/UpdateResource.js';
 import CreateResource from './pages/information/map/CreateResource.js';
