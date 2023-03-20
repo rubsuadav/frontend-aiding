@@ -91,6 +91,7 @@ export default function App() {
         <Route path="/partners/:id" element={ <ShowPartner/>} />
         <Route path="/partners/create" element={ <CreatePartner/>} />
         <Route path="/partners/update/:id" element={ <UpdatePartner/>} />
+
         <Route path="/partners/:id/communication/create" element={ <CreateCommunication/>} />
         <Route path="/partners/:id/communication/update/:idc" element={ <UpdateCommunication/>} />
         <Route path="/partners/:id/donation/create" element={ <CreateDonation/>} />

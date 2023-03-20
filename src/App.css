@@ -84,7 +84,71 @@
   padding: 5px;
   margin: 5px;
   font-size: medium;
+  float: left;
+}
+
+#boton-importar {
+  background-color: var(--gris);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  font-size: medium;
+  float: right;
+}
+
+#modal-container {
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#modal-partner {
+  background-color: #fff;
+  width: 40%;
+  height: 35%;
+}
+
+#modal-partner-content {
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+}
+
+#modal-button-right {
+  float: right;
+}
+
+#modal-button-left {
+  float: left;
+}
+
+.window-notice {
+  background: rgba(33, 41, 52, 0.85);
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  position: fixed;
+  z-index: 999;
+}
+
+.window-notice .content {
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(33, 41, 52, 0.75);
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 600px;
+  min-width: 320px !important;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding: 2rem;
+  font-size: 1.3rem;
 }
 
 :where(.css-dev-only-do-not-override-10ed4xt).ant-btn-default:not(
