@@ -1,5 +1,5 @@
 import React from "react";
-import userApi from "./services/backend.js";
+import { base } from "./services/backend.js";
 import swal from "sweetalert";
 import { useNavigate, useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
@@ -26,12 +26,12 @@ export default function CreateUser() {
   let navigate = useNavigate();
 
   function postUser(user) {
-    const aux = userApi
-      .post("", user)
+    const aux = base
+      .post("users/", user)
       .then((response) => {
         console.log(response);
         swal(successMsg);
-        navigate("/users");
+        navigate("/base/users");
       })
       .catch((error) => {
         console.log(error);

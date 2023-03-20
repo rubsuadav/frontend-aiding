@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import userApi from "./services/backend.js";
+import { base } from "./services/backend.js";
 import swal from 'sweetalert';
 
 const successMsg = {
@@ -35,7 +35,7 @@ export default function EditUser() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await userApi.get(id);
+      const response = await base.get(`/${id}`);
       setUser(response.data);
     };
     fetchUser();
@@ -52,9 +52,9 @@ export default function EditUser() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await userApi.put(id, user);
+      await base.put(`/users/${id}`, user);
       swal(successMsg);
-      navigate("/users");
+      navigate("/base/users");
     } catch (error) {
       console.error(error);
       swal(errorMsg);

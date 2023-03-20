@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Table, Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import usersApi from "./services/backend.js";
+import { base } from "./services/backend.js";
 
 const onChange = (pagination, filters, sorter, extra) => {
   console.log("params", pagination, filters, sorter, extra);
@@ -28,9 +28,6 @@ const Users = () => {
         compare: (a, b) => a.id - b.id,
         multiple: 1,
       },
-      render: (id) => {
-        return <div onClick={() => navigate("/verUsuario/" + id)}>{id}</div>;
-      },
     },
     {
       title: "Nombre de usuario",
@@ -45,14 +42,14 @@ const Users = () => {
   
 
   useEffect(() => {
-    const getUsersData = usersApi.get().then((response) => {
+    const getUsersData = base.get("users/").then((response) => {
       setUsersData(response.data);
     });
   }, []);
 
   // Navigate del botón de crear user
   function createUserRedirect() {
-    navigate("/crearUsuario");
+    navigate("/base/users/crearUsuario");
   }
 
   return (
@@ -69,7 +66,7 @@ const Users = () => {
         onRow={(record, rowIndex) => {
           return {
             onClick: (event) => {
-              navigate("/verUsuario/" + record.id);
+              navigate("verUsuario/" + record.id);
             },
           };
         }}

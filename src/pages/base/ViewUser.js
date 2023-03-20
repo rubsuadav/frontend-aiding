@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import userApi from "./services/backend.js";
+import { base } from "./services/backend.js";
 import swal from "sweetalert";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ export default function ViewUser() {
 
   const getUserById = async (id) => {
     try {
-      const response = await userApi.get(`/${id}`);
+      const response = await base.get(`/users/${id}`);
       setUser(response.data);
     } catch (error) {
       console.log(error);
@@ -41,7 +41,7 @@ export default function ViewUser() {
   };
 
   const deleteUser = async () => {
-    const result = await userApi
+    const result = await base
       .delete(`/${id}`)
       .then((res) => {
         swal(successMsg);
@@ -99,14 +99,14 @@ export default function ViewUser() {
         <Button
           className="col mb-4 mx-5"
           variant="outline-primary"
-          onClick={() => navigate("/users")}
+          onClick={() => navigate("/base/users")}
         >
           Volver a la lista de usuarios
         </Button>
         <Button
           className="col mb-4 mx-5"
           variant="outline-primary"
-          onClick={() => navigate("/editarUsuario/" + id)}
+          onClick={() => navigate("/base/users/editarUsuario/" + id)}
         >
           Editar
         </Button>

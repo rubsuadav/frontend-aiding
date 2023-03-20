@@ -29,10 +29,11 @@ import ResourcesTable from './pages/information/map/ResourcesTable.js';
 import ResourcesListEdit from './components/ResourcesListEdit';
 import ShowResourceUser from './pages/information/map/ShowResourceUser.js';
 
-import Users from "./pages/users/Users";
-import ViewUser from "./pages/users/ViewUser";
-import EditUser from "./pages/users/EditUser";
-import CreateUser from "./pages/users/CreateUser";
+import Users from "./pages/base/Users";
+import ViewUser from "./pages/base/ViewUser";
+import EditUser from "./pages/base/EditUser";
+import CreateUser from "./pages/base/CreateUser";
+import Login from "./pages/base/Login";
 
 var navLinks= [
     {
@@ -45,7 +46,7 @@ var navLinks= [
     },
     {
       title: "Usuarios",
-      path: "users"
+      path: "base/users"
     },
     /* {
       title: "Crear Socio",
@@ -105,10 +106,12 @@ export default function App() {
         <Route path="/partners/:id/communication/update/:idc" element={ <UpdateCommunication/>} />
         <Route path="/partners/:id/donation/create" element={ <CreateDonation/>} />
 
-        <Route exact path="/users" element={<Users />} />
-        <Route exact path="/crearUsuario" element={<CreateUser />} />
-        <Route exact path="/verUsuario/:id" element={<ViewUser />} />
-        <Route exact path="/editarUsuario/:id" element={<EditUser />} />
+        <Route path="/base/login" element={ <Login/>} />
+
+        <Route exact path="/base/users" element={<Users />} />
+        <Route exact path="/base/users/crearUsuario" element={<CreateUser />} />
+        <Route exact path="/base/users/verUsuario/:id" element={<ViewUser />} />
+        <Route exact path="/base/users/editarUsuario/:id" element={<EditUser />} />
       </Routes>
     </Router>
     <Footer/>
