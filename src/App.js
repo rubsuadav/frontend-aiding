@@ -29,6 +29,11 @@ import ResourcesTable from './pages/information/map/ResourcesTable.js';
 import ResourcesListEdit from './components/ResourcesListEdit';
 import ShowResourceUser from './pages/information/map/ShowResourceUser.js';
 
+import Users from "./pages/users/Users";
+import ViewUser from "./pages/users/ViewUser";
+import EditUser from "./pages/users/EditUser";
+import CreateUser from "./pages/users/CreateUser";
+
 var navLinks= [
     {
       title: "Inicio",
@@ -37,6 +42,10 @@ var navLinks= [
     {
       title: "Socios",
       path: "partners"
+    },
+    {
+      title: "Usuarios",
+      path: "users"
     },
     /* {
       title: "Crear Socio",
@@ -95,6 +104,11 @@ export default function App() {
         <Route path="/partners/:id/communication/create" element={ <CreateCommunication/>} />
         <Route path="/partners/:id/communication/update/:idc" element={ <UpdateCommunication/>} />
         <Route path="/partners/:id/donation/create" element={ <CreateDonation/>} />
+
+        <Route exact path="/users" element={<Users />} />
+        <Route exact path="/crearUsuario" element={<CreateUser />} />
+        <Route exact path="/verUsuario/:id" element={<ViewUser />} />
+        <Route exact path="/editarUsuario/:id" element={<EditUser />} />
       </Routes>
     </Router>
     <Footer/>
