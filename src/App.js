@@ -54,7 +54,7 @@ var navLinks= [
       path: "information/map-resources"
     },
     {
-      title: "Admin Resources",
+      title: "Administración de recursos",
       path: "/information/admin"
     }
   ];
