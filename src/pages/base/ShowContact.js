@@ -73,59 +73,56 @@ const onSubmit = async (e) => {
 
 return (
   <div className="container my-5 shadow">
-        <h1 className="pt-3">Contáctanos</h1>
-        {<p className="text-danger"></p>}
-        <Form className="" onSubmit={(e) => onSubmit(e)}>
-          <div className="row justify-content-evenly">
-            <div className="col-md-5">
-            <div className="mb-3">
-          <label>Nombre</label>
+    <h1 className="pt-3">Contáctanos</h1>
+    {<p className="text-danger"></p>}
+    <div className="row justify-content-evenly">
+      <div className="col-md-5">
+        <div className="mb-5">
+          <label> Nombre</label>
           <p>{name}</p>
         </div>
-        <div className="mb-3">
+        <div className="mb-5">
           <label>Correo electrónico</label>
           <p>{email}</p>
         </div>
-        <div className="mb-3">
+        <div className="mb-5">
           <label>Asunto</label>
           <p>{subject}</p>
         </div>
-      </div>
-      <div className="col-md-5">
-        <div className="mb-3">
+        <div className="mb-5">
           <label>Mensaje</label>
-          <p>{message}</p>
+          <p id="mensaje">{message}</p>
         </div>
-        <div className="mb-3">
+        <div className="mb-5">
           <label>Fecha y hora</label>
           <p>{datetime}</p>
         </div>
       </div>
-
-            <div className="col-md-5">
-              <Form.Group className="mb-3">
-                <Form.Label>Respondido</Form.Label>
-                <Form.Check
-                  type="switch"
-                  id="custom-switch"
-                  name="isAnswered"
-                  checked={isAnswered}
-                  onChange={(e) => onInputChange(e)}
-                />
-              </Form.Group>
-            </div>
+    </div>
+    <div className="row justify-content-evenly">
+      <Form className="" onSubmit={(e) => onSubmit(e)}>
+          <div className="col-md-5">
+            <Form.Group className="mb-3">
+              <Form.Label>Respondido</Form.Label>
+              <Form.Check
+                type="switch"
+                id="custom-switch"
+                name="isAnswered"
+                checked={isAnswered}
+                onChange={(e) => onInputChange(e)}
+              />
+            </Form.Group>
           </div>
-          <div className="row justify-content-evenly">
-            <div className="col-md-5">
-              <Button variant="primary" type="submit">
-                Actualizar
-              </Button>
-            </div>    
-          </div>
-        </Form>
-      </div>
-
-
+        <div className="row justify-content-evenly">
+          <div className="col-md-5">
+            <Button variant="primary" type="submit">
+              Actualizar
+            </Button>
+          </div>    
+        </div>
+      </Form>
+    </div>
+  </div>
   );
 }
 
