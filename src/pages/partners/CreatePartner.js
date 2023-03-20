@@ -67,7 +67,7 @@ function CreatePartner() {
 
 
   function validateIBAN(iban) {
-    if (IBAN.isValid(iban)) {
+    if (IBAN.isValid(iban) && iban.substring(0,2) === "ES") {
       return true;
     } else {
       return false;
@@ -136,7 +136,7 @@ function CreatePartner() {
     if (iban === "" || iban === null) {
       error_msgs.iban = "El IBAN no puede estar vacío";
     } else if(!validateIBAN(iban)){
-      error_msgs.iban = "Este no es un IBAN válido";
+      error_msgs.iban = "Este no es un IBAN válido, y debe ser de España";
     }
 
     if (account_holder === "" || account_holder === null) {
