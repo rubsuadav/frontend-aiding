@@ -56,9 +56,37 @@ function CreateCommunication() {
       setCommunication({ ...communication, [e.target.name]: e.target.value });
     };
   
+    /* Validator */
+    const [errors, setErrors] = useState({});
+
+    function validateForm() {
+      let error_msgs = {};
+
+      if (date === "" || date === null) {
+        error_msgs.date = "La fecha no puede estar vacía";
+      }
+
+      if (description === "" || description === null) {
+        error_msgs.description = "La descripción no puede estar vacía";
+      }
+
+      setErrors(error_msgs);
+
+      if (Object.keys(error_msgs).length === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
     const onSubmit = async (e) => {
       e.preventDefault();
-      postCommunication(communication);
+      if (validateForm()) {
+        const formData = new FormData();
+        formData.append("date", date);
+        formData.append("communication_type", communication_type);
+        formData.append("description", description);
+        postCommunication(formData);
+      }
     };
   
     return (
@@ -77,6 +105,9 @@ function CreateCommunication() {
                   name="date"
                 />
               </Form.Group>
+              {errors.date && (
+                  <p className="text-danger">{errors.date}</p>
+                )}
 
               <Form.Group className="mb-3">
                 <Form.Label>Tipo de la comunicación</Form.Label>
@@ -101,6 +132,9 @@ function CreateCommunication() {
                   placeholder="Descripción de la comunicación"
                 />
               </Form.Group>
+              {errors.description && (
+                  <p className="text-danger">{errors.description}</p>
+                )}
             </div>
           </div>
   
