@@ -48,14 +48,7 @@
 
 /* HOME */
 
-#div-home {
-  height: 485px;
-}
 
-#welcome {
-  font-weight: bold;
-  margin-top: 50px;
-}
 
 /* NAVBAR */
 
@@ -172,4 +165,3 @@
   top: 0;
   width: 95%;
 }
-

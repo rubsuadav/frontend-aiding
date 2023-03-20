@@ -32,7 +32,7 @@ import ShowResourceUser from './pages/information/map/ShowResourceUser.js';
 var navLinks= [
     {
       title: "Inicio",
-      path: "home"
+      path: "/"
     },
     {
       title: "Socios",
@@ -55,7 +55,7 @@ var navLinks= [
       path: "information/map-resources"
     },
     {
-      title: "Admin Resources",
+      title: "Admin Recursos",
       path: "/information/admin"
     },
     {
@@ -73,7 +73,7 @@ export default function App() {
     <Router>
       <Navbar navLinks={navLinks} logo={logo}/>
       <Routes>
-        <Route path="/home" element={ <Home/>} />
+        <Route path="/" element={ <Home/>} />
         <Route path="information/sections/:id" element={ <ListAdvertisement/>} />
         <Route path="information/sections" element={ <ListAdvertisement/>} />
         <Route path="information/advertisements/:id" element={ <ShowAdvertisement/>} />
