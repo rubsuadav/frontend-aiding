@@ -49,9 +49,10 @@ export default function Details() {
     latitude: "",
     longitude: "",
     resource_type: "",
+    posittion: "",
   });
 
-  const {
+ /*  const {
     title,
     description,
     contact_phone,
@@ -63,6 +64,7 @@ export default function Details() {
     longitude,
     resource_type,
   } = resource;
+ */
 
   const { id } = useParams();
 
@@ -128,7 +130,7 @@ export default function Details() {
       }
     }
 
-  const formatted_resource_type = resourceFormatter(resource.resource_type);
+  const resource_type = resourceFormatter(resource.resource_type);
 
   return (
     <section>
@@ -156,9 +158,9 @@ export default function Details() {
                         />
                         <Marker
                           icon={customIcon}
-                          position={[latitude, longitude]}
+                          position={[resource.latitude, resource.longitude]}
                         >
-                          <Popup>{title}</Popup>
+                          <Popup>{resource.title}</Popup>
                         </Marker>
                       </MapContainer>
                     </MDBRow>
@@ -206,7 +208,7 @@ export default function Details() {
                     <MDBCardText>Título</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{title}</MDBCardText>
+                    <MDBCardText className="text-muted">{resource.title}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -217,7 +219,7 @@ export default function Details() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      {description}
+                      {resource.description}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -228,7 +230,7 @@ export default function Details() {
                     <MDBCardText>Calle</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{street}</MDBCardText>
+                    <MDBCardText className="text-muted">{resource.street}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -238,7 +240,7 @@ export default function Details() {
                     <MDBCardText>Número</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{number}</MDBCardText>
+                    <MDBCardText className="text-muted">{resource.number}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -248,7 +250,7 @@ export default function Details() {
                     <MDBCardText>Ciudad</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{city}</MDBCardText>
+                    <MDBCardText className="text-muted">{resource.city}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -259,29 +261,7 @@ export default function Details() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      {additional_comments}
-                    </MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Latitud</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{latitude}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Longitud</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      {longitude}
+                      {resource.additional_comments}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -305,10 +285,21 @@ export default function Details() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      {contact_phone}
+                      {resource.contact_phone}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
+                <hr />
+
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Posición en el mapa</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">{resource.position}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

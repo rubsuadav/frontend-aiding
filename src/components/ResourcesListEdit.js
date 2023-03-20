@@ -37,6 +37,7 @@ export default function ResourcesListEdit() {
       latitude: "",
       longitude: "",
       resource_type: "",
+      position: "",
     },
   ]);
 
@@ -95,11 +96,11 @@ export default function ResourcesListEdit() {
                           }
                         />
 
-                        {markers.map((item, index) => (
+                        {resources_data.map((item) => (
                           <Marker
                             key={item.id}
                             icon={customIcon}
-                            position={item.position}
+                            position={[item.latitude, item.longitude]}
                           >
                             <Popup>{item.title}</Popup>
                           </Marker>

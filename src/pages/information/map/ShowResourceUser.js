@@ -33,9 +33,10 @@ export default function DetailsUser() {
     latitude: "",
     longitude: "",
     resource_type: "",
+    position: "",
   });
 
-  const {
+ /*  const {
     title,
     description,
     contact_phone,
@@ -46,7 +47,7 @@ export default function DetailsUser() {
     latitude,
     longitude,
     resource_type,
-  } = resource;
+  } = resource; */
 
   const { id } = useParams();
 
@@ -88,7 +89,7 @@ export default function DetailsUser() {
     }
   }
 
-  const formatted_resource_type = resourceFormatter(resource.resource_type);
+  const resource_type = resourceFormatter(resource.resource_type);
 
 
   return (
@@ -117,9 +118,9 @@ export default function DetailsUser() {
                         />
                         <Marker
                           icon={customIcon}
-                          position={[latitude, longitude]}
+                          position={[resource.latitude, resource.longitude]}
                         >
-                          <Popup>{title}</Popup>
+                          <Popup>{resource.title}</Popup>
                         </Marker>
                       </MapContainer>
                     </MDBRow>
@@ -137,7 +138,7 @@ export default function DetailsUser() {
                     <MDBCardText>Título</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{title}</MDBCardText>
+                    <MDBCardText className="text-muted">{resource.title}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -148,7 +149,7 @@ export default function DetailsUser() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      {description}
+                      {resource.description}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -160,7 +161,7 @@ export default function DetailsUser() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      {contact_phone}
+                      {resource.contact_phone}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -171,7 +172,7 @@ export default function DetailsUser() {
                     <MDBCardText>Calle</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{street}</MDBCardText>
+                    <MDBCardText className="text-muted">{resource.street}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -181,7 +182,7 @@ export default function DetailsUser() {
                     <MDBCardText>Número</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{number}</MDBCardText>
+                    <MDBCardText className="text-muted">{resource.number}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -191,7 +192,7 @@ export default function DetailsUser() {
                     <MDBCardText>Ciudad</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{city}</MDBCardText>
+                    <MDBCardText className="text-muted">{resource.city}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -214,7 +215,7 @@ export default function DetailsUser() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      {additional_comments}
+                      {resource.additional_comments}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -222,22 +223,10 @@ export default function DetailsUser() {
 
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Latitud</MDBCardText>
+                    <MDBCardText>Posición en el mapa</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{latitude}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Longitud</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      {longitude}
-                    </MDBCardText>
+                    <MDBCardText className="text-muted">{resource.position}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
 
