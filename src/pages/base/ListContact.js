@@ -143,6 +143,10 @@ const columns = [
   {
     title: 'Fecha',
     dataIndex: 'datetime',
+    render: (datetime) => {
+      const formattedDateTime = new Date(datetime).toLocaleString('es-ES', {day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit'})
+      return <span>{formattedDateTime}</span>
+    }
   },
   {
     title: 'Respondido',
