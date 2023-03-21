@@ -5,7 +5,6 @@ import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
 import { useNavigate } from "react-router-dom";
 import {contacts} from "./services/backend.js";
-import {MDBCol,MDBRow} from "mdb-react-ui-kit";
 
 const onChange = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);

@@ -50,7 +50,7 @@ function putContact(contact) {
     .put(`/${id}/`, contact)
     .then((response) => {
       swal(successMsg);
-      navigate(`/contacts/${id}`);
+      window.history.back();
     })
     .catch((error) => {
       swal(errorMsg);
