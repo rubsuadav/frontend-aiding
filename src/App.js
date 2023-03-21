@@ -7,8 +7,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import ListAdvertisement from './pages/information/advertisement/ListAdvertisement';
+import AdminListAdvertisement from './pages/information/advertisement/AdminListAdvertisement';
 import ShowAdvertisement from './pages/information/advertisement/ShowAdvertisement';
-import CreateAdvertisement from './pages/information/advertisement/CreateAdvertisement';
+import AdminCreateAdvertisement from './pages/information/advertisement/AdminCreateAdvertisement';
+import AdminUpdateAdvertisement from './pages/information/advertisement/AdminUpdateAdvertisement';
+
 import Home from "./pages/Home";
 import ListPartner from "./pages/partners/ListPartner";
 import ShowPartner from "./pages/partners/ShowPartner";
@@ -17,8 +20,7 @@ import UpdatePartner from "./pages/partners/UpdatePartner";
 import CreateCommunication from "./pages/partners/CreateCommunication";
 import UpdateCommunication from './pages/partners/UpdateCommunication';
 import CreateDonation from './pages/partners/CreateDonation';
-
-
+import Certificate from './pages/partners/Certificate';
 
 import UpdateResource from './pages/information/map/UpdateResource.js';
 import CreateResource from './pages/information/map/CreateResource.js';
@@ -36,7 +38,7 @@ import CreateContact from './pages/base/CreateContact';
 var navLinks= [
     {
       title: "Inicio",
-      path: "home"
+      path: "/"
     },
     {
       title: "Socios",
@@ -59,8 +61,12 @@ var navLinks= [
       path: "information/map-resources"
     },
     {
-      title: "Admin Resources",
+      title: "Admin Recursos",
       path: "/information/admin"
+    },
+    {
+      title: "Admin Noticias",
+      path: "admin/information/advertisements"
     },
     {
       title: "Atención al cliente",
@@ -77,11 +83,13 @@ export default function App() {
     <Router>
       <Navbar navLinks={navLinks} logo={logo}/>
       <Routes>
-        <Route path="/home" element={ <Home/>} />
+        <Route path="/" element={ <Home/>} />
         <Route path="information/sections/:id" element={ <ListAdvertisement/>} />
         <Route path="information/sections" element={ <ListAdvertisement/>} />
         <Route path="information/advertisements/:id" element={ <ShowAdvertisement/>} />
-        <Route path="information/advertisements/create" element={ <CreateAdvertisement/>} />
+        <Route path="admin/information/advertisements/create" element={ <AdminCreateAdvertisement/>} />
+        <Route path="admin/information/advertisements/:id/update" element={ <AdminUpdateAdvertisement/>} />
+        <Route path="admin/information/advertisements" element={ <AdminListAdvertisement/>} />
         <Route exact path='/information/map-resources' element={<ResourcesListEdit/>} />
         <Route path="/information/map-resources/:id" element={ <ShowResourceUser/>} />
 
@@ -93,6 +101,7 @@ export default function App() {
         <Route path="/partners/:id" element={ <ShowPartner/>} />
         <Route path="/partners/create" element={ <CreatePartner/>} />
         <Route path="/partners/update/:id" element={ <UpdatePartner/>} />
+
         <Route path="/partners/:id/communication/create" element={ <CreateCommunication/>} />
         <Route path="/partners/:id/communication/update/:idc" element={ <UpdateCommunication/>} />
         <Route path="/partners/:id/donation/create" element={ <CreateDonation/>} />

@@ -27,13 +27,15 @@ export default function CreateResource() {
   const [resource, setResource] = useState({
     title: "",
     description: "",
+    contact_phone: "",
     street: "",
     number: "",
     city: "",
     additional_comments: "",
+    resource_type:"seniors_association"
   });
 
-  const { title, description, street, number, city, additional_comments } =
+  const { title, description, contact_phone, street, number, city, additional_comments, resource_type } =
     resource;
 
   const onInputChange = (e) => {
@@ -86,6 +88,17 @@ export default function CreateResource() {
                 />
               </Form.Group>
 
+              
+              <Form.Group className="mb-3">
+                <Form.Label>Teléfono</Form.Label>
+                <Form.Control
+                  onChange={(e) => onInputChange(e)}
+                  value={contact_phone}
+                  name="contact_phone"
+                  placeholder="Teléfono de contacto"
+                />
+              </Form.Group>
+
               <Form.Group className="mb-3">
                 <Form.Label>Calle</Form.Label>
                 <Form.Control
@@ -124,6 +137,20 @@ export default function CreateResource() {
                   name="additional_comments"
                   placeholder="Comentarios adicionales"
                 />
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Tipo de recurso</Form.Label>
+                <Form.Select
+                  onChange={(e) => onInputChange(e)}
+                  value={resource_type}
+                  name="resource_type"
+                >
+                  <option value="neighborhood_association">Asociación de vecinos</option>
+                  <option value="seniors_association">Asociación de mayores</option>
+                  <option value="nursing_home">Residencia</option>
+                 
+                </Form.Select>
               </Form.Group>
             </div>
 
