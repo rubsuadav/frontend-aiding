@@ -100,7 +100,7 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     zIndex: 900,
     width: "100%",
-    position: "absolute",
+    position: "sticky",
     alignSelf:"center",
     paddingBottom: "10%"
   },
