@@ -57,10 +57,19 @@ function CreateContact(){
     function validateForm() {
         let error_msgs = {};
 
+    if (name === "" || name === null) {
+      error_msgs.name = "El nombre no puede estar vacío";
+    }
     if (email === "" || email === null) {
         error_msgs.email = "El email no puede estar vacío";
     }else if (!validateEmail(email)) {
         error_msgs.email = "Este no es un email válido";
+    }
+    if (subject === "" || subject === null) {
+      error_msgs.subject = "El asunto no puede estar vacío";
+    }
+    if (message === "" || message === null) {
+      error_msgs.message = "El mensaje no puede estar vacío";
     }
     setErrors(error_msgs);
 
