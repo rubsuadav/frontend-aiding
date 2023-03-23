@@ -1,41 +1,55 @@
 import { Link } from "react-router-dom";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 import { VscAccount } from "react-icons/vsc";
+import { Button } from "antd";
 
-const NavigationBar = ({navLinks, logo}) => {
-  
+import { useAuthContext } from "../routes/authContext";
+
+const NavigationBar = ({ navLinksPublic, navLinksAdmin, logo }) => {
+  const { logout, isAuthenticated } = useAuthContext();
+
+  function Logout() {
+    logout();
+    return null;
+  }
+
   return (
-    <Navbar className='navbar' expand="sm">
+    <Navbar className="navbar" expand="sm">
       <Container>
-        <Navbar.Brand as={Link} to="/home">
+        <Navbar.Brand as={Link} to="/">
           <img
-                src={logo}
-                width="180"
-                height="80"
-                className="d-inline-block align-top"
-                alt="Logo"
-              />
-
+            src={logo}
+            width="180"
+            height="80"
+            className="d-inline-block align-top"
+            alt="Logo"
+          />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end">
           <Nav className="me-auto">
-            {navLinks.map((link) => (
-              <Nav.Link key={link.path} as={Link} to={link.path}>{link.title}</Nav.Link>
+            {navLinksPublic.map((link) => (
+              <Nav.Link key={link.path} as={Link} to={link.path}>
+                {link.title}
+              </Nav.Link>
             ))}
-              {/* <Nav.Link as={Link} to="/Home">Home</Nav.Link>
-              <Nav.Link as={Link} to="/Items">Items</Nav.Link> */}
-            </Nav>
-          < VscAccount />
-          <Navbar.Text id="admin">
-          Administrador
-          </Navbar.Text>
+
+            {isAuthenticated &&  navLinksAdmin.map((link) => (
+              <Nav.Link key={link.path} as={Link} to={link.path}>
+                {link.title}
+              </Nav.Link>
+            ))}
+            {isAuthenticated && <Nav.Link onClick={Logout}>Logout</Nav.Link>}
+            {!isAuthenticated && <Nav.Link key="base/login" as={Link} to="base/login">
+                Login
+              </Nav.Link>}
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
-}
+};
 
 export default NavigationBar;
