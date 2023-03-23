@@ -1,5 +1,7 @@
 import React from "react";
 import { Document, Page, Text, Image, StyleSheet, View, Link} from "@react-pdf/renderer";
+import boscoSello from "../../images/Bosco-sello.png"
+import boscoLogo from "../../images/boscoglobal-logo.png"
 
 export const styles = StyleSheet.create({
   body:{
@@ -158,7 +160,7 @@ export function generateCertificate(user, language, amount){
   return(
     <Document>
         <Page style={styles.body}>          
-          <Image src="http://localhost:3000/boscoglobal-logo.png" height="50" style={styles.image}></Image>
+          <Image src={boscoLogo} height="50" style={styles.image}></Image>
           <Text style={styles.textTop}>{text[0]}</Text>
           <Text style={styles.textSp}>{text[1]}</Text>
           <Text style={styles.text}>{text[2]}<Text style={styles.textSp}>{text[3]}</Text> {text[4]}</Text>
@@ -195,7 +197,7 @@ export function generateCertificate(user, language, amount){
           <Text style={styles.text}>{text[9]}</Text>
           <Text style={styles.text}>{text[10]}</Text>
           <Text style={styles.textStp}>Sevilla, {text[11]} {date.getFullYear()}</Text>
-          <Image src="http://localhost:3000/Bosco-sello.png" height="50" style={styles.stamp}></Image>
+          <Image src={boscoSello} height="50" style={styles.stamp}></Image>
           <Text style={styles.textBtm}>Francisco Antonio Echeto Zubiri</Text>
           <Text style={styles.textBtm}>{text[12]}</Text>
           <Text style={styles.footer}>C/Salesianos,3A. 41008 Sevilla (España) · T. 954 53 28 27 · info@boscoglobal.org · <Link src="https://boscoglobal.org/" style={styles.link}>boscoglobal.org</Link></Text>

@@ -11,9 +11,9 @@ import {
 } from "mdb-react-ui-kit";
 import Communication from "./Communications.js";
 import {partners, fileUrl} from "./services/backend.js";
-import { generateCertificate, styles} from "./Certificate.js";
+import { generateCertificate} from "./Certificate.js";
 import { PDFViewer, PDFDownloadLink} from "@react-pdf/renderer";
-import { Button, Dropdown} from "react-bootstrap";
+import { Button} from "react-bootstrap";
 import { Badge, Tag } from 'antd';
 
 export default function Details() {
@@ -69,14 +69,6 @@ export default function Details() {
     const result = await partners.get(`/${id}/donation`);
     setDonation(result.data);
   };
-
-  const [verCertificado, setVerCertificado] = useState(false);
-  const [idioma, setIdioma] = useState("Español");
-
-  function handleClick(lan){
-    setVerCertificado(true);
-    setIdioma(lan);
-  }
 
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
@@ -156,6 +148,15 @@ export default function Details() {
       }
     }
 
+    //VARIABLES DEL POP UP CERTIFICADO
+  const [verCertificado, setVerCertificado] = useState(false);
+  const [idioma, setIdioma] = useState("Español");
+
+  function handleClick(lan){
+    setVerCertificado(true);
+    setIdioma(lan);
+  } 
+
   const sex = partnerFormatter(user.sex);
   const language = partnerFormatter(user.language);
   const periodicity = donationFormatter(donation.periodicity);
@@ -164,21 +165,26 @@ export default function Details() {
     <section>
       {verCertificado ? (
         <section>
-          <div>
-            <button onClick={()=>  setVerCertificado(false)}> Cerrar </button>
-            <button onClick={()=>  setIdioma("Español")}> Español </button>            
-            <button onClick={()=>  setIdioma("Catalán")}> catalan </button>
+          <div style={{display: "flex", flexDirection:"row"}}>
+            <button onClick={()=>  setIdioma("Español")}type="button" id="button" className="btn btn-light w-100"  width="10%"> Español </button>            
+            <button onClick={()=>  setIdioma("Catalán")}type="button" id="button" className="btn btn-light w-100"  width="10%"> Català </button>
+            <button onClick={()=>  setVerCertificado(false)}type="button" id="button" className="btn btn-light w-100" width="10%"> Cerrar </button>
           </div>
           <div><PDFViewer  height={"910"} width={"700"}>{generateCertificate(user,idioma, donation.amount)}</PDFViewer></div>
           <div>
-            <PDFDownloadLink document={generateCertificate(user,idioma, donation.amount)} fileName="certificate.pdf">
+            ¿No carga?
+            <div><PDFDownloadLink document={generateCertificate(user,"Español", donation.amount)} fileName="certificate.pdf">
               {({ blob, url, loading, error }) =>
-                loading ? 'Loading document...' : 'Download now!'
+                loading ? 'Loading document...' : 'Descarga en español'
               }
-            </PDFDownloadLink>
+            </PDFDownloadLink></div>
+            <div><PDFDownloadLink document={generateCertificate(user,"Català", donation.amount)} fileName="certificate.pdf">
+              {({ blob, url, loading, error }) =>
+                loading ? 'Loading document...' : 'Descaga en català'
+              }
+            </PDFDownloadLink></div>  
           </div>
         </section>
-
       ):
       <MDBContainer className="py-5">
       <center>
@@ -455,8 +461,7 @@ export default function Details() {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
-       }
-      
+    }
     </section>
   );
 }
