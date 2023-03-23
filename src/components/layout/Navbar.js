@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { VscAccount } from "react-icons/vsc";
-import { Button } from "antd";
+import swal from "sweetalert";
 
 import { useAuthContext } from "../routes/authContext";
 
@@ -12,6 +11,7 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, logo }) => {
 
   function Logout() {
     logout();
+    swal("", "Has cerrado sesión correctamente", "success");
     return null;
   }
 
