@@ -3,15 +3,25 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import swal from "sweetalert";
+import { backendUrl } from "../../config";
+import axios from "axios";
+import Cookies from "universal-cookie";
 
 import { useAuthContext } from "../routes/authContext";
 
 const NavigationBar = ({ navLinksPublic, navLinksAdmin, logo }) => {
   const { logout, isAuthenticated } = useAuthContext();
+  const cookie = new Cookies();
 
   function Logout() {
-    logout();
-    swal("", "Has cerrado sesión correctamente", "success");
+    axios.get(backendUrl + "base/logout/").then((response) => {
+      logout();
+      cookie.remove("sessionid");
+      swal("", "Has cerrado sesión correctamente", "success");
+    }).catch((error) => {
+      swal("", "Ha ocurrido un error", "error");
+    });
+    
     return null;
   }
 

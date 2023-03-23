@@ -12,6 +12,7 @@ import ButtonReact from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Col, Container, Row } from "react-bootstrap";
 
+
 const successMsg_delete = {
   title: "Mensaje de confirmación",
   text: "Te confirmamos que la sección se ha eliminado correctamente",
