@@ -8,6 +8,7 @@ import {
   MDBCard,
   MDBCardText,
   MDBCardBody,
+  MDBCardImage
 } from "mdb-react-ui-kit";
 import Communication from "./Communications.js";
 import {partners, fileUrl} from "./services/backend.js";
