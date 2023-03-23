@@ -48,7 +48,6 @@ export default function CreateResource() {
     if (validateForm()) {
       postResource(resource);
     }
-    
   };
 
   function postResource(resource) {
