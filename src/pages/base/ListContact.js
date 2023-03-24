@@ -115,7 +115,6 @@ const Contacts = () => {
        text
      ),
  });
-
 const columns = [
   {
     title: 'id',
@@ -151,6 +150,17 @@ const columns = [
     title: 'Respondido',
     dataIndex: 'isAnswered',
     render:(isAnswered) => isAnswered ? 'Sí' : 'No',
+    filters: [
+      {
+        text: 'Sí',
+        value: 'Sí',
+      },
+      {
+        text: 'No',
+        value: 'No',
+      },
+    ],
+    onFilter: (value, record) => record.isAnswered === (value === 'Sí'),
   },
   
 ];
