@@ -11,7 +11,9 @@ import {
 } from "mdb-react-ui-kit";
 import Communication from "./Communications.js";
 import {partners, fileUrl} from "./services/backend.js";
-import { Button } from "react-bootstrap";
+import { generateCertificate, styles} from "./Certificate.js";
+import { PDFViewer} from "@react-pdf/renderer";
+import { Button, Dropdown} from "react-bootstrap";
 import { Badge, Tag } from 'antd';
 
 export default function Details() {
@@ -68,6 +70,51 @@ export default function Details() {
     setDonation(result.data);
   };
 
+  const [verCertificado, setVerCertificado] = useState(false);
+  const [idioma, setIdioma] = useState("Español");
+
+  function handleClick(lan){
+    setVerCertificado(true);
+    setIdioma(lan);
+  }
+
+  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <a
+      href=""
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+      type="button" id="button" className="btn btn-light w-100"
+    >
+      {children}
+      &#x25bc;
+    </a>
+  ));
+  
+  const CustomMenu = React.forwardRef(
+    ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+      const [value, setValue] = useState('');
+  
+      return (
+        <div
+          ref={ref}
+          style={style}
+          className={className}
+          aria-labelledby={labeledBy}
+        >
+          <ul className="list-unstyled">
+            {React.Children.toArray(children).filter(
+              (child) =>
+                !value || child.props.children.toLowerCase().startsWith(value),
+            )}
+          </ul>
+        </div>
+      );
+    },
+  );
+  
   // FORMATEADOR DE LOS ENUMERADOS
   function partnerFormatter(value) {
     var formattedValue = value;
@@ -115,6 +162,13 @@ export default function Details() {
 
   return (
     <section>
+      {verCertificado ? (
+        <div style={styles.cont}>
+          <button onClick={()=>  setVerCertificado(false)}> Cerrar </button>
+          <PDFViewer  height={"1000"}>{generateCertificate(user,idioma, donation.amount)}</PDFViewer>
+        </div>
+
+      ): null}
       <MDBContainer className="py-5">
         <center>
         <h2>
@@ -333,13 +387,20 @@ export default function Details() {
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
-                      <Button href="" type="button" id="button" className="btn btn-light w-100">
-                        Generar certificado
-                      </Button>
+                      <Dropdown>
+                        <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+                          Certificado 
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu as={CustomMenu}>
+                          <Dropdown.Item  onClick={()=> handleClick("Español")} type="button" id="button" className="btn btn-light w-100">Español</Dropdown.Item>
+                          <Dropdown.Item onClick={()=> handleClick("Catalán")} type="button" id="button" className="btn btn-light w-100">Català</Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
-                <hr />
+                <hr />    
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">

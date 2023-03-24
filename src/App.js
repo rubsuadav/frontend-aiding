@@ -20,6 +20,7 @@ import UpdatePartner from "./pages/partners/UpdatePartner";
 import CreateCommunication from "./pages/partners/CreateCommunication";
 import UpdateCommunication from './pages/partners/UpdateCommunication';
 import CreateDonation from './pages/partners/CreateDonation';
+import Certificate from './pages/partners/Certificate';
 
 import UpdateResource from './pages/information/map/UpdateResource.js';
 import CreateResource from './pages/information/map/CreateResource.js';
@@ -28,6 +29,11 @@ import ResourcesTable from './pages/information/map/ResourcesTable.js';
 
 import ResourcesListEdit from './components/ResourcesListEdit';
 import ShowResourceUser from './pages/information/map/ShowResourceUser.js';
+
+import ListContact from "./pages/base/ListContact";
+import ContactDetail from './pages/base/ShowContact';
+import CreateContact from './pages/base/CreateContact';
+
 
 var navLinks= [
     {
@@ -61,6 +67,10 @@ var navLinks= [
     {
       title: "Admin Noticias",
       path: "admin/information/advertisements"
+    },
+    {
+      title: "Atención al cliente",
+      path: "/base/contacts"
     }
   ];
 
@@ -95,6 +105,10 @@ export default function App() {
         <Route path="/partners/:id/communication/create" element={ <CreateCommunication/>} />
         <Route path="/partners/:id/communication/update/:idc" element={ <UpdateCommunication/>} />
         <Route path="/partners/:id/donation/create" element={ <CreateDonation/>} />
+
+        <Route path="/base/contacts" element={ <ListContact/>} />
+        <Route path ="/base/contacts/:id" element={ <ContactDetail/>} />
+        <Route path ="/base/contacts/CreateContact" element={ <CreateContact/>} />
       </Routes>
     </Router>
     <Footer/>
