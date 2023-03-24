@@ -368,7 +368,7 @@ export default function Details() {
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
                       <Button onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
-                        Gestionar Donación
+                        Añadir Donación
                       </Button>
                     </MDBCardText>
                   </MDBCol>

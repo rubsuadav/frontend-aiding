@@ -5,14 +5,27 @@ import {
   MDBCardTitle,
   MDBCardText,
   MDBCardImage,
-  MDBBtn,
-  MDBRipple,
   MDBCol,
   MDBContainer,
   MDBRow
 } from 'mdb-react-ui-kit';
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  let navigate = useNavigate();
+
+  function redirectNoticias() {
+    navigate("/information/sections");
+  }
+
+  function redirectRecursos() {
+    navigate("/information/map-resources");
+  }
+
+  function redirectMayores() {
+    navigate("/information/sections");
+  }
+
   return (
     <MDBContainer className="py-4">
       <center><h1>Bienvenidos</h1></center>
@@ -20,12 +33,10 @@ function Home() {
       <MDBRow className="g-6">
         <MDBCol md="4">
           <MDBCard className="shadow">
-            <MDBRipple rippleColor='light' rippleTag='div' className='bg-image hover-overlay'>
-              <MDBCardImage src='../noticias.jpg' fluid alt='...' />
+              <MDBCardImage onClick={redirectNoticias} src='../noticias.jpg' fluid alt='Foto de <a href="https://unsplash.com/@betrue?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Aleksandar Velickovic</a> en <a href="https://unsplash.com/es/fotos/AG2ujwcYHGE?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>' />
               <a>
                 <div className='mask' style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}></div>
               </a>
-            </MDBRipple>
             <MDBCardBody>
               <MDBCardTitle>Noticias</MDBCardTitle>
               <MDBCardText>
@@ -36,12 +47,10 @@ function Home() {
         </MDBCol>
         <MDBCol md="4">
         <MDBCard className="shadow">
-            <MDBRipple rippleColor='light' rippleTag='div' className='bg-image hover-overlay'>
-              <MDBCardImage src='../recursos.jpg' fluid alt='...' />
+              <MDBCardImage onClick={redirectRecursos} src='../recursos.jpg' fluid alt='Foto de <a href="https://unsplash.com/@cristina_gottardi?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Cristina Gottardi</a> en <a href="https://unsplash.com/es/fotos/6Frs5Cht6Pc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>' />
               <a>
                 <div className='mask' style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}></div>
               </a>
-            </MDBRipple>
             <MDBCardBody>
               <MDBCardTitle>Recursos</MDBCardTitle>
               <MDBCardText>
@@ -52,12 +61,10 @@ function Home() {
         </MDBCol>
         <MDBCol md="4">
         <MDBCard className="shadow">
-            <MDBRipple rippleColor='light' rippleTag='div' className='bg-image hover-overlay'>
-              <MDBCardImage src='../mayores.jpg' fluid alt='...' />
+              <MDBCardImage onClick={redirectMayores} src='../mayores.jpg' fluid alt='Foto de <a href="https://unsplash.com/@vladsargu?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vlad Sargu</a> en <a href="https://unsplash.com/es/fotos/ItphH2lGzuI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>' />
               <a>
                 <div className='mask' style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}></div>
               </a>
-            </MDBRipple>
             <MDBCardBody>
               <MDBCardTitle>Mayores que molan</MDBCardTitle>
               <MDBCardText>
