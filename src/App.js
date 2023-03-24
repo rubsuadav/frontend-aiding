@@ -34,6 +34,8 @@ import ListContact from "./pages/base/ListContact";
 import ContactDetail from './pages/base/ShowContact';
 import CreateContact from './pages/base/CreateContact';
 
+import ListTurn from "./pages/volunteers/ListTurn";
+import CreateTurn from "./pages/volunteers/CreateTurn";
 
 var navLinks= [
     {
@@ -67,6 +69,10 @@ var navLinks= [
     {
       title: "Admin Noticias",
       path: "admin/information/advertisements"
+    },
+    {
+      title: "Turnos",
+      path: "turns"
     },
     {
       title: "Atención al cliente",
@@ -109,6 +115,9 @@ export default function App() {
         <Route path="/base/contacts" element={ <ListContact/>} />
         <Route path ="/base/contacts/:id" element={ <ContactDetail/>} />
         <Route path ="/base/contacts/CreateContact" element={ <CreateContact/>} />
+
+        <Route path="/turns" element={ <ListTurn/>} />
+        <Route path="/turns/create" element={ <CreateTurn/>} />
       </Routes>
     </Router>
     <Footer/>
