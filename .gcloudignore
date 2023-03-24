@@ -1,0 +1,11 @@
+/.github/workflows
+/node_modules
+/public
+/src
+.env
+.gitignore
+info.yml
+LICENSE
+package-lock.json
+package.json
+README.md
