@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { VscAccount } from "react-icons/vsc";
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const NavigationBar = ({navLinks, logo}) => {
   
@@ -25,8 +26,10 @@ const NavigationBar = ({navLinks, logo}) => {
             {navLinks.map((link) => (
               <Nav.Link key={link.path} as={Link} to={link.path}>{link.title}</Nav.Link>
             ))}
-              {/* <Nav.Link as={Link} to="/Home">Home</Nav.Link>
-              <Nav.Link as={Link} to="/Items">Items</Nav.Link> */}
+              <NavDropdown title="Eventos" id="nav-dropdown">
+                <NavDropdown.Item>{<Nav.Link as={Link} to="/events/programed">Programados</Nav.Link>}</NavDropdown.Item>
+                <NavDropdown.Item>{<Nav.Link as={Link} to="/events/started">Empezados</Nav.Link>}</NavDropdown.Item>
+              </NavDropdown>
             </Nav>
           < VscAccount />
           <Navbar.Text id="admin">

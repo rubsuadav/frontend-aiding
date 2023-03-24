@@ -34,7 +34,10 @@ import ListContact from "./pages/base/ListContact";
 import ContactDetail from './pages/base/ShowContact';
 import CreateContact from './pages/base/CreateContact';
 
-import listEvents from './pages/events/listEvent';
+
+import ProgramedEvent from './pages/events/ProgramedEvent';
+import StartedEvent from './pages/events/StartedEvent';
+import ShowEvent from './pages/events/ShowEvent';
 
 var navLinks= [
     {
@@ -48,10 +51,6 @@ var navLinks= [
     {
       title: "Recursos",
       path: "information/map-resources"
-    },
-    {
-      title: "Eventos",
-      path: "/events"
     },
     {
       title: "Socios",
@@ -107,7 +106,9 @@ export default function App() {
         <Route path ="/base/contacts/:id" element={ <ContactDetail/>} />
         <Route path ="/base/contacts/CreateContact" element={ <CreateContact/>} />
 
-        <Route path="/events" element={ <listEvents/>} />
+        <Route path="/events/programed" element={ <ProgramedEvent/>} />
+        <Route path="/events/started" element={ <StartedEvent/>} />
+        <Route path="/events/:id" element={ <ShowEvent/>} />
 
       </Routes>
     </Router>
