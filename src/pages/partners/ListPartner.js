@@ -20,6 +20,18 @@ const onChange = (pagination, filters, sorter, extra) => {
 const Partners = () => {
   let navigate = useNavigate();
 
+  function partnerFormatter(value) {
+    var formattedValue = value;
+    switch (value) {
+      case "spanish":
+        formattedValue = "Español";
+        return `${formattedValue}`;
+      case "catalan":
+        formattedValue = "Catalán";
+        return `${formattedValue}`;
+    }
+  }
+
   /*BUSCADOR*/
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
@@ -123,14 +135,6 @@ const Partners = () => {
   });
   const columns = [
     {
-      title: 'Nº de socio',
-      dataIndex: 'id',
-      sorter: {
-        compare: (a, b) => a.id - b.id,
-        multiple: 1,
-      },
-    },
-    {
       title: 'DNI',
       dataIndex: 'dni',
       ...getColumnSearchProps('dni'),
@@ -147,6 +151,21 @@ const Partners = () => {
     {
       title: 'Email',
       dataIndex: 'email',
+    },
+    {
+      title: 'Idioma',
+      dataIndex: 'language',
+      filters: [
+        {
+          text: 'Español',
+          value: 'Español',
+        },
+        {
+          text: 'Catalán',
+          value: 'Catalán',
+        },
+      ],
+      onFilter: (value, record) => record.language.includes(value),
     },
     {
       title: 'Registro Donación',
@@ -173,12 +192,12 @@ const Partners = () => {
   /*DATOS*/
   const [partners_data, setPartnersData] = React.useState([
     {
-      id: '...',
       dni: '...',
       name: '...',
       last_name: '...',
       email: '...',
       state: '...',
+      language: '...',
     }
   ]);
 
