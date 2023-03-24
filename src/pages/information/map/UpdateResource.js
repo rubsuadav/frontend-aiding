@@ -70,12 +70,11 @@ export default function UpdateResource() {
       })
       .catch((error) => {
         if (error.response) {
-          let error_msgs = {general: "No ha rellenado correctamente."};
-          setErrors(error_msgs);
-        }else { 
-          swal(errorMsg);
-        }
-      });
+         let error_msgs = {general: "No ha rellenado correctamente."};
+         setErrors(error_msgs);
+       }
+       swal(errorMsg);
+     });
   }
 
   /* Validator */

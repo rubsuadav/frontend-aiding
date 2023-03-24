@@ -62,9 +62,8 @@ export default function CreateResource() {
          if (error.response) {
           let error_msgs = {general: "No ha rellenado correctamente."};
           setErrors(error_msgs);
-        }else { 
-          swal(errorMsg);
         }
+        swal(errorMsg);
       });
   }
 
