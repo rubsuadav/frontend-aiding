@@ -249,6 +249,7 @@ const AdminListAdvertisement = () => {
             setErrors(error_msgs);
           }else {
             swal(errorMsg_create);
+            console.log(sectionBE.getUri())
           }
         });
     }
@@ -275,7 +276,7 @@ const AdminListAdvertisement = () => {
   };
 
   useEffect(() => {
-    sectionBE.get("").then((response) => {
+    sectionBE.get().then((response) => {
       setSections(response.data);
     });
   }, [event]);
@@ -283,9 +284,7 @@ const AdminListAdvertisement = () => {
   useEffect(() => {
     advertisementBE.get().then((response) => {
       setAdvertisements(response.data);
-    });
-    sectionBE.get("").then((response) => {
-      setSections(response.data);
+      console.log(response.status);
     });
   }, []);
 

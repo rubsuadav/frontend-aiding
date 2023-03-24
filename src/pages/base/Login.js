@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 import { Form, Button } from "react-bootstrap";
 import swal from "sweetalert";
+import axios from "axios";
 
-import { base as baseApi } from "./services/backend";
+import {backendUrl} from "../../config";
 
 export default function Login() {
   const { login } = useAuthContext();
@@ -24,9 +25,9 @@ export default function Login() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    baseApi.post("login/", { username, password }).then((response) => {
-      console.log(response.headers);
-      login();
+    axios.post(`${backendUrl}token/`, { username, password }).then((response) => {
+      console.log(response.data);
+      login(response.data);
       swal("Bienvenido", "Has iniciado sesión correctamente", "success");
       navigate("/");
     });
