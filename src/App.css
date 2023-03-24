@@ -48,7 +48,13 @@
 
 /* HOME */
 
+#contacto {
+  color: rgb(183, 183, 183);
+}
 
+#contacto:hover {
+  color: var(--boton);
+}
 
 /* NAVBAR */
 
@@ -164,4 +170,10 @@
   bottom: 0;
   top: 0;
   width: 95%;
+}
+
+/* MENSAJES */
+
+#mensaje{
+  word-break: break-all;
 }
