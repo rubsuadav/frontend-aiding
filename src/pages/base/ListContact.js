@@ -117,14 +117,6 @@ const Contacts = () => {
  });
 const columns = [
   {
-    title: 'id',
-    dataIndex: 'id',
-    sorter: {
-      compare: (a, b) => a.id - b.id,
-      multiple: 1,
-    },
-  },
-  {
     title: 'Nombre',
     dataIndex: 'name',
     ...getColumnSearchProps('name'),
