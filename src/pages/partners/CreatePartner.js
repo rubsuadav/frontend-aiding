@@ -33,6 +33,7 @@ function CreatePartner() {
     function postPartner(partner){
         const aux = partners.post('',partner).then((response) => {
             console.log(response);
+            console.log(partner);
             swal(successMsg);
             navigate("/partners");
         }).catch((error) => {
@@ -288,8 +289,8 @@ function CreatePartner() {
                   value={language}
                   name="language"
                 >
-                  <option value="spanish">Español</option>
-                  <option value="catalan">Catalán</option>
+                  <option value="Español">Español</option>
+                  <option value="Catalán">Catalán</option>
                 </Form.Select>
               </Form.Group>
               {errors.language && (
@@ -390,7 +391,7 @@ function CreatePartner() {
                 )}
   
               <Form.Group className="mb-3">
-                <Form.Label>Iban</Form.Label>
+                <Form.Label>IBAN</Form.Label>
                 <Form.Control
                   onChange={(e) => onInputChange(e)}
                   value={iban}
