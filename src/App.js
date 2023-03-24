@@ -34,6 +34,7 @@ import ListContact from "./pages/base/ListContact";
 import ContactDetail from './pages/base/ShowContact';
 import CreateContact from './pages/base/CreateContact';
 
+import listEvents from './pages/events/listEvent';
 
 var navLinks= [
     {
@@ -41,24 +42,20 @@ var navLinks= [
       path: "/"
     },
     {
-      title: "Socios",
-      path: "partners"
-    },
-    /* {
-      title: "Crear Socio",
-      path: "partners/create"
-    }, */
-    {
       title: "Noticias",
       path: "information/sections"
     },
-    /* {
-      title: "Crear Noticia",
-      path: "information/advertisements/create"
-    } */
     {
       title: "Recursos",
       path: "information/map-resources"
+    },
+    {
+      title: "Eventos",
+      path: "/events"
+    },
+    {
+      title: "Socios",
+      path: "partners"
     },
     {
       title: "Admin Recursos",
@@ -109,6 +106,9 @@ export default function App() {
         <Route path="/base/contacts" element={ <ListContact/>} />
         <Route path ="/base/contacts/:id" element={ <ContactDetail/>} />
         <Route path ="/base/contacts/CreateContact" element={ <CreateContact/>} />
+
+        <Route path="/events" element={ <listEvents/>} />
+
       </Routes>
     </Router>
     <Footer/>
