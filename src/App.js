@@ -69,7 +69,7 @@ var navLinksAdmin = [
   },
   {
     title: "Atención al cliente",
-    path: "base/contacts",
+    path: "admin/base/contacts",
   },
 ];
 
@@ -90,6 +90,11 @@ export default function App() {
             <Route path="/" element={<PublicRoute />}>
               {/* Home */}
               <Route index element={<Home />} />
+              {/* Contacto */}
+              <Route
+                path="base/contacts/CreateContact"
+                element={<CreateContact />}
+              />
 
               {/* Information */}
               <Route
@@ -103,10 +108,6 @@ export default function App() {
               <Route
                 path="information/advertisements/:id"
                 element={<ShowAdvertisement />}
-              />
-              <Route
-                path="information/resources/:id"
-                element={<ShowResource />}
               />
               <Route
                 exact
@@ -127,10 +128,6 @@ export default function App() {
               {/* Base */}
               <Route path="base/contacts" element={<ListContact />} />
               <Route path="base/contacts/:id" element={<ContactDetail />} />
-              <Route
-                path="base/contacts/CreateContact"
-                element={<CreateContact />}
-              />
 
               {/* Information */}
               <Route
@@ -149,6 +146,10 @@ export default function App() {
                 exact
                 path="information/edit-resource/:id"
                 element={<UpdateResource />}
+              />
+              <Route
+                path="information/resources/:id"
+                element={<ShowResource />}
               />
               <Route
                 exact

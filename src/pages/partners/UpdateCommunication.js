@@ -68,7 +68,7 @@ function UpdateCommunication() {
       .put(`/${id}/communication/${idc}`, communication)
       .then((response) => {
         swal(successMsg);
-        navigate(`/partners/${id}`);
+        navigate(`/admin/partners/${id}`);
       })
       .catch((error) => {
         swal(errorMsg);
@@ -119,7 +119,7 @@ function UpdateCommunication() {
       .delete(`/${id}/communication/${idc}`)
       .then((res) => {
         swal(successMsgDelete);
-        navigate(`/partners/${id}`);
+        navigate(`/admin/partners/${id}`);
       })
       .catch((err) => {
         swal(errorMsgDelete);

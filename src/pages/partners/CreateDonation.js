@@ -32,7 +32,7 @@ function CreateDonation() {
         const aux = partners.post(`/${id}/donation`,donation).then((response) => {
             console.log(response);
             swal(successMsg);
-            navigate(`/partners/${id}`);
+            navigate(`/admin/partners/${id}`);
         }).catch((error) => {
           if (error.response && error.response.status === 400) {
             let error_msgs = {general: "Actualmente el socio esta inactivo. Para crear una donación debe estar activo."};
