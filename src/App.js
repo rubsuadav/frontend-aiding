@@ -39,7 +39,6 @@ import ListContact from "./pages/base/ListContact";
 import ContactDetail from "./pages/base/ShowContact";
 import CreateContact from "./pages/base/CreateContact";
 
-
 var navLinksPublic = [
   {
     title: "Inicio",
@@ -55,18 +54,17 @@ var navLinksPublic = [
   },
 ];
 
-
 var navLinksAdmin = [
   {
     title: "Socios",
     path: "admin/partners",
   },
   {
-    title: "Admin Recursos",
+    title: "Recursos",
     path: "admin/information/resources",
   },
   {
-    title: "Admin Noticias",
+    title: "Noticias",
     path: "admin/information/advertisements",
   },
   {
@@ -82,7 +80,11 @@ export default function App() {
     <div className="App">
       <AuthContextProvider>
         <Router>
-          <Navbar navLinksPublic={navLinksPublic} navLinksAdmin={navLinksAdmin} logo={logo} />
+          <Navbar
+            navLinksPublic={navLinksPublic}
+            navLinksAdmin={navLinksAdmin}
+            logo={logo}
+          />
           <Routes>
             {/* Public routes ===========================================*/}
             <Route path="/" element={<PublicRoute />}>
