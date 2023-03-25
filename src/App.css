@@ -49,6 +49,13 @@
 
 /* HOME */
 
+#contacto {
+  color: rgb(183, 183, 183);
+}
+
+#contacto:hover {
+  color: var(--boton);
+}
 
 /* NAVBAR */
 

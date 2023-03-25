@@ -32,7 +32,7 @@ function CreateContact(){
           .then((response) => {
             console.log(response);
             swal(successMsg);
-            navigate("/home");
+            navigate("/");
           })
           .catch((error) => {
             if (error.response) {
