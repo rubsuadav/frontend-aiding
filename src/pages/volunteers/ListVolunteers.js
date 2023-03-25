@@ -136,6 +136,7 @@ const Volunteers = () => {
     {
       title: 'Apellidos',
       dataIndex: 'last_name',
+      ...getColumnSearchProps('last_name')
     },
     {
       title: 'Email',

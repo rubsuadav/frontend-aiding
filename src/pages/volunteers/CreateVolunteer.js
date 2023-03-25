@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-import { parseISO, differenceInYears } from 'date-fns';
 
 
 
@@ -57,7 +56,7 @@ function CreateVolunteer() {
     const strRegex = /^[a-zA-Z]$/;
     const first_caracter=nif.charAt(0);
     if(!dniRegex.test(nif)){ //Check NIF and DNI
-      if(strRegex.test(first_caracter)){//if DNI
+      if(!strRegex.test(first_caracter)){//if DNI
         const letters = "TRWAGMYFPDXBNJZSQVHLCKE";
         const letterIndex = parseInt(nif.substring(0, 8)) % 23;
         const expectedLetter = letters.charAt(letterIndex);
@@ -82,7 +81,7 @@ function CreateVolunteer() {
     if ( nif === "" || nif === null) {
       error_msgs.nif = "El NIF no puede estar vacío";
     } else if (!validateNIF(nif)) {
-      error_msgs.nif = "Este no es un NIF válido o ya está en uso";
+      error_msgs.nif = "Este no es un NIF válido";
     }
 
     if (phone === "" || phone === null) {
@@ -110,7 +109,12 @@ function CreateVolunteer() {
     if (rol === "" || rol === null) {
       error_msgs.rol = "Por favor, indique el rol del voluntario";
     }
-
+    if (observations.length>250) {
+      error_msgs.observations = "Las observaciones no pueden tener más de 250 caracteres";
+    }
+    if (postal_code === "" || postal_code === null) {
+      error_msgs.postal_code = "El código postal no puede estar vacío";
+    }
     setErrors(error_msgs);
 
     if (Object.keys(error_msgs).length === 0) {
@@ -129,8 +133,9 @@ function CreateVolunteer() {
       phone: "",
       email: "",
       state: "Activo",
-      situation: "",
+      situation: "Ok",
       rol: "Voluntario",
+      postal_code: "",
       observations:"",
       computerKnowledge:"False",
       truckKnowledge:"False",
@@ -150,6 +155,7 @@ function CreateVolunteer() {
       state,
       situation,
       rol,
+      postal_code,
       observations,
       computerKnowledge,
       truckKnowledge,
@@ -162,6 +168,7 @@ function CreateVolunteer() {
     };
   
     const onSubmit = async (e) => {
+      e.preventDefault();
       if (validateForm()) {
         postVolunteer(volunteer);
       }
@@ -175,21 +182,7 @@ function CreateVolunteer() {
           <div className="row justify-content-evenly">
             <div className="col-md-5">
               <Form.Group className="mb-3">
-                <Form.Group className="mb-3">
-                  <Form.Label>Número de voluntario</Form.Label>
-                  <Form.Control
-                    onChange={(e) => onInputChange(e)}
-                    value={num_volunteer}
-                    name="num_volunteer"
-                    placeholder="Número de volutario"
-                  />
-                </Form.Group>
-                  {errors.phone && (
-                    <p className="text-danger">{errors.phone}</p>
-                  )}
-
                 <Form.Label>Nombre</Form.Label>
-
                 <Form.Control
                   onChange={(e) => onInputChange(e)}
                   value={name}
@@ -211,6 +204,18 @@ function CreateVolunteer() {
                 </Form.Group>
                 {errors.last_name && (
                     <p className="text-danger">{errors.last_name}</p>
+                  )}
+                <Form.Group className="mb-3">
+                  <Form.Label>Número de voluntario</Form.Label>
+                  <Form.Control
+                    onChange={(e) => onInputChange(e)}
+                    value={num_volunteer}
+                    name="num_volunteer"
+                    placeholder="Número de volutario"
+                  />
+                </Form.Group>
+                  {errors.phone && (
+                    <p className="text-danger">{errors.phone}</p>
                   )}
                 <Form.Group className="mb-3">
                   <Form.Label>NIF</Form.Label>
@@ -236,33 +241,60 @@ function CreateVolunteer() {
                   {errors.phone && (
                     <p className="text-danger">{errors.phone}</p>
                   )}
+                <Form.Group className="mb-3">
+                  <Form.Label>E-mail</Form.Label>
+                  <Form.Control
+                    onChange={(e) => onInputChange(e)}
+                    value={email}
+                    name="email"
+                    placeholder="E-mail del voluntario. Debe ser único."
+                  />
+                </Form.Group>
+                {errors.email && (
+                  <p className="text-danger">{errors.email}</p>
+                )}
 
-              <Form.Group className="mb-3">
-                <Form.Label>Población</Form.Label>
+                <Form.Group className="mb-3">
+                  <Form.Label>Población</Form.Label>
+                  <Form.Control
+                    onChange={(e) => onInputChange(e)}
+                    value={place}
+                    name="place"
+                    placeholder="Población del voluntario"
+                  />
+                </Form.Group>
+                {errors.place && (
+                  <p className="text-danger">{errors.place}</p>
+                )}
+                <Form.Group className="mb-3">
+                <Form.Label>Código postal</Form.Label>
                 <Form.Control
                   onChange={(e) => onInputChange(e)}
-                  value={place}
-                  name="place"
-                  placeholder="Población del voluntario"
+                  value={postal_code}
+                  name="postal_code"
+                  placeholder="Código postal"
                 />
               </Form.Group>
               {errors.place && (
-                  <p className="text-danger">{errors.place}</p>
+                  <p className="text-danger">{errors.postal_code}</p>
                 )}
             </div>
             <div className="col-md-5">
               <Form.Group className="mb-3">
-                <Form.Label>E-mail</Form.Label>
-                <Form.Control
+                <Form.Label>Rol</Form.Label>
+                <Form.Select
                   onChange={(e) => onInputChange(e)}
-                  value={email}
-                  name="email"
-                  placeholder="E-mail del voluntario. Debe ser único."
-                />
+                  value={rol}
+                  name="rol">
+                  <option value="Voluntario">Voluntario</option>
+                  <option value="Supervisor">Supervisor</option>
+                  <option value="Capitan">Capitan</option>
+                  <option value="nuevo">Nuevo</option>
+                  <option value="posibleSupervisor">Posible Supervisor</option>
+                  <option value="posibleCapitan">Posible Capitán</option>
+                  <option value="posibleVoluntarioEstructura">Posible voluntario de estructura</option>
+                </Form.Select>
               </Form.Group>
-              {errors.email && (
-                  <p className="text-danger">{errors.email}</p>
-                )}
 
               <Form.Group className="mb-3">
                 <Form.Label>Situacion</Form.Label>
@@ -278,7 +310,7 @@ function CreateVolunteer() {
 
               <Form.Group className="mb-3">
                 <Form.Label>Conocimiento Tecnologico</Form.Label>
-                <Form.Check 
+                <Form.Check
                 onChange={(e) => onInputChange(e)}
                 type='checkbox'
                 value={computerKnowledge}
@@ -315,19 +347,6 @@ function CreateVolunteer() {
                   placeholder="Otros conocimientos del voluntario"
                 />
               </Form.Group>
-              
-
-              <Form.Group className="mb-3">
-                <Form.Label>Rol</Form.Label>
-                <Form.Select
-                  onChange={(e) => onInputChange(e)}
-                  value={rol}
-                  name="rol">
-                  <option value="Voluntario">Voluntario</option>
-                  <option value="Supervisor">Supervisor</option>
-                  <option value="Capitan">Capitan</option>
-                </Form.Select>
-              </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Estado</Form.Label>
@@ -345,6 +364,8 @@ function CreateVolunteer() {
                 <Form.Control
                   onChange={(e) => onInputChange(e)}
                   value={observations}
+                  as="textarea" 
+                  rows="3"
                   name="observations"
                   placeholder="Observaciones"
                 />
