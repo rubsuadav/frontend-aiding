@@ -115,16 +115,7 @@ const Contacts = () => {
        text
      ),
  });
-
 const columns = [
-  {
-    title: 'id',
-    dataIndex: 'id',
-    sorter: {
-      compare: (a, b) => a.id - b.id,
-      multiple: 1,
-    },
-  },
   {
     title: 'Nombre',
     dataIndex: 'name',
@@ -151,6 +142,17 @@ const columns = [
     title: 'Respondido',
     dataIndex: 'isAnswered',
     render:(isAnswered) => isAnswered ? 'Sí' : 'No',
+    filters: [
+      {
+        text: 'Sí',
+        value: 'Sí',
+      },
+      {
+        text: 'No',
+        value: 'No',
+      },
+    ],
+    onFilter: (value, record) => record.isAnswered === (value === 'Sí'),
   },
   
 ];

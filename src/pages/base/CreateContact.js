@@ -32,7 +32,7 @@ function CreateContact(){
           .then((response) => {
             console.log(response);
             swal(successMsg);
-            navigate("/home");
+            navigate("/");
           })
           .catch((error) => {
             if (error.response) {
@@ -60,10 +60,11 @@ function CreateContact(){
     if (name === "" || name === null) {
       error_msgs.name = "El nombre no puede estar vacío";
     }
-    if (email === "" || email === null) {
-        error_msgs.email = "El email no puede estar vacío";
-    }else if (!validateEmail(email)) {
-        error_msgs.email = "Este no es un email válido";
+    if (email === "" && phone === "") {
+      error_msgs.email = "Ingrese un correo electrónico o un número de teléfono";
+      error_msgs.phone = "Ingrese un correo electrónico o un número de teléfono";
+    } else if (email !== "" && !validateEmail(email)) {
+      error_msgs.email = "Este no es un email válido";
     }
     if (subject === "" || subject === null) {
       error_msgs.subject = "El asunto no puede estar vacío";
@@ -83,11 +84,12 @@ function CreateContact(){
     const [contact, setContact] = useState({
         name: "",
         email: "",
+        phone: "",
         subject: "",
         message: "",
     });
 
-    const{ name, email, subject, message, } = contact;
+    const{ name, email, phone, subject, message, } = contact;
     
     const onInputChange = (e) => {
         setContact({ ...contact, [e.target.name]: e.target.value });
@@ -99,6 +101,7 @@ function CreateContact(){
           const formData = new FormData();
           formData.append("name", name);
           formData.append("email", email);
+          formData.append("phone", phone);
           formData.append("subject", subject);
           formData.append("message", message);
           postContact(contact);
@@ -136,6 +139,18 @@ function CreateContact(){
                   />
                   {errors.email && (
                     <p className="text-danger">{errors.email}</p>
+                  )}
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Teléfono</Form.Label>
+                  <Form.Control
+                    onChange={(e) => onInputChange(e)}
+                    value={phone}
+                    name="phone"
+                    placeholder="Tu número de teléfono"
+                  />
+                  {errors.phone && (
+                    <p className="text-danger">{errors.phone}</p>
                   )}
                 </Form.Group>
       
