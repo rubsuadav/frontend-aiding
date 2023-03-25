@@ -96,7 +96,11 @@ function UpdateVolunteer() {
   }
 
   const onInputChange = (e) => {
-    setVolunteer({ ...volunteer, [e.target.name]: e.target.value });
+    if(e.target.name === "truckKnowledge" || e.target.name === "computerKnowledge" ||e.target.name === "warehouseKnowledge"){
+      setVolunteer({ ...volunteer, [e.target.name]: e.target.checked });
+    }else{
+      setVolunteer({ ...volunteer, [e.target.name]: e.target.value });
+    }
   };
   
   const onSubmit = async (e) => {
@@ -325,30 +329,30 @@ function UpdateVolunteer() {
               <Form.Group className="mb-3">
                 <Form.Label>Conocimiento Tecnologico</Form.Label>
                 <Form.Check
-                onChange={(e) => onInputChange(e)}
                 type='checkbox'
-                value={computerKnowledge}
+                checked = {computerKnowledge}
                 name="computerKnowledge"
+                onChange={(e) => onInputChange(e)}
               />
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Puede Manejar un Camión</Form.Label>
                 <Form.Check 
-                onChange={(e) => onInputChange(e)}
                 type='checkbox'
-                value={truckKnowledge}
+                checked = {truckKnowledge}
                 name="truckKnowledge"
+                onChange={(e) => onInputChange(e)}
               />
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Sabe gestionar almacenes</Form.Label>
                 <Form.Check 
-                onChange={(e) => onInputChange(e)}
                 type='checkbox'
-                value={warehouseKnowledge}
+                checked = {warehouseKnowledge}
                 name="warehouseKnowledge"
+                onChange={(e) => onInputChange(e)}
               />
               </Form.Group>
 
