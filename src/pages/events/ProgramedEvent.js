@@ -30,7 +30,7 @@ function ProgramedEvent() {
     console.log(event_data);
   /*FORMATEO DE FECHAS*/
   function formatDate(date) {
-    return moment(date).format('DD/MM/YYYY');
+    return moment(date).format('DD/MM/YYYY hh:mm');
   }
 
   return (

@@ -4,6 +4,7 @@ import { events } from "./services/backend";
 import Button from "react-bootstrap/Button";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const errorMsg = {
   title: "Mensaje de error",
@@ -23,41 +24,73 @@ const successMsg = {
 
 export default function AdminCreateEvent() {
     let navigate = useNavigate();
-
-    const [event, setEventData] = React.useState([
-        {
-        title: '...',
-        description: '...',
-        start_date: '...',
-        end_date: '...',
-        places: '...',
-        street: '...',
-        number: '...',
-        city: '...',
-        }
-      ]);
-
-      const onInputChange = (e) => {
-        setEventData({...event,[e.target.data]:e.target.value});
+    const [event, setEventData] = React.useState(
+      {
+      title: '',
+      description: '',
+      start_date: '',
+      end_date: '',
+      places: '',
+      street: '',
+      number: '',
+      city: '',
       }
+    );
 
-      const onSubmit = async (e) => {
-        e.preventDefault();
-        postEvent(event);
-      };
+    const onTitleChange = (e) => {
+      setEventData({ ...event, title: e.target.value });
+    }
 
-      function postEvent(event){
-        const aux = events.post('',event).then((response) => {
-            console.log(response);
-            swal(successMsg);
-            navigate("/events");
-        }).catch((error) => {
-            console.log(error);
-            swal(errorMsg);
-          });
+    const onDescriptionChange = (e) => {
+      setEventData({ ...event, description: e.target.value });
+    }
+
+    const onStreetChange = (e) => {
+      setEventData({ ...event, street: e.target.value });
+    }
+  
+    const onNumberChange = (e) => {
+      setEventData({ ...event, number: e.target.value });
+    }
+  
+    const onCityChange = (e) => {
+      setEventData({ ...event, city: e.target.value });
+    }
+
+    const onPlacesChange = (e) => {
+      setEventData({ ...event, places: e.target.value });
+    }
+  
+    const onStartDateChange = (e) => {
+      setEventData({ ...event, start_date: moment(e.target.value).format('YYYY-MM-DD HH:mm:ss') });
+    }
+  
+    const onEndDateChange = (e) => {
+      setEventData({ ...event, end_date:  moment(e.target.value).format('YYYY-MM-DD HH:mm:ss')  });
+    }
+
+    const onSubmit = async (e) => {
+      e.preventDefault();
+      console.log(event)
+      postEvent(event);
+        
+    };
+
+    function postEvent(event){
+      const aux = events.post('',event).then((response) => {
+        console.log(response);
+        console.log(event);
+        swal(successMsg);
+        navigate("/events/admin");
+      }).catch((error) => {
+        console.log(error);
+        console.log(event);
+        swal(errorMsg);
+      });
     };
 
     const { title, description, start_date, end_date, places, street,number,city } = event;
+
 
     return (
         <div className="container my-5">
@@ -69,7 +102,7 @@ export default function AdminCreateEvent() {
                 <Form.Group className="mb-3">
                   <Form.Label>Título</Form.Label>
                   <Form.Control
-                    onChange={(e) => onInputChange(e)}
+                    onChange={(e) => onTitleChange(e)}
                     value={title}
                     name="title"
                     placeholder="Título del evento"
@@ -79,7 +112,7 @@ export default function AdminCreateEvent() {
                 <Form.Group className="mb-3">
                   <Form.Label>Descripción</Form.Label>
                   <Form.Control
-                    onChange={(e) => onInputChange(e)}
+                    onChange={(e) => onDescriptionChange(e)}
                     value={description}
                     name="description"
                     placeholder="Descripción del evento"
@@ -89,7 +122,7 @@ export default function AdminCreateEvent() {
                 <Form.Group className="mb-3">
                   <Form.Label>Plazas</Form.Label>
                   <Form.Control
-                    onChange={(e) => onInputChange(e)}
+                    onChange={(e) => onPlacesChange(e)}
                     value={places}
                     name="places"
                     placeholder="Plazas en el evento"
@@ -100,7 +133,7 @@ export default function AdminCreateEvent() {
                 <Form.Group className="mb-3">
                   <Form.Label>Calle</Form.Label>
                   <Form.Control
-                    onChange={(e) => onInputChange(e)}
+                    onChange={(e) => onStreetChange(e)}
                     value={street}
                     name="street"
                     placeholder="Nombre de la calle"
@@ -110,7 +143,7 @@ export default function AdminCreateEvent() {
                 <Form.Group className="mb-3">
                   <Form.Label>Número</Form.Label>
                   <Form.Control
-                    onChange={(e) => onInputChange(e)}
+                    onChange={(e) => onNumberChange(e)}
                     value={number}
                     name="number"
                     placeholder="Número de la calle"
@@ -120,7 +153,7 @@ export default function AdminCreateEvent() {
                 <Form.Group className="mb-3">
                   <Form.Label>Ciudad</Form.Label>
                   <Form.Control
-                    onChange={(e) => onInputChange(e)}
+                    onChange={(e) => onCityChange(e)}
                     value={city}
                     name="city"
                     placeholder="Ciudad donde se encuentra el evento"
@@ -130,9 +163,9 @@ export default function AdminCreateEvent() {
                 <Form.Group className="mb-3">
                 <Form.Label>Fecha de inicio</Form.Label>
                 <Form.Control
-                  onChange={(e) => onInputChange(e)}
+                  onChange={(e) => onStartDateChange(e)}
                   value={start_date}
-                  type="date"
+                  type="datetime-local"
                   name="start_date"
                 />
               </Form.Group>
@@ -140,9 +173,9 @@ export default function AdminCreateEvent() {
               <Form.Group className="mb-3">
                 <Form.Label>Fecha de finalizado</Form.Label>
                 <Form.Control
-                  onChange={(e) => onInputChange(e)}
+                  onChange={(e) => onEndDateChange(e)}
                   value={end_date}
-                  type="date"
+                  type="datetime-local"
                   name="end_date"
                 />
               </Form.Group>

@@ -12,12 +12,30 @@ import {
 } from "mdb-react-ui-kit";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import swal from "sweetalert";
+
+const successMsg = {
+  title: "Mensaje de confirmación",
+  text: "El evento se ha borrado correctamente",
+  icon: "success",
+  button: "Aceptar",
+  timer: "5000",
+};
+
+const errorMsg = {
+  title: "Mensaje de error",
+  text: "Se ha producido un error al borrar el evento",
+  icon: "error",
+  button: "Aceptar",
+  timer: "5000",
+};
 
 function ShowEvent() {
 
     /*DATOS*/
-  const [event_data, setEventData] = React.useState([
+  const [event_data, setEventData] = React.useState(
     {
     title: '...',
     description: '...',
@@ -30,9 +48,13 @@ function ShowEvent() {
     latitude: '...',
     longitude: '...',
     }
-  ]);
+  );
+
+  const [map_loaded,setMapLoaded] = React.useState (false);
 
   const { id } = useParams();
+
+  let navigate=useNavigate();
 
 
   /*CARGA DE DATOS*/
@@ -43,11 +65,37 @@ function ShowEvent() {
   const loadData = async () => {
     const result = await events.get(`/${id}`);
     setEventData(result.data);
+    setMapLoaded(true);
   };
 
   /*FORMATEO DE FECHAS*/
   function formatDate(date) {
     return moment(date).format('DD/MM/YYYY HH:mm');
+  };
+
+  const deleteConfirmationAlert = async () => {
+    swal({
+      title: "Eliminar evento",
+      text: "¿Estás seguro que desea eliminar el evento?",
+      icon: "warning",
+      buttons: ["No", "Sí"],
+    }).then((res) => {
+      if (res) {
+        deleteEvent();
+      }
+    });
+  };
+
+  const deleteEvent = async () => {
+    const result = await events
+      .delete(`/${id}`)
+      .then((res) => {
+        swal(successMsg);
+        navigate("/events/admin");
+      })
+      .catch((err) => {
+        swal(errorMsg);
+      });
   };
 
   
@@ -71,7 +119,7 @@ function ShowEvent() {
                 <MDBRow>
                   <MDBCol sm="12">
                     <MDBRow>
-                    <MapContainer
+                    {map_loaded && <MapContainer
                         center={[event_data.latitude, event_data.longitude]}
                         zoom={13}
                         id="map"
@@ -91,7 +139,37 @@ function ShowEvent() {
                         >
                           <Popup>{event_data.title}</Popup>
                         </Marker>
-                      </MapContainer>
+                      </MapContainer>}
+                    </MDBRow>
+
+                    <MDBRow>
+                      <MDBCol>
+                        <MDBCardText className="text-muted w-auto">
+                          <Button
+                            onClick={() => {
+                              navigate(`/events/${id}/update`);
+                            }}
+                            type="button"
+                            className="btn btn-light w-100"
+                          >
+                            Editar evento
+                          </Button>
+                        </MDBCardText>
+                      </MDBCol>
+
+                      <MDBCol>
+                        <MDBCardText className="text-muted w-auto">
+                          <Button
+                            onClick={() => {
+                              deleteConfirmationAlert();
+                            }}
+                            type="button"
+                            className="btn btn-danger w-100"
+                          >
+                            Borrar
+                          </Button>
+                        </MDBCardText>
+                      </MDBCol>
                     </MDBRow>
                   </MDBCol>
                 </MDBRow>
