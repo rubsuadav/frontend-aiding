@@ -2,7 +2,6 @@ import axios from "axios";
 import { backendUrl } from "../../../config";
 import { configureAxios } from "../../../components/routes/axiosConfig";
 
-
 export const base = axios.create({
   baseURL: String(backendUrl + "base/"),
 });

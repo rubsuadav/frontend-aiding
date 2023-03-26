@@ -14,10 +14,10 @@ export function configureAxios(AxiosInstance) {
       const token = localStorage.getItem("access_token");
       if (token) {
         // eslint-disable-next-line no-param-reassign
-        config.headers.Authorization = `Bearer ${token}`; 
+        config.headers.Authorization = `Bearer ${token}`;
         config.withCredentials = true;
       }
-      
+
       config.timeout = 10000;
       return config;
     },
@@ -30,7 +30,7 @@ export function configureAxios(AxiosInstance) {
     (resp) => resp,
     async (error) => {
       const refresh_token = localStorage.getItem("refresh_token");
-      
+
       if (error.response.status === 401 && !refresh && refresh_token) {
         refresh = true;
         console.log(localStorage.getItem("refresh_token"));
@@ -54,6 +54,4 @@ export function configureAxios(AxiosInstance) {
       return Promise.reject(error);
     }
   );
-
 }
-
