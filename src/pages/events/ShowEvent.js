@@ -37,12 +37,20 @@ function ShowEvent() {
 
   /*CARGA DE DATOS*/
   useEffect(() => {
-    events.get(`${id}`).then((response) => {setEventData(response.data);});}, []);
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    const result = await events.get(`/${id}`);
+    setEventData(result.data);
+  };
 
   /*FORMATEO DE FECHAS*/
   function formatDate(date) {
     return moment(date).format('DD/MM/YYYY HH:mm');
-  }
+  };
+
+  
 
   const customIcon = new L.Icon({
     iconUrl: require("../../images/marker.png"),
@@ -50,6 +58,7 @@ function ShowEvent() {
     shadowAnchor: null,
     iconSize: new L.Point(20, 30),
   });
+  
 
   return (
 
@@ -62,8 +71,8 @@ function ShowEvent() {
                 <MDBRow>
                   <MDBCol sm="12">
                     <MDBRow>
-                      <MapContainer
-                        center={[37.358342303352885, -5.986570537333228]}
+                    <MapContainer
+                        center={[event_data.latitude, event_data.longitude]}
                         zoom={13}
                         id="map"
                         style={{
@@ -73,7 +82,7 @@ function ShowEvent() {
                       >
                         <TileLayer
                           url={
-                            "https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=4Qg1CBLvuefoRWUOrqlJ"
+                            "https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?callback=initialize&key=4Qg1CBLvuefoRWUOrqlJ"
                           }
                         />
                         <Marker

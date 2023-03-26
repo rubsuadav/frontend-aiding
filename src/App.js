@@ -38,6 +38,9 @@ import CreateContact from './pages/base/CreateContact';
 import ProgramedEvent from './pages/events/ProgramedEvent';
 import StartedEvent from './pages/events/StartedEvent';
 import ShowEvent from './pages/events/ShowEvent';
+import AdminListEvent from './pages/events/AdminListEvents';
+import AdminCreateEvent from './pages/events/AdminCreateEvents';
+import AdminUpdateEvent from './pages/events/AdminUpdateEvents';
 
 var navLinks= [
     {
@@ -67,6 +70,10 @@ var navLinks= [
     {
       title: "Atención al cliente",
       path: "/base/contacts"
+    },
+    {
+      title: "Admin Eventos",
+      path: "/events/admin"
     }
   ];
 
@@ -109,6 +116,10 @@ export default function App() {
         <Route path="/events/programed" element={ <ProgramedEvent/>} />
         <Route path="/events/started" element={ <StartedEvent/>} />
         <Route path="/events/:id" element={ <ShowEvent/>} />
+        <Route path="/events/admin" element={ <AdminListEvent/>} />
+        <Route path="/events/create" element={ <AdminCreateEvent/>} />
+        <Route path="/events/:id/update" element={ <AdminUpdateEvent/>} />
+
 
       </Routes>
     </Router>

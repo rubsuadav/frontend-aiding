@@ -3,8 +3,10 @@ import { started } from "./services/backend";
 import { useEffect } from 'react';
 import { Row, Col, Card } from 'antd';
 import moment from 'moment';
+import { useNavigate } from "react-router-dom";
 
 function StartedEvent() {
+  let navigate = useNavigate();
 
     /*DATOS*/
   const [event_data, setEventData] = React.useState([
@@ -16,6 +18,7 @@ function StartedEvent() {
     places: '...',
     }
   ]);
+  
 
   /*CARGA DE DATOS*/
   useEffect(() => {
@@ -33,7 +36,7 @@ function StartedEvent() {
       <Row gutter={[24, 24]} justify="center" >
         {event_data.map((data, index) => (
           <Col span={8} key={index}>
-            <Card className="shadow" title={data.title} bordered={false}>
+            <Card className="shadow" title={data.title} bordered={false} onClick={() => navigate(`/events/${data.id}`)}>
               {data.description}
               <br/>
               {formatDate(data.start_date)} - {formatDate(data.end_date)}
