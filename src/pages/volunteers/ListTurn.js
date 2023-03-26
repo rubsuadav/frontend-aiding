@@ -125,20 +125,14 @@ const Turns = () => {
     {
       title: 'Fecha',
       dataIndex: 'date',
-      sorter: {
-        compare: (a, b) => a.id - b.id,
-        multiple: 1,
-      },
     },
     {
       title: 'Hora de Comienzo',
-      dataIndex: 'start',
-      ...getColumnSearchProps('dni'),
+      dataIndex: 'startTime',
     },
     {
       title: 'Hora de Finalización',
-      dataIndex: 'end',
-      ...getColumnSearchProps('name'),
+      dataIndex: 'endTime',
     },
   ];
 
@@ -152,7 +146,7 @@ const Turns = () => {
   ]);
 
   useEffect(() => {
-    turns.get().then((response) => {setTurnsData(response.data);});
+    turns.get("turns/").then((response) => {setTurnsData(response.data);});
   }, []);
 
   function createTurnRedirect(){

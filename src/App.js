@@ -36,6 +36,8 @@ import CreateContact from './pages/base/CreateContact';
 
 import ListTurn from "./pages/volunteers/ListTurn";
 import CreateTurn from "./pages/volunteers/CreateTurn";
+import ShowTurn from "./pages/volunteers/ShowTurn";
+import UpdateTurn from "./pages/volunteers/UpdateTurn";
 
 var navLinks= [
     {
@@ -118,6 +120,8 @@ export default function App() {
 
         <Route path="/turns" element={ <ListTurn/>} />
         <Route path="/turns/create" element={ <CreateTurn/>} />
+        <Route path="/turns/:id" element={ <ShowTurn/>} />
+        <Route path="/turns/update/:id" element={ <UpdateTurn/>} />
       </Routes>
     </Router>
     <Footer/>
