@@ -13,6 +13,9 @@ import {turns, fileUrl} from "./services/backend.js";
 import { PDFViewer} from "@react-pdf/renderer";
 import { Button, Dropdown} from "react-bootstrap";
 import { Badge, Tag } from 'antd';
+import Modal from 'react-bootstrap/Modal';
+import Form from "react-bootstrap/Form";
+import ButtonR from "react-bootstrap/Button";
 
 export default function Details() {
   let navigate = useNavigate();
