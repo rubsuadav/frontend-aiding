@@ -11,5 +11,5 @@
 module.exports = global.config = {
   // Backend url
   backendUrl: process.env.REACT_APP_BACKEND_URL,
-  userTimeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  userTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 };

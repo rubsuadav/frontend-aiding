@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import moment from "moment";
-import { userTimeZone  } from "../../config";
+import { userTimezone  } from "../../config";
 
 const errorMsg = {
   title: "Mensaje de error",
@@ -73,8 +73,10 @@ function AdminCreateEvent() {
     const onSubmit = async (e) => {
       e.preventDefault();
       console.log(event)
-      const eventWithTimeZone = { ...event,userTimeZone}
+      const eventWithTimeZone = { ...event,userTimezone}
+      console.log(eventWithTimeZone)
       postEvent(eventWithTimeZone);
+      console.log(eventWithTimeZone)
         
     };
 

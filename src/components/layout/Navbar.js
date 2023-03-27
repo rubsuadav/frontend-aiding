@@ -64,10 +64,10 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, logo }) => {
               </Nav.Link>
             ))}
 
-              {isAuthenticated && <NavDropdown title="Eventos" id="nav-dropdown">
+              <NavDropdown title="Eventos" id="nav-dropdown">
                 <NavDropdown.Item>{<Nav.Link as={Link} to="/events/programed">Programados</Nav.Link>}</NavDropdown.Item>
                 <NavDropdown.Item>{<Nav.Link as={Link} to="/events/started">Empezados</Nav.Link>}</NavDropdown.Item>
-              </NavDropdown> }
+              </NavDropdown> 
             {/** Dropdown menu for admin */}
             {isAuthenticated && (
               <NavDropdown title="Administración" id="basic-nav-dropdown">

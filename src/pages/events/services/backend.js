@@ -1,17 +1,19 @@
 import axios from "axios";
+import { configureAxios } from "../../../components/routes/axiosConfig";
 import { backendUrl } from "../../../config";
 
 export const events = axios.create({
   baseURL: String(backendUrl + "events/"),
-  timeout: 1000,
 });
 
 export const programed = axios.create({
   baseURL: String(backendUrl + "events/programed/"),
-  timeout: 1000,
 });
 
 export const started = axios.create({
   baseURL: String(backendUrl + "events/started/"),
-  timeout: 1000,
 });
+
+configureAxios(events);
+configureAxios(programed);
+configureAxios(started);

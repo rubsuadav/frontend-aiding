@@ -91,7 +91,7 @@ function ShowEvent() {
       .delete(`/${id}`)
       .then((res) => {
         swal(successMsg);
-        navigate("/events/admin");
+        navigate("/admin/events");
       })
       .catch((err) => {
         swal(errorMsg);
@@ -147,7 +147,7 @@ function ShowEvent() {
                         <MDBCardText className="text-muted w-auto">
                           <Button
                             onClick={() => {
-                              navigate(`/events/${id}/update`);
+                              navigate(`/admin/events/${id}/update`);
                             }}
                             type="button"
                             className="btn btn-light w-100"

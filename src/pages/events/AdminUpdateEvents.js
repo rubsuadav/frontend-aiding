@@ -6,7 +6,7 @@ import React from "react";
 import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
-import { userTimeZone } from "../../config";
+import { userTimezone } from "../../config";
 
 const errorMsg = {
   title: "Mensaje de error",
@@ -37,7 +37,7 @@ function AdminUpdateEvent() {
         end_date: '...',
         places: '...',
         street: '...',
-        number: '...',
+        number: '',
         city: '...',
         }
       );
@@ -88,7 +88,7 @@ function AdminUpdateEvent() {
       }
       const onSubmit = async (e) => {
         e.preventDefault();
-        const eventWithTimeZone = { ...event,userTimeZone}
+        const eventWithTimeZone = { ...event,userTimezone}
         putEvent(eventWithTimeZone);
       };
 
