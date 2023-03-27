@@ -70,7 +70,7 @@ var navLinksAdmin = [
   },
   {
     title: "Voluntarios",
-    path: "volunteers",
+    path: "admin/volunteers",
   },
   {
     title: "Noticias",
@@ -190,11 +190,11 @@ export default function App() {
                 element={<CreateDonation />}
               />
               {/* Volunteers */}
-              <Route path="/volunteers" element={<ListVolunteers />} />
-              <Route path="/volunteers/create" element={<CreateVolunteer />} />
-              <Route path="/volunteers/:id" element={<ShowVolunteer />} />
+              <Route path="volunteers" element={<ListVolunteers />} />
+              <Route path="volunteers/create" element={<CreateVolunteer />} />
+              <Route path="volunteers/:id" element={<ShowVolunteer />} />
               <Route
-                path="/volunteers/update/:id"
+                path="volunteers/update/:id"
                 element={<UpdateVolunteer />}
               />
             </Route>

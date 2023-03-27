@@ -83,7 +83,7 @@ function UpdateVolunteer() {
       .put(`/${id}`, volunteer)
       .then((response) => {
         swal(successMsg);
-        navigate(`/volunteers/${id}`);
+        navigate(`/admin/volunteers/${id}`);
       })
       .catch((error) => {
         if (error.response && error.response.status === 409) {
