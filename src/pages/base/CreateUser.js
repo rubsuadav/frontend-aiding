@@ -42,7 +42,7 @@ export default function CreateUser() {
   const [user, setUser] = useState({
     username: "",
     password: "",
-    is_admin: "",
+    is_admin: false,
   });
 
   const { username, password, is_admin } = user;
@@ -94,6 +94,7 @@ export default function CreateUser() {
                   type="switch"
                   id="custom-switch"
                   name="is_admin"
+                  defaultChecked={false}
                   checked={is_admin}
                   onChange={(e) => onInputChange(e)}
                 />
