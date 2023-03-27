@@ -207,7 +207,7 @@ const Partners = () => {
   }, []);
 
   function createPartnerRedirect(){
-    navigate("/partners/create");
+    navigate("/admin/partners/create");
   }
 
   /*EXPORTACIÓN DE SOCIOS */
@@ -301,7 +301,7 @@ const Partners = () => {
         onRow={(record, rowIndex) => {
           return {
             onClick: event => {
-              navigate("/partners/" + record.id);
+              navigate("/admin/partners/" + record.id);
             },
           };
         }}

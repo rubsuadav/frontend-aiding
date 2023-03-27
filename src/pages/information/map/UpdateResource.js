@@ -66,7 +66,7 @@ export default function UpdateResource() {
       .then((response) => {
         console.log(response);
         swal(successMsg);
-        navigate(`/information/resources/${id}`);
+        navigate(`/admin/information/resources/${id}`);
       })
       .catch((error) => {
         if (error.response) {
@@ -226,7 +226,7 @@ export default function UpdateResource() {
               </Button>
               <Link
                 className="btn btn-outline-danger col mb-4 mx-2"
-                to={`/information/resources/${id}`}
+                to={`/admin/information/resources/${id}`}
               >
                 Cancelar
               </Link>

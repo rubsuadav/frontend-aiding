@@ -22,7 +22,7 @@ const successMsg = {
   timer: "5000",
 };
 
-export default function AdminCreateEvent() {
+function AdminCreateEvent() {
     let navigate = useNavigate();
     const [event, setEventData] = React.useState(
       {
@@ -81,7 +81,7 @@ export default function AdminCreateEvent() {
         console.log(response);
         console.log(event);
         swal(successMsg);
-        navigate("/events/admin");
+        navigate("/admin/events");
       }).catch((error) => {
         console.log(error);
         console.log(event);
@@ -188,7 +188,7 @@ export default function AdminCreateEvent() {
                 </Button>
                 <Link
                   className="btn btn-outline-danger col mb-4 mx-2"
-                  to="/events/admin"
+                  to="/admin/events"
                 >
                   Cancelar
                 </Link>
@@ -197,5 +197,6 @@ export default function AdminCreateEvent() {
           </div>
         </div>
       </div>
-    )
-}
+    );
+};
+export default AdminCreateEvent;

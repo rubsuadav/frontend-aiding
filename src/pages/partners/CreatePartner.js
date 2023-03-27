@@ -35,7 +35,7 @@ function CreatePartner() {
             console.log(response);
             console.log(partner);
             swal(successMsg);
-            navigate("/partners");
+            navigate("/admin/partners");
         }).catch((error) => {
             if (error.response && error.response.status === 409) {
               let error_msgs = {general: "Ya existe un socio con ese DNI, teléfono, email o IBAN"};

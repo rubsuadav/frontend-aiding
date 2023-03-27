@@ -81,7 +81,7 @@ function UpdatePartner() {
       .put(`/${id}`, partner)
       .then((response) => {
         swal(successMsg);
-        navigate(`/partners/${id}`);
+        navigate(`/admin/partners/${id}`);
       })
       .catch((error) => {
         if (error.response && error.response.status === 409) {

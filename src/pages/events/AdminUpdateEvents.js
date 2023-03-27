@@ -23,7 +23,7 @@ const successMsg = {
   timer: "5000",
 };
 
-export default function AdminUpdateEvent() {
+function AdminUpdateEvent() {
     let navigate = useNavigate();
 
     const { id } = useParams();
@@ -211,5 +211,6 @@ export default function AdminUpdateEvent() {
           </div>
         </div>
       </div>
-    )
-}
+    );
+};
+export default AdminUpdateEvent;

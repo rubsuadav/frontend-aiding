@@ -197,7 +197,7 @@ const AdminListEvent = () => {
         <h1>Eventos</h1>
         <Button
           onClick={() => {
-            navigate("/events/create");
+            navigate("/admin/events/create");
           }}
           id="boton-socio"
         >

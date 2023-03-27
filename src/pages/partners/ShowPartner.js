@@ -58,11 +58,11 @@ export default function Details() {
   };
 
   function createCommunicationRedirect(){
-    navigate(`/partners/${id}/communication/create`);
+    navigate(`/admin/partners/${id}/communication/create`);
   }
 
   function createDonationRedirect(){
-    navigate(`/partners/${id}/donation/create`);
+    navigate(`/admin/partners/${id}/donation/create`);
   }
   
   const loadDonation = async () => {
@@ -415,7 +415,7 @@ export default function Details() {
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
                       <Button
-                        onClick={() => {navigate(`/partners/update/${id}`)}}
+                        onClick={() => {navigate(`/admin/partners/update/${id}`)}}
                         type="button" id="button" 
                         className="btn btn-light w-100"
                       >

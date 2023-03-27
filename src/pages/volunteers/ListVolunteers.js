@@ -181,7 +181,7 @@ const Volunteers = () => {
   }, []);
 
   function createVolunteerRedirect(){
-    navigate("/volunteers/create");
+    navigate("/admin/volunteers/create");
   }
   
   return (
@@ -197,7 +197,7 @@ const Volunteers = () => {
         onRow={(record, rowIndex) => {
           return {
             onClick: event => {
-              navigate("/volunteers/" + record.id);
+              navigate("/admin/volunteers/" + record.id);
             },
           };
         }}
