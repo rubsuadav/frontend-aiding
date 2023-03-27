@@ -58,7 +58,7 @@ function CreateVolunteer() {
     if(!dniRegex.test(nif)){ //Check NIF and DNI
       if(!strRegex.test(first_caracter)){//if DNI
         const letters = "TRWAGMYFPDXBNJZSQVHLCKE";
-        const letterIndex = parseInt(nif.substring(0, 8)) % 23;
+        const letterIndex = parseInt(nif.substring(0, 8),10) % 23;
         const expectedLetter = letters.charAt(letterIndex);
         const actualLetter = nif.charAt(8).toUpperCase();
         return expectedLetter === actualLetter;

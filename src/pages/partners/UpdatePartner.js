@@ -118,7 +118,7 @@ function UpdatePartner() {
       return false;
     }
     const letters = "TRWAGMYFPDXBNJZSQVHLCKE";
-    const letterIndex = parseInt(dni.substring(0, 8)) % 23;
+    const letterIndex = parseInt(dni.substring(0, 8),10) % 23;
     const expectedLetter = letters.charAt(letterIndex);
     const actualLetter = dni.charAt(8).toUpperCase();
     return expectedLetter === actualLetter;

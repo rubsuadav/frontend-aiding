@@ -7,11 +7,11 @@ export const events = axios.create({
 });
 
 export const programed = axios.create({
-    baseURL: String(backendUrl + "events/programed/"),
-    timeout: 1000,
-  });
+  baseURL: String(backendUrl + "events/programed/"),
+  timeout: 1000,
+});
 
 export const started = axios.create({
-baseURL: String(backendUrl + "events/started/"),
-timeout: 1000,
+  baseURL: String(backendUrl + "events/started/"),
+  timeout: 1000,
 });
