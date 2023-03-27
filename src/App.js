@@ -49,6 +49,13 @@ import CreateTurn from "./pages/volunteers/CreateTurn";
 import ShowTurn from "./pages/volunteers/ShowTurn";
 import UpdateTurn from "./pages/volunteers/UpdateTurn";
 
+import AdminCreateEvent from './pages/events/AdminCreateEvents';
+import ProgramedEvent from './pages/events/ProgramedEvent';
+import StartedEvent from './pages/events/StartedEvent';
+import ShowEvent from './pages/events/ShowEvent';
+import AdminListEvent from './pages/events/AdminListEvents';
+import AdminUpdateEvent from './pages/events/AdminUpdateEvents';
+
 var navLinksPublic = [
   {
     title: "Inicio",
@@ -84,6 +91,10 @@ var navLinksAdmin = [
   {
     title: "Atención al cliente",
     path: "admin/base/contacts",
+  },
+  {
+    title: "Eventos",
+    path: "admin/events"
   },
   {
     title: "Turnos",
@@ -135,6 +146,22 @@ export default function App() {
               <Route
                 path="information/map-resources/:id"
                 element={<ShowResourceUser />}
+              />
+              
+              {/* Events */}
+              <Route 
+                path="/events/programed" 
+                element={ <ProgramedEvent/>} 
+              />
+
+              <Route 
+                path="/events/started" 
+                  element={ <StartedEvent/>} 
+              />
+
+              <Route 
+                path="/events/:id" 
+                element={ <ShowEvent/>} 
               />
 
               {/* Login */}
@@ -206,11 +233,29 @@ export default function App() {
                 path="volunteers/update/:id"
                 element={<UpdateVolunteer />}
               />
+            
+
+              <Route 
+                path="/admin/events/" 
+                element={ <AdminListEvent/>} 
+              />
+
+              
+              <Route 
+                path="/admin/events/create" 
+                  element={ <AdminCreateEvent/>} 
+              />
+
+              <Route 
+                path="/admin/events/:id/update" 
+                element={ <AdminUpdateEvent/>} 
+              />
               <Route path="volunteers/turns" element={ <ListTurn/>} />
               <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
               <Route path="volunteers/turns/:id" element={ <ShowTurn/>} />
               <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
             </Route>
+              
           </Routes>
         </Router>
       </AuthContextProvider>
