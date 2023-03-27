@@ -1,14 +1,16 @@
 import axios from "axios";
 import { backendUrl } from "../../../config";
+import { configureAxios } from "../../../components/routes/axiosConfig";
 
 export const partners = axios.create({
   baseURL: String(backendUrl + "partners/"),
-  timeout: 1000,
 });
 
 export const donations = axios.create({
   baseURL: String(backendUrl + "partners/donation/"),
-  timeout: 1000,
 });
+
+configureAxios(partners);
+configureAxios(donations);
 
 export const fileUrl = backendUrl;

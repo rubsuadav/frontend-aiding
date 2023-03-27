@@ -7,9 +7,11 @@ import Col from "react-bootstrap/Col";
 import { advertisementBE, sectionBE, mediaUrl } from "./services/backend.js";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import SafeHTML from "../../../components/SanitizeHTML";
+import { useAuthContext } from "../../../components/routes/authContext";
 
 export default function ShowAdvertisement() {
   let navigate = useNavigate();
+  const { isAuthenticated } = useAuthContext();
   /* Data */
   const { id } = useParams();
   const [advertisement, setAdvertisement] = useState({
@@ -108,7 +110,8 @@ export default function ShowAdvertisement() {
           <Row>
             <SafeHTML html={body} />
           </Row>
-          <Row className="justify-content-center">
+          {isAuthenticated && (
+            <Row className="justify-content-center">
             <Link
               className="btn btn-outline-primary col-4 mb-4 mx-2"
               to={`/admin/information/advertisements/${id}/update`}
@@ -116,6 +119,7 @@ export default function ShowAdvertisement() {
               Modificar artículo
             </Link>
           </Row>
+          )}
         </Col>
         <Col className="mb-5 mx-3">
           <Row className="">

@@ -1,5 +1,5 @@
 import React from "react";
-import {turns} from "./services/backend.js";
+import {volunteers} from "./services/backend.js";
 import swal from 'sweetalert';
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
@@ -28,10 +28,10 @@ function CreateTurn() {
     let navigate = useNavigate();
 
     function postTurn(turn){
-        const aux = turns.post('turns/',turn).then((response) => {
+        const aux = volunteers.post('turns/',turn).then((response) => {
             console.log(response);
             swal(successMsg);
-            navigate("/turns");
+            navigate("/admin/volunteers/turns");
         }).catch((error) => {
             if (error.response && error.response.status === 409) {
               let error_msgs = {general: "La fecha de inicio debe ser anterior a la de finalización, y la fecha no debe haber pasado."};

@@ -4,7 +4,7 @@ import ButtonR from "react-bootstrap/Button";
 import { Table, Button, Input, Space, Tag} from 'antd';
 import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
-import {fileUrl, turns} from "./services/backend.js";
+import {volunteers} from "./services/backend.js";
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import Modal from 'react-bootstrap/Modal';
@@ -146,11 +146,11 @@ const Turns = () => {
   ]);
 
   useEffect(() => {
-    turns.get("turns/").then((response) => {setTurnsData(response.data);});
+    volunteers.get("turns/").then((response) => {setTurnsData(response.data);});
   }, []);
 
   function createTurnRedirect(){
-    navigate("/turns/create");
+    navigate("/admin/volunteers/turns/create");
   }
 
   return (
@@ -166,7 +166,7 @@ const Turns = () => {
         onRow={(record, rowIndex) => {
           return {
             onClick: event => {
-              navigate("/turns/" + record.id);
+              navigate("/admin/volunteers/turns/" + record.id);
             },
           };
         }}

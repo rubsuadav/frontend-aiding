@@ -1,5 +1,5 @@
 import React from "react";
-import {turns} from "./services/backend.js";
+import {volunteers} from "./services/backend.js";
 import swal from "sweetalert";
 import { useNavigate, useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
@@ -46,16 +46,16 @@ function UpdateTurn() {
   }, []);
 
   const loadTurn = async () => {
-    const result = await turns.get(`/turns/${id}/`);
+    const result = await volunteers.get(`/turns/${id}/`);
     setTurn(result.data);
   };
 
   function putTurn(turn) {
-    const aux = turns
+    const aux = volunteers
       .put(`/turns/${id}/`, turn)
       .then((response) => {
         swal(successMsg);
-        navigate(`/turns/${id}`);
+        navigate(`/admin/volunteers/turns/${id}`);
       })
       .catch((error) => {
         if (error.response && error.response.status === 409) {

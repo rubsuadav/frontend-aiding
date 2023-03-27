@@ -32,7 +32,7 @@ function CreateContact(){
           .then((response) => {
             console.log(response);
             swal(successMsg);
-            navigate("/home");
+            navigate("/");
           })
           .catch((error) => {
             if (error.response) {
@@ -106,7 +106,7 @@ function CreateContact(){
           formData.append("message", message);
           postContact(contact);
           swal(successMsg);
-          navigate("/home");
+          navigate("/");
           
         }
       };

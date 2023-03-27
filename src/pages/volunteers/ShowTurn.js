@@ -9,7 +9,7 @@ import {
   MDBCardText,
   MDBCardBody,
 } from "mdb-react-ui-kit";
-import {turns, fileUrl} from "./services/backend.js";
+import {volunteers} from "./services/backend.js";
 import { PDFViewer} from "@react-pdf/renderer";
 import { Button, Dropdown} from "react-bootstrap";
 import { Badge, Tag } from 'antd';
@@ -33,7 +33,7 @@ export default function Details() {
   }, []);
 
   const loadTurn = async () => {
-    const result = await turns.get(`turns/${id}/`);
+    const result = await volunteers.get(`turns/${id}/`);
     setTurn(result.data);
   };
 
@@ -120,7 +120,7 @@ export default function Details() {
             <MDBCol>
               <MDBCardText className="text-muted w-auto">
                 <Button
-                  onClick={() => {navigate(`/turns/update/${id}`)}}
+                  onClick={() => {navigate(`/admin/volunteers/turns/update/${id}`)}}
                   type="button" id="button" 
                   className="btn btn-light w-75"
                   >
