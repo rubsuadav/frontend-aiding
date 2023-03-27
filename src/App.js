@@ -23,8 +23,14 @@ import ShowPartner from "./pages/partners/ShowPartner";
 import CreatePartner from "./pages/partners/CreatePartner";
 import UpdatePartner from "./pages/partners/UpdatePartner";
 import CreateCommunication from "./pages/partners/CreateCommunication";
-import UpdateCommunication from "./pages/partners/UpdateCommunication";
-import CreateDonation from "./pages/partners/CreateDonation";
+import UpdateCommunication from './pages/partners/UpdateCommunication';
+import CreateDonation from './pages/partners/CreateDonation';
+
+import Users from "./pages/base/Users";
+import ViewUser from "./pages/base/ViewUser";
+import EditUser from "./pages/base/EditUser";
+import CreateUser from "./pages/base/CreateUser";
+import Login from "./pages/base/Login";
 
 import ListVolunteers from "./pages/volunteers/ListVolunteers";
 import CreateVolunteer from "./pages/volunteers/CreateVolunteer";
@@ -37,8 +43,6 @@ import ShowResource from "./pages/information/map/ShowResource.js";
 import ResourcesTable from "./pages/information/map/ResourcesTable.js";
 import ResourcesListEdit from "./components/ResourcesListEdit";
 import ShowResourceUser from "./pages/information/map/ShowResourceUser.js";
-
-import Login from "./pages/base/Login";
 
 import ListContact from "./pages/base/ListContact";
 import ContactDetail from './pages/base/ShowContact';
@@ -77,6 +81,10 @@ var navLinksAdmin = [
     path: "admin/partners",
   },
   {
+    title: "Usuario",
+    path: "admin/base/users",
+  },
+  {
     title: "Recursos",
     path: "admin/information/resources",
   },
@@ -107,6 +115,7 @@ var logo = ["./logo.png"];
 export default function App() {
   return (
     <div className="App">
+
       <AuthContextProvider>
         <Router>
           <Navbar
@@ -173,6 +182,10 @@ export default function App() {
               {/* Base */}
               <Route path="base/contacts" element={<ListContact />} />
               <Route path="base/contacts/:id" element={<ContactDetail />} />
+              <Route exact path="base/users" element={<Users />} />
+              <Route exact path="base/users/crearUsuario" element={<CreateUser />} />
+              <Route exact path="base/users/verUsuario/:id" element={<ViewUser />} />
+              <Route exact path="base/users/editarUsuario/:id" element={<EditUser />} />
 
               {/* Information */}
               <Route
