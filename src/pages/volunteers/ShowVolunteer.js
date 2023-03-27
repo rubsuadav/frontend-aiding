@@ -262,7 +262,7 @@ export default function Details() {
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
                       <Button
-                        onClick={() => {navigate(`/volunteers/update/${id}`)}}
+                        onClick={() => {navigate(`/admin/volunteers/update/${id}`)}}
                         type="button" id="button" 
                         className="btn btn-light w-100"
                       >

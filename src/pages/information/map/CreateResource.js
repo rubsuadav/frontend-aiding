@@ -56,7 +56,7 @@ export default function CreateResource() {
       .then((response) => {
         console.log(response);
         swal(successMsg);
-        navigate("/information/admin");
+        navigate("/admin/information/resources");
       })
       .catch((error) => {
          if (error.response) {
@@ -217,7 +217,7 @@ export default function CreateResource() {
               </Button>
               <Link
                 className="btn btn-outline-danger col mb-4 mx-2"
-                to="/information/admin"
+                to="/admin/information/resources"
               >
                 Cancelar
               </Link>

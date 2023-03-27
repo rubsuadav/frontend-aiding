@@ -82,7 +82,7 @@ export default function Details() {
       .delete(`/${id}`)
       .then((res) => {
         swal(successMsg);
-        navigate("/information/admin");
+        navigate("/admin/information/resources");
       })
       .catch((err) => {
         swal(errorMsg);
@@ -170,7 +170,7 @@ export default function Details() {
                         <MDBCardText className="text-muted w-auto">
                           <Button
                             onClick={() => {
-                              navigate(`/information/edit-resource/${id}`);
+                              navigate(`/admin/information/edit-resource/${id}`);
                             }}
                             type="button"
                             className="btn btn-light w-100"
@@ -306,7 +306,7 @@ export default function Details() {
         </MDBRow>
         <Button
           onClick={() => {
-            navigate(`/information/admin`);
+            navigate(`/admin/information/resources`);
           }}
           type="button"
           className="btn btn-light w-100"

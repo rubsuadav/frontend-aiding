@@ -32,7 +32,7 @@ function CreateVolunteer() {
         const aux = volunteers.post('',volunteer).then((response) => {
             console.log(response);
             swal(successMsg);
-            navigate("/volunteers");
+            navigate("/admin/volunteers");
         }).catch((error) => {
             if (error.response && error.response.status === 409) {
               let error_msgs = {general: "Ya existe un voluntario con ese numero de voluntario, NIF, teléfono o email"};
