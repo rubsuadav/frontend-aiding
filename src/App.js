@@ -26,13 +26,18 @@ import CreateCommunication from "./pages/partners/CreateCommunication";
 import UpdateCommunication from "./pages/partners/UpdateCommunication";
 import CreateDonation from "./pages/partners/CreateDonation";
 
+import ListVolunteers from "./pages/volunteers/ListVolunteers";
+import CreateVolunteer from "./pages/volunteers/CreateVolunteer";
+import ShowVolunteer from "./pages/volunteers/ShowVolunteer";
+import UpdateVolunteer from "./pages/volunteers/UpdateVolunteer";
+
 import UpdateResource from "./pages/information/map/UpdateResource.js";
 import CreateResource from "./pages/information/map/CreateResource.js";
 import ShowResource from "./pages/information/map/ShowResource.js";
 import ResourcesTable from "./pages/information/map/ResourcesTable.js";
-
 import ResourcesListEdit from "./components/ResourcesListEdit";
 import ShowResourceUser from "./pages/information/map/ShowResourceUser.js";
+
 import Login from "./pages/base/Login";
 
 import ListContact from "./pages/base/ListContact";
@@ -62,6 +67,10 @@ var navLinksAdmin = [
   {
     title: "Recursos",
     path: "admin/information/resources",
+  },
+  {
+    title: "Voluntarios",
+    path: "volunteers",
   },
   {
     title: "Noticias",
@@ -179,6 +188,14 @@ export default function App() {
               <Route
                 path="partners/:id/donation/create"
                 element={<CreateDonation />}
+              />
+              {/* Volunteers */}
+              <Route path="/volunteers" element={<ListVolunteers />} />
+              <Route path="/volunteers/create" element={<CreateVolunteer />} />
+              <Route path="/volunteers/:id" element={<ShowVolunteer />} />
+              <Route
+                path="/volunteers/update/:id"
+                element={<UpdateVolunteer />}
               />
             </Route>
           </Routes>
