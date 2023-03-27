@@ -35,7 +35,7 @@ export default function EditUser() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await base.get(`/${id}`);
+      const response = await base.get(`users/${id}`);
       setUser(response.data);
     };
     fetchUser();
@@ -54,7 +54,7 @@ export default function EditUser() {
     try {
       await base.put(`/users/${id}`, user);
       swal(successMsg);
-      navigate("/base/users");
+      navigate("/admin/base/users");
     } catch (error) {
       console.error(error);
       swal(errorMsg);

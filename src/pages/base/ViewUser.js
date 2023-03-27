@@ -24,47 +24,6 @@ export default function ViewUser() {
     }
   };
 
-  const successMsg = {
-    title: "Mensaje de confirmación",
-    text: "Te confirmamos que el recurso se ha borrado correctamente",
-    icon: "success",
-    button: "Aceptar",
-    timer: "5000",
-  };
-
-  const errorMsg = {
-    title: "Mensaje de error",
-    text: "Se ha producido un error al borrar el recurso",
-    icon: "error",
-    button: "Aceptar",
-    timer: "5000",
-  };
-
-  const deleteUser = async () => {
-    const result = await base
-      .delete(`/${id}`)
-      .then((res) => {
-        swal(successMsg);
-        navigate("/users");
-      })
-      .catch((err) => {
-        swal(errorMsg);
-      });
-  };
-
-  const deleteConfirmationAlert = async () => {
-    swal({
-      title: "Eliminar usuario",
-      text: "¿Estás seguro que desea eliminar el usuario?",
-      icon: "warning",
-      buttons: ["No", "Sí"],
-    }).then((res) => {
-      if (res) {
-        deleteUser();
-      }
-    });
-  };
-
   return (
     <div className="container my-5 shadow">
       <h1 className="pt-3">Ver usuario</h1>
@@ -99,27 +58,16 @@ export default function ViewUser() {
         <Button
           className="col mb-4 mx-5"
           variant="outline-primary"
-          onClick={() => navigate("/base/users")}
+          onClick={() => navigate("/admin/base/users")}
         >
           Volver a la lista de usuarios
         </Button>
         <Button
           className="col mb-4 mx-5"
           variant="outline-primary"
-          onClick={() => navigate("/base/users/editarUsuario/" + id)}
+          onClick={() => navigate("/admin/base/users/editarUsuario/" + id)}
         >
           Editar
-        </Button>
-        <Button
-          className="col mb-4 mx-5"
-          variant="outline-primary"
-          onClick={() => {
-            deleteConfirmationAlert();
-          }}
-          type="button"
-          // className="btn btn-danger w-100"
-        >
-          Eliminar
         </Button>
       </div>
     </div>

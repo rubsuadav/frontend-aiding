@@ -31,7 +31,7 @@ export default function CreateUser() {
       .then((response) => {
         console.log(response);
         swal(successMsg);
-        navigate("/base/users");
+        navigate("/admin/base/users");
       })
       .catch((error) => {
         console.log(error);

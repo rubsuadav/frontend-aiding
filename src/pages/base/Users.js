@@ -49,7 +49,7 @@ const Users = () => {
 
   // Navigate del botón de crear user
   function createUserRedirect() {
-    navigate("/base/users/crearUsuario");
+    navigate("/admin/base/users/crearUsuario");
   }
 
   return (
@@ -66,7 +66,7 @@ const Users = () => {
         onRow={(record, rowIndex) => {
           return {
             onClick: (event) => {
-              navigate("verUsuario/" + record.id);
+              navigate("/admin/base/users/verUsuario/" + record.id);
             },
           };
         }}

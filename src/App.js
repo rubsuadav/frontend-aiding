@@ -70,7 +70,7 @@ var navLinksAdmin = [
   },
   {
     title: "Usuario",
-    path: "admin/users",
+    path: "admin/base/users",
   },
   {
     title: "Recursos",
