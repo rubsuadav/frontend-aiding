@@ -41,8 +41,13 @@ import ShowResourceUser from "./pages/information/map/ShowResourceUser.js";
 import Login from "./pages/base/Login";
 
 import ListContact from "./pages/base/ListContact";
-import ContactDetail from "./pages/base/ShowContact";
-import CreateContact from "./pages/base/CreateContact";
+import ContactDetail from './pages/base/ShowContact';
+import CreateContact from './pages/base/CreateContact';
+
+import ListTurn from "./pages/volunteers/ListTurn";
+import CreateTurn from "./pages/volunteers/CreateTurn";
+import ShowTurn from "./pages/volunteers/ShowTurn";
+import UpdateTurn from "./pages/volunteers/UpdateTurn";
 
 import AdminCreateEvent from './pages/events/AdminCreateEvents';
 import ProgramedEvent from './pages/events/ProgramedEvent';
@@ -90,6 +95,10 @@ var navLinksAdmin = [
   {
     title: "Eventos",
     path: "admin/events"
+  },
+  {
+    title: "Turnos",
+    path: "admin/volunteers/turns"
   },
 ];
 
@@ -241,6 +250,10 @@ export default function App() {
                 path="/admin/events/:id/update" 
                 element={ <AdminUpdateEvent/>} 
               />
+              <Route path="volunteers/turns" element={ <ListTurn/>} />
+              <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
+              <Route path="volunteers/turns/:id" element={ <ShowTurn/>} />
+              <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
             </Route>
               
           </Routes>
