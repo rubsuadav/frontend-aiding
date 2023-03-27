@@ -11,7 +11,9 @@ import {
 } from "mdb-react-ui-kit";
 import Communication from "./Communications.js";
 import {partners, fileUrl} from "./services/backend.js";
-import { Button } from "react-bootstrap";
+import { generateCertificate} from "./Certificate.js";
+import { PDFViewer, PDFDownloadLink} from "@react-pdf/renderer";
+import { Button} from "react-bootstrap";
 import { Badge, Tag } from 'antd';
 
 export default function Details() {
@@ -56,11 +58,11 @@ export default function Details() {
   };
 
   function createCommunicationRedirect(){
-    navigate(`/partners/${id}/communication/create`);
+    navigate(`/admin/partners/${id}/communication/create`);
   }
 
   function createDonationRedirect(){
-    navigate(`/partners/${id}/donation/create`);
+    navigate(`/admin/partners/${id}/donation/create`);
   }
   
   const loadDonation = async () => {
@@ -68,6 +70,43 @@ export default function Details() {
     setDonation(result.data);
   };
 
+  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <a
+      href=""
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+      type="button" id="button" className="btn btn-light w-100"
+    >
+      {children}
+      &#x25bc;
+    </a>
+  ));
+  
+  const CustomMenu = React.forwardRef(
+    ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+      const [value, setValue] = useState('');
+  
+      return (
+        <div
+          ref={ref}
+          style={style}
+          className={className}
+          aria-labelledby={labeledBy}
+        >
+          <ul className="list-unstyled">
+            {React.Children.toArray(children).filter(
+              (child) =>
+                !value || child.props.children.toLowerCase().startsWith(value),
+            )}
+          </ul>
+        </div>
+      );
+    },
+  );
+  
   // FORMATEADOR DE LOS ENUMERADOS
   function partnerFormatter(value) {
     var formattedValue = value;
@@ -109,12 +148,44 @@ export default function Details() {
       }
     }
 
+    //VARIABLES DEL POP UP CERTIFICADO
+  const [verCertificado, setVerCertificado] = useState(false);
+  const [idioma, setIdioma] = useState("Español");
+
+  function handleClick(lan){
+    setVerCertificado(true);
+    setIdioma(lan);
+  } 
+
   const sex = partnerFormatter(user.sex);
   const language = partnerFormatter(user.language);
   const periodicity = donationFormatter(donation.periodicity);
 
   return (
     <section>
+      {verCertificado ? (
+        <section>
+          <div style={{display: "flex", flexDirection:"row"}}>
+            <button onClick={()=>  setIdioma("Español")}type="button" id="button" className="btn btn-light w-100"  width="10%"> Español </button>            
+            <button onClick={()=>  setIdioma("Catalán")}type="button" id="button" className="btn btn-light w-100"  width="10%"> Català </button>
+            <button onClick={()=>  setVerCertificado(false)}type="button" id="button" className="btn btn-light w-100" width="10%"> Cerrar </button>
+          </div>
+          <div><PDFViewer  height={"910"} width={"700"}>{generateCertificate(user,idioma, donation.amount)}</PDFViewer></div>
+          <div>
+            ¿No carga?
+            <div><PDFDownloadLink document={generateCertificate(user,"Español", donation.amount)} fileName="certificate.pdf">
+              {({ blob, url, loading, error }) =>
+                loading ? 'Loading document...' : 'Descarga en español'
+              }
+            </PDFDownloadLink></div>
+            <div><PDFDownloadLink document={generateCertificate(user,"Català", donation.amount)} fileName="certificate.pdf">
+              {({ blob, url, loading, error }) =>
+                loading ? 'Loading document...' : 'Descaga en català'
+              }
+            </PDFDownloadLink></div>  
+          </div>
+        </section>
+      ):
       <MDBContainer className="py-5">
         <center>
         <h2>
@@ -332,19 +403,19 @@ export default function Details() {
                 <hr />
                 <MDBRow>
                   <MDBCol>
-                    <MDBCardText className="text-muted w-auto">
-                      <Button href="" type="button" id="button" className="btn btn-light w-100">
-                        Generar certificado
-                      </Button>
+                  <MDBCardText className="text-muted w-auto">
+                    <Button  onClick={()=> handleClick(user.language)} type="button" id="button" className="btn btn-light w-100">
+                      Generar certificado
+                    </Button>
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
-                <hr />
+                <hr />    
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
                       <Button
-                        onClick={() => {navigate(`/partners/update/${id}`)}}
+                        onClick={() => {navigate(`/admin/partners/update/${id}`)}}
                         type="button" id="button" 
                         className="btn btn-light w-100"
                       >
@@ -368,7 +439,7 @@ export default function Details() {
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
                       <Button onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
-                        Gestionar Donación
+                        Añadir Donación
                       </Button>
                     </MDBCardText>
                   </MDBCol>
@@ -383,13 +454,14 @@ export default function Details() {
               <MDBCardBody>
                 <MDBCardText><h4>COMUNICACIONES</h4></MDBCardText>
 
-                <Communication user_id={id}/>
+              <Communication user_id={id}/>
 
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
+            </MDBCardBody>
+          </MDBCard>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
+    }
     </section>
   );
 }

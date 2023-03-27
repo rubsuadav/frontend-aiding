@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./config";
+import "./components/routes/axiosConfig";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

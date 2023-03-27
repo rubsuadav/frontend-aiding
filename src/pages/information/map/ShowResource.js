@@ -41,24 +41,30 @@ export default function Details() {
   const [resource, setResource] = useState({
     title: "",
     description: "",
+    contact_phone: "",
     street: "",
     number: "",
     city: "",
     additional_comments: "",
     latitude: "",
     longitude: "",
+    resource_type: "",
+    posittion: "",
   });
 
-  const {
+ /*  const {
     title,
     description,
+    contact_phone,
     street,
     number,
     city,
     additional_comments,
     latitude,
     longitude,
+    resource_type,
   } = resource;
+ */
 
   const { id } = useParams();
 
@@ -76,7 +82,7 @@ export default function Details() {
       .delete(`/${id}`)
       .then((res) => {
         swal(successMsg);
-        navigate("/information/admin");
+        navigate("/admin/information/resources");
       })
       .catch((err) => {
         swal(errorMsg);
@@ -108,6 +114,24 @@ export default function Details() {
     //className: 'leaflet-div-icon'
   });
 
+  // FORMATEADOR DE LOS ENUMERADOS
+  function resourceFormatter(value) {
+    var formattedValue = value;
+    switch (value) {
+      case "neighborhood_association":
+        formattedValue = "Asociación de vecinos";
+        return `${formattedValue}`;
+      case "seniors_association":
+        formattedValue = "Asociación de mayores";
+        return `${formattedValue}`;
+      case "nursing_home":
+        formattedValue = "Residencia";
+        return `${formattedValue}`;
+      }
+    }
+
+  const resource_type = resourceFormatter(resource.resource_type);
+
   return (
     <section>
       <MDBContainer className="py-5">
@@ -134,9 +158,9 @@ export default function Details() {
                         />
                         <Marker
                           icon={customIcon}
-                          position={[latitude, longitude]}
+                          position={[resource.latitude, resource.longitude]}
                         >
-                          <Popup>{title}</Popup>
+                          <Popup>{resource.title}</Popup>
                         </Marker>
                       </MapContainer>
                     </MDBRow>
@@ -146,7 +170,7 @@ export default function Details() {
                         <MDBCardText className="text-muted w-auto">
                           <Button
                             onClick={() => {
-                              navigate(`/information/edit-resource/${id}`);
+                              navigate(`/admin/information/edit-resource/${id}`);
                             }}
                             type="button"
                             className="btn btn-light w-100"
@@ -184,7 +208,7 @@ export default function Details() {
                     <MDBCardText>Título</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{title}</MDBCardText>
+                    <MDBCardText className="text-muted">{resource.title}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -195,7 +219,7 @@ export default function Details() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      {description}
+                      {resource.description}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -206,7 +230,7 @@ export default function Details() {
                     <MDBCardText>Calle</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{street}</MDBCardText>
+                    <MDBCardText className="text-muted">{resource.street}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -216,7 +240,7 @@ export default function Details() {
                     <MDBCardText>Número</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{number}</MDBCardText>
+                    <MDBCardText className="text-muted">{resource.number}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -226,7 +250,7 @@ export default function Details() {
                     <MDBCardText>Ciudad</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{city}</MDBCardText>
+                    <MDBCardText className="text-muted">{resource.city}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -237,7 +261,7 @@ export default function Details() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      {additional_comments}
+                      {resource.additional_comments}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -245,31 +269,44 @@ export default function Details() {
 
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Latitud</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{latitude}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Longitud</MDBCardText>
+                    <MDBCardText>Tipo de recurso</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      {longitude}
+                      {resource_type}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
+                <hr />
+
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Teléfono de contacto</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">
+                      {resource.contact_phone}
+                    </MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Posición en el mapa</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">{resource.position}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
         </MDBRow>
         <Button
           onClick={() => {
-            navigate(`/information/admin`);
+            navigate(`/admin/information/resources`);
           }}
           type="button"
           className="btn btn-light w-100"

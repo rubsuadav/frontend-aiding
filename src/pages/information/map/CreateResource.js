@@ -22,18 +22,21 @@ const errorMsg = {
 };
 
 export default function CreateResource() {
+
   let navigate = useNavigate();
 
   const [resource, setResource] = useState({
     title: "",
     description: "",
+    contact_phone: "",
     street: "",
     number: "",
     city: "",
     additional_comments: "",
+    resource_type:"seniors_association"
   });
 
-  const { title, description, street, number, city, additional_comments } =
+  const { title, description, contact_phone, street, number, city, additional_comments, resource_type } =
     resource;
 
   const onInputChange = (e) => {
@@ -42,7 +45,9 @@ export default function CreateResource() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    postResource(resource);
+    if (validateForm()) {
+      postResource(resource);
+    }
   };
 
   function postResource(resource) {
@@ -51,14 +56,56 @@ export default function CreateResource() {
       .then((response) => {
         console.log(response);
         swal(successMsg);
-        navigate("/information/admin");
+        navigate("/admin/information/resources");
       })
       .catch((error) => {
-        console.log(error);
+         if (error.response) {
+          let error_msgs = {general: "No ha rellenado correctamente."};
+          setErrors(error_msgs);
+        }
         swal(errorMsg);
       });
   }
 
+    /* Validator */
+   const [errors, setErrors] = useState({});
+
+   function validateTLF(contact_phone) {
+     const tlfRegex = /^\d{9}$/;
+     if (!tlfRegex.test(contact_phone)) {
+       return false;
+     }
+     return true;
+   }
+ 
+   function validateForm() {
+     let error_msgs = {};
+ 
+     if (title === "" || title === null) {
+       error_msgs.title = "El título no puede estar vacío";
+     }
+ 
+     if (street === "" || street === null) {
+       error_msgs.street = "La calle no puede estar vacía";
+     }
+ 
+     if (!validateTLF(contact_phone)) {
+       error_msgs.contact_phone = "Este no es un teléfono válido";
+     }
+ 
+     if (city === "" || city === null) {
+       error_msgs.city = "La ciudad no puede estar vacía";
+     }
+ 
+     setErrors(error_msgs);
+ 
+     if (Object.keys(error_msgs).length === 0) {
+       return true;
+     } else {
+       return false;
+     }
+   }
+ 
   return (
     <div className="container my-5">
       <div className="row justify-content-center">
@@ -75,6 +122,9 @@ export default function CreateResource() {
                   placeholder="Título del recurso"
                 />
               </Form.Group>
+              {errors.title && (
+                  <p className="text-danger">{errors.title}</p>
+                )}
 
               <Form.Group className="mb-3">
                 <Form.Label>Descripción</Form.Label>
@@ -85,6 +135,20 @@ export default function CreateResource() {
                   placeholder="Descripción del recurso"
                 />
               </Form.Group>
+              
+              <Form.Group className="mb-3">
+                <Form.Label>Teléfono</Form.Label>
+                <Form.Control
+                  onChange={(e) => onInputChange(e)}
+                  value={contact_phone}
+                  name="contact_phone"
+                  placeholder="Teléfono de contacto"
+                />
+              </Form.Group>
+              {errors.contact_phone && (
+                  <p className="text-danger">{errors.contact_phone}</p>
+                )}
+
 
               <Form.Group className="mb-3">
                 <Form.Label>Calle</Form.Label>
@@ -95,6 +159,9 @@ export default function CreateResource() {
                   placeholder="Calle del recurso"
                 />
               </Form.Group>
+              {errors.street && (
+                  <p className="text-danger">{errors.street}</p>
+                )}
 
               <Form.Group className="mb-3">
                 <Form.Label>Número</Form.Label>
@@ -115,6 +182,9 @@ export default function CreateResource() {
                   placeholder="Ciudad donde se encuentra el recurso"
                 />
               </Form.Group>
+              {errors.city && (
+                  <p className="text-danger">{errors.city}</p>
+                )}
 
               <Form.Group className="mb-3">
                 <Form.Label>Comentarios adicionales</Form.Label>
@@ -125,6 +195,20 @@ export default function CreateResource() {
                   placeholder="Comentarios adicionales"
                 />
               </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Tipo de recurso</Form.Label>
+                <Form.Select
+                  onChange={(e) => onInputChange(e)}
+                  value={resource_type}
+                  name="resource_type"
+                >
+                  <option value="neighborhood_association">Asociación de vecinos</option>
+                  <option value="seniors_association">Asociación de mayores</option>
+                  <option value="nursing_home">Residencia</option>
+                 
+                </Form.Select>
+              </Form.Group>
             </div>
 
             <div className="row justify-content-evenly">
@@ -133,7 +217,7 @@ export default function CreateResource() {
               </Button>
               <Link
                 className="btn btn-outline-danger col mb-4 mx-2"
-                to="/information/admin"
+                to="/admin/information/resources"
               >
                 Cancelar
               </Link>

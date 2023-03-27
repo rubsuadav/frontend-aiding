@@ -33,8 +33,9 @@ function CreatePartner() {
     function postPartner(partner){
         const aux = partners.post('',partner).then((response) => {
             console.log(response);
+            console.log(partner);
             swal(successMsg);
-            navigate("/partners");
+            navigate("/admin/partners");
         }).catch((error) => {
             if (error.response && error.response.status === 409) {
               let error_msgs = {general: "Ya existe un socio con ese DNI, teléfono, email o IBAN"};
@@ -288,8 +289,8 @@ function CreatePartner() {
                   value={language}
                   name="language"
                 >
-                  <option value="spanish">Español</option>
-                  <option value="catalan">Catalán</option>
+                  <option value="Español">Español</option>
+                  <option value="Catalán">Catalán</option>
                 </Form.Select>
               </Form.Group>
               {errors.language && (
@@ -390,7 +391,7 @@ function CreatePartner() {
                 )}
   
               <Form.Group className="mb-3">
-                <Form.Label>Iban</Form.Label>
+                <Form.Label>IBAN</Form.Label>
                 <Form.Control
                   onChange={(e) => onInputChange(e)}
                   value={iban}
