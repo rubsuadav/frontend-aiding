@@ -1,14 +1,17 @@
 import axios from "axios";
 import { backendUrl } from "../../../../config";
+import { configureAxios } from "../../../../components/routes/axiosConfig";
+
 
 export const advertisementBE = axios.create({
   baseURL: String(backendUrl + "information/advertisements/"),
-  timeout: 1000,
 });
 
 export const sectionBE = axios.create({
   baseURL: String(backendUrl + "information/sections/"),
-  timeout: 1000,
 });
+
+configureAxios(advertisementBE);
+configureAxios(sectionBE);
 
 export const mediaUrl = String(backendUrl + "media/");

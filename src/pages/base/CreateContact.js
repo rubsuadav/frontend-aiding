@@ -106,7 +106,7 @@ function CreateContact(){
           formData.append("message", message);
           postContact(contact);
           swal(successMsg);
-          navigate("/home");
+          navigate("/");
           
         }
       };

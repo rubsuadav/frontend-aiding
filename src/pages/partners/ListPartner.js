@@ -13,6 +13,7 @@ import * as XLSX from 'xlsx';
 import axios from 'axios';
 import {MDBCol,MDBRow} from "mdb-react-ui-kit";
 
+
 const onChange = (pagination, filters, sorter, extra) => {
   console.log('params', pagination, filters, sorter, extra);
 };
@@ -206,7 +207,7 @@ const Partners = () => {
   }, []);
 
   function createPartnerRedirect(){
-    navigate("/partners/create");
+    navigate("/admin/partners/create");
   }
 
   /*EXPORTACIÓN DE SOCIOS */
@@ -300,7 +301,7 @@ const Partners = () => {
         onRow={(record, rowIndex) => {
           return {
             onClick: event => {
-              navigate("/partners/" + record.id);
+              navigate("/admin/partners/" + record.id);
             },
           };
         }}

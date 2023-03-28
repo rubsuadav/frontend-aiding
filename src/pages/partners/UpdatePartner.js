@@ -81,7 +81,7 @@ function UpdatePartner() {
       .put(`/${id}`, partner)
       .then((response) => {
         swal(successMsg);
-        navigate(`/partners/${id}`);
+        navigate(`/admin/partners/${id}`);
       })
       .catch((error) => {
         if (error.response && error.response.status === 409) {
@@ -118,7 +118,7 @@ function UpdatePartner() {
       return false;
     }
     const letters = "TRWAGMYFPDXBNJZSQVHLCKE";
-    const letterIndex = parseInt(dni.substring(0, 8)) % 23;
+    const letterIndex = parseInt(dni.substring(0, 8),10) % 23;
     const expectedLetter = letters.charAt(letterIndex);
     const actualLetter = dni.charAt(8).toUpperCase();
     return expectedLetter === actualLetter;

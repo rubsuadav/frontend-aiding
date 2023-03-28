@@ -183,7 +183,7 @@ return (
         onRow={(record, rowIndex) => {
           return {
             onClick: event => {
-              navigate("/base/contacts/" + record.id);
+              navigate("/admin/base/contacts/" + record.id);
             },
           };
         }}

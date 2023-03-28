@@ -41,6 +41,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -174,6 +175,13 @@
 
 /* MENSAJES */
 
-#mensaje{
+#mensaje {
   word-break: break-all;
+}
+
+/* EVENTOS */
+#eventosTitulo {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
 }

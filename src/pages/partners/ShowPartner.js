@@ -11,9 +11,9 @@ import {
 } from "mdb-react-ui-kit";
 import Communication from "./Communications.js";
 import {partners, fileUrl} from "./services/backend.js";
-import { generateCertificate, styles} from "./Certificate.js";
-import { PDFViewer} from "@react-pdf/renderer";
-import { Button, Dropdown} from "react-bootstrap";
+import { generateCertificate} from "./Certificate.js";
+import { PDFViewer, PDFDownloadLink} from "@react-pdf/renderer";
+import { Button} from "react-bootstrap";
 import { Badge, Tag } from 'antd';
 
 export default function Details() {
@@ -58,25 +58,17 @@ export default function Details() {
   };
 
   function createCommunicationRedirect(){
-    navigate(`/partners/${id}/communication/create`);
+    navigate(`/admin/partners/${id}/communication/create`);
   }
 
   function createDonationRedirect(){
-    navigate(`/partners/${id}/donation/create`);
+    navigate(`/admin/partners/${id}/donation/create`);
   }
   
   const loadDonation = async () => {
     const result = await partners.get(`/${id}/donation`);
     setDonation(result.data);
   };
-
-  const [verCertificado, setVerCertificado] = useState(false);
-  const [idioma, setIdioma] = useState("Español");
-
-  function handleClick(lan){
-    setVerCertificado(true);
-    setIdioma(lan);
-  }
 
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
@@ -156,6 +148,15 @@ export default function Details() {
       }
     }
 
+    //VARIABLES DEL POP UP CERTIFICADO
+  const [verCertificado, setVerCertificado] = useState(false);
+  const [idioma, setIdioma] = useState("Español");
+
+  function handleClick(lan){
+    setVerCertificado(true);
+    setIdioma(lan);
+  } 
+
   const sex = partnerFormatter(user.sex);
   const language = partnerFormatter(user.language);
   const periodicity = donationFormatter(donation.periodicity);
@@ -163,12 +164,28 @@ export default function Details() {
   return (
     <section>
       {verCertificado ? (
-        <div style={styles.cont}>
-          <button onClick={()=>  setVerCertificado(false)}> Cerrar </button>
-          <PDFViewer  height={"1000"}>{generateCertificate(user,idioma, donation.amount)}</PDFViewer>
-        </div>
-
-      ): null}
+        <section>
+          <div style={{display: "flex", flexDirection:"row"}}>
+            <button onClick={()=>  setIdioma("Español")}type="button" id="button" className="btn btn-light w-100"  width="10%"> Español </button>            
+            <button onClick={()=>  setIdioma("Catalán")}type="button" id="button" className="btn btn-light w-100"  width="10%"> Català </button>
+            <button onClick={()=>  setVerCertificado(false)}type="button" id="button" className="btn btn-light w-100" width="10%"> Cerrar </button>
+          </div>
+          <div><PDFViewer  height={"910"} width={"700"}>{generateCertificate(user,idioma, donation.amount)}</PDFViewer></div>
+          <div>
+            ¿No carga?
+            <div><PDFDownloadLink document={generateCertificate(user,"Español", donation.amount)} fileName="certificate.pdf">
+              {({ blob, url, loading, error }) =>
+                loading ? 'Loading document...' : 'Descarga en español'
+              }
+            </PDFDownloadLink></div>
+            <div><PDFDownloadLink document={generateCertificate(user,"Català", donation.amount)} fileName="certificate.pdf">
+              {({ blob, url, loading, error }) =>
+                loading ? 'Loading document...' : 'Descaga en català'
+              }
+            </PDFDownloadLink></div>  
+          </div>
+        </section>
+      ):
       <MDBContainer className="py-5">
         <center>
         <h2>
@@ -386,17 +403,10 @@ export default function Details() {
                 <hr />
                 <MDBRow>
                   <MDBCol>
-                    <MDBCardText className="text-muted w-auto">
-                      <Dropdown>
-                        <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-                          Certificado 
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu as={CustomMenu}>
-                          <Dropdown.Item  onClick={()=> handleClick("Español")} type="button" id="button" className="btn btn-light w-100">Español</Dropdown.Item>
-                          <Dropdown.Item onClick={()=> handleClick("Catalán")} type="button" id="button" className="btn btn-light w-100">Català</Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
+                  <MDBCardText className="text-muted w-auto">
+                    <Button  onClick={()=> handleClick(user.language)} type="button" id="button" className="btn btn-light w-100">
+                      Generar certificado
+                    </Button>
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -405,7 +415,7 @@ export default function Details() {
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
                       <Button
-                        onClick={() => {navigate(`/partners/update/${id}`)}}
+                        onClick={() => {navigate(`/admin/partners/update/${id}`)}}
                         type="button" id="button" 
                         className="btn btn-light w-100"
                       >
@@ -444,13 +454,14 @@ export default function Details() {
               <MDBCardBody>
                 <MDBCardText><h4>COMUNICACIONES</h4></MDBCardText>
 
-                <Communication user_id={id}/>
+              <Communication user_id={id}/>
 
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
+            </MDBCardBody>
+          </MDBCard>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
+    }
     </section>
   );
 }

@@ -33,7 +33,7 @@ function CreateCommunication() {
         const aux = partners.post(`/${id}/communication/`,communication).then((response) => {
             console.log(response);
             swal(successMsg);
-            navigate(`/partners/${id}`);
+            navigate(`/admin/partners/${id}`);
         }).catch((error) => {
             console.log(error);
             swal(errorMsg);
