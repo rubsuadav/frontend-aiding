@@ -83,7 +83,7 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, logo }) => {
         {/** Login and logout buttons */}
         {isAuthenticated && (
           <Button variant="light" onClick={Logout}>
-            Cerrar sessión
+            Cerrar sesión
           </Button>
         )}
         {!isAuthenticated && (

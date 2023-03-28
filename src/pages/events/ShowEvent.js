@@ -15,6 +15,7 @@ import L from "leaflet";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import swal from "sweetalert";
+import { useAuthContext } from "../../components/routes/authContext";
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -34,6 +35,7 @@ const errorMsg = {
 
 function ShowEvent() {
 
+  const { isAuthenticated } = useAuthContext();
     /*DATOS*/
   const [event_data, setEventData] = React.useState(
     {
@@ -142,35 +144,38 @@ function ShowEvent() {
                       </MapContainer>}
                     </MDBRow>
 
-                    <MDBRow>
-                      <MDBCol>
-                        <MDBCardText className="text-muted w-auto">
-                          <Button
-                            onClick={() => {
-                              navigate(`/admin/events/${id}/update`);
-                            }}
-                            type="button"
-                            className="btn btn-light w-100"
-                          >
-                            Editar evento
-                          </Button>
-                        </MDBCardText>
-                      </MDBCol>
+                    {isAuthenticated && (
+                      <MDBRow>
+                        <MDBCol>
+                          <MDBCardText className="text-muted w-auto">
+                            <Button
+                              onClick={() => {
+                                navigate(`/admin/events/${id}/update`);
+                              }}
+                              type="button"
+                              className="btn btn-light w-100"
+                            >
+                              Editar evento
+                            </Button>
+                          </MDBCardText>
+                        </MDBCol>
 
-                      <MDBCol>
-                        <MDBCardText className="text-muted w-auto">
-                          <Button
-                            onClick={() => {
-                              deleteConfirmationAlert();
-                            }}
-                            type="button"
-                            className="btn btn-danger w-100"
-                          >
-                            Borrar
-                          </Button>
-                        </MDBCardText>
-                      </MDBCol>
-                    </MDBRow>
+                        <MDBCol>
+                          <MDBCardText className="text-muted w-auto">
+                            <Button
+                              onClick={() => {
+                                deleteConfirmationAlert();
+                              }}
+                              type="button"
+                              className="btn btn-danger w-100"
+                            >
+                              Borrar
+                            </Button>
+                          </MDBCardText>
+                        </MDBCol>
+                      </MDBRow>
+                    )}
+                    
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
