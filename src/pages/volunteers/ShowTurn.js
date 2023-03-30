@@ -7,15 +7,26 @@ import {
   MDBRow,
   MDBCard,
   MDBCardText,
-  MDBCardBody,
 } from "mdb-react-ui-kit";
 import {volunteers} from "./services/backend.js";
-import { PDFViewer} from "@react-pdf/renderer";
-import { Button, Dropdown} from "react-bootstrap";
-import { Badge, Tag } from 'antd';
-import Modal from 'react-bootstrap/Modal';
-import Form from "react-bootstrap/Form";
-import ButtonR from "react-bootstrap/Button";
+import swal from "sweetalert";
+import { Button} from "react-bootstrap";
+
+const successMsgDelete = {
+  title: "Mensaje de confirmación",
+  text: "El turno se ha borrado correctamente",
+  icon: "success",
+  button: "Aceptar",
+  timer: "5000",
+};
+
+const errorMsgDelete = {
+  title: "Mensaje de error",
+  text: "Se ha producido un error al borrar el turno",
+  icon: "error",
+  button: "Aceptar",
+  timer: "5000",
+};
 
 export default function Details() {
   let navigate = useNavigate();
@@ -37,20 +48,30 @@ export default function Details() {
     setTurn(result.data);
   };
 
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <a
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-      type="button" id="button" className="btn btn-light w-100"
-    >
-      {children}
-      &#x25bc;
-    </a>
-  ));
+  const deleteConfirmationAlert = async () => {
+    swal({
+      title: "Eliminar turno",
+      text: "¿Estás seguro que desea eliminar el turno?",
+      icon: "warning",
+      buttons: ["No", "Sí"],
+    }).then((res) => {
+      if (res) {
+        deleteTurn();
+      }
+    });
+  };
+
+  const deleteTurn = async () => {
+    const result = await volunteers
+      .delete(`/turns/${id}`)
+      .then((res) => {
+        swal(successMsgDelete);
+        navigate("/admin/volunteers/turns");
+      })
+      .catch((err) => {
+        swal(errorMsgDelete);
+      });
+  };
 
   const CustomMenu = React.forwardRef(
     ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
@@ -81,54 +102,73 @@ export default function Details() {
           Turno
           </h2>
         </center>
-        <MDBCard>
-          <MDBRow>
-            <MDBCol sm="3">
-              <MDBCardText>Fecha</MDBCardText>
-            </MDBCol>
-            <MDBCol sm="9">
-              <MDBCardText className="text-muted">
-                {turn.date}
-              </MDBCardText>
-            </MDBCol>
-            </MDBRow>
-            <hr />
-            <MDBRow>
-            <MDBCol sm="3">
-              <MDBCardText>Hora de Inicio</MDBCardText>
-            </MDBCol>
-            <MDBCol sm="9">
-              <MDBCardText className="text-muted">
-                {turn.startTime}
-              </MDBCardText>
-            </MDBCol>
-            </MDBRow>
-            <hr />
-            <MDBRow>
-            <MDBCol sm="3">
-              <MDBCardText>Hora de Finalización</MDBCardText>
-            </MDBCol>
-            <MDBCol sm="9">
-              <MDBCardText className="text-muted">
-                {turn.endTime}
-              </MDBCardText>
-            </MDBCol>
-            </MDBRow>
-        </MDBCard>
+        <MDBRow>
+          <MDBCol style={{paddingLeft: "30px"}}>
+            <MDBCard style={{width: "600px", paddingTop: "17px", paddingBottom: "17px"}}>
+              <MDBRow>
+                <MDBCol sm="3">
+                  <MDBCardText>Fecha</MDBCardText>
+                </MDBCol>
+                <MDBCol sm="9">
+                  <MDBCardText className="text-muted">
+                    {turn.date}
+                  </MDBCardText>
+                </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                <MDBCol sm="3">
+                  <MDBCardText>Hora de Inicio</MDBCardText>
+                </MDBCol>
+                <MDBCol sm="9">
+                  <MDBCardText className="text-muted">
+                    {turn.startTime}
+                  </MDBCardText>
+                </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                <MDBCol sm="3">
+                  <MDBCardText>Finalización</MDBCardText>
+                </MDBCol>
+                <MDBCol sm="9">
+                  <MDBCardText className="text-muted">
+                    {turn.endTime}
+                  </MDBCardText>
+                </MDBCol>
+                </MDBRow>
+            </MDBCard>
+          </MDBCol>
+          <MDBCol style={{paddingLeft: "30px"}}>
+            <MDBCard style={{width: "600px"}}>
+              <MDBCol style={{paddingTop: "5px"}}>
+                <MDBCardText className="text-muted w-auto">
+                  <Button
+                    onClick={() => {navigate(`/admin/volunteers/turns/update/${id}`)}}
+                    type="button" id="button" 
+                    className="btn btn-light w-75"
+                    >
+                    Editar turno
+                  </Button>
+                </MDBCardText>
+              </MDBCol>
+              <MDBCol style={{paddingTop: "5px", paddingBottom: "5px"}}>
+                <MDBCardText className="text-muted w-auto">
+                  <Button
+                    onClick={() => {
+                    deleteConfirmationAlert();
+                    }}
+                    type="button"
+                    className="btn btn-danger w-75"
+                    >
+                      Borrar
+                    </Button>
+                  </MDBCardText>
+              </MDBCol>
+            </MDBCard>
+          </MDBCol>
+        </MDBRow>
         <hr />
-          <MDBRow>
-            <MDBCol>
-              <MDBCardText className="text-muted w-auto">
-                <Button
-                  onClick={() => {navigate(`/admin/volunteers/turns/update/${id}`)}}
-                  type="button" id="button" 
-                  className="btn btn-light w-75"
-                  >
-                  Editar turno
-                </Button>
-              </MDBCardText>
-            </MDBCol>
-          </MDBRow>
       </MDBContainer>
     </section>
   );
