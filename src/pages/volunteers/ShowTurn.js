@@ -10,7 +10,7 @@ import {
 } from "mdb-react-ui-kit";
 import {volunteers} from "./services/backend.js";
 import swal from "sweetalert";
-import { Button, Dropdown} from "react-bootstrap";
+import { Button} from "react-bootstrap";
 
 const successMsgDelete = {
   title: "Mensaje de confirmación",
