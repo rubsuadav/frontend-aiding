@@ -148,10 +148,17 @@ const Partners = () => {
     {
       title: 'Apellidos',
       dataIndex: 'last_name',
+      ...getColumnSearchProps('last_name'),
     },
     {
       title: 'Email',
       dataIndex: 'email',
+      ...getColumnSearchProps('email'),
+    },
+    {
+      title: 'Provincia',
+      dataIndex: 'province',
+      ...getColumnSearchProps('province'),
     },
     {
       title: 'Idioma',
@@ -199,6 +206,7 @@ const Partners = () => {
       email: '...',
       state: '...',
       language: '...',
+      province: '...',
     }
   ]);
 
@@ -259,6 +267,7 @@ const Partners = () => {
         <h1 className="pt-3">Socios</h1>
         <div id="botones-socios">
           <Button onClick={handleShow} id="boton-importar" >Importar socios</Button>
+          <Button  id="boton-importar" onClick={() => exportToExcel('myTable')}>Exportar a Excel</Button>
         </div>
 
         <Modal show={show} onHide={handleClose}>
@@ -285,12 +294,9 @@ const Partners = () => {
           </Modal.Footer> 
         </Modal>
         
-        <MDBRow className='g-0'>
-          <MDBCol md='1'>
+        <MDBRow>
+          <MDBCol md='2'>
           <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
-          </MDBCol>
-          <MDBCol md='1'>
-          <Button  id="boton-socio" onClick={() => exportToExcel('myTable')}>Exportar a Excel</Button>
           </MDBCol>
         </MDBRow>
         <br></br>
