@@ -26,13 +26,11 @@ export default function ViewUser() {
 
   return (
     <div className="container my-5 shadow">
-      <h1 className="pt-3">Ver usuario</h1>
-
       <div className="row justify-content-center">
         <div className="col-md-6">
-          <div className="row mb-3">
+          <div className="row mb-3 mt-3">
             <div className="col-md-6 text-end fw-bold">
-              <label htmlFor="username" className="form-label">
+              <label htmlFor="username" className="form-label" >
                 Nombre de usuario:
               </label>
             </div>
@@ -56,16 +54,16 @@ export default function ViewUser() {
 
       <div className="row justify-content-evenly">
         <Button
-          className="col mb-4 mx-5"
-          variant="outline-primary"
+          className="col mb-4 mx-5 btn btn-light w-100"
           onClick={() => navigate("/admin/base/users")}
+          id="button"
         >
           Volver a la lista de usuarios
         </Button>
         <Button
-          className="col mb-4 mx-5"
-          variant="outline-primary"
+          className="col mb-4 mx-5 btn btn-light w-100"
           onClick={() => navigate("/admin/base/users/editarUsuario/" + id)}
+          id="button"
         >
           Editar
         </Button>

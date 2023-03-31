@@ -57,7 +57,7 @@ const Users = () => {
       <h1 className="pt-3">Usuarios</h1>
       <Button
         onClick={createUserRedirect}
-        id="boton-usuario"
+        id="boton-socio"
         style={{ float: "left" }}
       >
         Crear usuario

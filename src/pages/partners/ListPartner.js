@@ -262,31 +262,28 @@ const Partners = () => {
         </div>
 
         <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Importar socios</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form className="" id='modal-partner-content'> 
-            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <div id="modal-partner-content">
-              <input name="file" id="input-file" type="file" class="custom-file-input" onChange={handleFileSelect} />
+          <Modal.Header closeButton>
+            <Modal.Title>Importar socios</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form className="" id='modal-partner-content'> 
+              <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+              <div id="modal-partner-content">
+                <input name="file" id="input-file" type="file" class="custom-file-input" onChange={handleFileSelect} />
+              </div>
+              </Form.Group>
+              <div id='modal-button-right'>
+                <ButtonR variant="outline-success" className="col mb-4 mx-5" type="submit" onClick={handleSubmit}> Importar </ButtonR>
+              </div>
+            </Form>
+            <div id='modal-button-left'>
+              <ButtonR variant="outline-danger" className="col mb-4 mx-5" onClick={handleClose}> Cancelar </ButtonR>
             </div>
-            </Form.Group>
-            <div id='modal-button-right'>
-              <ButtonR variant="outline-success" className="col mb-4 mx-5" type="submit" onClick={handleSubmit}> Importar </ButtonR>
-            </div>
-          </Form>
-          <div id='modal-button-left'>
-            <ButtonR variant="outline-danger" className="col mb-4 mx-5" onClick={handleClose}> Cancelar </ButtonR>
-          </div>
-
-        </Modal.Body>
-        <Modal.Footer>
-
-              <p className="text-danger">{errors.toString()}</p>
-
-        </Modal.Footer>
-      </Modal>
+          </Modal.Body>
+          <Modal.Footer>
+            <p className="text-danger">{errors.toString()}</p>
+          </Modal.Footer> 
+        </Modal>
         
         <MDBRow className='g-0'>
           <MDBCol md='1'>

@@ -160,6 +160,10 @@
 
 /* ID BUTTON */
 
+#button {
+  border-color: rgb(129, 129, 129);
+}
+
 #button:hover {
   color: var(--boton);
   background-color: var(--bs-btn-hover-bg);

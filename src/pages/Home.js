@@ -23,7 +23,7 @@ function Home() {
   }
 
   function redirectMayores() {
-    navigate("/information/sections");
+    navigate("/events/programed");
   }
 
   return (
@@ -66,9 +66,9 @@ function Home() {
                 <div className='mask' style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}></div>
               </a>
             <MDBCardBody>
-              <MDBCardTitle>Mayores que molan</MDBCardTitle>
+              <MDBCardTitle>Eventos</MDBCardTitle>
               <MDBCardText>
-                Noticias sobre personas mayores que hacen cosas increíbles. 
+                Un apartado con los eventos más interesantes para la comunidad.
               </MDBCardText>
             </MDBCardBody>
           </MDBCard>
