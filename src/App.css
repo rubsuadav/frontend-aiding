@@ -76,6 +76,24 @@
   font-size: medium;
 }
 
+/* Estilo para el contenedor principal */
+.container-principal {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo para el contenedor secundario */
+.container-secundario {
+  flex: 1;
+}
+
+/* Estilo para el footer */
+#sticky-footer {
+  margin-top: auto;
+}
+
+
 /* PARTNERS */
 
 #boton-socio {
