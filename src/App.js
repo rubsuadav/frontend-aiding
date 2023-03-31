@@ -116,9 +116,9 @@ export default function App() {
   return (
     <div className="App">
       <div className="container-principal">
-        <div className="container-secundario">
-          <AuthContextProvider>
-            <Router>
+        <AuthContextProvider>
+          <Router>
+            <div className="container-secundario">
               <Navbar
                 navLinksPublic={navLinksPublic}
                 navLinksAdmin={navLinksAdmin}
@@ -271,10 +271,10 @@ export default function App() {
                 </Route>
                   
               </Routes>
-            </Router>
-          </AuthContextProvider>
-        </div>
-        <Footer />
+            </div>
+            <Footer />
+          </Router>
+        </AuthContextProvider>
       </div>
     </div>
   );
