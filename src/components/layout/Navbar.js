@@ -82,12 +82,12 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, logo }) => {
         </Navbar.Collapse>
         {/** Login and logout buttons */}
         {isAuthenticated && (
-          <Button variant="light" onClick={Logout}>
+          <Button variant="light" onClick={Logout} className="logout">
             Cerrar sesión
           </Button>
         )}
         {!isAuthenticated && (
-          <Nav.Link key="base/login" as={Link} to="base/login">
+          <Nav.Link key="base/login" as={Link} to="base/login" className="login">
             Iniciar sesión
           </Nav.Link>
         )}
