@@ -60,6 +60,9 @@ import ShowEvent from './pages/events/ShowEvent';
 import AdminListEvent from './pages/events/AdminListEvents';
 import AdminUpdateEvent from './pages/events/AdminUpdateEvents';
 
+import AdminCreateNotification from './pages/base/AdminCreateNotification';
+import AdminShowHostEmail from './pages/base/AdminShowHostEmail';
+
 var navLinksPublic = [
   {
     title: "Inicio",
@@ -108,6 +111,15 @@ var navLinksAdmin = [
     title: "Turnos",
     path: "admin/volunteers/turns"
   },
+  {
+    title: "Notifications",
+    path: "admin/base/createnotification"
+  },
+
+  {
+    title: "Correo del sistema",
+    path: "admin/base/hostemail"
+  }
 ];
 
 var logo = ["./logo.png"];
@@ -267,6 +279,9 @@ export default function App() {
               <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
               <Route path="volunteers/turns/:id" element={ <ShowTurn/>} />
               <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
+
+              <Route path="base/createnotification" element={ <AdminCreateNotification/>} />
+              <Route path="base/hostemail" element={ <AdminShowHostEmail/>} />
             </Route>
               
           </Routes>
