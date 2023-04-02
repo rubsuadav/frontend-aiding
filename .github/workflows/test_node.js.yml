@@ -25,4 +25,13 @@ jobs:
         node-version: 19.7.0
         cache: 'npm'
     - run: npm ci
-    - run: npm run cy:run
+  
+   - name: Start server and run tests
+        uses: qawolf/github-action@v1
+        with:
+          command: npm run start
+          env: |
+            CYPRESS_baseUrl=http://localhost:3000
+          wait-on: |
+            http://localhost:3000
+          test-command: npm run test
