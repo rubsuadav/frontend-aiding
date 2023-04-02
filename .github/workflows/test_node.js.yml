@@ -10,28 +10,28 @@ on:
     branches: [ "main", "develop" ]
 
 jobs:
-  build:
-
+  tests:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Test config
-      run: |
+      - name: Test config
+        uses: actions/checkout@v3
+        run: |
         echo ${{ secrets.TEST_CONFIG }} >> .env
-    - name: Use Node.js 19.7.0
-      uses: actions/setup-node@v3
-      with:
-        node-version: 19.7.0
-        cache: 'npm'
-    - run: npm ci
-  
-   - name: Start server and run tests
-        uses: qawolf/github-action@v1
+
+      - name: Use Node.js 19.7.0
+        uses: actions/setup-node@v3
         with:
-          command: npm run start
-          env: |
-            CYPRESS_baseUrl=http://localhost:3000
-          wait-on: |
-            http://localhost:3000
-          test-command: npm run test
+          node-version: 19.7.0
+          cache: 'npm'
+      run: npm ci
+  
+      - name: Start server and run tests
+            uses: qawolf/github-action@v1
+            with:
+              command: npm run start
+              env: |
+                CYPRESS_baseUrl=http://localhost:3000
+              wait-on: |
+                http://localhost:3000
+              test-command: npm run test
