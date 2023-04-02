@@ -1,13 +1,12 @@
-import { defineConfig } from "cypress";
+const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-    setupNodeEvents() {
+    setupNodeEvents(on, config) {
       // implement node event listeners here
       this.baseUrl = "http://localhost:3000";
     },
   },
-
   component: {
     devServer: {
       framework: "create-react-app",
