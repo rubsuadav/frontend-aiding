@@ -24,7 +24,7 @@ jobs:
         run: npm ci
 
       - name: Start server and run tests
-        uses: qawolf/github-action@v1
+        uses: actions/setup-node@v3
         with:
           command: npm run start
           env: |
