@@ -85,6 +85,5 @@ describe("Events", () => {
     const path = "information/sections";
     cy.visit(baseUrl + path);
     cy.wait(1000);
-  
   });
 });
