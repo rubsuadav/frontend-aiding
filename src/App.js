@@ -44,6 +44,9 @@ import ResourcesTable from "./pages/information/map/ResourcesTable.js";
 import ResourcesListEdit from "./components/ResourcesListEdit";
 import ShowResourceUser from "./pages/information/map/ShowResourceUser.js";
 
+import TermsAndPolicies from "./pages/information/policies/TermsAndPolicies.js";
+import SLAs from "./pages/information/policies/SLAs.js";
+
 import ListContact from "./pages/base/ListContact";
 import ContactDetail from './pages/base/ShowContact';
 import CreateContact from './pages/base/CreateContact';
@@ -156,6 +159,14 @@ export default function App() {
                 path="information/map-resources/:id"
                 element={<ShowResourceUser />}
               />
+              <Route
+                path="policies/terms"
+                element={<TermsAndPolicies />}
+              />
+              <Route
+                path="policies/slas"
+                element={<SLAs />}
+              />
               
               {/* Events */}
               <Route 
@@ -218,6 +229,14 @@ export default function App() {
                 exact
                 path="information/resources"
                 element={<ResourcesTable />}
+              />
+              <Route
+                path="policies/terms"
+                element={<TermsAndPolicies />}
+              />
+              <Route
+                path="policies/slas"
+                element={<SLAs />}
               />
 
               {/* Partner*/}
