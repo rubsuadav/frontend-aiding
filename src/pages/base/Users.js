@@ -17,6 +17,7 @@ const Users = () => {
       id: "...",
       username: "...",
       is_admin: "...",
+      roles: "",
     },
   ]);
 
@@ -38,8 +39,12 @@ const Users = () => {
       dataIndex: 'is_admin',
       render:(is_admin) => is_admin ? 'ADMINISTRADOR' : 'USUARIO',
     },
+    {
+      title: "Roles",
+      dataIndex: "roles_id",
+      render: (roles_id) => roles_id == 2 ? 'capitan' : 'supervisor',
+    },
   ];
-  
 
   useEffect(() => {
     const getUsersData = base.get("users/").then((response) => {

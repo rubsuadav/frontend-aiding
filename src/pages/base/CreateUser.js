@@ -43,9 +43,10 @@ export default function CreateUser() {
     username: "",
     password: "",
     is_admin: false,
+    roles_id: "",
   });
 
-  const { username, password, is_admin } = user;
+  const { username, password, is_admin, roles_id } = user;
 
   const onInputChange = (e) => {
     if (e.target.name === "is_admin") {
@@ -98,6 +99,17 @@ export default function CreateUser() {
                   checked={is_admin}
                   onChange={(e) => onInputChange(e)}
                 />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Roles</Form.Label>
+                <Form.Select
+                  onChange={(e) => onInputChange(e)}
+                  value={roles_id}
+                  name="roles_id"
+                >
+                  <option value="capitan">Capitan</option>
+                  <option value="supervisor">Supervisor</option>
+                </Form.Select>
               </Form.Group>
             </div>
           </div>

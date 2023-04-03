@@ -31,6 +31,7 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, logo }) => {
     logoutApi
       .post("", { refresh_token: localStorage.getItem("refresh_token") })
       logout();
+      swal("Sesión cerrada", "Hasta pronto!", "success");
 
     return null;
   }

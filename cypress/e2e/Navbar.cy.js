@@ -17,8 +17,8 @@ describe("Footer", () => {
 describe("Login", () => {
   it("can login", () => {
     cy.get(".login").click();
-    cy.get('input[name="username"]').type("aiding");
-    cy.get('input[name="password"]').type("a1d1ng");
+    cy.get('input[name="username"]').type("rub");
+    cy.get('input[name="password"]').type("rub");
     cy.get('button[type="submit"]').click();
     cy.get(".swal-modal").should("be.visible");
     cy.get(".swal-button").click();
@@ -36,8 +36,8 @@ describe("Login", () => {
 describe("Logout", () => {
   it("can logout", () => {
     cy.get(".login").click();
-    cy.get('input[name="username"]').type("aiding");
-    cy.get('input[name="password"]').type("a1d1ng");
+    cy.get('input[name="username"]').type("rub");
+    cy.get('input[name="password"]').type("rub");
     cy.get('button[type="submit"]').click();
     cy.get(".swal-modal").should("be.visible");
     cy.get(".swal-button").click();

@@ -51,6 +51,16 @@ export default function ViewUser() {
               <label id="is_admin">{user.is_admin ? "Sí" : "No"}</label>
             </div>
           </div>
+          <div className="row mb-3">
+            <div className="col-md-6 text-end fw-bold">
+              <label htmlFor="roles_id" className="form-label">
+                Rol:
+              </label>
+            </div>
+            <div className="col-md-6">
+              <label id="roles_id">{user.roles_id == 2 ? "capitan" : "supervisor"}</label>
+            </div>
+          </div>
         </div>
       </div>
 
