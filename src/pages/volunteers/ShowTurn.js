@@ -11,6 +11,7 @@ import {
 import {volunteers} from "./services/backend.js";
 import swal from "sweetalert";
 import { Button} from "react-bootstrap";
+import { Table } from 'antd';
 
 const successMsgDelete = {
   title: "Mensaje de confirmación",
@@ -94,6 +95,43 @@ export default function Details() {
     },
   );
 
+  const columns = [
+    {
+      title: 'ID del Voluntario',
+      dataIndex: 'num_volunteer',
+    },
+    {
+      title: 'Nombre',
+      dataIndex: 'name',
+    },
+    {
+      title: 'Apellidos',
+      dataIndex: 'last_name',
+    },
+    {
+      title: 'NIF',
+      dataIndex: 'nif',
+    },
+    {
+      title: 'Rol',
+      dataIndex: 'rol',
+    },
+  ];
+
+  const [volunteers_data, setVolunteersData] = React.useState([
+    {
+      num_volunteer: '...',
+      nif: '...',
+      name: '...',
+      last_name: '...',
+      rol: '...',
+    }
+  ]);
+
+  useEffect(() => {
+    volunteers.get().then((response) => {setVolunteersData(response.data);});
+  }, []);
+
   return (
     <section>
       <MDBContainer className="py-5">
@@ -169,6 +207,19 @@ export default function Details() {
           </MDBCol>
         </MDBRow>
         <hr />
+        <div className='container my-5'>
+          <h2 className="pt-3">Voluntarios asignados</h2>
+          <br></br>
+          <Table id='table'
+          onRow={(record, rowIndex) => {
+            return {
+              onClick: event => {
+                navigate("/admin/volunteers/" + record.id);
+              },
+          } ;
+          }}
+          columns={columns} dataSource={volunteers_data} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
+        </div>
       </MDBContainer>
     </section>
   );
