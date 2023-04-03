@@ -179,7 +179,7 @@ export default function Details() {
           </MDBCol>
           <MDBCol style={{paddingLeft: "30px"}}>
             <MDBCard style={{width: "600px"}}>
-              <MDBCol style={{paddingTop: "5px"}}>
+              <MDBCol style={{paddingTop: "15px"}}>
                 <MDBCardText className="text-muted w-auto">
                   <Button
                     onClick={() => {navigate(`/admin/volunteers/turns/update/${id}`)}}
@@ -200,6 +200,18 @@ export default function Details() {
                     className="btn btn-danger w-75"
                     >
                       Borrar
+                    </Button>
+                  </MDBCardText>
+              </MDBCol>
+              <hr/>
+              <MDBCol style={{paddingTop: "5px", paddingBottom: "15px"}}>
+                <MDBCardText className="text-muted w-auto">
+                  <Button
+                    onClick={() => {navigate(`/admin/volunteers/volunteerTurns/create/${id}`)}}
+                    type="button"
+                    className="btn btn-light w-75"
+                    >
+                      Asignar voluntario
                     </Button>
                   </MDBCardText>
               </MDBCol>
