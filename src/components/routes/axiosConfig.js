@@ -6,6 +6,7 @@ const requestService = axios.create({
   baseURL: String(backendUrl),
 });
 
+
 let refresh = false;
 
 export function configureAxios(AxiosInstance) {
@@ -29,8 +30,13 @@ export function configureAxios(AxiosInstance) {
   AxiosInstance.interceptors.response.use(
     (resp) => resp,
     async (error) => {
-      const refresh_token = localStorage.getItem("refresh_token");
 
+      // If response is undefined throws error 500 server error
+      if (error.response === undefined) {
+        return Promise.reject(error);
+      }
+
+      const refresh_token = localStorage.getItem("refresh_token");
       if (error.response.status === 401 && !refresh && refresh_token) {
         refresh = true;
         console.log(localStorage.getItem("refresh_token"));
