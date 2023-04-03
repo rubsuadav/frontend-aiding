@@ -30,14 +30,7 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, logo }) => {
   function Logout() {
     logoutApi
       .post("", { refresh_token: localStorage.getItem("refresh_token") })
-      .then((response) => {
-        logout();
-        swal("", "Has cerrado sesión correctamente", "success");
-      })
-      .catch((error) => {
-        console.log(error);
-        swal("", "Ha ocurrido un error", "error");
-      });
+      logout();
 
     return null;
   }
