@@ -34,7 +34,7 @@ function CreateVolunteerTurn() {
             navigate("/admin/volunteers/turns/" + id);
         }).catch((error) => {
             if (error.response && error.response.status === 409) {
-              let error_msgs = {general: "La fecha de inicio debe ser anterior a la de finalización, y la fecha no debe haber pasado."};
+              let error_msgs = {general: "Este voluntario ya está asignado al turno"};
               setErrors(error_msgs);
             }else {
               swal(errorMsg);

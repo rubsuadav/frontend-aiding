@@ -33,6 +33,14 @@ const errorMsgDelete = {
   timer: "5000",
 };
 
+const errorMsgDeleteVolunteer = {
+  title: "Mensaje de error",
+  text: "Se ha producido un error al quitar el voluntario del turno",
+  icon: "error",
+  button: "Aceptar",
+  timer: "5000",
+};
+
 export default function Details() {
   let navigate = useNavigate();
 
@@ -98,7 +106,7 @@ export default function Details() {
         window.location.reload();
       })
       .catch((err) => {
-        swal(errorMsgDelete);
+        swal(errorMsgDeleteVolunteer);
       });
   };
 
@@ -166,8 +174,8 @@ export default function Details() {
   ]);
 
   useEffect(() => {
-    volunteers.get("/volunteerTurns/").then((response) => {
-      const promises = response.data.map((volunteerTurn) => {
+    volunteers.get(`/turns/${id}/volunteers`).then((response) => {
+      const promises = response.data.volunteerTurn.map((volunteerTurn) => {
         return volunteers.get(`${volunteerTurn.volunteer_id}`).then((volunteerResponse) => {
           const data = volunteerResponse.data;
           const updatedData = Object.assign({}, data, {volunteerTurn: volunteerTurn.id})
