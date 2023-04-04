@@ -127,7 +127,10 @@ Servicio Premium: El soporte técnico se proporcionará a través de correo elec
                       <br/>
                       <div class="izquierda">
                       <h3>6. Responsabilidad y gestión de contingencias. </h3>
-                      <p> El proveedor de servicios no será responsable de ningún daño o pérdida resultante del uso de la página web, incluyendo, pero no limitado a, pérdida de datos, interrupción del negocio o pérdida de beneficios. </p>
+                      <p> El proveedor de servicios no será responsable de ningún daño o pérdida resultante del uso de la página web, incluyendo, pero no limitado a, pérdida de datos, interrupción del negocio o pérdida de beneficios. 
+                      En nuestra web, tenemos un sólido plan de gestión de contingencias en caso de una brecha de seguridad o incidente relacionado con la protección de datos personales. Si alguna vez ocurre, notificaremos inmediatamente a los usuarios afectados para garantizar una respuesta oportuna y eficaz. Además, realizaremos una investigación exhaustiva para determinar la naturaleza y el alcance del incidente, implementaremos medidas de seguridad adicionales para evitar futuras brechas y trabajaremos con nuestros proveedores para fortalecer aún más nuestras medidas de seguridad.  
+
+Nuestro objetivo es garantizar la máxima protección de los datos personales de nuestros usuarios en todo momento, y nuestro plan de gestión de contingencias está diseñado para lograr precisamente eso.  </p>
                       </div>
 
                       <br/>
