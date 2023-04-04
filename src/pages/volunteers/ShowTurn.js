@@ -13,6 +13,10 @@ import swal from "sweetalert";
 import { Button} from "react-bootstrap";
 import { Table } from 'antd';
 
+const onChange = (pagination, filters, sorter, extra) => {
+  console.log('params', pagination, filters, sorter, extra);
+};
+
 const successMsgDelete = {
   title: "Mensaje de confirmación",
   text: "El turno se ha borrado correctamente",
@@ -74,6 +78,30 @@ export default function Details() {
       });
   };
 
+  const deleteVolunteerConfirmationAlert = async (volunteerTurn) => {
+    swal({
+      title: "Quitar voluntario",
+      text: "¿Estás seguro que desea quitar el voluntario del turno?",
+      icon: "warning",
+      buttons: ["No", "Sí"],
+    }).then((res) => {
+      if (res) {
+        deleteVolunteerTurn(volunteerTurn);
+      }
+    });
+  };
+
+  const deleteVolunteerTurn = async (volunteerTurn) => {
+    const result = await volunteers
+      .delete(`/volunteerTurns/${volunteerTurn}`)
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        swal(errorMsgDelete);
+      });
+  };
+
   const CustomMenu = React.forwardRef(
     ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
       const [value, setValue] = useState('');
@@ -116,6 +144,15 @@ export default function Details() {
       title: 'Rol',
       dataIndex: 'rol',
     },
+    {
+      title: 'Acción',
+      key: 'action',
+      render: (text, record) => (
+        <Button type="primary" className="btn btn-danger w-75" onClick={() => deleteVolunteerConfirmationAlert(record.volunteerTurn)}>
+        Quitar
+        </Button>
+      ),
+    },
   ];
 
   const [volunteers_data, setVolunteersData] = React.useState([
@@ -129,7 +166,19 @@ export default function Details() {
   ]);
 
   useEffect(() => {
-    volunteers.get().then((response) => {setVolunteersData(response.data);});
+    volunteers.get("/volunteerTurns/").then((response) => {
+      const promises = response.data.map((volunteerTurn) => {
+        return volunteers.get(`${volunteerTurn.volunteer_id}`).then((volunteerResponse) => {
+          const data = volunteerResponse.data;
+          const updatedData = Object.assign({}, data, {volunteerTurn: volunteerTurn.id})
+          return updatedData;
+        })
+      })
+
+      Promise.all(promises).then((volunteerData) => {
+        setVolunteersData(volunteerData);
+      })
+    });
   }, []);
 
   return (
@@ -223,14 +272,7 @@ export default function Details() {
           <h2 className="pt-3">Voluntarios asignados</h2>
           <br></br>
           <Table id='table'
-          onRow={(record, rowIndex) => {
-            return {
-              onClick: event => {
-                navigate("/admin/volunteers/" + record.id);
-              },
-          } ;
-          }}
-          columns={columns} dataSource={volunteers_data} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
+          columns={columns} dataSource={volunteers_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
         </div>
       </MDBContainer>
     </section>
