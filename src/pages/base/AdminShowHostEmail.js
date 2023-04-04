@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { base } from "./services/backend.js";
-import swal from "sweetalert";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
 export default function ShowHostEmail() {
     let navigate = useNavigate();
@@ -25,7 +23,7 @@ export default function ShowHostEmail() {
 
     return (
         <div className="container my-5 shadow">
-            <h1 className="pt-3">Ver cuenta del sistema</h1>
+            <h1 className="pt-3">Cuenta del sistema</h1>
 
             <div className="row justify-content-center">
                 <div className="col-md-6">
@@ -64,7 +62,7 @@ export default function ShowHostEmail() {
                 <Button
                     className="col mb-4 mx-5"
                     variant="outline-primary"
-                    onClick={() => navigate("/admin/base/editHostEmail/")}
+                    onClick={() => navigate("/admin/base/hostemail/update/")}
                 >
                     Editar
                 </Button>

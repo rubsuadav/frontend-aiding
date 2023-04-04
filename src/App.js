@@ -62,6 +62,7 @@ import AdminUpdateEvent from './pages/events/AdminUpdateEvents';
 
 import AdminCreateNotification from './pages/base/AdminCreateNotification';
 import AdminShowHostEmail from './pages/base/AdminShowHostEmail';
+import AdminUpdateHostEmail from './pages/base/AdminUpdateHostEmail';
 
 var navLinksPublic = [
   {
@@ -112,8 +113,8 @@ var navLinksAdmin = [
     path: "admin/volunteers/turns"
   },
   {
-    title: "Notifications",
-    path: "admin/base/createnotification"
+    title: "Crear Notificación",
+    path: "admin/base/notification/create"
   },
 
   {
@@ -280,8 +281,9 @@ export default function App() {
               <Route path="volunteers/turns/:id" element={ <ShowTurn/>} />
               <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
 
-              <Route path="base/createnotification" element={ <AdminCreateNotification/>} />
+              <Route path="base/notification/create" element={ <AdminCreateNotification/>} />
               <Route path="base/hostemail" element={ <AdminShowHostEmail/>} />
+              <Route path="base/hostemail/update" element={ <AdminUpdateHostEmail/>} />
             </Route>
               
           </Routes>

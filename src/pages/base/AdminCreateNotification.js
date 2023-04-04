@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -23,7 +24,8 @@ const errorMsg = {
 }
 
 
-function CreateNotificationAdmin(){
+
+function AdminCreateNotification(){
     let navigate = useNavigate();
 
     function postNotification(notification) {
@@ -58,20 +60,16 @@ function CreateNotificationAdmin(){
           .map(email => email.trim())
           .filter(email => emailRegex.test(email) === false);
 
-        if (invalidEmails.length > 0) {
-          return false;
-          // return `Las siguientes direcciones de correo electrónico no son válidas: ${invalidEmails.join(', ')}`;
-        }
-        return true;
+        return invalidEmails.length <= 0;
       }
 
     function validateForm() {
         let error_msgs = {};
 
     if (recipients === "") {
-      error_msgs.recipients = "Ingrese un correo electrónico";
+      error_msgs.recipients = "Ingrese, al menos, un correo electrónico";
       } else if (recipients !== "" && !validateEmails(recipients)) {
-      error_msgs.recipients = "Este no es un email válido";
+      error_msgs.recipients = "Algunos correos electrónicos no son válidos";
     }
     if (subject === "" || subject === null) {
       error_msgs.subject = "El asunto no puede estar vacío";
@@ -83,12 +81,14 @@ function CreateNotificationAdmin(){
 
     return Object.keys(error_msgs).length === 0;
 }
+    const location = useLocation();
+    const initialRecipients = location.state?.initialRecipients || [];
 
     const [notification, setNotification] = useState({
         subject: "",
         message: "",
-        recipients: "",
-    });
+        recipients: initialRecipients.join(", "), // aquí se establece el valor inicial
+      });
 
     const{ subject, message, recipients} = notification;
     
@@ -168,4 +168,4 @@ function CreateNotificationAdmin(){
         </div>
       );
 }
-export default CreateNotificationAdmin;
+export default AdminCreateNotification;

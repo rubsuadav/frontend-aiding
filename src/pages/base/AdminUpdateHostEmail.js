@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { base } from "./services/backend.js";
@@ -21,8 +21,7 @@ const errorMsg = {
   timer: "5000",
 }
 
-export default function EditUser() {
-  const { id } = useParams();
+export default function UpdateHostEmail() {
   const navigate = useNavigate();
 
   const [hostEmail, setHostEmail] = useState({
