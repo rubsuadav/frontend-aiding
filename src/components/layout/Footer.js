@@ -10,11 +10,11 @@ function Footer() {
     }
 
     function handleTerms() {
-        navigate('/base/terms');
+        navigate('policies/terms');
     }
 
     function handleSLAs() {
-        navigate('/base/slas');
+        navigate('policies/slas');
     }
 
     return (
