@@ -215,6 +215,7 @@
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700');
 @import url('https://fonts.googleapis.com/css?family=Catamaran:400,800');
+
 .error-container {
   text-align: center;
   font-size: 106px;
@@ -222,10 +223,12 @@
   font-weight: 800;
   margin: 70px 15px;
 }
+
 .error-container > span {
   display: inline-block;
   position: relative;
 }
+
 .error-container > span.four {
   width: 136px;
   height: 43px;
@@ -235,6 +238,7 @@
     linear-gradient(105deg, transparent 0%, transparent 40%, rgba(0, 0, 0, 0.06) 41%, rgba(0, 0, 0, 0.07) 76%, transparent 77%, transparent 100%),
     linear-gradient(to right, #b6afee, #7600dd);
 }
+
 .error-container > span.four:before,
 .error-container > span.four:after {
   content: '';
@@ -242,6 +246,7 @@
   position: absolute;
   border-radius: 999px;
 }
+
 .error-container > span.four:before {
   width: 43px;
   height: 156px;
@@ -252,6 +257,7 @@
     linear-gradient(116deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.07) 50%, transparent 51%, transparent 100%),
     linear-gradient(to top, #a661e3, #b6afee, #aba2ec, #a196ef, #a661e3);
 }
+
 .error-container > span.four:after {
   width: 137px;
   height: 43px;
@@ -271,6 +277,7 @@
   overflow: hidden;
   animation: bgshadow 5s infinite;
 }
+
 .error-container > span.zero:before {
   content: '';
   display: block;
@@ -285,6 +292,7 @@
     linear-gradient(95deg, transparent 0%, transparent 8%, rgba(0, 0, 0, 0.07) 9%, transparent 50%, transparent 100%),
     linear-gradient(85deg, transparent 0%, transparent 19%, rgba(0, 0, 0, 0.05) 20%, rgba(0, 0, 0, 0.07) 91%, transparent 92%, transparent 100%);
 }
+
 .error-container > span.zero:after {
   content: '';
   display: block;
@@ -348,18 +356,22 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 body {
   background-color: #FDFAF5;
   margin-bottom: 50px;
 }
+
 html, button, input, select, textarea {
     font-family: 'Montserrat', Helvetica, sans-serif;
     color: #bbb;
 }
+
 h1 {
   text-align: center;
   margin: 30px 15px;
 }
+
 .zoom-area { 
   max-width: 490px;
   margin: 30px auto 30px;
