@@ -341,18 +341,19 @@
   0% {
     box-shadow: inset -160px 160px 0px 5px rgba(0, 0, 0, 0.4);
   }
+
   45% {
     box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.1);
   }
+
   55% {
     box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.1);
   }
+  
   100% {
     box-shadow: inset 160px -160px 0px 5px rgba(0, 0, 0, 0.4);
   }
-  
 }
-
 /* demo stuff */
 * {
     -webkit-box-sizing: border-box;
@@ -365,10 +366,10 @@ body {
   margin-bottom: 50px;
 }
 
-html, 
-button, 
-input, 
-select, 
+html,
+button,
+input,
+select,
 textarea {
     font-family: 'Montserrat', Helvetica, sans-serif;
     color: #bbb;
