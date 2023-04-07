@@ -224,24 +224,23 @@ const Partners = () => {
   const [selectedFile, setSelectedFile] = React.useState(null);
 
   var [errors, setErrors] = useState({});
-
+  
   const handleSubmit = async(event) => {
     event.preventDefault()
     const formData = new FormData();
     formData.append("selectedFile", selectedFile);
-    try {
-      const response = await axios({
-        method: "post",
-        url: fileUrl+"partners/import/",
-        data: formData,
-      });
+     partners.post("import/",formData).then((response)=>{
+      console.log(fileUrl);
       setShow(false);
-    } catch(error) {
+      navigate("/admin/partners/");
+      window.location.reload(true);
+    }).catch((error) => {
       setErrors(error.response.data["error"]);
       console.log(errors);
-    }
+    });
     partners.get().then((response) => {setPartnersData(response.data);});
   }
+
 
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0])
