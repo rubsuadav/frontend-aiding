@@ -60,6 +60,8 @@ import ShowEvent from './pages/events/ShowEvent';
 import AdminListEvent from './pages/events/AdminListEvents';
 import AdminUpdateEvent from './pages/events/AdminUpdateEvents';
 
+import Error404 from "./pages/Error404";
+
 var navLinksPublic = [
   {
     title: "Inicio",
@@ -268,8 +270,9 @@ export default function App() {
                   <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
                   <Route path="volunteers/turns/:id" element={ <ShowTurn/>} />
                   <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
-                </Route>
                   
+                </Route>
+                <Route path="*" element={<Error404 />} />
               </Routes>
             </div>
             <Footer />
