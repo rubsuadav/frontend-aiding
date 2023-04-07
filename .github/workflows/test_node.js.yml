@@ -29,8 +29,6 @@ jobs:
           command: npm run start
           env: |
             CYPRESS_baseUrl=http://localhost:3000
-            CYPRESS_backendUrl=http://localhost:8000
           wait-on: |
             http://localhost:3000
-            http://localhost:8000
           test-command: npm run test

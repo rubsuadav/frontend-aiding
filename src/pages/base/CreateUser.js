@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
+import { rolesBE } from "./services/backend.js";
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -29,7 +30,7 @@ export default function CreateUser() {
     const aux = base
       .post("users/", user)
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         swal(successMsg);
         navigate("/admin/base/users");
       })
@@ -46,7 +47,29 @@ export default function CreateUser() {
     roles_id: "",
   });
 
+  const [roles, setRoles] = useState([
+    {
+      id: "",
+      name: "",
+    },
+  ]);
+
   const { username, password, is_admin, roles_id } = user;
+
+  function getRoles() {
+    rolesBE
+      .get("")
+      .then((response) => {
+        setRoles(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    getRoles();
+  }, []);
 
   const onInputChange = (e) => {
     if (e.target.name === "is_admin") {
@@ -75,6 +98,7 @@ export default function CreateUser() {
                   value={username}
                   name="username"
                   placeholder="Nombre del usuario"
+                  required = {true}
                 />
               </Form.Group>
   
@@ -86,6 +110,7 @@ export default function CreateUser() {
                   type="password"
                   name="password"
                   placeholder="Contraseña"
+                  required = {true}
                 />
               </Form.Group>
   
@@ -107,8 +132,10 @@ export default function CreateUser() {
                   value={roles_id}
                   name="roles_id"
                 >
-                  <option value="capitan">Capitan</option>
-                  <option value="supervisor">Supervisor</option>
+                  <option value=""></option>
+                    {roles.map((rol) => (
+                      <option value={rol.name}>{rol.name}</option>
+                    ))}
                 </Form.Select>
               </Form.Group>
             </div>

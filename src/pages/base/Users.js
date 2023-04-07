@@ -17,7 +17,7 @@ const Users = () => {
       id: "...",
       username: "...",
       is_admin: "...",
-      roles: "",
+      roles_id: "",
     },
   ]);
 
@@ -38,11 +38,6 @@ const Users = () => {
       title: "Rol del usuario",
       dataIndex: 'is_admin',
       render:(is_admin) => is_admin ? 'ADMINISTRADOR' : 'USUARIO',
-    },
-    {
-      title: "Roles",
-      dataIndex: "roles_id",
-      render: (roles_id) => roles_id == 2 ? 'capitan' : 'supervisor',
     },
   ];
 

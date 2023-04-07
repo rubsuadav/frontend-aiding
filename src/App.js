@@ -110,6 +110,17 @@ var navLinksAdmin = [
   },
 ];
 
+var navLinksCaptainSupervisor = [
+  {
+    title: "Turnos",
+    path: "admin/volunteers/turns"
+  },
+  {
+    title: "Voluntarios",
+    path: "admin/volunteers",
+  },
+];
+
 var logo = ["./logo.png"];
 
 export default function App() {
@@ -121,6 +132,7 @@ export default function App() {
           <Navbar
             navLinksPublic={navLinksPublic}
             navLinksAdmin={navLinksAdmin}
+            navLinksCaptainSupervisor={navLinksCaptainSupervisor}
             logo={logo}
           />
           <Routes>
