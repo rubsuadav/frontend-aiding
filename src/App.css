@@ -286,7 +286,6 @@
   transform: rotate(45deg);
   width: 90px;
   height: 90px;
-  background-color: transparent;
   left: 0px;
   bottom: 0px;
   background:
@@ -313,7 +312,7 @@
   height: 156px;
   border-radius: 999px;
   background:
-    linear-gradient(-45deg, transparent 0%, rgba(0, 0, 0, 0.06) 50%,  transparent 51%, transparent 100%),
+    linear-gradient(-45deg, transparent 0%, rgba(0, 0, 0, 0.06) 50%, transparent 51%, transparent 100%),
     linear-gradient(to top right, #7600dd, #8218df, #877bde, #a196ef, #998eed, #998eed, #877bde);
   overflow: hidden;
 }
@@ -327,7 +326,7 @@
   height: 70px;
   left: 43px;
   bottom: 43px;
-  background: #FDFAF5;
+  background: #fdfaf5;
   box-shadow: -2px 2px 2px 0px rgba(0, 0, 0, 0.1);
 }
 
