@@ -239,8 +239,8 @@
     linear-gradient(to right, #b6afee, #7600dd);
 }
 
-.error-container > span.four:before,
-.error-container > span.four:after {
+.error-container > span.four::before,
+.error-container > span.four::after {
   content: '';
   display: block;
   position: absolute;
@@ -350,6 +350,7 @@
   100% {
     box-shadow: inset 160px -160px 0px 5px rgba(0, 0, 0, 0.4);
   }
+  
 }
 
 /* demo stuff */
@@ -364,7 +365,11 @@ body {
   margin-bottom: 50px;
 }
 
-html, button, input, select, textarea {
+html, 
+button, 
+input, 
+select, 
+textarea {
     font-family: 'Montserrat', Helvetica, sans-serif;
     color: #bbb;
 }
@@ -374,11 +379,9 @@ h1 {
   margin: 30px 15px;
 }
 
-.zoom-area { 
+.zoom-area {
   max-width: 490px;
   margin: 30px auto 30px;
   font-size: 19px;
   text-align: center;
 }
-
-
