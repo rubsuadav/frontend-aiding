@@ -50,7 +50,7 @@ export function configureAxios(AxiosInstance) {
           localStorage.setItem("access_token", response.data.access);
           localStorage.setItem("refresh_token", response.data.refresh);
           return requestService(error.config);
-        } 
+        }
         // Token refresh expired
         else {
           localStorage.removeItem("access_token");
