@@ -65,6 +65,7 @@ import ListTurn from "./pages/volunteers/ListTurn";
 import CreateTurn from "./pages/volunteers/CreateTurn";
 import ShowTurn from "./pages/volunteers/ShowTurn";
 import UpdateTurn from "./pages/volunteers/UpdateTurn";
+import CreateVolunteerTurn from "./pages/volunteers/CreateVolunteerTurn";
 
 // Events
 import AdminCreateEvent from './pages/events/AdminCreateEvents';
@@ -284,6 +285,7 @@ export default function App() {
               <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
               <Route path="volunteers/turns/:id" element={ <ShowTurn/>} />
               <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
+              <Route path="volunteers/volunteerTurns/create/:id" element={ <CreateVolunteerTurn/>} />
             </Route>
               
           </Routes>
