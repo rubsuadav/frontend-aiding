@@ -8,16 +8,24 @@ import { AuthContextProvider } from "./components/routes/authContext";
 import PublicRoute from "./components/routes/PublicRoute";
 import PrivateRoute from "./components/routes/PrivateRoute";
 
-// importamos los componentes creados
+// Components
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+
+// Errors
+import ERROR_404 from "./pages/error/404";
+
+// Advertisement
 import ListAdvertisement from "./pages/information/advertisement/ListAdvertisement";
 import AdminListAdvertisement from "./pages/information/advertisement/AdminListAdvertisement";
 import ShowAdvertisement from "./pages/information/advertisement/ShowAdvertisement";
 import AdminCreateAdvertisement from "./pages/information/advertisement/AdminCreateAdvertisement";
 import AdminUpdateAdvertisement from "./pages/information/advertisement/AdminUpdateAdvertisement";
 
+// Home
 import Home from "./pages/Home";
+
+// Partners
 import ListPartner from "./pages/partners/ListPartner";
 import ShowPartner from "./pages/partners/ShowPartner";
 import CreatePartner from "./pages/partners/CreatePartner";
@@ -26,17 +34,25 @@ import CreateCommunication from "./pages/partners/CreateCommunication";
 import UpdateCommunication from './pages/partners/UpdateCommunication';
 import CreateDonation from './pages/partners/CreateDonation';
 
+// Contacts
+import ListContact from "./pages/base/ListContact";
+import ContactDetail from './pages/base/ShowContact';
+import CreateContact from './pages/base/CreateContact';
+
+// Users
 import Users from "./pages/base/Users";
 import ViewUser from "./pages/base/ViewUser";
 import EditUser from "./pages/base/EditUser";
 import CreateUser from "./pages/base/CreateUser";
 import Login from "./pages/base/Login";
 
+// Volunteers
 import ListVolunteers from "./pages/volunteers/ListVolunteers";
 import CreateVolunteer from "./pages/volunteers/CreateVolunteer";
 import ShowVolunteer from "./pages/volunteers/ShowVolunteer";
 import UpdateVolunteer from "./pages/volunteers/UpdateVolunteer";
 
+// Resources
 import UpdateResource from "./pages/information/map/UpdateResource.js";
 import CreateResource from "./pages/information/map/CreateResource.js";
 import ShowResource from "./pages/information/map/ShowResource.js";
@@ -44,16 +60,14 @@ import ResourcesTable from "./pages/information/map/ResourcesTable.js";
 import ResourcesListEdit from "./components/ResourcesListEdit";
 import ShowResourceUser from "./pages/information/map/ShowResourceUser.js";
 
-import ListContact from "./pages/base/ListContact";
-import ContactDetail from './pages/base/ShowContact';
-import CreateContact from './pages/base/CreateContact';
-
+// Turns
 import ListTurn from "./pages/volunteers/ListTurn";
 import CreateTurn from "./pages/volunteers/CreateTurn";
 import ShowTurn from "./pages/volunteers/ShowTurn";
 import UpdateTurn from "./pages/volunteers/UpdateTurn";
 import CreateVolunteerTurn from "./pages/volunteers/CreateVolunteerTurn";
 
+// Events
 import AdminCreateEvent from './pages/events/AdminCreateEvents';
 import ProgramedEvent from './pages/events/ProgramedEvent';
 import StartedEvent from './pages/events/StartedEvent';
