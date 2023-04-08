@@ -49,7 +49,7 @@ function CreateDonation() {
     const [donation, setDonation] = useState({
       date: "",
       amount: "",
-      periodicity: "",
+      periodicity: "MENSUAL",
     });
 
     const {

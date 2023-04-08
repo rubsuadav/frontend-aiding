@@ -162,10 +162,18 @@ const AdminListEvent = () => {
       {
        title:"Fecha de inicio",
        dataIndex:"start_date",
+       render: (start_date) => {
+        const formattedDateTime = new Date(start_date).toLocaleString('es-ES', {day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit'})
+        return <span>{formattedDateTime}</span>
+        }
       },
       {
         title:"Fecha de finalizado",
         dataIndex:"end_date",
+        render: (end_date) => {
+          const formattedDateTime = new Date(end_date).toLocaleString('es-ES', {day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit'})
+          return <span>{formattedDateTime}</span>
+        }
        },
     ];
   

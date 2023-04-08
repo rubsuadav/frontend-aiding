@@ -52,17 +52,36 @@ export default function Login() {
     setForm({ ...form, [event.target.name]: event.target.value });
   }
 
+  const requestRole = async (token) => {
+    try {
+      const roleApi = axios.create({
+        baseURL: backendUrl,
+        headers: {
+          Authorization: `Bearer ${token.access}`,
+        },
+        withCredentials: true,
+      });
+  
+      const response = await roleApi.get("base/user/role/");
+      return String(response.data.role);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  };
+
   function handleSubmit(event) {
     event.preventDefault();
+    let role = null;
 
     if (!validateForm()) return;
 
     setLoading(true);
     axios
       .post(`${backendUrl}token/`, { username, password })
-      .then((response) => {
-        console.log(response.data);
-        login(response.data);
+      .then(async (response) => {
+        role = await requestRole(response.data);
+        console.log(role);
+        login(response.data, role);
         swal("Bienvenido", "Has iniciado sesión correctamente", "success");
         navigate("/");
       })
