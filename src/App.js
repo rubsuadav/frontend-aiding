@@ -127,6 +127,17 @@ var navLinksAdmin = [
   },
 ];
 
+var navLinksCaptainSupervisor = [
+  {
+    title: "Turnos",
+    path: "admin/volunteers/turns"
+  },
+  {
+    title: "Voluntarios",
+    path: "admin/volunteers",
+  },
+];
+
 var logo = ["./logo.png"];
 
 export default function App() {
@@ -139,6 +150,7 @@ export default function App() {
               <Navbar
                 navLinksPublic={navLinksPublic}
                 navLinksAdmin={navLinksAdmin}
+                navLinksCaptainSupervisor={navLinksCaptainSupervisor}
                 logo={logo}
               />
               <Routes>
@@ -151,7 +163,7 @@ export default function App() {
                     path="base/contacts/CreateContact"
                     element={<CreateContact />}
                   />
-
+                  
                   {/* Information */}
                   <Route
                     path="information/sections"
@@ -180,6 +192,7 @@ export default function App() {
                     path="/events/programed" 
                     element={ <ProgramedEvent/>} 
                   />
+
 
                   <Route 
                     path="/events/started" 

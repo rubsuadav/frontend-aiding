@@ -17,6 +17,7 @@ const Users = () => {
       id: "...",
       username: "...",
       is_admin: "...",
+      roles_id: "",
     },
   ]);
 
@@ -39,7 +40,6 @@ const Users = () => {
       render:(is_admin) => is_admin ? 'ADMINISTRADOR' : 'USUARIO',
     },
   ];
-  
 
   useEffect(() => {
     const getUsersData = base.get("users/").then((response) => {

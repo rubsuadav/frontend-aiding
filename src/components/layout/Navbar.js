@@ -13,8 +13,8 @@ import Button from "react-bootstrap/Button";
 import { backendUrl } from "../../config";
 import { useAuthContext } from "../routes/authContext";
 
-const NavigationBar = ({ navLinksPublic, navLinksAdmin, logo }) => {
-  const { logout, isAuthenticated } = useAuthContext();
+const NavigationBar = ({ navLinksPublic, navLinksAdmin, navLinksCaptainSupervisor, logo }) => {
+  const { logout, isAuthenticated, isCaptain, isSupervisor, isAdmin } = useAuthContext();
 
   /** Logout logic */
   const logoutApi = axios.create({
@@ -30,14 +30,8 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, logo }) => {
   function Logout() {
     logoutApi
       .post("", { refresh_token: localStorage.getItem("refresh_token") })
-      .then((response) => {
-        logout();
-        swal("", "Has cerrado sesión correctamente", "success");
-      })
-      .catch((error) => {
-        console.log(error);
-        swal("", "Ha ocurrido un error", "error");
-      });
+      logout();
+      swal("Sesión cerrada", "Hasta pronto!", "success");
 
     return null;
   }
@@ -72,9 +66,19 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, logo }) => {
                 <NavDropdown.Item>{<Nav.Link as={Link} to="/events/started">Empezados</Nav.Link>}</NavDropdown.Item>
               </NavDropdown> 
             {/** Dropdown menu for admin */}
-            {isAuthenticated && (
+            {isAdmin && (
               <NavDropdown title="Administración" id="basic-nav-dropdown">
                 {navLinksAdmin.map((link) => (
+                  <NavDropdown.Item key={link.path} as={Link} to={link.path}>
+                    {link.title}
+                  </NavDropdown.Item>
+                ))}
+              </NavDropdown>
+            )}
+            {/** Dropdown menu for captain and supervisor*/}
+            {isAuthenticated && (isCaptain || isSupervisor) && (
+              <NavDropdown title="Menú para capitanes/supervisores" id="basic-nav-dropdown">
+                {navLinksCaptainSupervisor.map((link) => (
                   <NavDropdown.Item key={link.path} as={Link} to={link.path}>
                     {link.title}
                   </NavDropdown.Item>
@@ -85,12 +89,12 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, logo }) => {
         </Navbar.Collapse>
         {/** Login and logout buttons */}
         {isAuthenticated && (
-          <Button variant="light" onClick={Logout}>
+          <Button variant="light" onClick={Logout} className="logout">
             Cerrar sesión
           </Button>
         )}
         {!isAuthenticated && (
-          <Nav.Link key="base/login" as={Link} to="base/login">
+          <Nav.Link key="base/login" as={Link} to="base/login" className="login">
             Iniciar sesión
           </Nav.Link>
         )}
