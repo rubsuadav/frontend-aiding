@@ -52,6 +52,7 @@ import ListTurn from "./pages/volunteers/ListTurn";
 import CreateTurn from "./pages/volunteers/CreateTurn";
 import ShowTurn from "./pages/volunteers/ShowTurn";
 import UpdateTurn from "./pages/volunteers/UpdateTurn";
+import CreateVolunteerTurn from "./pages/volunteers/CreateVolunteerTurn";
 
 import AdminCreateEvent from './pages/events/AdminCreateEvents';
 import ProgramedEvent from './pages/events/ProgramedEvent';
@@ -59,6 +60,8 @@ import StartedEvent from './pages/events/StartedEvent';
 import ShowEvent from './pages/events/ShowEvent';
 import AdminListEvent from './pages/events/AdminListEvents';
 import AdminUpdateEvent from './pages/events/AdminUpdateEvents';
+
+import Error404 from "./pages/Error404";
 
 var navLinksPublic = [
   {
@@ -126,165 +129,170 @@ var logo = ["./logo.png"];
 export default function App() {
   return (
     <div className="App">
+      <div className="container-principal">
+        <AuthContextProvider>
+          <Router>
+            <div className="container-secundario">
+              <Navbar
+                navLinksPublic={navLinksPublic}
+                navLinksAdmin={navLinksAdmin}
+                navLinksCaptainSupervisor={navLinksCaptainSupervisor}
+                logo={logo}
+              />
+              <Routes>
+                {/* Public routes ===========================================*/}
+                <Route path="/" element={<PublicRoute />}>
+                  {/* Home */}
+                  <Route index element={<Home />} />
+                  {/* Contacto */}
+                  <Route
+                    path="base/contacts/CreateContact"
+                    element={<CreateContact />}
+                  />
+                  
+                  {/* Information */}
+                  <Route
+                    path="information/sections"
+                    element={<ListAdvertisement />}
+                  />
+                  <Route
+                    path="information/sections/:id"
+                    element={<ListAdvertisement />}
+                  />
+                  <Route
+                    path="information/advertisements/:id"
+                    element={<ShowAdvertisement />}
+                  />
+                  <Route
+                    exact
+                    path="information/map-resources"
+                    element={<ResourcesListEdit />}
+                  />
+                  <Route
+                    path="information/map-resources/:id"
+                    element={<ShowResourceUser />}
+                  />
+                  
+                  {/* Events */}
+                  <Route 
+                    path="/events/programed" 
+                    element={ <ProgramedEvent/>} 
+                  />
 
-      <AuthContextProvider>
-        <Router>
-          <Navbar
-            navLinksPublic={navLinksPublic}
-            navLinksAdmin={navLinksAdmin}
-            navLinksCaptainSupervisor={navLinksCaptainSupervisor}
-            logo={logo}
-          />
-          <Routes>
-            {/* Public routes ===========================================*/}
-            <Route path="/" element={<PublicRoute />}>
-              {/* Home */}
-              <Route index element={<Home />} />
-              {/* Contacto */}
-              <Route
-                path="base/contacts/CreateContact"
-                element={<CreateContact />}
-              />
 
-              {/* Information */}
-              <Route
-                path="information/sections"
-                element={<ListAdvertisement />}
-              />
-              <Route
-                path="information/sections/:id"
-                element={<ListAdvertisement />}
-              />
-              <Route
-                path="information/advertisements/:id"
-                element={<ShowAdvertisement />}
-              />
-              <Route
-                exact
-                path="information/map-resources"
-                element={<ResourcesListEdit />}
-              />
-              <Route
-                path="information/map-resources/:id"
-                element={<ShowResourceUser />}
-              />
-              
-              {/* Events */}
-              <Route 
-                path="/events/programed" 
-                element={ <ProgramedEvent/>} 
-              />
+                  <Route 
+                    path="/events/started" 
+                      element={ <StartedEvent/>} 
+                  />
 
-              <Route 
-                path="/events/started" 
-                  element={ <StartedEvent/>} 
-              />
+                  <Route 
+                    path="/events/:id" 
+                    element={ <ShowEvent/>} 
+                  />
 
-              <Route 
-                path="/events/:id" 
-                element={ <ShowEvent/>} 
-              />
+                  {/* Login */}
+                  <Route path="base/login" element={<Login />} />
+                </Route>
 
-              {/* Login */}
-              <Route path="base/login" element={<Login />} />
-            </Route>
+                {/* Admin routes ============================================*/}
+                <Route path="/admin" element={<PrivateRoute />}>
+                  {/* Base */}
+                  <Route path="base/contacts" element={<ListContact />} />
+                  <Route path="base/contacts/:id" element={<ContactDetail />} />
+                  <Route exact path="base/users" element={<Users />} />
+                  <Route exact path="base/users/crearUsuario" element={<CreateUser />} />
+                  <Route exact path="base/users/verUsuario/:id" element={<ViewUser />} />
+                  <Route exact path="base/users/editarUsuario/:id" element={<EditUser />} />
 
-            {/* Admin routes ============================================*/}
-            <Route path="/admin" element={<PrivateRoute />}>
-              {/* Base */}
-              <Route path="base/contacts" element={<ListContact />} />
-              <Route path="base/contacts/:id" element={<ContactDetail />} />
-              <Route exact path="base/users" element={<Users />} />
-              <Route exact path="base/users/crearUsuario" element={<CreateUser />} />
-              <Route exact path="base/users/verUsuario/:id" element={<ViewUser />} />
-              <Route exact path="base/users/editarUsuario/:id" element={<EditUser />} />
+                  {/* Information */}
+                  <Route
+                    path="information/advertisements/create"
+                    element={<AdminCreateAdvertisement />}
+                  />
+                  <Route
+                    path="information/advertisements/:id/update"
+                    element={<AdminUpdateAdvertisement />}
+                  />
+                  <Route
+                    path="information/advertisements"
+                    element={<AdminListAdvertisement />}
+                  />
+                  <Route
+                    exact
+                    path="information/edit-resource/:id"
+                    element={<UpdateResource />}
+                  />
+                  <Route
+                    path="information/resources/:id"
+                    element={<ShowResource />}
+                  />
+                  <Route
+                    exact
+                    path="information/create-resource"
+                    element={<CreateResource />}
+                  />
+                  <Route
+                    exact
+                    path="information/resources"
+                    element={<ResourcesTable />}
+                  />
 
-              {/* Information */}
-              <Route
-                path="information/advertisements/create"
-                element={<AdminCreateAdvertisement />}
-              />
-              <Route
-                path="information/advertisements/:id/update"
-                element={<AdminUpdateAdvertisement />}
-              />
-              <Route
-                path="information/advertisements"
-                element={<AdminListAdvertisement />}
-              />
-              <Route
-                exact
-                path="information/edit-resource/:id"
-                element={<UpdateResource />}
-              />
-              <Route
-                path="information/resources/:id"
-                element={<ShowResource />}
-              />
-              <Route
-                exact
-                path="information/create-resource"
-                element={<CreateResource />}
-              />
-              <Route
-                exact
-                path="information/resources"
-                element={<ResourcesTable />}
-              />
+                  {/* Partner*/}
+                  <Route path="partners" element={<ListPartner />} />
+                  <Route path="partners/:id" element={<ShowPartner />} />
+                  <Route path="partners/create" element={<CreatePartner />} />
+                  <Route path="partners/update/:id" element={<UpdatePartner />} />
 
-              {/* Partner*/}
-              <Route path="partners" element={<ListPartner />} />
-              <Route path="partners/:id" element={<ShowPartner />} />
-              <Route path="partners/create" element={<CreatePartner />} />
-              <Route path="partners/update/:id" element={<UpdatePartner />} />
+                  <Route
+                    path="partners/:id/communication/create"
+                    element={<CreateCommunication />}
+                  />
+                  <Route
+                    path="partners/:id/communication/update/:idc"
+                    element={<UpdateCommunication />}
+                  />
+                  <Route
+                    path="partners/:id/donation/create"
+                    element={<CreateDonation />}
+                  />
+                  {/* Volunteers */}
+                  <Route path="volunteers" element={<ListVolunteers />} />
+                  <Route path="volunteers/create" element={<CreateVolunteer />} />
+                  <Route path="volunteers/:id" element={<ShowVolunteer />} />
+                  <Route
+                    path="volunteers/update/:id"
+                    element={<UpdateVolunteer />}
+                  />
+                
 
-              <Route
-                path="partners/:id/communication/create"
-                element={<CreateCommunication />}
-              />
-              <Route
-                path="partners/:id/communication/update/:idc"
-                element={<UpdateCommunication />}
-              />
-              <Route
-                path="partners/:id/donation/create"
-                element={<CreateDonation />}
-              />
-              {/* Volunteers */}
-              <Route path="volunteers" element={<ListVolunteers />} />
-              <Route path="volunteers/create" element={<CreateVolunteer />} />
-              <Route path="volunteers/:id" element={<ShowVolunteer />} />
-              <Route
-                path="volunteers/update/:id"
-                element={<UpdateVolunteer />}
-              />
-            
+                  <Route 
+                    path="/admin/events/" 
+                    element={ <AdminListEvent/>} 
+                  />
 
-              <Route 
-                path="/admin/events/" 
-                element={ <AdminListEvent/>} 
-              />
+                  
+                  <Route 
+                    path="/admin/events/create" 
+                      element={ <AdminCreateEvent/>} 
+                  />
 
-              
-              <Route 
-                path="/admin/events/create" 
-                  element={ <AdminCreateEvent/>} 
-              />
-
-              <Route 
-                path="/admin/events/:id/update" 
-                element={ <AdminUpdateEvent/>} 
-              />
-              <Route path="volunteers/turns" element={ <ListTurn/>} />
-              <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
-              <Route path="volunteers/turns/:id" element={ <ShowTurn/>} />
-              <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
-            </Route>
-              
-          </Routes>
-        </Router>
-      </AuthContextProvider>
-      <Footer />
+                  <Route 
+                    path="/admin/events/:id/update" 
+                    element={ <AdminUpdateEvent/>} 
+                  />
+                  <Route path="volunteers/turns" element={ <ListTurn/>} />
+                  <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
+                  <Route path="volunteers/turns/:id" element={ <ShowTurn/>} />
+                  <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
+                  <Route path="volunteers/volunteerTurns/create/:id" element={ <CreateVolunteerTurn/>} />
+                </Route>
+                <Route path="*" element={<Error404 />} />
+              </Routes>
+            </div>
+            <Footer />
+          </Router>
+        </AuthContextProvider>
+      </div>
     </div>
   );
 }
