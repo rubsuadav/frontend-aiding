@@ -62,13 +62,27 @@ export default function Details() {
   }
 
   function createDonationRedirect(){
+    console.log(existDonation());
+    if (existDonation()){
+      navigate(`/admin/partners/${id}/donation/edit`);
+    }else{
     navigate(`/admin/partners/${id}/donation/create`);
+    }
   }
   
   const loadDonation = async () => {
     const result = await partners.get(`/${id}/donation`);
     setDonation(result.data);
   };
+
+  function existDonation(){
+    if (donation.date == "" || donation.date == undefined){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
 
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
@@ -434,16 +448,16 @@ export default function Details() {
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol>
-                    <MDBCardText className="text-muted w-auto">
-                      <Button onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
-                        Añadir Donación
-                      </Button>
-                    </MDBCardText>
-                  </MDBCol>
-                </MDBRow>
+                <hr/>
+                  <MDBRow>
+                    <MDBCol>
+                      <MDBCardText className="text-muted w-auto">
+                        <Button onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
+                          Editar Donación
+                        </Button>
+                      </MDBCardText>
+                    </MDBCol>
+                  </MDBRow>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

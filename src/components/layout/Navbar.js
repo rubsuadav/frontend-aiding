@@ -46,13 +46,16 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, logo }) => {
     <Navbar className="navbar" expand="sm">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          <img
-            src={logo}
-            width="180"
-            height="80"
-            className="d-inline-block align-top"
-            alt="Logo"
-          />
+        <img
+          src={logo}
+          width="180"
+          height="80"
+          className="d-inline-block align-top"
+          alt="Logo"
+          loading="lazy"
+          key={new Date().getTime()}
+        />
+
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end">
