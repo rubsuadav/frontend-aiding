@@ -50,15 +50,41 @@ export default function UpdateHostEmail() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await base.put(`/hostEmail/`, hostEmail);
-      swal(successMsg);
-      navigate("/");
+      if (validateForm()) {
+        await base.put(`/hostEmail/`, hostEmail);
+        swal(successMsg);
+        navigate("/");
+      }
     } catch (error) {
       console.error(error);
       swal(errorMsg);
     }
   };
+  const [errors, setErrors] = useState({});
 
+  function validateEmail(email) {
+    const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return regex.test(email);
+  }
+
+  function validateForm() {
+    let error_msgs = {};
+
+    if (email === "" || email === null) {
+      error_msgs.email = "El email no puede estar vacío";
+    } else if (!validateEmail(email)) {
+      error_msgs.email = "Este no es un email válido";
+    }
+
+    setErrors(error_msgs);
+    
+    if (Object.keys(error_msgs).length === 0){
+      return true;
+    } else {
+      return false;
+    }
+
+  }
   return (
     <div className="container my-5 shadow">
       <h1 className="pt-3">Editar correo del sistema</h1>
@@ -75,7 +101,9 @@ export default function UpdateHostEmail() {
                 placeholder="email"
               />
             </Form.Group>
-
+            {errors.email && (
+              <p className="text-danger">{errors.email}</p>
+            )}
             <Form.Group className="mb-12">
               <Form.Label>Contraseña</Form.Label>
               <Form.Control
