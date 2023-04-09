@@ -11,6 +11,11 @@ import {
 import {volunteers} from "./services/backend.js";
 import swal from "sweetalert";
 import { Button} from "react-bootstrap";
+import { Table } from 'antd';
+
+const onChange = (pagination, filters, sorter, extra) => {
+  console.log('params', pagination, filters, sorter, extra);
+};
 
 const successMsgDelete = {
   title: "Mensaje de confirmación",
@@ -23,6 +28,14 @@ const successMsgDelete = {
 const errorMsgDelete = {
   title: "Mensaje de error",
   text: "Se ha producido un error al borrar el turno",
+  icon: "error",
+  button: "Aceptar",
+  timer: "5000",
+};
+
+const errorMsgDeleteVolunteer = {
+  title: "Mensaje de error",
+  text: "Se ha producido un error al quitar el voluntario del turno",
   icon: "error",
   button: "Aceptar",
   timer: "5000",
@@ -73,6 +86,30 @@ export default function Details() {
       });
   };
 
+  const deleteVolunteerConfirmationAlert = async (volunteerTurn) => {
+    swal({
+      title: "Quitar voluntario",
+      text: "¿Estás seguro que desea quitar el voluntario del turno?",
+      icon: "warning",
+      buttons: ["No", "Sí"],
+    }).then((res) => {
+      if (res) {
+        deleteVolunteerTurn(volunteerTurn);
+      }
+    });
+  };
+
+  const deleteVolunteerTurn = async (volunteerTurn) => {
+    const result = await volunteers
+      .delete(`/volunteerTurns/${volunteerTurn}`)
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        swal(errorMsgDeleteVolunteer);
+      });
+  };
+
   const CustomMenu = React.forwardRef(
     ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
       const [value, setValue] = useState('');
@@ -93,6 +130,64 @@ export default function Details() {
       );
     },
   );
+
+  const columns = [
+    {
+      title: 'ID del Voluntario',
+      dataIndex: 'num_volunteer',
+    },
+    {
+      title: 'Nombre',
+      dataIndex: 'name',
+    },
+    {
+      title: 'Apellidos',
+      dataIndex: 'last_name',
+    },
+    {
+      title: 'NIF',
+      dataIndex: 'nif',
+    },
+    {
+      title: 'Rol',
+      dataIndex: 'rol',
+    },
+    {
+      title: 'Acción',
+      key: 'action',
+      render: (text, record) => (
+        <Button type="primary" className="btn btn-danger w-75" onClick={() => deleteVolunteerConfirmationAlert(record.volunteerTurn)}>
+        Quitar
+        </Button>
+      ),
+    },
+  ];
+
+  const [volunteers_data, setVolunteersData] = React.useState([
+    {
+      num_volunteer: '...',
+      nif: '...',
+      name: '...',
+      last_name: '...',
+      rol: '...',
+    }
+  ]);
+
+  useEffect(() => {
+    volunteers.get(`/turns/${id}/volunteers`).then((response) => {
+      const promises = response.data.volunteerTurn.map((volunteerTurn) => {
+        return volunteers.get(`${volunteerTurn.volunteer_id}`).then((volunteerResponse) => {
+          const data = volunteerResponse.data;
+          const updatedData = Object.assign({}, data, {volunteerTurn: volunteerTurn.id})
+          return updatedData;
+        })
+      })
+
+      Promise.all(promises).then((volunteerData) => {
+        setVolunteersData(volunteerData);
+      })
+    });
+  }, []);
 
   return (
     <section>
@@ -141,7 +236,7 @@ export default function Details() {
           </MDBCol>
           <MDBCol style={{paddingLeft: "30px"}}>
             <MDBCard style={{width: "600px"}}>
-              <MDBCol style={{paddingTop: "5px"}}>
+              <MDBCol style={{paddingTop: "15px"}}>
                 <MDBCardText className="text-muted w-auto">
                   <Button
                     onClick={() => {navigate(`/admin/volunteers/turns/update/${id}`)}}
@@ -165,10 +260,28 @@ export default function Details() {
                     </Button>
                   </MDBCardText>
               </MDBCol>
+              <hr/>
+              <MDBCol style={{paddingTop: "5px", paddingBottom: "15px"}}>
+                <MDBCardText className="text-muted w-auto">
+                  <Button
+                    onClick={() => {navigate(`/admin/volunteers/volunteerTurns/create/${id}`)}}
+                    type="button"
+                    className="btn btn-light w-75"
+                    >
+                      Asignar voluntario
+                    </Button>
+                  </MDBCardText>
+              </MDBCol>
             </MDBCard>
           </MDBCol>
         </MDBRow>
         <hr />
+        <div className='container my-5'>
+          <h2 className="pt-3">Voluntarios asignados</h2>
+          <br></br>
+          <Table id='table'
+          columns={columns} dataSource={volunteers_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
+        </div>
       </MDBContainer>
     </section>
   );
