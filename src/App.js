@@ -283,12 +283,10 @@ export default function App() {
                     element={<UpdateVolunteer />}
                   />
                 
-
                   <Route 
                     path="/admin/events/" 
                     element={ <AdminListEvent/>} 
                   />
-
                   
                   <Route 
                     path="/admin/events/create" 
@@ -304,6 +302,8 @@ export default function App() {
                   <Route path="volunteers/turns/:id" element={ <ShowTurn/>} />
                   <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
                   <Route path="volunteers/volunteerTurns/create/:id" element={ <CreateVolunteerTurn/>} />
+
+                  <Route path="/admin/notifications" element={ <AdminCreateNotification/> } />
                 </Route>
                 <Route path="*" element={<Error404 />} />
               </Routes>

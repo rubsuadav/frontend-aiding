@@ -23,8 +23,6 @@ const errorMsg = {
   timer: "5000",
 }
 
-
-
 function AdminCreateNotification() {
   let navigate = useNavigate();
 
