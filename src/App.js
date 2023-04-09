@@ -98,7 +98,7 @@ var navLinksAdmin = [
     path: "admin/partners",
   },
   {
-    title: "Usuario",
+    title: "Usuarios",
     path: "admin/base/users",
   },
   {
