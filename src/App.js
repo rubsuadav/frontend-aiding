@@ -128,7 +128,7 @@ var navLinksAdmin = [
   },
   {
     title: "Crear Notificación",
-    path: "admin/base/notification/create"
+    path: "admin/notification/create"
   },
 ];
 
@@ -168,7 +168,7 @@ export default function App() {
                     path="base/contacts/CreateContact"
                     element={<CreateContact />}
                   />
-                  
+
                   {/* Information */}
                   <Route
                     path="information/sections"
@@ -191,22 +191,22 @@ export default function App() {
                     path="information/map-resources/:id"
                     element={<ShowResourceUser />}
                   />
-                  
+
                   {/* Events */}
-                  <Route 
-                    path="/events/programed" 
-                    element={ <ProgramedEvent/>} 
+                  <Route
+                    path="/events/programed"
+                    element={ <ProgramedEvent/>}
                   />
 
 
-                  <Route 
-                    path="/events/started" 
-                      element={ <StartedEvent/>} 
+                  <Route
+                    path="/events/started"
+                      element={ <StartedEvent/>}
                   />
 
-                  <Route 
-                    path="/events/:id" 
-                    element={ <ShowEvent/>} 
+                  <Route
+                    path="/events/:id"
+                    element={ <ShowEvent/>}
                   />
 
                   {/* Login */}
@@ -282,20 +282,20 @@ export default function App() {
                     path="volunteers/update/:id"
                     element={<UpdateVolunteer />}
                   />
-                
-                  <Route 
-                    path="/admin/events/" 
-                    element={ <AdminListEvent/>} 
-                  />
-                  
-                  <Route 
-                    path="/admin/events/create" 
-                      element={ <AdminCreateEvent/>} 
+
+                  <Route
+                    path="/admin/events/"
+                    element={ <AdminListEvent/>}
                   />
 
-                  <Route 
-                    path="/admin/events/:id/update" 
-                    element={ <AdminUpdateEvent/>} 
+                  <Route
+                    path="/admin/events/create"
+                      element={ <AdminCreateEvent/>}
+                  />
+
+                  <Route
+                    path="/admin/events/:id/update"
+                    element={ <AdminUpdateEvent/>}
                   />
                   <Route path="volunteers/turns" element={ <ListTurn/>} />
                   <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
@@ -303,7 +303,7 @@ export default function App() {
                   <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
                   <Route path="volunteers/volunteerTurns/create/:id" element={ <CreateVolunteerTurn/>} />
 
-                  <Route path="/admin/notifications" element={ <AdminCreateNotification/> } />
+                  <Route path="/admin/notification/create" element={ <AdminCreateNotification/> } />
                 </Route>
                 <Route path="*" element={<Error404 />} />
               </Routes>
