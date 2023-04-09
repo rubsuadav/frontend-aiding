@@ -8,16 +8,24 @@ import { AuthContextProvider } from "./components/routes/authContext";
 import PublicRoute from "./components/routes/PublicRoute";
 import PrivateRoute from "./components/routes/PrivateRoute";
 
-// importamos los componentes creados
+// Components
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+
+// Errors
+import ERROR_404 from "./pages/error/404";
+
+// Advertisement
 import ListAdvertisement from "./pages/information/advertisement/ListAdvertisement";
 import AdminListAdvertisement from "./pages/information/advertisement/AdminListAdvertisement";
 import ShowAdvertisement from "./pages/information/advertisement/ShowAdvertisement";
 import AdminCreateAdvertisement from "./pages/information/advertisement/AdminCreateAdvertisement";
 import AdminUpdateAdvertisement from "./pages/information/advertisement/AdminUpdateAdvertisement";
 
+// Home
 import Home from "./pages/Home";
+
+// Partners
 import ListPartner from "./pages/partners/ListPartner";
 import ShowPartner from "./pages/partners/ShowPartner";
 import CreatePartner from "./pages/partners/CreatePartner";
@@ -26,17 +34,25 @@ import CreateCommunication from "./pages/partners/CreateCommunication";
 import UpdateCommunication from './pages/partners/UpdateCommunication';
 import CreateDonation from './pages/partners/CreateDonation';
 
+// Contacts
+import ListContact from "./pages/base/ListContact";
+import ContactDetail from './pages/base/ShowContact';
+import CreateContact from './pages/base/CreateContact';
+
+// Users
 import Users from "./pages/base/Users";
 import ViewUser from "./pages/base/ViewUser";
 import EditUser from "./pages/base/EditUser";
 import CreateUser from "./pages/base/CreateUser";
 import Login from "./pages/base/Login";
 
+// Volunteers
 import ListVolunteers from "./pages/volunteers/ListVolunteers";
 import CreateVolunteer from "./pages/volunteers/CreateVolunteer";
 import ShowVolunteer from "./pages/volunteers/ShowVolunteer";
 import UpdateVolunteer from "./pages/volunteers/UpdateVolunteer";
 
+// Resources
 import UpdateResource from "./pages/information/map/UpdateResource.js";
 import CreateResource from "./pages/information/map/CreateResource.js";
 import ShowResource from "./pages/information/map/ShowResource.js";
@@ -44,25 +60,23 @@ import ResourcesTable from "./pages/information/map/ResourcesTable.js";
 import ResourcesListEdit from "./components/ResourcesListEdit";
 import ShowResourceUser from "./pages/information/map/ShowResourceUser.js";
 
-import ListContact from "./pages/base/ListContact";
-import ContactDetail from './pages/base/ShowContact';
-import CreateContact from './pages/base/CreateContact';
-
+// Turns
 import ListTurn from "./pages/volunteers/ListTurn";
 import CreateTurn from "./pages/volunteers/CreateTurn";
 import ShowTurn from "./pages/volunteers/ShowTurn";
 import UpdateTurn from "./pages/volunteers/UpdateTurn";
+import CreateVolunteerTurn from "./pages/volunteers/CreateVolunteerTurn";
 
+// Events
 import AdminCreateEvent from './pages/events/AdminCreateEvents';
 import ProgramedEvent from './pages/events/ProgramedEvent';
 import StartedEvent from './pages/events/StartedEvent';
 import ShowEvent from './pages/events/ShowEvent';
 import AdminListEvent from './pages/events/AdminListEvents';
 import AdminUpdateEvent from './pages/events/AdminUpdateEvents';
-
 import AdminCreateNotification from './pages/base/AdminCreateNotification';
-import AdminShowHostEmail from './pages/base/AdminShowHostEmail';
-import AdminUpdateHostEmail from './pages/base/AdminUpdateHostEmail';
+import Error404 from "./pages/Error404";
+
 
 var navLinksPublic = [
   {
@@ -116,11 +130,17 @@ var navLinksAdmin = [
     title: "Crear Notificación",
     path: "admin/base/notification/create"
   },
+];
 
+var navLinksCaptainSupervisor = [
   {
-    title: "Correo del sistema",
-    path: "admin/base/hostemail"
-  }
+    title: "Turnos",
+    path: "admin/volunteers/turns"
+  },
+  {
+    title: "Voluntarios",
+    path: "admin/volunteers",
+  },
 ];
 
 var logo = ["./logo.png"];
@@ -128,168 +148,170 @@ var logo = ["./logo.png"];
 export default function App() {
   return (
     <div className="App">
+      <div className="container-principal">
+        <AuthContextProvider>
+          <Router>
+            <div className="container-secundario">
+              <Navbar
+                navLinksPublic={navLinksPublic}
+                navLinksAdmin={navLinksAdmin}
+                navLinksCaptainSupervisor={navLinksCaptainSupervisor}
+                logo={logo}
+              />
+              <Routes>
+                {/* Public routes ===========================================*/}
+                <Route path="/" element={<PublicRoute />}>
+                  {/* Home */}
+                  <Route index element={<Home />} />
+                  {/* Contacto */}
+                  <Route
+                    path="base/contacts/CreateContact"
+                    element={<CreateContact />}
+                  />
+                  
+                  {/* Information */}
+                  <Route
+                    path="information/sections"
+                    element={<ListAdvertisement />}
+                  />
+                  <Route
+                    path="information/sections/:id"
+                    element={<ListAdvertisement />}
+                  />
+                  <Route
+                    path="information/advertisements/:id"
+                    element={<ShowAdvertisement />}
+                  />
+                  <Route
+                    exact
+                    path="information/map-resources"
+                    element={<ResourcesListEdit />}
+                  />
+                  <Route
+                    path="information/map-resources/:id"
+                    element={<ShowResourceUser />}
+                  />
+                  
+                  {/* Events */}
+                  <Route 
+                    path="/events/programed" 
+                    element={ <ProgramedEvent/>} 
+                  />
 
-      <AuthContextProvider>
-        <Router>
-          <Navbar
-            navLinksPublic={navLinksPublic}
-            navLinksAdmin={navLinksAdmin}
-            logo={logo}
-          />
-          <Routes>
-            {/* Public routes ===========================================*/}
-            <Route path="/" element={<PublicRoute />}>
-              {/* Home */}
-              <Route index element={<Home />} />
-              {/* Contacto */}
-              <Route
-                path="base/contacts/CreateContact"
-                element={<CreateContact />}
-              />
 
-              {/* Information */}
-              <Route
-                path="information/sections"
-                element={<ListAdvertisement />}
-              />
-              <Route
-                path="information/sections/:id"
-                element={<ListAdvertisement />}
-              />
-              <Route
-                path="information/advertisements/:id"
-                element={<ShowAdvertisement />}
-              />
-              <Route
-                exact
-                path="information/map-resources"
-                element={<ResourcesListEdit />}
-              />
-              <Route
-                path="information/map-resources/:id"
-                element={<ShowResourceUser />}
-              />
-              
-              {/* Events */}
-              <Route 
-                path="/events/programed" 
-                element={ <ProgramedEvent/>} 
-              />
+                  <Route 
+                    path="/events/started" 
+                      element={ <StartedEvent/>} 
+                  />
 
-              <Route 
-                path="/events/started" 
-                  element={ <StartedEvent/>} 
-              />
+                  <Route 
+                    path="/events/:id" 
+                    element={ <ShowEvent/>} 
+                  />
 
-              <Route 
-                path="/events/:id" 
-                element={ <ShowEvent/>} 
-              />
+                  {/* Login */}
+                  <Route path="base/login" element={<Login />} />
+                </Route>
 
-              {/* Login */}
-              <Route path="base/login" element={<Login />} />
-            </Route>
+                {/* Admin routes ============================================*/}
+                <Route path="/admin" element={<PrivateRoute />}>
+                  {/* Base */}
+                  <Route path="base/contacts" element={<ListContact />} />
+                  <Route path="base/contacts/:id" element={<ContactDetail />} />
+                  <Route exact path="base/users" element={<Users />} />
+                  <Route exact path="base/users/crearUsuario" element={<CreateUser />} />
+                  <Route exact path="base/users/verUsuario/:id" element={<ViewUser />} />
+                  <Route exact path="base/users/editarUsuario/:id" element={<EditUser />} />
 
-            {/* Admin routes ============================================*/}
-            <Route path="/admin" element={<PrivateRoute />}>
-              {/* Base */}
-              <Route path="base/contacts" element={<ListContact />} />
-              <Route path="base/contacts/:id" element={<ContactDetail />} />
-              <Route exact path="base/users" element={<Users />} />
-              <Route exact path="base/users/crearUsuario" element={<CreateUser />} />
-              <Route exact path="base/users/verUsuario/:id" element={<ViewUser />} />
-              <Route exact path="base/users/editarUsuario/:id" element={<EditUser />} />
+                  {/* Information */}
+                  <Route
+                    path="information/advertisements/create"
+                    element={<AdminCreateAdvertisement />}
+                  />
+                  <Route
+                    path="information/advertisements/:id/update"
+                    element={<AdminUpdateAdvertisement />}
+                  />
+                  <Route
+                    path="information/advertisements"
+                    element={<AdminListAdvertisement />}
+                  />
+                  <Route
+                    exact
+                    path="information/edit-resource/:id"
+                    element={<UpdateResource />}
+                  />
+                  <Route
+                    path="information/resources/:id"
+                    element={<ShowResource />}
+                  />
+                  <Route
+                    exact
+                    path="information/create-resource"
+                    element={<CreateResource />}
+                  />
+                  <Route
+                    exact
+                    path="information/resources"
+                    element={<ResourcesTable />}
+                  />
 
-              {/* Information */}
-              <Route
-                path="information/advertisements/create"
-                element={<AdminCreateAdvertisement />}
-              />
-              <Route
-                path="information/advertisements/:id/update"
-                element={<AdminUpdateAdvertisement />}
-              />
-              <Route
-                path="information/advertisements"
-                element={<AdminListAdvertisement />}
-              />
-              <Route
-                exact
-                path="information/edit-resource/:id"
-                element={<UpdateResource />}
-              />
-              <Route
-                path="information/resources/:id"
-                element={<ShowResource />}
-              />
-              <Route
-                exact
-                path="information/create-resource"
-                element={<CreateResource />}
-              />
-              <Route
-                exact
-                path="information/resources"
-                element={<ResourcesTable />}
-              />
+                  {/* Partner*/}
+                  <Route path="partners" element={<ListPartner />} />
+                  <Route path="partners/:id" element={<ShowPartner />} />
+                  <Route path="partners/create" element={<CreatePartner />} />
+                  <Route path="partners/update/:id" element={<UpdatePartner />} />
 
-              {/* Partner*/}
-              <Route path="partners" element={<ListPartner />} />
-              <Route path="partners/:id" element={<ShowPartner />} />
-              <Route path="partners/create" element={<CreatePartner />} />
-              <Route path="partners/update/:id" element={<UpdatePartner />} />
+                  <Route
+                    path="partners/:id/communication/create"
+                    element={<CreateCommunication />}
+                  />
+                  <Route
+                    path="partners/:id/communication/update/:idc"
+                    element={<UpdateCommunication />}
+                  />
+                  <Route
+                    path="partners/:id/donation/create"
+                    element={<CreateDonation />}
+                  />
+                  {/* Volunteers */}
+                  <Route path="volunteers" element={<ListVolunteers />} />
+                  <Route path="volunteers/create" element={<CreateVolunteer />} />
+                  <Route path="volunteers/:id" element={<ShowVolunteer />} />
+                  <Route
+                    path="volunteers/update/:id"
+                    element={<UpdateVolunteer />}
+                  />
+                
 
-              <Route
-                path="partners/:id/communication/create"
-                element={<CreateCommunication />}
-              />
-              <Route
-                path="partners/:id/communication/update/:idc"
-                element={<UpdateCommunication />}
-              />
-              <Route
-                path="partners/:id/donation/create"
-                element={<CreateDonation />}
-              />
-              {/* Volunteers */}
-              <Route path="volunteers" element={<ListVolunteers />} />
-              <Route path="volunteers/create" element={<CreateVolunteer />} />
-              <Route path="volunteers/:id" element={<ShowVolunteer />} />
-              <Route
-                path="volunteers/update/:id"
-                element={<UpdateVolunteer />}
-              />
-            
+                  <Route 
+                    path="/admin/events/" 
+                    element={ <AdminListEvent/>} 
+                  />
 
-              <Route 
-                path="/admin/events/" 
-                element={ <AdminListEvent/>} 
-              />
+                  
+                  <Route 
+                    path="/admin/events/create" 
+                      element={ <AdminCreateEvent/>} 
+                  />
 
-              
-              <Route 
-                path="/admin/events/create" 
-                  element={ <AdminCreateEvent/>} 
-              />
-
-              <Route 
-                path="/admin/events/:id/update" 
-                element={ <AdminUpdateEvent/>} 
-              />
-              <Route path="volunteers/turns" element={ <ListTurn/>} />
-              <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
-              <Route path="volunteers/turns/:id" element={ <ShowTurn/>} />
-              <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
-
-              <Route path="base/notification/create" element={ <AdminCreateNotification/>} />
-              <Route path="base/hostemail" element={ <AdminShowHostEmail/>} />
-              <Route path="base/hostemail/update" element={ <AdminUpdateHostEmail/>} />
-            </Route>
-              
-          </Routes>
-        </Router>
-      </AuthContextProvider>
-      <Footer />
+                  <Route 
+                    path="/admin/events/:id/update" 
+                    element={ <AdminUpdateEvent/>} 
+                  />
+                  <Route path="volunteers/turns" element={ <ListTurn/>} />
+                  <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
+                  <Route path="volunteers/turns/:id" element={ <ShowTurn/>} />
+                  <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
+                  <Route path="volunteers/volunteerTurns/create/:id" element={ <CreateVolunteerTurn/>} />
+                </Route>
+                <Route path="*" element={<Error404 />} />
+              </Routes>
+            </div>
+            <Footer />
+          </Router>
+        </AuthContextProvider>
+      </div>
     </div>
   );
 }

@@ -164,7 +164,11 @@ function CreateVolunteer() {
     } = volunteer;
   
     const onInputChange = (e) => {
-      setVolunteer({ ...volunteer, [e.target.name]: e.target.value });
+      if(e.target.name === "truckKnowledge" || e.target.name === "computerKnowledge" ||e.target.name === "warehouseKnowledge"){
+        setVolunteer({ ...volunteer, [e.target.name]: e.target.checked });
+      }else{
+        setVolunteer({ ...volunteer, [e.target.name]: e.target.value });
+      }
     };
   
     const onSubmit = async (e) => {

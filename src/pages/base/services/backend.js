@@ -14,13 +14,13 @@ export const notifications = axios.create({
   baseURL: String(backendUrl + "base/notifications/"),
 });
 
-export const hostEmail = axios.create({
-  baseURL: String(backendUrl + "base/hostEmail/"),
+export const rolesBE = axios.create({
+  baseURL: String(backendUrl + "base/user/roles/"),
 });
 
 configureAxios(base);
 configureAxios(contacts);
 configureAxios(notifications);
-configureAxios(hostEmail);
+configureAxios(rolesBE);
 
 export const fileUrl = backendUrl;
