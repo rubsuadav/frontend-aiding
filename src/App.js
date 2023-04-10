@@ -75,6 +75,13 @@ import ShowEvent from './pages/events/ShowEvent';
 import AdminListEvent from './pages/events/AdminListEvents';
 import AdminUpdateEvent from './pages/events/AdminUpdateEvents';
 import AdminCreateNotification from './pages/base/AdminCreateNotification';
+
+// Stock
+import ListItems from './pages/stock/ListItems';
+import CreateItem from './pages/stock/CreateItem';
+import ShowItem from './pages/stock/ShowItem';
+import UpdateItem from './pages/stock/UpdateItem';
+
 import Error404 from "./pages/Error404";
 
 
@@ -99,7 +106,7 @@ var navLinksAdmin = [
     path: "admin/partners",
   },
   {
-    title: "Usuario",
+    title: "Usuarios",
     path: "admin/base/users",
   },
   {
@@ -129,6 +136,8 @@ var navLinksAdmin = [
   {
     title: "Crear Notificación",
     path: "admin/notification/create"
+    title: "Inventario",
+    path: "admin/stock/items"
   },
 ];
 
@@ -304,6 +313,12 @@ export default function App() {
                   <Route path="volunteers/volunteerTurns/create/:id" element={ <CreateVolunteerTurn/>} />
 
                   <Route path="/admin/notification/create" element={ <AdminCreateNotification/> } />
+                  
+                  <Route path="stock/items" element={<ListItems />} />
+                  <Route path="stock/items/create" element={<CreateItem />} />
+                  <Route path="stock/items/:id" element={<ShowItem />} />
+                  <Route path="stock/items/update/:id" element={<UpdateItem />} />
+
                 </Route>
                 <Route path="*" element={<Error404 />} />
               </Routes>

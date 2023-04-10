@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { base } from "./services/backend.js";
+import { base, rolesBE } from "./services/backend.js";
 import swal from "sweetalert";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +11,27 @@ export default function ViewUser() {
   const [user, setUser] = useState({});
   const { id } = useParams();
 
+  const [roles, setRoles] = React.useState([]);
+
+  function getRoles() {
+    rolesBE
+      .get("")
+      .then((response) => {
+        setRoles(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  function getRoleName(rolesId) {
+    const role = roles.find((t) => t.id === rolesId);
+    return role ? role.name : '';
+  }
+
   useEffect(() => {
     getUserById(id);
+    getRoles();
   }, []);
 
   const getUserById = async (id) => {
@@ -47,6 +66,16 @@ export default function ViewUser() {
             </div>
             <div className="col-md-6">
               <label id="is_admin">{user.is_admin ? "Sí" : "No"}</label>
+            </div>
+          </div>
+          <div className="row mb-3">
+            <div className="col-md-6 text-end fw-bold">
+              <label htmlFor="roles_id" className="form-label">
+                Rol:
+              </label>
+            </div>
+            <div className="col-md-6">
+              <label id="roles_id">{getRoleName(user.roles_id)}</label>
             </div>
           </div>
         </div>
