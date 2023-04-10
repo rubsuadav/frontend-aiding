@@ -47,15 +47,19 @@ Al seguir utilizando la plataforma de Aiding tras el aviso, estaría aceptando e
                     <br/>
                   <div class="izquierda">
                   <h3>3. Recopilación de información. </h3>
-                  <p>Para utilizar los servicios de Aiding, no necesita estar registrado. Sin embargo, para usar algunos de los servicios ofrecidos por Aiding, sí es necesario tener una cuenta, y para ello es imprescindible proporcionar algunos datos personales. También, según los módulos contratados por el cliente, los datos solicitados al usuario pueden cambiar.  
+                  <p>Para utilizar los servicios de Aiding, no necesita estar registrado. Sin embargo, para usar algunos de los servicios ofrecidos por Aiding, sí es necesario tener una cuenta, y para ello es imprescindible proporcionar un usuario y contraseña. También, según las funcionalidades contratadas por esta organización, los datos solicitados al usuario pueden variar siendo estos datos más personales.  
 
-A pesar de esto, Aiding se compromete a que toda la información proporcionada será tratada y conservada de forma segura de manera que se garantiza la fiabilidad y confianza del usuario. Asimismo, Aiding se compromete a únicamente solicitar la información y los datos exclusivamente necesarios para el adecuado uso de sus funcionalidades. </p>
+Aiding, como empresa desarrolladora de esta página, se compromete a que toda la información proporcionada será tratada y conservada de forma segura de manera que se garantiza la fiabilidad y confianza del usuario. Dado que es la encargada de almacenar los datos solicitados del usuario que utilice la aplicación, se compromete a únicamente solicitar la información y los datos exclusivamente necesarios para el adecuado uso de sus funcionalidades. </p>
                   </div>
                   <Accordion.Item eventKey="6">
                       <Accordion.Header><h4>3.1 Cookies.</h4></Accordion.Header>
                       <Accordion.Body>
                         <div class="izquierda">
-                          <p> Utilizamos cookies en nuestro sitio web para mejorar su experiencia de navegación. Las cookies son pequeños archivos de texto que se colocan en su dispositivo cuando visita nuestro sitio web. Estas cookies nos permiten reconocer su dispositivo y personalizar su experiencia en nuestro sitio web. </p>
+                          <p> Utilizamos cookies en nuestro sitio web para mejorar su experiencia de navegación. Las cookies son pequeños archivos de texto que se colocan en su dispositivo cuando visita nuestro sitio web. Estas cookies nos permiten reconocer su dispositivo y personalizar su experiencia en nuestro sitio web. 
+
+Las cookies utilizadas son cookies de refresco (refresh) y de recambio (access). Tanto las cookies "refresh_token" como las "access_token" son utilizadas en el funcionamiento de la autenticación y autorización en sistemas web. El "access_token" es un token que se utiliza para acceder a recursos protegidos en un sistema web, y suele tener una vida útil corta. Por otro lado, el "refresh_token" es un token que se utiliza para obtener un nuevo "access_token" cuando el anterior ha expirado, y suele tener una vida útil más larga que el "access_token". De esta forma, el "refresh_token" permite mantener la sesión iniciada durante un periodo de tiempo prolongado, sin necesidad de que el usuario tenga que volver a iniciar sesión cada vez que el "access_token" caduque. 
+
+Además de estas se utiliza un tipo de cookie llamado “rol” que indica el rol del usuario en cuestión: admin, capitán o supervisor. O si en caso contrario el usuario es anónimo. </p>
                         </div>
                       </Accordion.Body>
                       </Accordion.Item>
@@ -89,7 +93,7 @@ Por todo lo anterior, nuestros usuarios y clientes pueden estar seguros de que s
                   <div class="izquierda">
                   <h3>5. Derechos del usuario. </h3>
                   </div>
-                  <Accordion.Item eventKey="1">
+                  <Accordion.Item eventKey="8">
                       <Accordion.Header><h4>1.1 Derecho al olvido.</h4></Accordion.Header>
                       <Accordion.Body>
                         <div class="izquierda">
@@ -100,7 +104,7 @@ Esta solicitud se debe de realizar al correo electrónico de la empresa (AidingS
                       </Accordion.Body>
                       </Accordion.Item>
 
-                      <Accordion.Item eventKey="2">
+                      <Accordion.Item eventKey="9">
                       <Accordion.Header><h4>1.2 Derecho a obtener mis datos.</h4></Accordion.Header>
                       <Accordion.Body>
                         <div class="izquierda">
@@ -133,7 +137,7 @@ Trabajamos arduamente para garantizar la privacidad y seguridad de los datos per
                   <p> Si tiene alguna pregunta sobre nuestros términos de uso o política de privacidad, contáctenos en AidingSevilla@outlook.es. </p>
                   </div>
 
-                  </Accordion>
+                          </Accordion>
               
               </div>
             </MDBRow>
