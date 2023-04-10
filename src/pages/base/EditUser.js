@@ -120,17 +120,18 @@ export default function EditUser() {
                 />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>Roles</Form.Label>
-                <Form.Select
-                  onChange={(e) => onInputChange(e)}
-                  value={roles_id}
-                  name="roles_id"
-                >
-                    {roles.map((rol) => (
-                      <option value={rol.id}>{rol.name}</option>
-                    ))}
-                </Form.Select>
-              </Form.Group>
+              <Form.Label>Roles</Form.Label>
+              <Form.Select
+                onChange={(e) => onInputChange(e)}
+                value={roles_id}
+                name="roles_id"
+              >
+                <option value=""></option>
+                {roles.map((rol) => (
+                  <option value={rol.id}>{rol.name}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
           </div>
         </div>
 

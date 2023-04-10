@@ -65,6 +65,8 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, navLinksCaptainSuperviso
                 <NavDropdown.Item>{<Nav.Link as={Link} to="/events/programed">Programados</Nav.Link>}</NavDropdown.Item>
                 <NavDropdown.Item>{<Nav.Link as={Link} to="/events/started">Empezados</Nav.Link>}</NavDropdown.Item>
               </NavDropdown> 
+
+      
             {/** Dropdown menu for admin */}
             {isAdmin && (
               <NavDropdown title="Administración" id="basic-nav-dropdown">
