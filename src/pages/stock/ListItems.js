@@ -289,7 +289,7 @@ const Items = () => {
       setItemsData(response.data);
       console.log(response.status);
     });
-  }, []);
+  }, [event]);
 
   function createItemRedirect() {
     navigate("/admin/stock/items/create");
