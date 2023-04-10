@@ -75,6 +75,12 @@ import ShowEvent from './pages/events/ShowEvent';
 import AdminListEvent from './pages/events/AdminListEvents';
 import AdminUpdateEvent from './pages/events/AdminUpdateEvents';
 
+// Stock
+import ListItems from './pages/stock/ListItems';
+import CreateItem from './pages/stock/CreateItem';
+import ShowItem from './pages/stock/ShowItem';
+import UpdateItem from './pages/stock/UpdateItem';
+
 import Error404 from "./pages/Error404";
 
 var navLinksPublic = [
@@ -124,6 +130,10 @@ var navLinksAdmin = [
   {
     title: "Turnos",
     path: "admin/volunteers/turns"
+  },
+  {
+    title: "Inventario",
+    path: "admin/stock/items"
   },
 ];
 
@@ -299,6 +309,12 @@ export default function App() {
                   <Route path="volunteers/turns/:id" element={ <ShowTurn/>} />
                   <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
                   <Route path="volunteers/volunteerTurns/create/:id" element={ <CreateVolunteerTurn/>} />
+
+                  <Route path="stock/items" element={<ListItems />} />
+                  <Route path="stock/items/create" element={<CreateItem />} />
+                  <Route path="stock/items/:id" element={<ShowItem />} />
+                  <Route path="stock/items/update/:id" element={<UpdateItem />} />
+
                 </Route>
                 <Route path="*" element={<Error404 />} />
               </Routes>
