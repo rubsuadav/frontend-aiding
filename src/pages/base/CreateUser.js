@@ -78,10 +78,6 @@ export default function CreateUser() {
       error_msgs.password = "La contraseña no puede estar vacía";
     }
 
-    if (roles_id === "" || roles_id === null) {
-      error_msgs.roles_id = "Hay un error con el rol";
-    }
-
     setErrors(error_msgs);
 
     if (Object.keys(error_msgs).length === 0) {
@@ -169,9 +165,6 @@ export default function CreateUser() {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Roles</Form.Label>
-              {errors.roles_id && (
-                <p className="text-danger">{errors.roles_id}</p>
-              )}
               <Form.Select
                 onChange={(e) => onInputChange(e)}
                 value={roles_id}
