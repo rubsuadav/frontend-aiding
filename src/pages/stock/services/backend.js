@@ -11,3 +11,4 @@ export const tiposBE = axios.create({
 });
 
 configureAxios(items);
+configureAxios(tiposBE);

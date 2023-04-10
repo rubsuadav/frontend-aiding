@@ -153,7 +153,7 @@ export default function Details() {
                       <MDBRow>
                         <MDBCol md="12">
                           <MDBCardText>
-                            <strong>Quantity</strong>
+                            <strong>Cantidad</strong>
                           </MDBCardText>
                         </MDBCol>
                         <MDBCol md="12">
@@ -166,7 +166,7 @@ export default function Details() {
                       <MDBRow>
                         <MDBCol md="12">
                           <MDBCardText>
-                            <strong>Description</strong>
+                            <strong>Descripción</strong>
                           </MDBCardText>
                         </MDBCol>
                         <MDBCol md="12">
@@ -224,7 +224,7 @@ export default function Details() {
                         type="button"
                         className="btn btn-light w-100"
                       >
-                        Editar evento
+                        Editar Item
                       </Button>
                     </MDBCardText>
                   </MDBCol>
