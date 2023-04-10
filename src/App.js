@@ -136,6 +136,8 @@ var navLinksAdmin = [
   {
     title: "Crear Notificación",
     path: "admin/notification/create"
+  },
+  {
     title: "Inventario",
     path: "admin/stock/items"
   },
