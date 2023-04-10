@@ -240,6 +240,7 @@ export default function DetailsUser() {
           }}
           type="button"
           className="btn btn-light w-100"
+          id="retorno"
         >
           {" "}
           Volver al listado
