@@ -71,13 +71,14 @@ import ShowTurn from "./pages/volunteers/ShowTurn";
 import UpdateTurn from "./pages/volunteers/UpdateTurn";
 import CreateVolunteerTurn from "./pages/volunteers/CreateVolunteerTurn";
 
-// Events
 import AdminCreateEvent from "./pages/events/AdminCreateEvents";
 import ProgramedEvent from "./pages/events/ProgramedEvent";
 import StartedEvent from "./pages/events/StartedEvent";
 import ShowEvent from "./pages/events/ShowEvent";
 import AdminListEvent from "./pages/events/AdminListEvents";
 import AdminUpdateEvent from "./pages/events/AdminUpdateEvents";
+
+import AdminCreateNotification from './pages/base/AdminCreateNotification';
 
 // Stock
 import ListItems from './pages/stock/ListItems';
@@ -86,6 +87,7 @@ import ShowItem from './pages/stock/ShowItem';
 import UpdateItem from './pages/stock/UpdateItem';
 
 import Error404 from "./pages/Error404";
+
 
 var navLinksPublic = [
   {
@@ -134,6 +136,10 @@ var navLinksAdmin = [
   {
     title: "Turnos",
     path: "admin/volunteers/turns",
+  },
+  {
+    title: "Crear Notificación",
+    path: "admin/notification/create"
   },
   {
     title: "Inventario",
@@ -341,6 +347,8 @@ export default function App() {
                   <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
                   <Route path="volunteers/volunteerTurns/create/:id" element={ <CreateVolunteerTurn/>} />
 
+                  <Route path="/admin/notification/create" element={ <AdminCreateNotification/> } />
+                  
                   <Route path="stock/items" element={<ListItems />} />
                   <Route path="stock/items/create" element={<CreateItem />} />
                   <Route path="stock/items/:id" element={<ShowItem />} />
