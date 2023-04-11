@@ -13,8 +13,14 @@ import Button from "react-bootstrap/Button";
 import { backendUrl } from "../../config";
 import { useAuthContext } from "../routes/authContext";
 
-const NavigationBar = ({ navLinksPublic, navLinksAdmin, navLinksCaptainSupervisor, logo }) => {
-  const { logout, isAuthenticated, isCaptain, isSupervisor, isAdmin } = useAuthContext();
+const NavigationBar = ({
+  navLinksPublic,
+  navLinksAdmin,
+  navLinksCaptainSupervisor,
+  logo,
+}) => {
+  const { logout, isAuthenticated, isCaptain, isSupervisor, isAdmin } =
+    useAuthContext();
 
   /** Logout logic */
   const logoutApi = axios.create({
@@ -28,10 +34,11 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, navLinksCaptainSuperviso
   });
 
   function Logout() {
-    logoutApi
-      .post("", { refresh_token: localStorage.getItem("refresh_token") })
-      logout();
-      swal("Sesión cerrada", "Hasta pronto!", "success");
+    logoutApi.post("", {
+      refresh_token: localStorage.getItem("refresh_token"),
+    });
+    logout();
+    swal("Sesión cerrada", "Hasta pronto!", "success");
 
     return null;
   }
@@ -40,16 +47,15 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, navLinksCaptainSuperviso
     <Navbar className="navbar" expand="sm">
       <Container>
         <Navbar.Brand as={Link} to="/">
-        <img
-          src={logo}
-          width="180"
-          height="80"
-          className="d-inline-block align-top"
-          alt="Logo"
-          loading="lazy"
-          key={new Date().getTime()}
-        />
-
+          <img
+            src={logo}
+            width="180"
+            height="80"
+            className="d-inline-block align-top"
+            alt="Logo"
+            loading="lazy"
+            key={new Date().getTime()}
+          />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end">
@@ -61,12 +67,23 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, navLinksCaptainSuperviso
               </Nav.Link>
             ))}
 
-              <NavDropdown title="Eventos" id="nav-dropdown">
-                <NavDropdown.Item>{<Nav.Link as={Link} to="/events/programed">Programados</Nav.Link>}</NavDropdown.Item>
-                <NavDropdown.Item>{<Nav.Link as={Link} to="/events/started">Empezados</Nav.Link>}</NavDropdown.Item>
-              </NavDropdown> 
+            <NavDropdown title="Eventos" id="nav-dropdown">
+              <NavDropdown.Item>
+                {
+                  <Nav.Link as={Link} to="/events/programed">
+                    Programados
+                  </Nav.Link>
+                }
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                {
+                  <Nav.Link as={Link} to="/events/started">
+                    Empezados
+                  </Nav.Link>
+                }
+              </NavDropdown.Item>
+            </NavDropdown>
 
-      
             {/** Dropdown menu for admin */}
             {isAdmin && (
               <NavDropdown title="Administración" id="basic-nav-dropdown">
@@ -79,7 +96,10 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, navLinksCaptainSuperviso
             )}
             {/** Dropdown menu for captain and supervisor*/}
             {isAuthenticated && (isCaptain || isSupervisor) && (
-              <NavDropdown title="Menú para capitanes/supervisores" id="basic-nav-dropdown">
+              <NavDropdown
+                title="Menú para capitanes/supervisores"
+                id="basic-nav-dropdown"
+              >
                 {navLinksCaptainSupervisor.map((link) => (
                   <NavDropdown.Item key={link.path} as={Link} to={link.path}>
                     {link.title}
@@ -96,9 +116,24 @@ const NavigationBar = ({ navLinksPublic, navLinksAdmin, navLinksCaptainSuperviso
           </Button>
         )}
         {!isAuthenticated && (
-          <Nav.Link key="base/login" as={Link} to="base/login" className="login">
-            Iniciar sesión
-          </Nav.Link>
+          <>
+            <Nav.Link
+              key="base/login"
+              as={Link}
+              to="base/login"
+              className="login"
+            >
+              Iniciar sesión
+            </Nav.Link>
+            <Nav.Link
+              key="base/register"
+              as={Link}
+              to="base/register"
+              className="login ms-3"
+            >
+              Registrarse
+            </Nav.Link>
+          </>
         )}
       </Container>
     </Navbar>

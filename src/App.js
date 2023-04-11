@@ -45,6 +45,7 @@ import ViewUser from "./pages/base/ViewUser";
 import EditUser from "./pages/base/EditUser";
 import CreateUser from "./pages/base/CreateUser";
 import Login from "./pages/base/Login";
+import Register from "./pages/base/Register";
 
 // Volunteers
 import ListVolunteers from "./pages/volunteers/ListVolunteers";
@@ -220,8 +221,9 @@ export default function App() {
 
                   <Route path="/events/:id" element={<ShowEvent />} />
 
-                  {/* Login */}
+                  {/* Login and register */}
                   <Route path="base/login" element={<Login />} />
+                  <Route path="base/register" element={<Register />} />
                 </Route>
 
                 {/* Admin routes ============================================*/}
