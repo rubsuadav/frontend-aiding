@@ -33,6 +33,7 @@ import UpdatePartner from "./pages/partners/UpdatePartner";
 import CreateCommunication from "./pages/partners/CreateCommunication";
 import UpdateCommunication from "./pages/partners/UpdateCommunication";
 import CreateDonation from "./pages/partners/CreateDonation";
+import UpdateDonation from "./pages/partners/UpdateDonation";
 
 // Contacts
 import ListContact from "./pages/base/ListContact";
@@ -304,6 +305,10 @@ export default function App() {
                   <Route
                     path="partners/:id/donation/create"
                     element={<CreateDonation />}
+                  />
+                  <Route
+                    path="partners/:id/donation/update"
+                    element={<UpdateDonation />}
                   />
                   {/* Volunteers */}
                   <Route path="volunteers" element={<ListVolunteers />} />

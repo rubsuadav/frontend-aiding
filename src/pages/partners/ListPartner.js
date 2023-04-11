@@ -174,6 +174,7 @@ const Partners = () => {
         },
       ],
       onFilter: (value, record) => record.language.includes(value),
+      render: (language) => (partnerFormatter(language)),
     },
     {
       title: 'Registro Donación',

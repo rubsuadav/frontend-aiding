@@ -4,12 +4,12 @@ import swal from 'sweetalert';
 import { useNavigate, useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 const successMsg = {
   title: "Mensaje de confirmación",
-  text: "Te confirmamos que la donación se ha creado correctamente",
+  text: "Te confirmamos que la donación se ha editado correctamente",
   icon: "success",
   button: "Aceptar",
   timer: "5000",
@@ -17,32 +17,17 @@ const successMsg = {
 
 const errorMsg = {
   title: "Mensaje de error",
-  text: "Se ha producido un error al crear la donación",
+  text: "Se ha producido un error al editado la donación",
   icon: "error",
   button: "Aceptar",
   timer: "5000",
 }
 
-function CreateDonation() {
+function UpdateDonation() {
     let navigate = useNavigate();
 
     const { id } = useParams();
 
-    function postDonation(){
-        const aux = partners.post(`/${id}/donation`,donation).then((response) => {
-            console.log(response);
-            swal(successMsg);
-            navigate(`/admin/partners/${id}`);
-        }).catch((error) => {
-          if (error.response && error.response.status === 400) {
-            let error_msgs = {general: "Actualmente el socio esta inactivo. Para crear una donación debe estar activo."};
-            setErrors(error_msgs);
-          }else {
-            swal(errorMsg);
-          }
-        });
-    };
-    
     const [errors, setErrors] = useState({});
 
 
@@ -55,7 +40,36 @@ function CreateDonation() {
       amount,
       periodicity,
     } = donation;
+
+    useEffect(() => {
+      loadDonation();
+    }, []);
+
+    const loadDonation = async () => {
+      const result = await partners.get(`/${id}/donation`);
+      setDonation(result.data);
+    };
   
+    function handleClickReturn(){
+      navigate(`/admin/partners/${id}`);
+      
+    }
+    
+    function putDonation(){
+        const aux = partners.put(`/${id}/donation`,donation).then((response) => {
+            console.log(response);
+            swal(successMsg);
+            navigate(`/admin/partners/${id}`);
+        }).catch((error) => {
+          if (error.response && error.response.status === 400) {
+            let error_msgs = {general: "Actualmente el socio esta inactivo. Para editar una donación debe estar activo."};
+            setErrors(error_msgs);
+          }else {
+            swal(errorMsg);
+          }
+        });
+    };
+    
     const onInputChange = (e) => {
       setDonation({ ...donation, [e.target.name]: e.target.value });
     };
@@ -86,13 +100,13 @@ function CreateDonation() {
         const formData = new FormData(); 
         formData.append("amount", amount);
         formData.append("periodicity", periodicity);
-        postDonation(FormData);
+        putDonation(FormData);
       }
     };
   
     return (
       <div className="container my-5 shadow">
-        <h1 className="pt-3">Crear donación</h1>
+        <h1 className="pt-3">Editar donación</h1>
         <Form className="" onSubmit={(e) => onSubmit(e)}>
           <div className="row justify-content-evenly">
             <div className="col-md-6">
@@ -126,7 +140,10 @@ function CreateDonation() {
           <div className="row justify-content-evenly">
           {errors.general && (<p className="text-danger">{errors.general}</p>)}
             <Button className="col mb-4 mx-5" variant="outline-success" type="submit">
-              Crear donación
+              Editar donación
+            </Button>
+            <Button  onClick={()=> handleClickReturn() } className="col mb-4 mx-5" variant="outline-info">
+              Volver
             </Button>
           </div>
         </Form>
@@ -134,4 +151,4 @@ function CreateDonation() {
     );
   }
 
-export default CreateDonation;
+export default UpdateDonation;

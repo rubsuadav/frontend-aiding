@@ -40,7 +40,7 @@ export default function Details() {
   });
 
   const [donation, setDonation] = useState({
-    date: "",
+    start_date: "",
     amount: "",
     periodicity: "",
   });
@@ -62,12 +62,15 @@ export default function Details() {
   }
 
   function createDonationRedirect(){
-    console.log(existDonation());
-    if (existDonation()){
-      navigate(`/admin/partners/${id}/donation/edit`);
-    }else{
     navigate(`/admin/partners/${id}/donation/create`);
-    }
+  }
+
+  function editDonationRedirect(){
+    navigate(`/admin/partners/${id}/donation/update`);
+  }
+
+  function handleClickReturn(){
+    navigate(`/admin/partners`);
   }
   
   const loadDonation = async () => {
@@ -76,13 +79,12 @@ export default function Details() {
   };
 
   function existDonation(){
-    if (donation.date == "" || donation.date == undefined){
+    if (donation.start_date == "" || donation.start_date == undefined){
       return false;
     }else{
       return true;
     }
   }
-
 
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
@@ -162,9 +164,13 @@ export default function Details() {
       }
     }
 
+
+
     //VARIABLES DEL POP UP CERTIFICADO
   const [verCertificado, setVerCertificado] = useState(false);
   const [idioma, setIdioma] = useState("Español");
+
+  
 
   function handleClick(lan){
     setVerCertificado(true);
@@ -201,10 +207,19 @@ export default function Details() {
         </section>
       ):
       <MDBContainer className="py-5">
-        <center>
-        <h2>
-          {user.name} {user.last_name}
-          </h2></center>
+        <MDBRow>
+          <MDBCol lg="1"> 
+            <Button  onClick={()=> handleClickReturn() } type="button" id="button" className="btn btn-light w-100">
+              Volver
+            </Button>
+          </MDBCol>
+          <MDBCol lg="10"> 
+          <center>
+          <h2>
+            {user.name} {user.last_name}
+            </h2></center>
+            </MDBCol>
+        </MDBRow>
         <hr />
         <MDBRow>
           <MDBCol lg="10"> 
@@ -452,9 +467,16 @@ export default function Details() {
                   <MDBRow>
                     <MDBCol>
                       <MDBCardText className="text-muted w-auto">
-                        <Button onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
+                      {existDonation() && (
+                        <Button onClick={editDonationRedirect} type="button" id="button" className="btn btn-light w-100">
                           Editar Donación
-                        </Button>
+                        </Button>)
+                      }
+                      {!existDonation() && (
+                        <Button onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
+                          Crear Donación
+                        </Button>)
+                      }
                       </MDBCardText>
                     </MDBCol>
                   </MDBRow>
