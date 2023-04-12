@@ -118,6 +118,10 @@ const Turns = () => {
   });
   const columns = [
     {
+      title: 'Título del turno',
+      dataIndex: 'title',
+    },
+    {
       title: 'Fecha',
       dataIndex: 'date',
     },
@@ -129,14 +133,21 @@ const Turns = () => {
       title: 'Hora de Finalización',
       dataIndex: 'endTime',
     },
+    {
+      title: 'Borrador',
+      dataIndex: 'draft',
+      render:(draft) => draft ? 'No' : 'Sí',
+    },
   ];
 
   /*DATOS*/
   const [turns_data, setTurnsData] = React.useState([
     {
+      title: '...',
       date: '...',
       start: '...',
       end: '...',
+      draft: '...',
     }
   ]);
 
