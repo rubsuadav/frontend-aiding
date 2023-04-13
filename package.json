@@ -39,6 +39,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "reactstrap": "^9.1.6",
     "sweetalert": "^2.1.2",
+    "twit": "^2.2.11",
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5",
     "yup": "^1.0.2"
