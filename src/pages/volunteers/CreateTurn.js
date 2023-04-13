@@ -18,7 +18,7 @@ const successMsg = {
 
 const errorMsg = {
   title: "Mensaje de error",
-  text: "Se ha producido un error al crear el turno",
+  text: "Se ha producido un error al crear el turno. Recuerda que el título debe ser único.",
   icon: "error",
   button: "Aceptar",
   timer: "5000",

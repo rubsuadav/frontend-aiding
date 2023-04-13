@@ -172,7 +172,11 @@ const Turns = () => {
         onRow={(record, rowIndex) => {
           return {
             onClick: event => {
-              navigate("/admin/volunteers/turns/" + record.id);
+              if(record.draft){
+                navigate("/admin/volunteers/turns/" + record.id);
+              } else {
+                navigate("/admin/volunteers/turns/" + record.id + "/draft");
+              }
             },
           };
         }}

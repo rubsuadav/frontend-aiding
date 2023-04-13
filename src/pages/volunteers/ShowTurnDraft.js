@@ -253,7 +253,6 @@ export default function Details() {
     });
   }, []);
 
-  if(!turn.draft){
     return(
       <section>
       <MDBContainer className="py-5">
@@ -385,84 +384,4 @@ export default function Details() {
       </MDBContainer>
     </section>
     )
-  }else{
-    return (
-      <section>
-        <MDBContainer className="py-5">
-          <center>
-            <h2>
-            Turno
-            </h2>
-          </center>
-          <MDBRow>
-            <MDBCol style={{paddingLeft: "30px"}}>
-              <MDBCard style={{width: "1200px", paddingTop: "17px", paddingBottom: "17px"}}>
-                  <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Título</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      {turn.title}
-                    </MDBCardText>
-                  </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Fecha</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      {turn.date}
-                    </MDBCardText>
-                  </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Hora de Inicio</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      {turn.startTime}
-                    </MDBCardText>
-                  </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Finalización</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      {turn.endTime}
-                    </MDBCardText>
-                  </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Borrador</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      {turn.draft ? "No" : "Sí"}
-                    </MDBCardText>
-                  </MDBCol>
-                  </MDBRow>
-              </MDBCard>
-            </MDBCol>
-          </MDBRow>
-          <hr />
-          <div className='container my-5'>
-            <h2 className="pt-3">Voluntarios asignados</h2>
-            <br></br>
-            <Table id='table'
-            columns={columnsFinished} dataSource={volunteers_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
-          </div>
-        </MDBContainer>
-      </section>
-    );
-  }
 }
