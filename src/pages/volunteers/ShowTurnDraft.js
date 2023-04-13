@@ -204,29 +204,6 @@ export default function Details() {
     },
   ];
 
-  const columnsFinished = [
-    {
-      title: 'ID del Voluntario',
-      dataIndex: 'num_volunteer',
-    },
-    {
-      title: 'Nombre',
-      dataIndex: 'name',
-    },
-    {
-      title: 'Apellidos',
-      dataIndex: 'last_name',
-    },
-    {
-      title: 'NIF',
-      dataIndex: 'nif',
-    },
-    {
-      title: 'Rol',
-      dataIndex: 'rol',
-    },
-  ];
-
   const [volunteers_data, setVolunteersData] = React.useState([
     {
       num_volunteer: '...',

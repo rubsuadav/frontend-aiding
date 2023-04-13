@@ -57,7 +57,7 @@ function UpdateTurn() {
       .put(`/turns/${id}/`, turn)
       .then((response) => {
         swal(successMsg);
-        navigate(`/admin/volunteers/turns/${id}`);
+        navigate(`/admin/volunteers/turns/${id}/draft`);
       })
       .catch((error) => {
         if (error.response && error.response.status === 409) {

@@ -193,38 +193,6 @@ export default function Details() {
       title: 'Rol',
       dataIndex: 'rol',
     },
-    {
-      title: 'Acción',
-      key: 'action',
-      render: (text, record) => (
-        <Button type="primary" className="btn btn-danger w-75" onClick={() => deleteVolunteerConfirmationAlert(record.volunteerTurn)}>
-        Quitar
-        </Button>
-      ),
-    },
-  ];
-
-  const columnsFinished = [
-    {
-      title: 'ID del Voluntario',
-      dataIndex: 'num_volunteer',
-    },
-    {
-      title: 'Nombre',
-      dataIndex: 'name',
-    },
-    {
-      title: 'Apellidos',
-      dataIndex: 'last_name',
-    },
-    {
-      title: 'NIF',
-      dataIndex: 'nif',
-    },
-    {
-      title: 'Rol',
-      dataIndex: 'rol',
-    },
   ];
 
   const [volunteers_data, setVolunteersData] = React.useState([
@@ -252,82 +220,100 @@ export default function Details() {
       })
     });
   }, []);
-    return (
+
+    return(
       <section>
-        <MDBContainer className="py-5">
-          <center>
-            <h2>
-            Turno
-            </h2>
-          </center>
-          <MDBRow>
-            <MDBCol style={{paddingLeft: "30px"}}>
-              <MDBCard style={{width: "1200px", paddingTop: "17px", paddingBottom: "17px"}}>
-                  <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Título</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      {turn.title}
-                    </MDBCardText>
-                  </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Fecha</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      {turn.date}
-                    </MDBCardText>
-                  </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Hora de Inicio</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      {turn.startTime}
-                    </MDBCardText>
-                  </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Finalización</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      {turn.endTime}
-                    </MDBCardText>
-                  </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Borrador</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      {turn.draft ? "No" : "Sí"}
-                    </MDBCardText>
-                  </MDBCol>
-                  </MDBRow>
-              </MDBCard>
-            </MDBCol>
-          </MDBRow>
-          <hr />
-          <div className='container my-5'>
-            <h2 className="pt-3">Voluntarios asignados</h2>
-            <br></br>
-            <Table id='table'
-            columns={columnsFinished} dataSource={volunteers_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
-          </div>
-        </MDBContainer>
-      </section>
-    );
+      <MDBContainer className="py-5">
+        <center>
+          <h2>
+          Turno
+          </h2>
+        </center>
+        <MDBRow>
+          <MDBCol style={{paddingLeft: "30px"}}>
+            <MDBCard style={{width: "600px", paddingTop: "17px", paddingBottom: "17px"}}>
+                <MDBRow>
+                <MDBCol sm="3">
+                  <MDBCardText>Título</MDBCardText>
+                </MDBCol>
+                <MDBCol sm="9">
+                  <MDBCardText className="text-muted">
+                    {turn.title}
+                  </MDBCardText>
+                </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                <MDBCol sm="3">
+                  <MDBCardText>Fecha</MDBCardText>
+                </MDBCol>
+                <MDBCol sm="9">
+                  <MDBCardText className="text-muted">
+                    {turn.date}
+                  </MDBCardText>
+                </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                <MDBCol sm="3">
+                  <MDBCardText>Hora de Inicio</MDBCardText>
+                </MDBCol>
+                <MDBCol sm="9">
+                  <MDBCardText className="text-muted">
+                    {turn.startTime}
+                  </MDBCardText>
+                </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                <MDBCol sm="3">
+                  <MDBCardText>Finalización</MDBCardText>
+                </MDBCol>
+                <MDBCol sm="9">
+                  <MDBCardText className="text-muted">
+                    {turn.endTime}
+                  </MDBCardText>
+                </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                <MDBCol sm="3">
+                  <MDBCardText>Estado</MDBCardText>
+                </MDBCol>
+                <MDBCol sm="9">
+                  <MDBCardText className="text-muted">
+                    {turn.draft ? "Terminado" : "Borrador  "}
+                  </MDBCardText>
+                </MDBCol>
+                </MDBRow>
+            </MDBCard>
+          </MDBCol>
+          <MDBCol style={{paddingLeft: "30px"}}>
+            <MDBCard style={{width: "600px"}}>
+              <MDBCol style={{paddingTop: "5px", paddingBottom: "5px"}}>
+                <MDBCardText className="text-muted w-auto">
+                  <Button
+                    onClick={() => {
+                    deleteConfirmationAlert();
+                    }}
+                    type="button"
+                    className="btn btn-danger w-75"
+                    >
+                      Borrar
+                    </Button>
+                  </MDBCardText>
+              </MDBCol>
+            </MDBCard>
+          </MDBCol>
+        </MDBRow>
+        <hr />
+        <div className='container my-5'>
+          <h2 className="pt-3">Voluntarios asignados</h2>
+          <br></br>
+          <Table id='table'
+          columns={columnsDraft} dataSource={volunteers_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
+        </div>
+      </MDBContainer>
+    </section>
+    )
 }
