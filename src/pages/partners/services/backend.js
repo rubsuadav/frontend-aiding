@@ -10,7 +10,12 @@ export const donations = axios.create({
   baseURL: String(backendUrl + "partners/donation/"),
 });
 
+export const dontaionAmmount = axios.create({
+  baseURL: String(backendUrl + "partners/donation/amount"),
+})
+
 configureAxios(partners);
 configureAxios(donations);
+configureAxios(dontaionAmmount);
 
 export const fileUrl = backendUrl;

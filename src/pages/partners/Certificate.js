@@ -1,5 +1,6 @@
 import React from "react";
 import { Document, Page, Text, Image, StyleSheet, View, Link} from "@react-pdf/renderer";
+import { date } from "yup";
 
 export const styles = StyleSheet.create({
   body:{
@@ -124,7 +125,9 @@ export const styles = StyleSheet.create({
 
 const logo = Image
 
-export function generateCertificate(user, language, amount){
+
+
+export function generateCertificate(user, language, donation){
   const text =[];
   let date = new Date();
   if(language == "Español"){
@@ -188,7 +191,7 @@ export function generateCertificate(user, language, amount){
                     <Text style={styles.text}>{text[7]} {date.getFullYear() -1} (euros)</Text>
                   </View>
                   <View style={styles.tableCol}>
-                    <Text style={styles.text}>{amount}</Text>
+                    <Text style={styles.text}>{donation}</Text>
                   </View>
                 </View>
               </View>
