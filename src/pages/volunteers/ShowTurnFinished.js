@@ -33,6 +33,22 @@ const errorMsgDelete = {
   timer: "5000",
 };
 
+const successMsgFinish = {
+  title: "Mensaje de confirmación",
+  text: "El turno se ha quitado de modo borrador correctamente",
+  icon: "success",
+  button: "Aceptar",
+  timer: "5000",
+};
+
+const errorMsgFinish = {
+  title: "Mensaje de error",
+  text: "Se ha producido un error al quitar el modo borrador del turno",
+  icon: "error",
+  button: "Aceptar",
+  timer: "5000",
+};
+
 const errorMsgDeleteVolunteer = {
   title: "Mensaje de error",
   text: "Se ha producido un error al quitar el voluntario del turno",
@@ -74,6 +90,19 @@ export default function Details() {
     });
   };
 
+  const finishDraftConfirmationAlert = async () => {
+    swal({
+      title: "Completar turno",
+      text: "¿Estás seguro que desea completar el borrador del turno?",
+      icon: "warning",
+      buttons: ["No", "Sí"],
+    }).then((res) => {
+      if (res) {
+        finishDraftTurn();
+      }
+    });
+  };
+
   const deleteTurn = async () => {
     const result = await volunteers
       .delete(`/turns/${id}`)
@@ -83,6 +112,18 @@ export default function Details() {
       })
       .catch((err) => {
         swal(errorMsgDelete);
+      });
+  };
+
+  const finishDraftTurn = async () => {
+    const result = await volunteers
+      .put(`/turns/${id}/draft`)
+      .then((res) => {
+        swal(successMsgFinish);
+        navigate("/admin/volunteers/turns");
+      })
+      .catch((err) => {
+        swal(errorMsgFinish);
       });
   };
 
@@ -131,7 +172,7 @@ export default function Details() {
     },
   );
 
-  const columns = [
+  const columnsDraft = [
     {
       title: 'ID del Voluntario',
       dataIndex: 'num_volunteer',
@@ -151,15 +192,6 @@ export default function Details() {
     {
       title: 'Rol',
       dataIndex: 'rol',
-    },
-    {
-      title: 'Acción',
-      key: 'action',
-      render: (text, record) => (
-        <Button type="primary" className="btn btn-danger w-75" onClick={() => deleteVolunteerConfirmationAlert(record.volunteerTurn)}>
-        Quitar
-        </Button>
-      ),
     },
   ];
 
@@ -189,8 +221,8 @@ export default function Details() {
     });
   }, []);
 
-  return (
-    <section>
+    return(
+      <section>
       <MDBContainer className="py-5">
         <center>
           <h2>
@@ -200,7 +232,18 @@ export default function Details() {
         <MDBRow>
           <MDBCol style={{paddingLeft: "30px"}}>
             <MDBCard style={{width: "600px", paddingTop: "17px", paddingBottom: "17px"}}>
-              <MDBRow>
+                <MDBRow>
+                <MDBCol sm="3">
+                  <MDBCardText>Título</MDBCardText>
+                </MDBCol>
+                <MDBCol sm="9">
+                  <MDBCardText className="text-muted">
+                    {turn.title}
+                  </MDBCardText>
+                </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
                 <MDBCol sm="3">
                   <MDBCardText>Fecha</MDBCardText>
                 </MDBCol>
@@ -232,21 +275,21 @@ export default function Details() {
                   </MDBCardText>
                 </MDBCol>
                 </MDBRow>
+                <hr />
+                <MDBRow>
+                <MDBCol sm="3">
+                  <MDBCardText>Estado</MDBCardText>
+                </MDBCol>
+                <MDBCol sm="9">
+                  <MDBCardText className="text-muted">
+                    {turn.draft ? "Terminado" : "Borrador  "}
+                  </MDBCardText>
+                </MDBCol>
+                </MDBRow>
             </MDBCard>
           </MDBCol>
           <MDBCol style={{paddingLeft: "30px"}}>
             <MDBCard style={{width: "600px"}}>
-              <MDBCol style={{paddingTop: "15px"}}>
-                <MDBCardText className="text-muted w-auto">
-                  <Button
-                    onClick={() => {navigate(`/admin/volunteers/turns/update/${id}`)}}
-                    type="button" id="button" 
-                    className="btn btn-light w-75"
-                    >
-                    Editar turno
-                  </Button>
-                </MDBCardText>
-              </MDBCol>
               <MDBCol style={{paddingTop: "5px", paddingBottom: "5px"}}>
                 <MDBCardText className="text-muted w-auto">
                   <Button
@@ -260,18 +303,6 @@ export default function Details() {
                     </Button>
                   </MDBCardText>
               </MDBCol>
-              <hr/>
-              <MDBCol style={{paddingTop: "5px", paddingBottom: "15px"}}>
-                <MDBCardText className="text-muted w-auto">
-                  <Button
-                    onClick={() => {navigate(`/admin/volunteers/volunteerTurns/create/${id}`)}}
-                    type="button"
-                    className="btn btn-light w-75"
-                    >
-                      Asignar voluntario
-                    </Button>
-                  </MDBCardText>
-              </MDBCol>
             </MDBCard>
           </MDBCol>
         </MDBRow>
@@ -280,9 +311,9 @@ export default function Details() {
           <h2 className="pt-3">Voluntarios asignados</h2>
           <br></br>
           <Table id='table'
-          columns={columns} dataSource={volunteers_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
+          columns={columnsDraft} dataSource={volunteers_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
         </div>
       </MDBContainer>
     </section>
-  );
+    )
 }
