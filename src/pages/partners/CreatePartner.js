@@ -35,7 +35,7 @@ function CreatePartner() {
             console.log(response);
             console.log(partner);
             swal(successMsg);
-            navigate("/partners");
+            navigate("/admin/partners");
         }).catch((error) => {
             if (error.response && error.response.status === 409) {
               let error_msgs = {general: "Ya existe un socio con ese DNI, teléfono, email o IBAN"};
@@ -60,7 +60,7 @@ function CreatePartner() {
       return false;
     }
     const letters = "TRWAGMYFPDXBNJZSQVHLCKE";
-    const letterIndex = parseInt(dni.substring(0, 8)) % 23;
+    const letterIndex = parseInt(dni.substring(0, 8),10) % 23;
     const expectedLetter = letters.charAt(letterIndex);
     const actualLetter = dni.charAt(8).toUpperCase();
     return expectedLetter === actualLetter;

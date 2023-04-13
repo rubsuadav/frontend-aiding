@@ -55,7 +55,9 @@ export default function UpdateResource() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    putResource(resource);
+    if (validateForm()) {
+      putResource(resource);
+    }
   };
 
   function putResource(resource) {
@@ -64,13 +66,55 @@ export default function UpdateResource() {
       .then((response) => {
         console.log(response);
         swal(successMsg);
-        navigate(`/information/resources/${id}`);
+        navigate(`/admin/information/resources/${id}`);
       })
       .catch((error) => {
-        console.log(error);
-        swal(errorMsg);
-      });
+        if (error.response) {
+         let error_msgs = {general: "No ha rellenado correctamente."};
+         setErrors(error_msgs);
+       }
+       swal(errorMsg);
+     });
   }
+
+  /* Validator */
+   const [errors, setErrors] = useState({});
+
+   function validateTLF(contact_phone) {
+     const tlfRegex = /^\d{9}$/;
+     if (!tlfRegex.test(contact_phone)) {
+       return false;
+     }
+     return true;
+   }
+ 
+   function validateForm() {
+     let error_msgs = {};
+ 
+     if (title === "" || title === null) {
+       error_msgs.title = "El título no puede estar vacío";
+     }
+ 
+     if (street === "" || street === null) {
+       error_msgs.street = "La calle no puede estar vacía";
+     }
+ 
+     if (!validateTLF(contact_phone)) {
+       error_msgs.contact_phone = "Este no es un teléfono válido";
+     }
+ 
+     if (city === "" || city === null) {
+       error_msgs.city = "La ciudad no puede estar vacía";
+     }
+ 
+     setErrors(error_msgs);
+ 
+     if (Object.keys(error_msgs).length === 0) {
+       return true;
+     } else {
+       return false;
+     }
+   }
 
   return (
     <div className="container my-5">
@@ -88,6 +132,9 @@ export default function UpdateResource() {
                   placeholder="Título del recurso"
                 />
               </Form.Group>
+               {errors.title && (
+                  <p className="text-danger">{errors.title}</p>
+                )}
 
               <Form.Group className="mb-3">
                 <Form.Label>Descripción</Form.Label>
@@ -108,7 +155,9 @@ export default function UpdateResource() {
                   placeholder="Teléfono de contacto"
                 />
               </Form.Group>
-
+                {errors.contact_phone && (
+                  <p className="text-danger">{errors.contact_phone}</p>
+                )}
 
               <Form.Group className="mb-3">
                 <Form.Label>Calle</Form.Label>
@@ -119,6 +168,9 @@ export default function UpdateResource() {
                   placeholder="Calle del recurso"
                 />
               </Form.Group>
+                {errors.street && (
+                  <p className="text-danger">{errors.street}</p>
+                )}
 
               <Form.Group className="mb-3">
                 <Form.Label>Número</Form.Label>
@@ -139,6 +191,9 @@ export default function UpdateResource() {
                   placeholder="Ciudad donde se encuentra el recurso"
                 />
               </Form.Group>
+                {errors.city && (
+                  <p className="text-danger">{errors.city}</p>
+                )}
 
               <Form.Group className="mb-3">
                 <Form.Label>Comentarios adicionales</Form.Label>
@@ -171,7 +226,7 @@ export default function UpdateResource() {
               </Button>
               <Link
                 className="btn btn-outline-danger col mb-4 mx-2"
-                to={`/information/resources/${id}`}
+                to={`/admin/information/resources/${id}`}
               >
                 Cancelar
               </Link>

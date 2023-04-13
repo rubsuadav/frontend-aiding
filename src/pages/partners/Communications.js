@@ -171,7 +171,7 @@ const Communication = ({user_id}) =>{
         onRow={(record, rowIndex) => {
           return {
             onClick: event => {
-              navigate("/partners/" + user_id + "/communication/update/" + record.id);
+              navigate("/admin/partners/" + user_id + "/communication/update/" + record.id);
             },
           };
         }}

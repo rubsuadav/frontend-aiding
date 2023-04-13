@@ -41,7 +41,7 @@ export default function Details() {
   });
 
   const [donation, setDonation] = useState({
-    date: "",
+    start_date: "",
     amount: "",
     periodicity: "",
   });
@@ -59,17 +59,33 @@ export default function Details() {
   };
 
   function createCommunicationRedirect(){
-    navigate(`/partners/${id}/communication/create`);
+    navigate(`/admin/partners/${id}/communication/create`);
   }
 
   function createDonationRedirect(){
-    navigate(`/partners/${id}/donation/create`);
+    navigate(`/admin/partners/${id}/donation/create`);
+  }
+
+  function editDonationRedirect(){
+    navigate(`/admin/partners/${id}/donation/update`);
+  }
+
+  function handleClickReturn(){
+    navigate(`/admin/partners`);
   }
   
   const loadDonation = async () => {
     const result = await partners.get(`/${id}/donation`);
     setDonation(result.data);
   };
+
+  function existDonation(){
+    if (donation.start_date == "" || donation.start_date == undefined){
+      return false;
+    }else{
+      return true;
+    }
+  }
 
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
@@ -149,9 +165,13 @@ export default function Details() {
       }
     }
 
+
+
     //VARIABLES DEL POP UP CERTIFICADO
   const [verCertificado, setVerCertificado] = useState(false);
   const [idioma, setIdioma] = useState("Español");
+
+  
 
   function handleClick(lan){
     setVerCertificado(true);
@@ -188,10 +208,19 @@ export default function Details() {
         </section>
       ):
       <MDBContainer className="py-5">
-        <center>
-        <h2>
-          {user.name} {user.last_name}
-          </h2></center>
+        <MDBRow>
+          <MDBCol lg="1"> 
+            <Button  onClick={()=> handleClickReturn() } type="button" id="button" className="btn btn-light w-100">
+              Volver
+            </Button>
+          </MDBCol>
+          <MDBCol lg="10"> 
+          <center>
+          <h2>
+            {user.name} {user.last_name}
+            </h2></center>
+            </MDBCol>
+        </MDBRow>
         <hr />
         <MDBRow>
           <MDBCol lg="10"> 
@@ -416,7 +445,7 @@ export default function Details() {
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
                       <Button
-                        onClick={() => {navigate(`/partners/update/${id}`)}}
+                        onClick={() => {navigate(`/admin/partners/update/${id}`)}}
                         type="button" id="button" 
                         className="btn btn-light w-100"
                       >
@@ -435,16 +464,23 @@ export default function Details() {
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol>
-                    <MDBCardText className="text-muted w-auto">
-                      <Button onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
-                        Añadir Donación
-                      </Button>
-                    </MDBCardText>
-                  </MDBCol>
-                </MDBRow>
+                <hr/>
+                  <MDBRow>
+                    <MDBCol>
+                      <MDBCardText className="text-muted w-auto">
+                      {existDonation() && (
+                        <Button onClick={editDonationRedirect} type="button" id="button" className="btn btn-light w-100">
+                          Editar Donación
+                        </Button>)
+                      }
+                      {!existDonation() && (
+                        <Button onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
+                          Crear Donación
+                        </Button>)
+                      }
+                      </MDBCardText>
+                    </MDBCol>
+                  </MDBRow>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

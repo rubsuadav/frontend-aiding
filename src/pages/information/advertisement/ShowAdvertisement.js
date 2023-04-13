@@ -1,15 +1,22 @@
 import "../../../App.css";
 import React, { useState, useEffect, useRef } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+
+// React Bootstrap
+import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+
+// Local imports
 import { advertisementBE, sectionBE, mediaUrl } from "./services/backend.js";
-import { useParams, Link, useNavigate } from "react-router-dom";
 import SafeHTML from "../../../components/SanitizeHTML";
+import { useAuthContext } from "../../../components/routes/authContext";
 
 export default function ShowAdvertisement() {
   let navigate = useNavigate();
+  const { isAuthenticated } = useAuthContext();
   /* Data */
   const { id } = useParams();
   const [advertisement, setAdvertisement] = useState({
@@ -37,6 +44,15 @@ export default function ShowAdvertisement() {
   } = advertisement;
 
   /* Functions */
+
+  function deleteAdvertisement(advertisementId, data) {
+    const filteredAdvertisements = data.filter(
+      (advertisement) =>
+        parseInt(advertisement.id) !== parseInt(advertisementId)
+    );
+    return filteredAdvertisements;
+  }
+
   useEffect(() => {
     advertisementBE.get(`${id}`).then((response) => {
       setAdvertisement(response.data);
@@ -49,8 +65,8 @@ export default function ShowAdvertisement() {
       firstLoad.current = false;
     } else {
       sectionBE.get(`/${section_id}/advertisements/`).then((response) => {
-        setSectionAdvertisements(response.data);
-        console.log(response.data);
+        const data = deleteAdvertisement(id, response.data);
+        setSectionAdvertisements(data);
       });
     }
   }, [advertisement]);
@@ -58,7 +74,7 @@ export default function ShowAdvertisement() {
   return (
     <Container>
       <Row className="mt-5">
-        <Col lg={6} className="align-self-center shadow mb-5 offset-lg-2">
+        <Col lg={6} className="align-self-center shadow mb-5 offset-lg-1">
           <Row className="">
             <h1 className="title" style={{ textAlign: "left" }}>
               <strong>{title}</strong>
@@ -108,14 +124,16 @@ export default function ShowAdvertisement() {
           <Row>
             <SafeHTML html={body} />
           </Row>
-          <Row className="justify-content-center">
-            <Link
-              className="btn btn-outline-primary col-4 mb-4 mx-2"
-              to={`/admin/information/advertisements/${id}/update`}
-            >
-              Modificar artículo
-            </Link>
-          </Row>
+          {isAuthenticated && (
+            <Row className="justify-content-center">
+              <Link
+                className="btn btn-outline-primary col-4 mb-4 mx-2"
+                to={`/admin/information/advertisements/${id}/update`}
+              >
+                Modificar artículo
+              </Link>
+            </Row>
+          )}
         </Col>
         <Col className="mb-5 mx-3">
           <Row className="">
@@ -124,53 +142,54 @@ export default function ShowAdvertisement() {
             </h5>
           </Row>
           <hr />
+
+          {sectionAdvertisements.length === 0 && (
+            <>
+              <Row className="justify-content-center">
+                <p className="text-muted" style={{ textAlign: "center" }}>
+                  No hay más noticias de esta sección
+                </p>
+              </Row>
+            </>
+          )}
           {sectionAdvertisements.map((adv) => (
-            <div
+            <Card
               onClick={() => {
                 navigate(`/information/advertisements/${adv.id}`);
               }}
-              className="shadow w-auto mb-3"
+              className="shadow w-auto my-5"
               style={{ cursor: "pointer" }}
             >
               <Row>
-                <Col
-                  style={{ maxHeight: "6rem" }}
-                  className="m-1"
-                  align="center"
-                  xs={5}
-                >
-                  <Image
-                    style={{
-                      display: "block",
-                      width: "auto",
-                      height: "auto",
-                      maxHeight: "inherit",
-                    }}
-                    className="border"
-                    fluid={true}
+                <Col style={{}} className="" align="center" xs={5}>
+                  <Card.Img
+                    variant="top"
+                    className="pr-5"
                     src={`${mediaUrl}${adv.front_page}`}
                   />
                 </Col>
                 <Col
                   style={{ maxHeight: "6rem", maxWidth: "auto" }}
-                  className="my-2"
+                  className="mr-2 justify-content-center align-self-center"
                 >
-                  <h6
-                    className="title me-2"
-                    style={{
-                      textAlign: "left",
-                      overflow: "hidden",
-                      display: "-webkit-box",
-                      WebkitLineClamp: "3",
-                      WebkitBoxOrient: "vertical",
-                      textAlign: "justify",
-                    }}
-                  >
-                    <strong>{adv.title}</strong>
-                  </h6>
+                  <div>
+                    <Card.Title
+                      className="title me-2"
+                      style={{
+                        textAlign: "left",
+                        overflow: "hidden",
+                        display: "-webkit-box",
+                        WebkitLineClamp: "2",
+                        WebkitBoxOrient: "vertical",
+                        textAlign: "left",
+                      }}
+                    >
+                      <strong>{adv.title}</strong>
+                    </Card.Title>
+                  </div>
                 </Col>
               </Row>
-            </div>
+            </Card>
           ))}
         </Col>
       </Row>
@@ -180,12 +199,10 @@ export default function ShowAdvertisement() {
 
 function parseDate(dateString) {
   const isoDate = new Date(dateString);
-  const hours = isoDate.getUTCHours().toString().padStart(2, "0");
-  const minutes = isoDate.getUTCMinutes().toString().padStart(2, "0");
   const day = isoDate.getUTCDate().toString().padStart(2, "0");
   const month = new Intl.DateTimeFormat("es-ES", { month: "long" }).format(
     isoDate
   );
   const year = isoDate.getUTCFullYear();
-  return `${hours}:${minutes} - ${day} ${month} ${year}`;
+  return `${day} ${month} ${year}`;
 }

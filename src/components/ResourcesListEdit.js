@@ -121,8 +121,8 @@ export default function ResourcesListEdit() {
 
                   <div>
                     {resources_data.map((item) => (
-                      <Accordion defaultActiveKey="0">
-                        <Accordion.Item eventKey="0">
+                      <Accordion defaultActiveKey="">
+                        <Accordion.Item eventKey={item.id}>
                           <Accordion.Header>{item.title}</Accordion.Header>
                           <Accordion.Body>
                             <div class="izquierda">
@@ -148,6 +148,7 @@ export default function ResourcesListEdit() {
                                 }}
                                 type="button"
                                 className="btn btn-light w-20"
+                                id="boton"
                               >
                                 Ver más información
                               </Button>

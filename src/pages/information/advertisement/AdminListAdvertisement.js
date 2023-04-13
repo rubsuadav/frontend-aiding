@@ -12,6 +12,7 @@ import ButtonReact from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Col, Container, Row } from "react-bootstrap";
 
+
 const successMsg_delete = {
   title: "Mensaje de confirmación",
   text: "Te confirmamos que la sección se ha eliminado correctamente",
@@ -22,7 +23,7 @@ const successMsg_delete = {
 
 const successMsg_create = {
   title: "Mensaje de confirmación",
-  text: "Te confirmamos que la sección se ha eliminado correctamente",
+  text: "Te confirmamos que la sección se ha creado correctamente",
   icon: "success",
   button: "Aceptar",
   timer: "5000",
@@ -248,6 +249,7 @@ const AdminListAdvertisement = () => {
             setErrors(error_msgs);
           }else {
             swal(errorMsg_create);
+            console.log(sectionBE.getUri())
           }
         });
     }
@@ -274,7 +276,7 @@ const AdminListAdvertisement = () => {
   };
 
   useEffect(() => {
-    sectionBE.get("").then((response) => {
+    sectionBE.get().then((response) => {
       setSections(response.data);
     });
   }, [event]);
@@ -282,9 +284,7 @@ const AdminListAdvertisement = () => {
   useEffect(() => {
     advertisementBE.get().then((response) => {
       setAdvertisements(response.data);
-    });
-    sectionBE.get("").then((response) => {
-      setSections(response.data);
+      console.log(response.status);
     });
   }, []);
 

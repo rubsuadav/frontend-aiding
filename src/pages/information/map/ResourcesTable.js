@@ -257,7 +257,7 @@ const ResourcesTable = () => {
       <h1>Recursos</h1>
       <Button
         onClick={() => {
-          navigate("/information/create-resource");
+          navigate("/admin/information/create-resource");
         }}
         id="boton-socio"
       >
@@ -267,7 +267,7 @@ const ResourcesTable = () => {
         onRow={(record, rowIndex) => {
           return {
             onClick: () => {
-              navigate("/information/resources/" + record.id);
+              navigate("/admin/information/resources/" + record.id);
             },
           };
         }}
