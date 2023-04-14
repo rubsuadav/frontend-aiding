@@ -12,7 +12,7 @@ export const donations = axios.create({
 
 export const dontaionAmmount = axios.create({
   baseURL: String(backendUrl + "partners/donation/amount"),
-})
+});
 
 configureAxios(partners);
 configureAxios(donations);

@@ -6,7 +6,6 @@ const requestService = axios.create({
   baseURL: String(backendUrl),
 });
 
-
 let refresh = false;
 
 export function configureAxios(AxiosInstance) {

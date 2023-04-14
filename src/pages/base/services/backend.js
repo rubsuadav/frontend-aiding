@@ -18,7 +18,6 @@ export const rolesBE = axios.create({
   baseURL: String(backendUrl + "base/user/roles/"),
 });
 
-
 configureAxios(base);
 configureAxios(contacts);
 configureAxios(notifications);
