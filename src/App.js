@@ -12,9 +12,6 @@ import PrivateRoute from "./components/routes/PrivateRoute";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 
-// Errors
-import ERROR_404 from "./pages/error/404";
-
 // Advertisement
 import ListAdvertisement from "./pages/information/advertisement/ListAdvertisement";
 import AdminListAdvertisement from "./pages/information/advertisement/AdminListAdvertisement";
@@ -90,11 +87,17 @@ import UpdateItem from './pages/stock/UpdateItem';
 
 import Error404 from "./pages/Error404";
 
+// Social Media
+import SocialMedia from "./components/SocialMedia.js";
 
 var navLinksPublic = [
   {
     title: "Inicio",
     path: "/",
+  },
+  {
+    title: "Postear",
+    path: "/post",
   },
   {
     title: "Noticias",
@@ -146,6 +149,10 @@ var navLinksAdmin = [
   {
     title: "Inventario",
     path: "admin/stock/items"
+  },
+  {
+    title: "Postear",
+    path: "sdmin/post",
   },
 ];
 
@@ -226,6 +233,9 @@ export default function App() {
                   <Route path="base/login" element={<Login />} />
                   <Route path="base/register" element={<Register />} />
                 </Route>
+
+                  {/* Social Media */}
+                  <Route path="/post" element={<SocialMedia />} />
 
                 {/* Admin routes ============================================*/}
                 <Route path="/admin" element={<PrivateRoute />}>
@@ -360,6 +370,9 @@ export default function App() {
                   <Route path="stock/items/create" element={<CreateItem />} />
                   <Route path="stock/items/:id" element={<ShowItem />} />
                   <Route path="stock/items/update/:id" element={<UpdateItem />} />
+
+                  {/* Social Media */}
+                  <Route path="/admin/post/" element={<SocialMedia />} />
 
                 </Route>
                 <Route path="*" element={<Error404 />} />
