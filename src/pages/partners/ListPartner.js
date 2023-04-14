@@ -1,22 +1,19 @@
-import React from 'react';
-import { SearchOutlined } from '@ant-design/icons';
+import React from "react";
+import { SearchOutlined } from "@ant-design/icons";
 import ButtonR from "react-bootstrap/Button";
-import { Table, Button, Input, Space, Tag} from 'antd';
-import { useRef, useState, useEffect } from 'react';
-import Highlighter from 'react-highlight-words';
-import {fileUrl, partners} from "./services/backend.js";
+import { Table, Button, Input, Space, Tag } from "antd";
+import { useRef, useState, useEffect } from "react";
+import Highlighter from "react-highlight-words";
+import { fileUrl, partners } from "./services/backend.js";
 import { useNavigate } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.css';
-import Modal from 'react-bootstrap/Modal';
+import "bootstrap/dist/css/bootstrap.css";
+import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import * as XLSX from 'xlsx';
-import axios from 'axios';
-import {MDBCol,MDBRow} from "mdb-react-ui-kit";
+import * as XLSX from "xlsx";
+import axios from "axios";
+import { MDBCol, MDBRow } from "mdb-react-ui-kit";
+import { useNotificationContext } from "../../components/notificationContext.js";
 
-
-const onChange = (pagination, filters, sorter, extra) => {
-  console.log('params', pagination, filters, sorter, extra);
-};
 
 const Partners = () => {
   let navigate = useNavigate();
@@ -34,8 +31,8 @@ const Partners = () => {
   }
 
   /*BUSCADOR*/
-  const [searchText, setSearchText] = useState('');
-  const [searchedColumn, setSearchedColumn] = useState('');
+  const [searchText, setSearchText] = useState("");
+  const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -44,10 +41,16 @@ const Partners = () => {
   };
   const handleReset = (clearFilters) => {
     clearFilters();
-    setSearchText('');
+    setSearchText("");
   };
   const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+      close,
+    }) => (
       <div
         style={{
           padding: 8,
@@ -58,21 +61,27 @@ const Partners = () => {
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
-          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
           style={{
             marginBottom: 8,
-            display: 'block',
+            display: "block",
           }}
         />
         <Space>
           <Button
             type="primary"
             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined style={{
-              alignItems: 'center',
-              display: 'inline-grid',
-            }}/>}
+            icon={
+              <SearchOutlined
+                style={{
+                  alignItems: "center",
+                  display: "inline-grid",
+                }}
+              />
+            }
             size="small"
             style={{
               width: 90,
@@ -108,7 +117,7 @@ const Partners = () => {
     filterIcon: (filtered) => (
       <SearchOutlined
         style={{
-          color: filtered ? '#678edf' : undefined,
+          color: filtered ? "#678edf" : undefined,
         }}
       />
     ),
@@ -123,12 +132,12 @@ const Partners = () => {
       searchedColumn === dataIndex ? (
         <Highlighter
           highlightStyle={{
-            backgroundColor: '#678edf',
+            backgroundColor: "#678edf",
             padding: 0,
           }}
           searchWords={[searchText]}
           autoEscape
-          textToHighlight={text ? text.toString() : ''}
+          textToHighlight={text ? text.toString() : ""}
         />
       ) : (
         text
@@ -136,62 +145,62 @@ const Partners = () => {
   });
   const columns = [
     {
-      title: 'DNI',
-      dataIndex: 'dni',
-      ...getColumnSearchProps('dni'),
+      title: "DNI",
+      dataIndex: "dni",
+      ...getColumnSearchProps("dni"),
     },
     {
-      title: 'Nombre',
-      dataIndex: 'name',
-      ...getColumnSearchProps('name'),
+      title: "Nombre",
+      dataIndex: "name",
+      ...getColumnSearchProps("name"),
     },
     {
-      title: 'Apellidos',
-      dataIndex: 'last_name',
-      ...getColumnSearchProps('last_name'),
+      title: "Apellidos",
+      dataIndex: "last_name",
+      ...getColumnSearchProps("last_name"),
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
-      ...getColumnSearchProps('email'),
+      title: "Email",
+      dataIndex: "email",
+      ...getColumnSearchProps("email"),
     },
     {
-      title: 'Provincia',
-      dataIndex: 'province',
-      ...getColumnSearchProps('province'),
+      title: "Provincia",
+      dataIndex: "province",
+      ...getColumnSearchProps("province"),
     },
     {
-      title: 'Idioma',
-      dataIndex: 'language',
+      title: "Idioma",
+      dataIndex: "language",
       filters: [
         {
-          text: 'Español',
-          value: 'Español',
+          text: "Español",
+          value: "Español",
         },
         {
-          text: 'Catalán',
-          value: 'Catalán',
+          text: "Catalán",
+          value: "Catalán",
         },
       ],
       onFilter: (value, record) => record.language.includes(value),
-      render: (language) => (partnerFormatter(language)),
+      render: (language) => partnerFormatter(language),
     },
     {
-      title: 'Registro Donación',
-      dataIndex: 'state',
+      title: "Registro Donación",
+      dataIndex: "state",
       filters: [
         {
-          text: 'Activo',
-          value: 'Activo',
+          text: "Activo",
+          value: "Activo",
         },
         {
-          text: 'Inactivo',
-          value: 'Inactivo',
+          text: "Inactivo",
+          value: "Inactivo",
         },
       ],
       onFilter: (value, record) => record.state.includes(value),
       render: (state) => (
-        <Tag color={state === 'Activo' ? 'green' : 'red'} key={state}>
+        <Tag color={state === "Activo" ? "green" : "red"} key={state}>
           {state.toUpperCase()}
         </Tag>
       ),
@@ -201,30 +210,63 @@ const Partners = () => {
   /*DATOS*/
   const [partners_data, setPartnersData] = React.useState([
     {
-      dni: '...',
-      name: '...',
-      last_name: '...',
-      email: '...',
-      state: '...',
-      language: '...',
-      province: '...',
-    }
+      id: "...",
+      dni: "...",
+      name: "...",
+      last_name: "...",
+      email: "...",
+      state: "...",
+      language: "...",
+      province: "...",
+    },
   ]);
 
   useEffect(() => {
-    partners.get().then((response) => {setPartnersData(response.data);});
+    partners.get().then((response) => {
+      setPartnersData(response.data);
+      setFilteredPartners(response.data);
+    });
   }, []);
 
-  function createPartnerRedirect(){
+  function createPartnerRedirect() {
     navigate("/admin/partners/create");
   }
 
-  /*EXPORTACIÓN DE SOCIOS */
+  /* NOTIFICACIONES */
+
+  const {filteredEmails, emails} = useNotificationContext();
+
+  function notifyPartners() {
+    let emails_aux = filteredPartners.map(obj => obj.email).join(" ");
+    console.log(emails);
+    filteredEmails(emails_aux);
+    console.log(emails);
+  };
+
+  const [filteredPartners, setFilteredPartners] = useState([{
+    id: "...",
+    dni: "...",
+    name: "...",
+    last_name: "...",
+    email: "...",
+    state: "...",
+    language: "...",
+    province: "...",
+  },
+]);
+
+
+  const onChange = (pagination, filters, sorter, extra) => {
+    console.log(extra.currentDataSource);
+    setFilteredPartners(extra.currentDataSource);
+  };
+
+  /* EXPORTACIÓN DE SOCIOS */
 
   const exportToExcel = (fileName) => {
-    const sheetName = 'Sheet1';
+    const sheetName = "Sheet1";
     const workbook = XLSX.utils.book_new();
-    const worksheetData = XLSX.utils.json_to_sheet(partners_data);
+    const worksheetData = XLSX.utils.json_to_sheet(filteredPartners);
     XLSX.utils.book_append_sheet(workbook, worksheetData, sheetName);
     XLSX.writeFile(workbook, `${fileName}.xlsx`);
   };
@@ -233,84 +275,128 @@ const Partners = () => {
   const [selectedFile, setSelectedFile] = React.useState(null);
 
   var [errors, setErrors] = useState({});
-  
-  const handleSubmit = async(event) => {
-    event.preventDefault()
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const formData = new FormData();
     formData.append("selectedFile", selectedFile);
-     partners.post("import/",formData).then((response)=>{
-      console.log(fileUrl);
-      setShow(false);
-      navigate("/admin/partners/");
-      window.location.reload(true);
-    }).catch((error) => {
-      setErrors(error.response.data["error"]);
-      console.log(errors);
+    partners
+      .post("import/", formData)
+      .then((response) => {
+        console.log(fileUrl);
+        setShow(false);
+        navigate("/admin/partners/");
+        window.location.reload(true);
+      })
+      .catch((error) => {
+        setErrors(error.response.data["error"]);
+        console.log(errors);
+      });
+    partners.get().then((response) => {
+      setPartnersData(response.data);
+      setFilteredPartners(response.data);
     });
-    partners.get().then((response) => {setPartnersData(response.data);});
-  }
-
+  };
 
   const handleFileSelect = (event) => {
-    setSelectedFile(event.target.files[0])
-  }
+    setSelectedFile(event.target.files[0]);
+  };
 
   const handleClose = () => setShow(false);
 
   const handleShow = () => {
     setErrors("");
     setShow(true);
-  }
-  
-  return (
-    <div className='container my-5'>
-        <h1 className="pt-3">Socios</h1>
-        <div id="botones-socios">
-          <Button onClick={handleShow} id="boton-importar" >Importar socios</Button>
-          <Button  id="boton-importar" onClick={() => exportToExcel('myTable')}>Exportar a Excel</Button>
-        </div>
+  };
 
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Importar socios</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form className="" id='modal-partner-content'> 
-              <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+  return (
+    <div className="container my-5">
+      <h1 className="pt-3">Socios</h1>
+      <div id="botones-socios">
+        <Button onClick={handleShow} id="boton-importar">
+          Importar socios
+        </Button>
+        <Button id="boton-importar" onClick={() => exportToExcel("myTable")}>
+          Exportar a Excel
+        </Button>
+        <Button id="boton-importar" onClick={() => notifyPartners()}>
+          Notificar socios
+        </Button>
+      </div>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Importar socios</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form className="" id="modal-partner-content">
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
               <div id="modal-partner-content">
-                <input name="file" id="input-file" type="file" class="custom-file-input" onChange={handleFileSelect} />
+                <input
+                  name="file"
+                  id="input-file"
+                  type="file"
+                  class="custom-file-input"
+                  onChange={handleFileSelect}
+                />
               </div>
-              </Form.Group>
-              <div id='modal-button-right'>
-                <ButtonR variant="outline-success" className="col mb-4 mx-5" type="submit" onClick={handleSubmit}> Importar </ButtonR>
-              </div>
-            </Form>
-            <div id='modal-button-left'>
-              <ButtonR variant="outline-danger" className="col mb-4 mx-5" onClick={handleClose}> Cancelar </ButtonR>
+            </Form.Group>
+            <div id="modal-button-right">
+              <ButtonR
+                variant="outline-success"
+                className="col mb-4 mx-5"
+                type="submit"
+                onClick={handleSubmit}
+              >
+                {" "}
+                Importar{" "}
+              </ButtonR>
             </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <p className="text-danger">{errors.toString()}</p>
-          </Modal.Footer> 
-        </Modal>
-        
-        <MDBRow>
-          <MDBCol md='2'>
-          <Button onClick={createPartnerRedirect} id="boton-socio">Crear socio</Button>
-          </MDBCol>
-        </MDBRow>
-        <br></br>
-        <Table id='table'
+          </Form>
+          <div id="modal-button-left">
+            <ButtonR
+              variant="outline-danger"
+              className="col mb-4 mx-5"
+              onClick={handleClose}
+            >
+              {" "}
+              Cancelar{" "}
+            </ButtonR>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <p className="text-danger">{errors.toString()}</p>
+        </Modal.Footer>
+      </Modal>
+
+      <MDBRow>
+        <MDBCol md="2">
+          <Button onClick={createPartnerRedirect} id="boton-socio">
+            Crear socio
+          </Button>
+        </MDBCol>
+      </MDBRow>
+      <br></br>
+      <Table
+        id="table"
         onRow={(record, rowIndex) => {
           return {
-            onClick: event => {
+            onClick: (event) => {
               navigate("/admin/partners/" + record.id);
             },
           };
         }}
-        columns={columns} dataSource={partners_data} onChange={onChange} scroll={{y: 400,}} pagination={{pageSize: 20,}}/>
+        columns={columns}
+        dataSource={partners_data}
+        onChange={onChange}
+        scroll={{ y: 400 }}
+        pagination={{ pageSize: 20 }}
+      />
     </div>
   );
-}
+};
 
 export default Partners;
