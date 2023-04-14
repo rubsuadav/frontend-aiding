@@ -296,8 +296,8 @@ function UpdatePartner() {
                   value={language}
                   name="language"
                 >
-                  <option value="Español">Español</option>
-                  <option value="Catalán">Catalán</option>
+                  <option value="spanish">Español</option>
+                  <option value="catalan">Catalán</option>
                 </Form.Select>
               </Form.Group>
               {errors.language && (
