@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { notifications } from "./services/backend.js";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useNotificationContext } from "../../components/notificationContext.js";
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -113,70 +114,92 @@ function AdminCreateNotification() {
     }
   };
 
+  /* NOTIFY PARTNERS / VOLUNTEERS */
+  const { emails, setFilteredEmails } = useNotificationContext();
+  const [emailsToNotify, setEmailsToNotify] = useState("");
+
+  useEffect(() => {
+    setNotification({ ...notification, recipients: emails });
+    setEmailsToNotify(emails);
+    setFilteredEmails("");
+  }, []);
+
   return (
-    <div className="container my-5 shadow">
-      <h1 className="pt-3">Notificación</h1>
-      {errors.error && <p className="text-danger">{errors.error}</p>}
-      <Form className="" onSubmit={(e) => onSubmit(e)}>
-        <div className="row justify-content-evenly">
-          <div className="col-md-5">
-            <Form.Group className="mb-3">
-              <Form.Label>Asunto</Form.Label>
-              <Form.Control
-                onChange={(e) => onInputChange(e)}
-                value={subject}
-                name="subject"
-                placeholder="Asunto"
-              />
-              {errors.name && <p className="text-danger">{errors.name}</p>}
-            </Form.Group>
+    <>
+      {emailsToNotify.length > 0 && (
+        <div class="alert alert-primary" role="alert">
+          Se han seleccionado {emailsToNotify.split(" ").length} correos
+          electrónicos.
+        </div>
+      )}
 
-            <Form.Group className="mb-3">
-              <Form.Label>Receptores</Form.Label>
-              <Form.Control
-                onChange={(e) => onInputChange(e)}
-                value={recipients}
-                name="recipients"
-                placeholder="Agregue direcciones de receptores separados por espacios"
-              />
-              {errors.recipients && (
-                <p className="text-danger">{errors.recipients}</p>
-              )}
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Mensaje</Form.Label>
-              <Form.Control
-                onChange={(e) => onInputChange(e)}
-                value={message}
-                name="message"
-                as="textarea"
-                rows={3}
-                placeholder="Escribe aquí tu mensaje"
-              />
-              {errors.message && (
-                <p className="text-danger">{errors.message}</p>
-              )}
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Adjuntar archivo</Form.Label>
-              <Form.Control
-                type="file"
-                name="file"
-                onChange={(e) =>
-                  setNotification({ ...notification, file: e.target.files[0] })
-                }
-              />
-            </Form.Group>
+      <div className="container my-5 shadow">
+        <h1 className="pt-3">Notificación</h1>
+        {errors.error && <p className="text-danger">{errors.error}</p>}
+        <Form className="" onSubmit={(e) => onSubmit(e)}>
+          <div className="row justify-content-evenly">
+            <div className="col-md-5">
+              <Form.Group className="mb-3">
+                <Form.Label>Asunto</Form.Label>
+                <Form.Control
+                  onChange={(e) => onInputChange(e)}
+                  value={subject}
+                  name="subject"
+                  placeholder="Asunto"
+                />
+                {errors.name && <p className="text-danger">{errors.name}</p>}
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Receptores</Form.Label>
+                <Form.Control
+                  onChange={(e) => onInputChange(e)}
+                  value={recipients}
+                  name="recipients"
+                  placeholder="Agregue direcciones de receptores separados por espacios"
+                />
+                {errors.recipients && (
+                  <p className="text-danger">{errors.recipients}</p>
+                )}
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Mensaje</Form.Label>
+                <Form.Control
+                  onChange={(e) => onInputChange(e)}
+                  value={message}
+                  name="message"
+                  as="textarea"
+                  rows={3}
+                  placeholder="Escribe aquí tu mensaje"
+                />
+                {errors.message && (
+                  <p className="text-danger">{errors.message}</p>
+                )}
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Adjuntar archivo</Form.Label>
+                <Form.Control
+                  type="file"
+                  name="file"
+                  onChange={(e) =>
+                    setNotification({
+                      ...notification,
+                      file: e.target.files[0],
+                    })
+                  }
+                />
+              </Form.Group>
+            </div>
           </div>
-        </div>
 
-        <div className="row justify-content-evenly">
-          <Button className="col mb-4 mx-5" variant="primary" type="submit">
-            Enviar mensaje
-          </Button>
-        </div>
-      </Form>
-    </div>
+          <div className="row justify-content-evenly">
+            <Button className="col mb-4 mx-5" variant="primary" type="submit">
+              Enviar mensaje
+            </Button>
+          </div>
+        </Form>
+      </div>
+    </>
   );
 }
 export default AdminCreateNotification;
