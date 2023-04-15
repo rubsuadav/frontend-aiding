@@ -74,12 +74,14 @@ import ShowTurnFinished from "./pages/volunteers/ShowTurnFinished";
 import UpdateTurn from "./pages/volunteers/UpdateTurn";
 import CreateVolunteerTurn from "./pages/volunteers/CreateVolunteerTurn";
 
+// Events
 import AdminCreateEvent from "./pages/events/AdminCreateEvents";
 import ProgramedEvent from "./pages/events/ProgramedEvent";
 import StartedEvent from "./pages/events/StartedEvent";
 import ShowEvent from "./pages/events/ShowEvent";
 import AdminListEvent from "./pages/events/AdminListEvents";
 import AdminUpdateEvent from "./pages/events/AdminUpdateEvents";
+import BookingEvents from "./pages/events/BookingEvents";
 
 import AdminCreateNotification from './pages/base/AdminCreateNotification';
 
@@ -218,6 +220,8 @@ export default function App() {
                   <Route path="/events/started" element={<StartedEvent />} />
 
                   <Route path="/events/:id" element={<ShowEvent />} />
+
+                  <Route path="/events/:id/booking" element={<BookingEvents />} />
 
                   {/* Login and register */}
                   <Route path="base/login" element={<Login />} />
