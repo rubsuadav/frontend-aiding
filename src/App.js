@@ -87,17 +87,10 @@ import UpdateItem from './pages/stock/UpdateItem';
 
 import Error404 from "./pages/Error404";
 
-// Social Media
-import SocialMedia from "./components/SocialMedia.js";
-
 var navLinksPublic = [
   {
     title: "Inicio",
     path: "/",
-  },
-  {
-    title: "Postear",
-    path: "/post",
   },
   {
     title: "Noticias",
@@ -234,9 +227,6 @@ export default function App() {
                   <Route path="base/register" element={<Register />} />
                 </Route>
 
-                  {/* Social Media */}
-                  <Route path="/post" element={<SocialMedia />} />
-
                 {/* Admin routes ============================================*/}
                 <Route path="/admin" element={<PrivateRoute />}>
                   {/* Base */}
@@ -370,9 +360,6 @@ export default function App() {
                   <Route path="stock/items/create" element={<CreateItem />} />
                   <Route path="stock/items/:id" element={<ShowItem />} />
                   <Route path="stock/items/update/:id" element={<UpdateItem />} />
-
-                  {/* Social Media */}
-                  <Route path="/admin/post/" element={<SocialMedia />} />
 
                 </Route>
                 <Route path="*" element={<Error404 />} />
