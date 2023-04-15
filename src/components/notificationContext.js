@@ -13,16 +13,16 @@ import {
   export function NotificationContextProvider({ children }) {
     const [emails, setEmails] = useState("");
   
-    const filteredEmails = useCallback(function (emails) {
-      setEmails(emails);
+    const setFilteredEmails = useCallback(function (data) {
+      setEmails(data);
     }, []);
   
     const value = useMemo(
       () => ({
-        filteredEmails,
+        setFilteredEmails,
         emails,
       }),
-      [filteredEmails, emails]
+      [setFilteredEmails,emails]
     );
   
     return <NotificationContext.Provider value={value}>{children}</NotificationContext.Provider>;

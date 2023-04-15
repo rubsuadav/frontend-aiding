@@ -232,15 +232,14 @@ const Partners = () => {
     navigate("/admin/partners/create");
   }
 
-  /* NOTIFICACIONES */
+  /* NOTIFICATIONS */
 
-  const {filteredEmails, emails} = useNotificationContext();
+  const {setFilteredEmails} = useNotificationContext();
 
   function notifyPartners() {
     let emails_aux = filteredPartners.map(obj => obj.email).join(" ");
-    console.log(emails);
-    filteredEmails(emails_aux);
-    console.log(emails);
+    setFilteredEmails(emails_aux);
+    navigate("/admin/notification/create");
   };
 
   const [filteredPartners, setFilteredPartners] = useState([{
@@ -257,7 +256,6 @@ const Partners = () => {
 
 
   const onChange = (pagination, filters, sorter, extra) => {
-    console.log(extra.currentDataSource);
     setFilteredPartners(extra.currentDataSource);
   };
 
@@ -320,7 +318,7 @@ const Partners = () => {
           Exportar a Excel
         </Button>
         <Button id="boton-importar" onClick={() => notifyPartners()}>
-          Notificar socios
+          Notificar socios seleccionados
         </Button>
       </div>
 
