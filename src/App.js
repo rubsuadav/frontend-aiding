@@ -223,11 +223,13 @@ export default function App() {
 
                     <Route path="/events/:id" element={<ShowEvent />} />
 
+                    <Route path="/events/:id/booking" element={<BookingEvents />} />
+
                     {/* Login and register */}
                     <Route path="base/login" element={<Login />} />
                     <Route path="base/register" element={<Register />} />
                   </Route>
-
+                                      
                   {/* Admin routes ============================================*/}
                   <Route path="/admin" element={<PrivateRoute />}>
                     {/* Base */}
@@ -334,11 +336,7 @@ export default function App() {
                       path="/admin/events/:id/update"
                       element={<AdminUpdateEvent />}
                     />
-                    
-                    <Route 
-                      path="/events/:id/booking"
-                      element={<BookingEvents />} 
-                    />
+
 
                     <Route path="volunteers/turns" element={<ListTurn />} />
                     <Route
