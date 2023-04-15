@@ -13,9 +13,6 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import { NotificationContextProvider } from "./components/notificationContext";
 
-// Errors
-import ERROR_404 from "./pages/error/404";
-
 // Advertisement
 import ListAdvertisement from "./pages/information/advertisement/ListAdvertisement";
 import AdminListAdvertisement from "./pages/information/advertisement/AdminListAdvertisement";
@@ -94,7 +91,6 @@ import UpdateItem from './pages/stock/UpdateItem';
 
 import Error404 from "./pages/Error404";
 
-
 var navLinksPublic = [
   {
     title: "Inicio",
@@ -146,6 +142,10 @@ var navLinksAdmin = [
   {
     title: "Inventario",
     path: "admin/stock/items"
+  },
+  {
+    title: "Postear",
+    path: "sdmin/post",
   },
 ];
 
