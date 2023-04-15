@@ -18,7 +18,7 @@ const successMsg = {
 
 const errorMsg = {
   title: "Mensaje de error",
-  text: "Se ha producido un error al actualizar el turno",
+  text: "Se ha producido un error al actualizar el turno. Recuerda que el título debe ser único.",
   icon: "error",
   button: "Aceptar",
   timer: "5000",
@@ -30,12 +30,14 @@ function UpdateTurn() {
   const { id } = useParams();
 
   const [turn, setTurn] = useState({
+    title: "",
     date: "",
     startTime: "",
     endTime: "",
   });
 
   const {
+    title,
     date,
     startTime,
     endTime,
@@ -55,7 +57,7 @@ function UpdateTurn() {
       .put(`/turns/${id}/`, turn)
       .then((response) => {
         swal(successMsg);
-        navigate(`/admin/volunteers/turns/${id}`);
+        navigate(`/admin/volunteers/turns/${id}/draft`);
       })
       .catch((error) => {
         if (error.response && error.response.status === 409) {
@@ -84,6 +86,10 @@ function UpdateTurn() {
   function validateForm() {
     let error_msgs = {};
 
+    if (title === "" || title === null) {
+      error_msgs.name = "El título del turno no puede estar vacío";
+    }
+
     if (date === "" || date === null) {
       error_msgs.name = "La fecha del turno no puede estar vacía";
     }
@@ -111,6 +117,19 @@ function UpdateTurn() {
         <Form className="" onSubmit={(e) => onSubmit(e)}>
           <div className="row justify-content-evenly">
             <div className="col-md-5">
+            <Form.Group className="mb-3">
+                <Form.Label>Título</Form.Label>
+                <Form.Control
+                  onChange={(e) => onInputChange(e)}
+                  value={title}
+                  name="title"
+                  type="input"
+                  placeholder="Título identificador del turno"
+                />
+              </Form.Group>
+                {errors.title && (
+                  <p className="text-danger">{errors.title}</p>
+                )}
               <Form.Group className="mb-3">
                 <Form.Label>Fecha</Form.Label>
                 <Form.Control

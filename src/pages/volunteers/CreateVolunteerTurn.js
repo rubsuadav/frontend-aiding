@@ -31,7 +31,7 @@ function CreateVolunteerTurn() {
         const aux = volunteers.post('volunteerTurns/',volunteerTurn).then((response) => {
             console.log(response);
             swal(successMsg);
-            navigate("/admin/volunteers/turns/" + id);
+            navigate("/admin/volunteers/turns/" + id + "/draft");
         }).catch((error) => {
             if (error.response && error.response.status === 409) {
               let error_msgs = {general: "Este voluntario ya está asignado al turno"};

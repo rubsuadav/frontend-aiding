@@ -66,7 +66,8 @@ import SLAs from "./pages/information/policies/SLAs.js";
 // Turns
 import ListTurn from "./pages/volunteers/ListTurn";
 import CreateTurn from "./pages/volunteers/CreateTurn";
-import ShowTurn from "./pages/volunteers/ShowTurn";
+import ShowTurnDraft from "./pages/volunteers/ShowTurnDraft";
+import ShowTurnFinished from "./pages/volunteers/ShowTurnFinished";
 import UpdateTurn from "./pages/volunteers/UpdateTurn";
 import CreateVolunteerTurn from "./pages/volunteers/CreateVolunteerTurn";
 
@@ -130,10 +131,6 @@ var navLinksAdmin = [
   {
     title: "Eventos",
     path: "admin/events",
-  },
-  {
-    title: "Turnos",
-    path: "admin/volunteers/turns",
   },
   {
     title: "Crear Notificación",
@@ -338,7 +335,8 @@ export default function App() {
                     path="volunteers/turns/create"
                     element={<CreateTurn />}
                   />
-                  <Route path="volunteers/turns/:id" element={<ShowTurn />} />
+                  <Route path="volunteers/turns/:id/draft" element={<ShowTurnDraft />} />
+                  <Route path="volunteers/turns/:id" element={<ShowTurnFinished />} />
                   <Route
                     path="volunteers/turns/update/:id"
                     element={<UpdateTurn />}
@@ -350,7 +348,8 @@ export default function App() {
 
                   <Route path="volunteers/turns" element={ <ListTurn/>} />
                   <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
-                  <Route path="volunteers/turns/:id" element={ <ShowTurn/>} />
+                  <Route path="volunteers/turns/:id/draft" element={ <ShowTurnDraft/>} />
+                  <Route path="volunteers/turns/:id" element={ <ShowTurnFinished/>} />
                   <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
                   <Route path="volunteers/volunteerTurns/create/:id" element={ <CreateVolunteerTurn/>} />
 
