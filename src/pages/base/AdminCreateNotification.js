@@ -45,6 +45,7 @@ function AdminCreateNotification() {
           // el servidor respondió con un código de estado diferente de 2xx
           error_msgs.error = error.response.data.message;
           setErrors(error_msgs);
+          swal(errorMsg)
         } else {
           // error de red u otro error
           console.log(error);
