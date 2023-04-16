@@ -13,10 +13,6 @@ import Button from "react-bootstrap/Button";
 import { backendUrl } from "../../config";
 import { useAuthContext } from "../routes/authContext";
 
-// Icon to share Aiding
-import { FaTwitter } from 'react-icons/fa';
-import { FaWhatsapp } from 'react-icons/fa';
-
 const NavigationBar = ({
   navLinksPublic,
   navLinksAdmin,
@@ -47,11 +43,6 @@ const NavigationBar = ({
     return null;
   }
   
- /*  Compartir Aiding */
-  const shareText = "¿Necesitas una página web a medida para tu negocio? Con Aiding puedes tener la tuya en un abrir y cerrar de ojos. Echa un vistazo a nuestra página de ejemplo: https://aiding-383619.ew.r.appspot.com/ y descubre lo que podemos hacer por ti. ¡Visítanos en https://aiding-web.vercel.app/ para saber más!";
-  const urlT = `https://twitter.com/intent/tweet?text=${shareText}`;
-  const urlW = `https://wa.me/?text=${shareText}`;
-
   return (
     <Navbar className="navbar" expand="sm">
       <Container>
@@ -75,23 +66,6 @@ const NavigationBar = ({
                 {link.title}
               </Nav.Link>
             ))}
-
-            {/** "Share Aiding" */}
-            <NavDropdown title="Compartir Aiding" id="nav-dropdown">
-              <NavDropdown.Item
-                href={urlT}
-                target="_blank"
-                rel="noopener noreferrer"
-              > <FaTwitter /> En Twitter
-              </NavDropdown.Item>
-
-              <NavDropdown.Item
-                href={urlW}
-                target="_blank"
-                rel="noopener noreferrer"
-              >    <FaWhatsapp /> En WhatsApp
-              </NavDropdown.Item>
-            </NavDropdown>
 
             <NavDropdown title="Eventos" id="nav-dropdown">
               <NavDropdown.Item>
