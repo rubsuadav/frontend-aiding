@@ -71,6 +71,7 @@ function UpdateCommunication() {
         navigate(`/admin/partners/${id}`);
       })
       .catch((error) => {
+        console.log(communication)
         swal(errorMsg);
       });
   }
@@ -101,14 +102,11 @@ function UpdateCommunication() {
       return false;
     }
   }
+  
   const onSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      const formData = new FormData();
-      formData.append("date", date);
-      formData.append("communication_type", communication_type);
-      formData.append("description", description);
-      putCommunication(formData);
+      putCommunication(communication);
     }
   };
 
