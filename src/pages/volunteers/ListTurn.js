@@ -156,7 +156,7 @@ const Turns = () => {
   }, []);
 
   function createTurnRedirect(){
-    navigate("/admin/volunteers/turns/create");
+    navigate("/roles/volunteers/turns/create");
   }
 
   return (
@@ -173,9 +173,9 @@ const Turns = () => {
           return {
             onClick: event => {
               if(record.draft){
-                navigate("/admin/volunteers/turns/" + record.id);
+                navigate("/roles/volunteers/turns/" + record.id);
               } else {
-                navigate("/admin/volunteers/turns/" + record.id + "/draft");
+                navigate("/roles/volunteers/turns/" + record.id + "/draft");
               }
             },
           };

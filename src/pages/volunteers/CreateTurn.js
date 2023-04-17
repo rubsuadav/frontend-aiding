@@ -31,7 +31,7 @@ function CreateTurn() {
         const aux = volunteers.post('turns/',turn).then((response) => {
             console.log(response);
             swal(successMsg);
-            navigate("/admin/volunteers/turns");
+            navigate("/roles/volunteers/turns");
         }).catch((error) => {
             if (error.response && error.response.status === 409) {
               let error_msgs = {general: "La fecha de inicio debe ser anterior a la de finalización, y la fecha no debe haber pasado."};

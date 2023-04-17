@@ -18,43 +18,25 @@ export function AuthContextProvider({ children }) {
     localStorage.getItem('access_token') ?? false
   );
 
-  const [isAdmin, setIsAdmin] = useState(
-    localStorage.getItem('role') ?? false
+  const [role, setRole] = useState(
+    localStorage.getItem('role') ?? { isAdmin: false, isCaptain: false, isSupervisor: false }
   );
 
-  const [isCaptain, setIsCaptain] = useState(
-    localStorage.getItem('role') ?? false
-  );
-
-  const [isSupervisor, setIsSupervisor] = useState(
-    localStorage.getItem('role') ?? false
-  );
+  const { isAdmin, isCaptain, isSupervisor } = role;
 
   const login = useCallback(function (token, role) {
     localStorage.setItem('access_token', token.access);
     localStorage.setItem('refresh_token', token.refresh);
     localStorage.setItem('role', role);
     setIsAuthenticated(true);
-    switch (role) {
-      case ROLE_ADMIN:
-        setIsAdmin(true);
-        break;
-      case ROLE_CAPTAIN:
-        setIsCaptain(true);
-        break;
-      case ROLE_SUPERVISOR:
-        setIsSupervisor(true);
-        break;
-    }
+    setRole(role);
   }, []);
 
   const logout = useCallback(function () {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('role');
-    setIsAdmin(false);
-    setIsCaptain(false);
-    setIsSupervisor(false);
+    setRole({ isAdmin: false, isCaptain: false, isSupervisor: false });
     setIsAuthenticated(false);
   }, []);
 
