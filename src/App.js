@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthContextProvider } from "./components/routes/authContext";
 import PublicRoute from "./components/routes/PublicRoute";
 import PrivateRoute from "./components/routes/PrivateRoute";
+import ProtectedRoute from "./components/routes/ProtectedRoute";
 
 // Components
 import Navbar from "./components/layout/Navbar";
@@ -152,11 +153,15 @@ var navLinksAdmin = [
 var navLinksCaptainSupervisor = [
   {
     title: "Turnos",
-    path: "admin/volunteers/turns",
+    path: "roles/volunteers/turns",
   },
   {
     title: "Voluntarios",
-    path: "admin/volunteers",
+    path: "roles/volunteers",
+  },
+  {
+    title: "Crear Notificación",
+    path: "roles/notification/create"
   },
 ];
 
@@ -228,6 +233,29 @@ export default function App() {
                     {/* Login and register */}
                     <Route path="base/login" element={<Login />} />
                     <Route path="base/register" element={<Register />} />
+                  </Route>
+
+                  {/* Capitan/supervsior routes ============================================*/}
+                  <Route path="/roles" element={<ProtectedRoute />}>
+                  <Route path="/roles/notification/create" element={ <AdminCreateNotification/> } />
+                    {/* Volunteers */}
+                    <Route path="volunteers" element={<ListVolunteers />} />
+                    <Route
+                      path="volunteers/create"
+                      element={<CreateVolunteer />}
+                    />
+                    <Route path="volunteers/:id" element={<ShowVolunteer />} />
+                    <Route
+                      path="volunteers/update/:id"
+                      element={<UpdateVolunteer />}
+                    />
+                    {/* Turns */}
+                    <Route path="volunteers/turns" element={ <ListTurn/>} />
+                    <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
+                    <Route path="volunteers/turns/:id/draft" element={ <ShowTurnDraft/>} />
+                    <Route path="volunteers/turns/:id" element={ <ShowTurnFinished/>} />
+                    <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
+                    <Route path="volunteers/volunteerTurns/create/:id" element={ <CreateVolunteerTurn/>} />
                   </Route>
                                       
                   {/* Admin routes ============================================*/}
@@ -353,13 +381,6 @@ export default function App() {
                       path="volunteers/volunteerTurns/create/:id"
                       element={<CreateVolunteerTurn />}
                     />
-
-                    <Route path="volunteers/turns" element={ <ListTurn/>} />
-                    <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
-                    <Route path="volunteers/turns/:id/draft" element={ <ShowTurnDraft/>} />
-                    <Route path="volunteers/turns/:id" element={ <ShowTurnFinished/>} />
-                    <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
-                    <Route path="volunteers/volunteerTurns/create/:id" element={ <CreateVolunteerTurn/>} />
 
                     <Route path="/admin/notification/create" element={ <AdminCreateNotification/> } />
                     
