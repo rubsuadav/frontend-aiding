@@ -143,15 +143,49 @@ function UpdatePartner() {
     return age >= 18;
   }
 
+  function validateText(valor) {
+    const regex = /^[a-zA-Z]*$/;
+    return regex.test(valor);
+  }
+  
+  function validateName(valor) {
+    const regex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+    return regex.test(valor);
+  }
+
+  function validateTelefone(valor) {
+    const regex = /^(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}$/;
+    return regex.test(valor);
+  }
+
+  function validateAdress(valor) {
+    const regex = /^[a-zA-Z0-9\s, '-]*$/;
+    return regex.test(valor);
+  }
+
+  function validateNumber(valor) {
+    const regex = /^[0-9]*$/;
+    return regex.test(valor);
+  }
+
+  function validatePostalCode(valor) {
+    const regex = /^[0-9]{5}$/;
+    return regex.test(valor);
+  }
+
   function validateForm() {
     let error_msgs = {};
 
     if (name === "" || name === null) {
       error_msgs.name = "El nombre no puede estar vacío";
+    } else if (!validateName(name)) {
+      error_msgs.name = "El nombre no puede contener números o caracteres especiales";
     }
 
     if (last_name === "" || last_name === null) {
       error_msgs.last_name = "Los apellidos no pueden estar vacío";
+    } else if (!validateName(last_name)) {
+      error_msgs.last_name = "Los apellidos no pueden contener números o caracteres especiales";
     }
 
     if (dni === "" || dni === null) {
@@ -162,6 +196,12 @@ function UpdatePartner() {
 
     if (phone1 === "" || phone1 === null) {
       error_msgs.phone1 = "El teléfono no puede estar vacío";
+    } else if (!validateTelefone(phone1)) {
+      error_msgs.phone1 = "Este no es un teléfono válido";
+    }
+
+    if(!validateTelefone(phone2) && !(phone2 === "") && !(phone2 === null)){
+      error_msgs.phone2 = "Este no es un teléfono válido";
     }
 
     if (birthdate === "" || birthdate === null) {
@@ -172,18 +212,26 @@ function UpdatePartner() {
 
     if (address === "" || address === null) {
       error_msgs.address = "La dirección no puede estar vacía";
+    } else if(!validateAdress(address)){
+      error_msgs.address = "La dirección no puede contener caracteres especiales";
     }
 
     if (postal_code === "" || postal_code === null) {
       error_msgs.postal_code = "El código postal no puede estar vacío";
+    } else if (!validatePostalCode(postal_code)) {
+      error_msgs.postal_code = "Este no es un código postal válido";
     }
 
     if (township === "" || township === null) {
       error_msgs.township = "La ciudad no puede estar vacía";
+    } else if (!validateText(township)) {
+      error_msgs.township = "La ciudad no puede contener números o caracteres especiales";
     }
 
     if (province === "" || province === null) {
       error_msgs.province = "La provincia no puede estar vacía";
+    } else if (!validateText(province)) {
+      error_msgs.province = "La provincia no puede contener números o caracteres especiales";
     }
     
     if (email === "" || email === null) {
@@ -195,11 +243,13 @@ function UpdatePartner() {
     if (iban === "" || iban === null) {
       error_msgs.iban = "El IBAN no puede estar vacío";
     } else if(!validateIBAN(iban)){
-      error_msgs.iban = "Este no es un IBAN válido";
+      error_msgs.iban = "Este no es un IBAN válido, y debe ser de España";
     }
 
     if (account_holder === "" || account_holder === null) {
       error_msgs.account_holder = "El titular de la cuenta no puede estar vacío";
+    } else if (!validateName(account_holder)) {
+      error_msgs.account_holder = "El titular de la cuenta no puede contener números o caracteres especiales";
     }
 
     setErrors(error_msgs);
@@ -275,6 +325,9 @@ function UpdatePartner() {
                   placeholder="Teléfono del socio"
                 />
               </Form.Group>
+                    {errors.phone2 && (
+                      <p className="text-danger">{errors.phone2}</p>
+                    )}
   
               <Form.Group className="mb-3">
                 <Form.Label>Género</Form.Label>
@@ -296,8 +349,8 @@ function UpdatePartner() {
                   value={language}
                   name="language"
                 >
-                  <option value="Español">Español</option>
-                  <option value="Catalán">Catalán</option>
+                  <option value="spanish">Español</option>
+                  <option value="catalan">Catalán</option>
                 </Form.Select>
               </Form.Group>
               {errors.language && (
