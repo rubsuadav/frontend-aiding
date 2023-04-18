@@ -23,7 +23,7 @@ const successMsg_delete = {
 
 const successMsg_create = {
   title: "Mensaje de confirmación",
-  text: "Te confirmamos que la sección se ha eliminado correctamente",
+  text: "Te confirmamos que la sección se ha creado correctamente",
   icon: "success",
   button: "Aceptar",
   timer: "5000",
@@ -368,6 +368,7 @@ const AdminListAdvertisement = () => {
                     value={name}
                     name="name"
                     required
+                    maxLength={100}
                     placeholder="Nombre de la sección"
                   />
                 </Form.Group>

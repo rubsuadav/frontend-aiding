@@ -8,9 +8,10 @@ import {
   MDBCard,
   MDBCardText,
   MDBCardBody,
+  MDBCardImage
 } from "mdb-react-ui-kit";
 import Communication from "./Communications.js";
-import {partners, fileUrl} from "./services/backend.js";
+import {partners, fileUrl, dontaionAmmount} from "./services/backend.js";
 import { generateCertificate} from "./Certificate.js";
 import { PDFViewer, PDFDownloadLink} from "@react-pdf/renderer";
 import { Button} from "react-bootstrap";
@@ -18,6 +19,7 @@ import { Badge, Tag } from 'antd';
 
 export default function Details() {
   let navigate = useNavigate();
+
 
   /**Establecer usuario */
   const [user, setUser] = useState({
@@ -40,7 +42,8 @@ export default function Details() {
   });
 
   const [donation, setDonation] = useState({
-    date: "",
+    id: "",
+    start_date: "",
     amount: "",
     periodicity: "",
   });
@@ -57,6 +60,15 @@ export default function Details() {
     setUser(result.data);
   };
 
+  const [donationAmount, setDonationAmount] = useState({
+    
+  });
+
+  const totalAmount =  async () => {
+    const result = await dontaionAmmount.get(`/${donation.id}`);
+    setDonationAmount(result.data['total_amuont']) ;
+  };
+
   function createCommunicationRedirect(){
     navigate(`/admin/partners/${id}/communication/create`);
   }
@@ -64,11 +76,27 @@ export default function Details() {
   function createDonationRedirect(){
     navigate(`/admin/partners/${id}/donation/create`);
   }
+
+  function editDonationRedirect(){
+    navigate(`/admin/partners/${id}/donation/update`);
+  }
+
+  function handleClickReturn(){
+    navigate(`/admin/partners`);
+  }
   
   const loadDonation = async () => {
     const result = await partners.get(`/${id}/donation`);
     setDonation(result.data);
   };
+
+  function existDonation(){
+    if (donation.start_date == "" || donation.start_date == undefined){
+      return false;
+    }else{
+      return true;
+    }
+  }
 
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
@@ -148,13 +176,19 @@ export default function Details() {
       }
     }
 
+
+
     //VARIABLES DEL POP UP CERTIFICADO
   const [verCertificado, setVerCertificado] = useState(false);
   const [idioma, setIdioma] = useState("Español");
 
+  
+
   function handleClick(lan){
-    setVerCertificado(true);
-    setIdioma(lan);
+    totalAmount().then(()=>{
+      setVerCertificado(true);
+      setIdioma(lan);
+    })
   } 
 
   const sex = partnerFormatter(user.sex);
@@ -170,15 +204,15 @@ export default function Details() {
             <button onClick={()=>  setIdioma("Catalán")}type="button" id="button" className="btn btn-light w-100"  width="10%"> Català </button>
             <button onClick={()=>  setVerCertificado(false)}type="button" id="button" className="btn btn-light w-100" width="10%"> Cerrar </button>
           </div>
-          <div><PDFViewer  height={"910"} width={"700"}>{generateCertificate(user,idioma, donation.amount)}</PDFViewer></div>
+          <div><PDFViewer  height={"910"} width={"700"}>{generateCertificate(user,idioma, donationAmount)}</PDFViewer></div>
           <div>
             ¿No carga?
-            <div><PDFDownloadLink document={generateCertificate(user,"Español", donation.amount)} fileName="certificate.pdf">
+            <div><PDFDownloadLink document={generateCertificate(user,"Español",donationAmount)} fileName="certificate.pdf">
               {({ blob, url, loading, error }) =>
                 loading ? 'Loading document...' : 'Descarga en español'
               }
             </PDFDownloadLink></div>
-            <div><PDFDownloadLink document={generateCertificate(user,"Català", donation.amount)} fileName="certificate.pdf">
+            <div><PDFDownloadLink document={generateCertificate(user,"Català", donationAmount)} fileName="certificate.pdf">
               {({ blob, url, loading, error }) =>
                 loading ? 'Loading document...' : 'Descaga en català'
               }
@@ -187,10 +221,19 @@ export default function Details() {
         </section>
       ):
       <MDBContainer className="py-5">
-        <center>
-        <h2>
-          {user.name} {user.last_name}
-          </h2></center>
+        <MDBRow>
+          <MDBCol lg="1"> 
+            <Button  onClick={()=> handleClickReturn() } type="button" id="button" className="btn btn-light w-100">
+              Volver
+            </Button>
+          </MDBCol>
+          <MDBCol lg="10"> 
+          <center>
+          <h2>
+            {user.name} {user.last_name}
+            </h2></center>
+            </MDBCol>
+        </MDBRow>
         <hr />
         <MDBRow>
           <MDBCol lg="10"> 
@@ -434,16 +477,23 @@ export default function Details() {
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol>
-                    <MDBCardText className="text-muted w-auto">
-                      <Button onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
-                        Añadir Donación
-                      </Button>
-                    </MDBCardText>
-                  </MDBCol>
-                </MDBRow>
+                <hr/>
+                  <MDBRow>
+                    <MDBCol>
+                      <MDBCardText className="text-muted w-auto">
+                      {existDonation() && (
+                        <Button onClick={editDonationRedirect} type="button" id="button" className="btn btn-light w-100">
+                          Editar Donación
+                        </Button>)
+                      }
+                      {!existDonation() && (
+                        <Button onClick={createDonationRedirect} type="button" id="button" className="btn btn-light w-100">
+                          Crear Donación
+                        </Button>)
+                      }
+                      </MDBCardText>
+                    </MDBCol>
+                  </MDBRow>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

@@ -29,8 +29,16 @@ export function configureAxios(AxiosInstance) {
   AxiosInstance.interceptors.response.use(
     (resp) => resp,
     async (error) => {
+
+
+      // If response is undefined throws error 500 server error
+      if (error.response === undefined) {
+        return Promise.reject(error);
+      }
+
       const refresh_token = localStorage.getItem("refresh_token");
 
+      // Access token is not valid and there is refresh token
       if (error.response.status === 401 && !refresh && refresh_token) {
         refresh = true;
         console.log(localStorage.getItem("refresh_token"));
@@ -41,6 +49,7 @@ export function configureAxios(AxiosInstance) {
           },
           { headers: { "Content-Type": "application/json" } }
         );
+        // Token refresh was valid
         if (response.status === 200) {
           axios.defaults.headers.common[
             "Authorization"
@@ -48,6 +57,13 @@ export function configureAxios(AxiosInstance) {
           localStorage.setItem("access_token", response.data.access);
           localStorage.setItem("refresh_token", response.data.refresh);
           return requestService(error.config);
+        }
+        // Token refresh expired
+        else {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
+          localStorage.removeItem("role");
+          return Promise.reject(error);
         }
       }
       refresh = false;

@@ -71,6 +71,7 @@ function UpdateCommunication() {
         navigate(`/admin/partners/${id}`);
       })
       .catch((error) => {
+        console.log(communication)
         swal(errorMsg);
       });
   }
@@ -91,6 +92,8 @@ function UpdateCommunication() {
 
     if (description === "" || description === null) {
       error_msgs.description = "La descripción no puede estar vacía";
+    } else if (description.length > 255) {
+      error_msgs.description = "La descripción debe tener menos de 255 caracteres";
     }
 
     setErrors(error_msgs);
@@ -101,14 +104,11 @@ function UpdateCommunication() {
       return false;
     }
   }
+  
   const onSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      const formData = new FormData();
-      formData.append("date", date);
-      formData.append("communication_type", communication_type);
-      formData.append("description", description);
-      putCommunication(formData);
+      putCommunication(communication);
     }
   };
 
@@ -176,6 +176,8 @@ function UpdateCommunication() {
                 onChange={(e) => onInputChange(e)}
                 value={description}
                 name="description"
+                as="textarea"
+                rows={3}
                 placeholder="Descripción de la comunicación"
               />
             </Form.Group>

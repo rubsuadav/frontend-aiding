@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { base } from "./services/backend.js";
+import { base, rolesBE } from "./services/backend.js";
 import swal from 'sweetalert';
 
 const successMsg = {
@@ -29,9 +29,28 @@ export default function EditUser() {
     username: "",
     password: "",
     is_admin: "",
+    roles_id: "",
   });
 
-  const { username, password, is_admin } = user;
+  const [roles, setRoles] = useState([
+    {
+      id: "",
+      name: "",
+    },
+  ]);
+
+  const { username, password, is_admin, roles_id } = user;
+
+  function getRoles() {
+    rolesBE
+      .get("")
+      .then((response) => {
+        setRoles(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -39,6 +58,7 @@ export default function EditUser() {
       setUser(response.data);
     };
     fetchUser();
+    getRoles();
   }, [id]);
 
   const onInputChange = (e) => {
@@ -99,6 +119,19 @@ export default function EditUser() {
                   onChange={(e) => onInputChange(e)}
                 />
               </Form.Group>
+              <Form.Group className="mb-3">
+              <Form.Label>Roles</Form.Label>
+              <Form.Select
+                onChange={(e) => onInputChange(e)}
+                value={roles_id}
+                name="roles_id"
+              >
+                <option value=""></option>
+                {roles.map((rol) => (
+                  <option value={rol.id}>{rol.name}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
           </div>
         </div>
 

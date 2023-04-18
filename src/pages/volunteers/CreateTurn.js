@@ -18,7 +18,7 @@ const successMsg = {
 
 const errorMsg = {
   title: "Mensaje de error",
-  text: "Se ha producido un error al crear el turno",
+  text: "Se ha producido un error al crear el turno. Recuerda que el título debe ser único.",
   icon: "error",
   button: "Aceptar",
   timer: "5000",
@@ -31,7 +31,7 @@ function CreateTurn() {
         const aux = volunteers.post('turns/',turn).then((response) => {
             console.log(response);
             swal(successMsg);
-            navigate("/admin/volunteers/turns");
+            navigate("/roles/volunteers/turns");
         }).catch((error) => {
             if (error.response && error.response.status === 409) {
               let error_msgs = {general: "La fecha de inicio debe ser anterior a la de finalización, y la fecha no debe haber pasado."};
@@ -47,6 +47,10 @@ function CreateTurn() {
 
   function validateForm() {
     let error_msgs = {};
+
+    if (title === "" || title === null) {
+      error_msgs.name = "El título del turno no puede estar vacío";
+    }
 
     if (date === "" || date === null) {
       error_msgs.name = "La fecha del turno no puede estar vacía";
@@ -70,12 +74,14 @@ function CreateTurn() {
   }
 
     const [turn, setTurn] = useState({
+      title: "",
       date: "",
       startTime: "",
       endTime: "",
     });
 
     const {
+      title,
       date,
       startTime,
       endTime,
@@ -98,6 +104,19 @@ function CreateTurn() {
         <Form className="" onSubmit={(e) => onSubmit(e)}>
           <div className="row justify-content-evenly">
             <div className="col-md-5">
+            <Form.Group className="mb-3">
+                <Form.Label>Título</Form.Label>
+                <Form.Control
+                  onChange={(e) => onInputChange(e)}
+                  value={title}
+                  name="title"
+                  type="input"
+                  placeholder="Título identificador del turno"
+                />
+              </Form.Group>
+                {errors.title && (
+                  <p className="text-danger">{errors.title}</p>
+                )}
               <Form.Group className="mb-3">
                 <Form.Label>Fecha</Form.Label>
                 <Form.Control

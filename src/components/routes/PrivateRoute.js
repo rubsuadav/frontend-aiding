@@ -1,19 +1,16 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuthContext } from "./authContext";
 
-import React from 'react'
-
 export default function PublicRoute() {
+  const { isAuthenticated } = useAuthContext();
 
-    const { isAuthenticated } = useAuthContext();
-
-    if (!isAuthenticated) {
-        return <Navigate to="/" />;
-    }
+  if (!isAuthenticated || localStorage.getItem("role") !== "admin") {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div>
-        <Outlet />
+      <Outlet />
     </div>
-  )
+  );
 }

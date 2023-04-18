@@ -1,16 +1,11 @@
 import React from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import ButtonR from "react-bootstrap/Button";
 import { Table, Button, Input, Space, Tag} from 'antd';
 import { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
 import {volunteers} from "./services/backend.js";
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
-import Modal from 'react-bootstrap/Modal';
-import Form from "react-bootstrap/Form";
-import * as XLSX from 'xlsx';
-import axios from 'axios';
 import {MDBCol,MDBRow} from "mdb-react-ui-kit";
 
 const onChange = (pagination, filters, sorter, extra) => {
@@ -123,6 +118,10 @@ const Turns = () => {
   });
   const columns = [
     {
+      title: 'Título del turno',
+      dataIndex: 'title',
+    },
+    {
       title: 'Fecha',
       dataIndex: 'date',
     },
@@ -134,14 +133,21 @@ const Turns = () => {
       title: 'Hora de Finalización',
       dataIndex: 'endTime',
     },
+    {
+      title: 'Borrador',
+      dataIndex: 'draft',
+      render:(draft) => draft ? 'No' : 'Sí',
+    },
   ];
 
   /*DATOS*/
   const [turns_data, setTurnsData] = React.useState([
     {
+      title: '...',
       date: '...',
       start: '...',
       end: '...',
+      draft: '...',
     }
   ]);
 
@@ -150,7 +156,7 @@ const Turns = () => {
   }, []);
 
   function createTurnRedirect(){
-    navigate("/admin/volunteers/turns/create");
+    navigate("/roles/volunteers/turns/create");
   }
 
   return (
@@ -166,7 +172,11 @@ const Turns = () => {
         onRow={(record, rowIndex) => {
           return {
             onClick: event => {
-              navigate("/admin/volunteers/turns/" + record.id);
+              if(record.draft){
+                navigate("/roles/volunteers/turns/" + record.id);
+              } else {
+                navigate("/roles/volunteers/turns/" + record.id + "/draft");
+              }
             },
           };
         }}

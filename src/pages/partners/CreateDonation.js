@@ -47,13 +47,11 @@ function CreateDonation() {
 
 
     const [donation, setDonation] = useState({
-      date: "",
       amount: "",
-      periodicity: "",
+      periodicity: "MENSUAL",
     });
 
     const {
-      date,
       amount,
       periodicity,
     } = donation;
@@ -62,15 +60,20 @@ function CreateDonation() {
       setDonation({ ...donation, [e.target.name]: e.target.value });
     };
 
+    function validarCampoNumerico(valor) {
+      const regex = /^[0-9]*$/;
+      return regex.test(valor);
+    }
+
     function validateForm() {
       let error_msgs = {};
   
-      if (date === "" || date === null) {
-        error_msgs.date = "La fecha no puede estar vacía";
-      }
-  
       if (amount === "" || amount === null) {
         error_msgs.amount = "La cantidad no puede estar vacía";
+      } else if (amount <= 0) {
+        error_msgs.amount = "La cantidad debe ser mayor que 0";
+      } else if (!validarCampoNumerico(amount)) {
+        error_msgs.amount = "La cantidad debe ser un número";
       }
 
       if (periodicity === "" || periodicity === null) {
@@ -90,7 +93,6 @@ function CreateDonation() {
       e.preventDefault();
       if (validateForm()) {
         const formData = new FormData(); 
-        formData.append("date", date);
         formData.append("amount", amount);
         formData.append("periodicity", periodicity);
         postDonation(FormData);
@@ -103,17 +105,6 @@ function CreateDonation() {
         <Form className="" onSubmit={(e) => onSubmit(e)}>
           <div className="row justify-content-evenly">
             <div className="col-md-6">
-              
-                <Form.Group className="mb-3">
-                <Form.Label>Fecha</Form.Label>
-                <Form.Control
-                  onChange={(e) => onInputChange(e)}
-                  value={date}
-                  type="date"
-                  name="date"
-                />
-               {errors.date && (<p className="text-danger">{errors.date}</p>)}
-              </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Periodicidad</Form.Label>

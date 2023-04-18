@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Table, Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import { base } from "./services/backend.js";
+import { base, rolesBE } from "./services/backend.js";
 
 const onChange = (pagination, filters, sorter, extra) => {
   console.log("params", pagination, filters, sorter, extra);
@@ -17,6 +17,7 @@ const Users = () => {
       id: "...",
       username: "...",
       is_admin: "...",
+      roles_id: "",
     },
   ]);
 
@@ -34,17 +35,40 @@ const Users = () => {
       dataIndex: "username",
     },
     {
-      title: "Rol del usuario",
+      title: "Administrador/Usuario",
       dataIndex: 'is_admin',
       render:(is_admin) => is_admin ? 'ADMINISTRADOR' : 'USUARIO',
     },
+    {
+      title: 'Rol del usuario',
+      dataIndex: 'roles_id',
+      render: (rolesId) => getRoleName(rolesId),
+    },
   ];
-  
+
+  function getRoleName(rolesId) {
+    const role = roles.find((t) => t.id === rolesId);
+    return role ? role.name : '';
+  }
+
+  const [roles, setRoles] = React.useState([]);
+
+  function getRoles() {
+    rolesBE
+      .get("")
+      .then((response) => {
+        setRoles(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   useEffect(() => {
     const getUsersData = base.get("users/").then((response) => {
       setUsersData(response.data);
     });
+    getRoles();
   }, []);
 
   // Navigate del botón de crear user
@@ -57,7 +81,7 @@ const Users = () => {
       <h1 className="pt-3">Usuarios</h1>
       <Button
         onClick={createUserRedirect}
-        id="boton-usuario"
+        id="boton-socio"
         style={{ float: "left" }}
       >
         Crear usuario
