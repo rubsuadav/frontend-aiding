@@ -121,7 +121,8 @@ function AdminUpdateEvent() {
                     onChange={(e) => onTitleChange(e)}
                     value={title}
                     name="title"
-                    placeholder="Título del evento"
+                    placeholder="Título del evento (máximo 100 caracteres)"
+                    maxLength={100}
                   />
                 </Form.Group>
   

@@ -210,7 +210,8 @@ const AdminCreateAdvertisement = () => {
                     value={title}
                     name="title"
                     required
-                    placeholder="Título del artículo"
+                    placeholder="Título del artículo (200 caractéres)"
+                    maxLength={200}
                   />
                 </Form.Group>
 
@@ -225,6 +226,7 @@ const AdminCreateAdvertisement = () => {
                     name="abstract"
                     placeholder="Breve resumen de máximo 250 caractéres"
                     as="textarea"
+                    maxLength={250}
                   />
                 </Form.Group>
 
@@ -235,7 +237,8 @@ const AdminCreateAdvertisement = () => {
                     onChange={(e) => onInputChange(e)}
                     value={url}
                     name="url"
-                    placeholder="Enlace del artículo original"
+                    placeholder="Enlace del artículo original (200 caractéres)"
+                    maxLength={200}
                   />
                 </Form.Group>
 
@@ -290,12 +293,13 @@ const AdminCreateAdvertisement = () => {
             <Container>
               <Row className="justify-content-center">
                 <Col sm={10} className="pt-5">
-                  <h2>Cuerpo de artículo</h2>
+                  <h2>Cuerpo del artículo</h2>
                   <EditButtons editor={editor} />
                   <EditorContent
                     className="my-3"
                     style={{ minHeight: "400px", border: "2px solid #000" } }
                     editor={editor}
+                    maxLength={5000}
                   />
                 </Col>
               </Row>

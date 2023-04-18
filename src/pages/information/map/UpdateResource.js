@@ -129,7 +129,8 @@ export default function UpdateResource() {
                   onChange={(e) => onInputChange(e)}
                   value={title}
                   name="title"
-                  placeholder="Título del recurso"
+                  placeholder="Título del recurso (máximo 100 caracteres)"
+                  maxLength={100}
                 />
               </Form.Group>
                {errors.title && (
@@ -142,7 +143,8 @@ export default function UpdateResource() {
                   onChange={(e) => onInputChange(e)}
                   value={description}
                   name="description"
-                  placeholder="Descripción del recurso"
+                  placeholder="Descripción del recurso (máximo 255 caracteres)"
+                  maxLength={255}
                 />
               </Form.Group>
 
@@ -201,7 +203,8 @@ export default function UpdateResource() {
                   onChange={(e) => onInputChange(e)}
                   value={additional_comments}
                   name="additional_comments"
-                  placeholder="Comentarios adicionales"
+                  placeholder="Comentarios adicionales (máximo 255 caracteres)"
+                  maxLength={255}
                 />
               </Form.Group>
 

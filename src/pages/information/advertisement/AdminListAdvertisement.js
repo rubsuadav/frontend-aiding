@@ -368,6 +368,7 @@ const AdminListAdvertisement = () => {
                     value={name}
                     name="name"
                     required
+                    maxLength={100}
                     placeholder="Nombre de la sección"
                   />
                 </Form.Group>
