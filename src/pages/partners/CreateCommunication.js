@@ -55,6 +55,7 @@ function CreateCommunication() {
     const onInputChange = (e) => {
       setCommunication({ ...communication, [e.target.name]: e.target.value });
     };
+
   
     /* Validator */
     const [errors, setErrors] = useState({});
@@ -68,6 +69,8 @@ function CreateCommunication() {
 
       if (description === "" || description === null) {
         error_msgs.description = "La descripción no puede estar vacía";
+      } else if (description.length > 255) {
+        error_msgs.description = "La descripción debe tener menos de 255 caracteres";
       }
 
       setErrors(error_msgs);
@@ -129,6 +132,8 @@ function CreateCommunication() {
                   onChange={(e) => onInputChange(e)}
                   value={description}
                   name="description"
+                  as="textarea"
+                  rows={3}
                   placeholder="Descripción de la comunicación"
                 />
               </Form.Group>
