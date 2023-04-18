@@ -119,7 +119,8 @@ export default function CreateResource() {
                   onChange={(e) => onInputChange(e)}
                   value={title}
                   name="title"
-                  placeholder="Título del recurso"
+                  placeholder="Título del recurso (100 caracteres)"
+                  maxLength={100}
                 />
               </Form.Group>
               {errors.title && (
@@ -132,7 +133,8 @@ export default function CreateResource() {
                   onChange={(e) => onInputChange(e)}
                   value={description}
                   name="description"
-                  placeholder="Descripción del recurso"
+                  placeholder="Descripción del recurso (255 caracteres)"
+                  maxlength={255}
                 />
               </Form.Group>
               
@@ -157,6 +159,7 @@ export default function CreateResource() {
                   value={street}
                   name="street"
                   placeholder="Calle del recurso"
+                  maxlength={255}
                 />
               </Form.Group>
               {errors.street && (
@@ -170,6 +173,7 @@ export default function CreateResource() {
                   value={number}
                   name="number"
                   placeholder="Número de la calle"
+                  maxlength={10}
                 />
               </Form.Group>
 
@@ -180,6 +184,7 @@ export default function CreateResource() {
                   value={city}
                   name="city"
                   placeholder="Ciudad donde se encuentra el recurso"
+                  maxlength={100}
                 />
               </Form.Group>
               {errors.city && (
@@ -192,7 +197,8 @@ export default function CreateResource() {
                   onChange={(e) => onInputChange(e)}
                   value={additional_comments}
                   name="additional_comments"
-                  placeholder="Comentarios adicionales"
+                  placeholder="Comentarios adicionales (255 caracteres)"
+                  maxlength={255}
                 />
               </Form.Group>
 

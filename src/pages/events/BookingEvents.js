@@ -112,9 +112,10 @@ function BookingEvents() {
               <Form.Label>Nombre</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Introduce tu nombre"
+                placeholder="Introduce tu nombre (máximo 100 caracteres)"
                 name="name"
                 value={name}
+                maxLength={100}
                 onChange={(e) => onInputChange(e)}
               />
             </Form.Group>
@@ -123,9 +124,10 @@ function BookingEvents() {
               <Form.Label>Apellidos</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Introduce tus apellidos"
+                placeholder="Introduce tus apellidos (máximo 100 caracteres)"
                 name="last_name"
                 value={last_name}
+                maxLength={100}
                 onChange={(e) => onInputChange(e)}
               />
             </Form.Group>
