@@ -42,7 +42,7 @@ const NavigationBar = ({
 
     return null;
   }
-
+  
   return (
     <Navbar className="navbar" expand="sm">
       <Container>
