@@ -8,9 +8,10 @@ import {
   MDBCard,
   MDBCardText,
   MDBCardBody,
+  MDBCardImage
 } from "mdb-react-ui-kit";
 import Communication from "./Communications.js";
-import {partners, fileUrl} from "./services/backend.js";
+import {partners, fileUrl, dontaionAmmount} from "./services/backend.js";
 import { generateCertificate} from "./Certificate.js";
 import { PDFViewer, PDFDownloadLink} from "@react-pdf/renderer";
 import { Button} from "react-bootstrap";
@@ -18,6 +19,7 @@ import { Badge, Tag } from 'antd';
 
 export default function Details() {
   let navigate = useNavigate();
+
 
   /**Establecer usuario */
   const [user, setUser] = useState({
@@ -40,6 +42,7 @@ export default function Details() {
   });
 
   const [donation, setDonation] = useState({
+    id: "",
     start_date: "",
     amount: "",
     periodicity: "",
@@ -55,6 +58,15 @@ export default function Details() {
   const loadUser = async () => {
     const result = await partners.get(`/${id}`);
     setUser(result.data);
+  };
+
+  const [donationAmount, setDonationAmount] = useState({
+    
+  });
+
+  const totalAmount =  async () => {
+    const result = await dontaionAmmount.get(`/${donation.id}`);
+    setDonationAmount(result.data['total_amuont']) ;
   };
 
   function createCommunicationRedirect(){
@@ -173,8 +185,10 @@ export default function Details() {
   
 
   function handleClick(lan){
-    setVerCertificado(true);
-    setIdioma(lan);
+    totalAmount().then(()=>{
+      setVerCertificado(true);
+      setIdioma(lan);
+    })
   } 
 
   const sex = partnerFormatter(user.sex);
@@ -190,15 +204,15 @@ export default function Details() {
             <button onClick={()=>  setIdioma("Catalán")}type="button" id="button" className="btn btn-light w-100"  width="10%"> Català </button>
             <button onClick={()=>  setVerCertificado(false)}type="button" id="button" className="btn btn-light w-100" width="10%"> Cerrar </button>
           </div>
-          <div><PDFViewer  height={"910"} width={"700"}>{generateCertificate(user,idioma, donation.amount)}</PDFViewer></div>
+          <div><PDFViewer  height={"910"} width={"700"}>{generateCertificate(user,idioma, donationAmount)}</PDFViewer></div>
           <div>
             ¿No carga?
-            <div><PDFDownloadLink document={generateCertificate(user,"Español", donation.amount)} fileName="certificate.pdf">
+            <div><PDFDownloadLink document={generateCertificate(user,"Español",donationAmount)} fileName="certificate.pdf">
               {({ blob, url, loading, error }) =>
                 loading ? 'Loading document...' : 'Descarga en español'
               }
             </PDFDownloadLink></div>
-            <div><PDFDownloadLink document={generateCertificate(user,"Català", donation.amount)} fileName="certificate.pdf">
+            <div><PDFDownloadLink document={generateCertificate(user,"Català", donationAmount)} fileName="certificate.pdf">
               {({ blob, url, loading, error }) =>
                 loading ? 'Loading document...' : 'Descaga en català'
               }
