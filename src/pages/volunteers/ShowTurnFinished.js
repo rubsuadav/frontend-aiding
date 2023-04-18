@@ -108,7 +108,7 @@ export default function Details() {
       .delete(`/turns/${id}`)
       .then((res) => {
         swal(successMsgDelete);
-        navigate("/admin/volunteers/turns");
+        navigate("/roles/volunteers/turns");
       })
       .catch((err) => {
         swal(errorMsgDelete);
@@ -120,7 +120,7 @@ export default function Details() {
       .put(`/turns/${id}/draft`)
       .then((res) => {
         swal(successMsgFinish);
-        navigate("/admin/volunteers/turns");
+        navigate("/roles/volunteers/turns");
       })
       .catch((err) => {
         swal(errorMsgFinish);

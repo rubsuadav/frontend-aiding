@@ -43,6 +43,9 @@ const NavigationBar = ({
     return null;
   }
 
+  const role = localStorage.getItem('role');
+  console.log(isAuthenticated && (role === 'capitán' || role === 'supervisor'));
+  
   return (
     <Navbar className="navbar" expand="sm">
       <Container>
@@ -85,7 +88,7 @@ const NavigationBar = ({
             </NavDropdown>
 
             {/** Dropdown menu for admin */}
-            {isAdmin && (
+            {isAuthenticated && role === 'admin' && (
               <NavDropdown title="Administración" id="basic-nav-dropdown">
                 {navLinksAdmin.map((link) => (
                   <NavDropdown.Item key={link.path} as={Link} to={link.path}>
@@ -95,7 +98,7 @@ const NavigationBar = ({
               </NavDropdown>
             )}
             {/** Dropdown menu for captain and supervisor*/}
-            {isAuthenticated && (isCaptain || isSupervisor) && (
+            {isAuthenticated && (role === 'capitán' || role === 'supervisor') && (
               <NavDropdown
                 title="Menú para capitanes/supervisores"
                 id="basic-nav-dropdown"

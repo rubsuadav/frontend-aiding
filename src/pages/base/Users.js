@@ -40,7 +40,7 @@ const Users = () => {
       render:(is_admin) => is_admin ? 'ADMINISTRADOR' : 'USUARIO',
     },
     {
-      title: 'Rol del user',
+      title: 'Rol del usuario',
       dataIndex: 'roles_id',
       render: (rolesId) => getRoleName(rolesId),
     },

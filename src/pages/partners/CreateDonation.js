@@ -60,11 +60,20 @@ function CreateDonation() {
       setDonation({ ...donation, [e.target.name]: e.target.value });
     };
 
+    function validarCampoNumerico(valor) {
+      const regex = /^[0-9]*$/;
+      return regex.test(valor);
+    }
+
     function validateForm() {
       let error_msgs = {};
   
       if (amount === "" || amount === null) {
         error_msgs.amount = "La cantidad no puede estar vacía";
+      } else if (amount <= 0) {
+        error_msgs.amount = "La cantidad debe ser mayor que 0";
+      } else if (!validarCampoNumerico(amount)) {
+        error_msgs.amount = "La cantidad debe ser un número";
       }
 
       if (periodicity === "" || periodicity === null) {

@@ -108,7 +108,7 @@ export default function Details() {
       .delete(`/turns/${id}`)
       .then((res) => {
         swal(successMsgDelete);
-        navigate("/admin/volunteers/turns");
+        navigate("/roles/volunteers/turns");
       })
       .catch((err) => {
         swal(errorMsgDelete);
@@ -120,7 +120,7 @@ export default function Details() {
       .put(`/turns/${id}/draft`)
       .then((res) => {
         swal(successMsgFinish);
-        navigate("/admin/volunteers/turns");
+        navigate("/roles/volunteers/turns");
       })
       .catch((err) => {
         swal(errorMsgFinish);
@@ -302,7 +302,7 @@ export default function Details() {
               <MDBCol style={{paddingTop: "15px"}}>
                 <MDBCardText className="text-muted w-auto">
                   <Button
-                    onClick={() => {navigate(`/admin/volunteers/turns/update/${id}`)}}
+                    onClick={() => {navigate(`/roles/volunteers/turns/update/${id}`)}}
                     type="button" id="button" 
                     className="btn btn-light w-75"
                     >
@@ -340,7 +340,7 @@ export default function Details() {
               <MDBCol style={{paddingTop: "5px", paddingBottom: "15px"}}>
                 <MDBCardText className="text-muted w-auto">
                   <Button
-                    onClick={() => {navigate(`/admin/volunteers/volunteerTurns/create/${id}`)}}
+                    onClick={() => {navigate(`/roles/volunteers/volunteerTurns/create/${id}`)}}
                     type="button" id="button"
                     className="btn btn-light w-75"
                     >

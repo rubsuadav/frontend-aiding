@@ -16,6 +16,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import swal from "sweetalert";
 import { useAuthContext } from "../../components/routes/authContext";
+import { FaCheck, FaTimes } from 'react-icons/fa';
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -49,6 +50,7 @@ function ShowEvent() {
     city: '...',
     latitude: '...',
     longitude: '...',
+    available_places: '...',
     }
   );
 
@@ -99,9 +101,6 @@ function ShowEvent() {
         swal(errorMsg);
       });
   };
-
-  
-
   const customIcon = new L.Icon({
     iconUrl: require("../../images/marker.png"),
     iconRetinaUrl: require("../../images/marker.png"),
@@ -109,7 +108,6 @@ function ShowEvent() {
     iconSize: new L.Point(20, 30),
   });
   
-
   return (
 
     <section>
@@ -176,6 +174,23 @@ function ShowEvent() {
                       </MDBRow>
                     )}
                     
+                    {(moment(event_data.start_date).isAfter(new Date()) && event_data.available_places[0] !== '0' ) && (
+                      <><hr></hr><MDBRow>
+                        <MDBCol>
+                          <MDBCardText className="text-muted w-auto">
+                            <Button
+                              onClick={() => {
+                                navigate(`/events/${id}/booking`);
+                              } }
+                              type="button"
+                              className="btn btn-light w-100"
+                            >
+                              Apuntarse al evento
+                            </Button>
+                          </MDBCardText>
+                        </MDBCol>
+                      </MDBRow></>
+                    )}
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
@@ -259,7 +274,42 @@ function ShowEvent() {
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
-      
+                
+                {(moment(event_data.start_date).isAfter(new Date())) &&(
+                  <><hr /><MDBRow>
+                    <MDBCol sm="3">
+                      <MDBCardText>Plazas disponibles</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                      <MDBCardText className="text-muted">
+                        {event_data.available_places.replace("places available of", "plazas disponibles de").replace("places", "plazas")}
+                      </MDBCardText>
+                    </MDBCol>
+                  </MDBRow></>
+                )}
+
+                {(moment(event_data.start_date).isAfter(new Date())) &&(
+                <><hr /><MDBRow>
+                    <MDBCol sm="3">
+                      <MDBCardText>¿Evento lleno?</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                      <MDBCardText className="text-muted">
+                        {event_data.available_places[0] === '0' ? (
+                          <>
+                            <span>Sí </span>
+                            <FaCheck style={{ color: 'green' }} />
+                          </>
+                        ) : (
+                          <>
+                            <span>No </span>
+                            <FaTimes style={{ color: 'red' }} />
+                          </>
+                        )}
+                      </MDBCardText>
+                    </MDBCol>
+                  </MDBRow></>
+                )}
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
