@@ -30,6 +30,19 @@ const Partners = () => {
     }
   }
 
+  /*LIMPIEZA*/
+  const [filteredInfo, setFilteredInfo] = useState({});
+
+  const handleChange = (pagination, filters, sorter) => {
+    console.log('Various parameters', pagination, filters, sorter);
+    setFilteredInfo(filters);
+  };
+
+  const clearFilters = () => {
+    setFilteredInfo({});
+    setSearchText("");
+  };
+
   /*BUSCADOR*/
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
@@ -41,6 +54,7 @@ const Partners = () => {
   };
   const handleReset = (clearFilters) => {
     clearFilters();
+    setFilteredInfo({});
     setSearchText("");
   };
   const getColumnSearchProps = (dataIndex) => ({
@@ -147,27 +161,36 @@ const Partners = () => {
     {
       title: "DNI",
       dataIndex: "dni",
+      filteredValue: filteredInfo.dni || null,
       ...getColumnSearchProps("dni"),
     },
     {
       title: "Nombre",
       dataIndex: "name",
+      filteredValue: filteredInfo.name || null,
       ...getColumnSearchProps("name"),
+      ellipsis: true,
     },
     {
       title: "Apellidos",
       dataIndex: "last_name",
+      filteredValue: filteredInfo.last_name || null,
       ...getColumnSearchProps("last_name"),
+      ellipsis: true,
     },
     {
       title: "Email",
       dataIndex: "email",
+      filteredValue: filteredInfo.email || null,
       ...getColumnSearchProps("email"),
+      ellipsis: true,
     },
     {
       title: "Provincia",
       dataIndex: "province",
+      filteredValue: filteredInfo.province || null,
       ...getColumnSearchProps("province"),
+      ellipsis: true,
     },
     {
       title: "Idioma",
@@ -175,13 +198,14 @@ const Partners = () => {
       filters: [
         {
           text: "Español",
-          value: "Español",
+          value: "spanish",
         },
         {
           text: "Catalán",
-          value: "Catalán",
+          value: "catalan",
         },
       ],
+      filteredValue: filteredInfo.language || null,
       onFilter: (value, record) => record.language.includes(value),
       render: (language) => partnerFormatter(language),
     },
@@ -198,6 +222,7 @@ const Partners = () => {
           value: "Inactivo",
         },
       ],
+      filteredValue: filteredInfo.state || null,
       onFilter: (value, record) => record.state.includes(value),
       render: (state) => (
         <Tag color={state === "Activo" ? "green" : "red"} key={state}>
@@ -377,7 +402,13 @@ const Partners = () => {
           </Button>
         </MDBCol>
       </MDBRow>
-      <br></br>
+
+      <MDBRow>
+        <MDBCol md="2">
+        <Button onClick={clearFilters} id="boton-socio">Limpiar filtros</Button>
+        </MDBCol>
+      </MDBRow>
+
       <Table
         id="table"
         onRow={(record, rowIndex) => {
@@ -389,7 +420,7 @@ const Partners = () => {
         }}
         columns={columns}
         dataSource={partners_data}
-        onChange={onChange}
+        onChange={onChange && handleChange}
         scroll={{ y: 400 }}
         pagination={{ pageSize: 20 }}
       />
