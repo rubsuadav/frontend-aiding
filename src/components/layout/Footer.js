@@ -1,18 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  MDBFooter,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBIcon,
-} from "mdb-react-ui-kit";
+import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 // Icon to share Aiding
-import { FaTwitter } from 'react-icons/fa';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaTwitter } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 
 import {
   BsFillDoorClosedFill,
@@ -20,24 +14,27 @@ import {
   BsFillSendFill,
 } from "react-icons/bs";
 
-
 function Footer() {
   let navigate = useNavigate();
 
-  function handleContact() {
+  function handleContact(event) {
+    event.preventDefault();
     navigate("/base/contacts/CreateContact");
   }
 
-  function handleTerms() {
+  function handleTerms(event) {
+    event.preventDefault();
     navigate("policies/terms");
   }
 
-  function handleSLAs() {
+  function handleSLAs(event) {
+    event.preventDefault();
     navigate("policies/slas");
   }
 
   /*  Compartir Aiding */
-  const shareText = "¿Necesitas una página web a medida para tu negocio? Con Aiding puedes tener la tuya en un abrir y cerrar de ojos. Echa un vistazo a nuestra página de ejemplo: https://aiding-383619.ew.r.appspot.com/ y descubre lo que podemos hacer por ti. ¡Visítanos en https://aiding-web.vercel.app/ para saber más!";
+  const shareText =
+    "¿Necesitas una página web a medida para tu negocio? Con Aiding puedes tener la tuya en un abrir y cerrar de ojos. Echa un vistazo a nuestra página de ejemplo: https://aiding-383619.ew.r.appspot.com/ y descubre lo que podemos hacer por ti. ¡Visítanos en https://aiding-web.vercel.app/ para saber más!";
   const urlT = `https://twitter.com/intent/tweet?text=${shareText}`;
   const urlW = `https://wa.me/?text=${shareText}`;
 
@@ -54,17 +51,27 @@ function Footer() {
                 Condiciones de uso
               </h6>
               <p>
-                <a onClick={handleTerms} id="contacto">
+                <a
+                  href="#"
+                  onClick={handleTerms}
+                  id="contacto"
+                  style={{ textDecoration: "none" }}
+                >
                   Políticas y términos de uso
                 </a>
               </p>
               <p>
-                <a onClick={handleSLAs} id="contacto">
+                <a
+                  href="#"
+                  onClick={handleSLAs}
+                  id="contacto"
+                  style={{ textDecoration: "none" }}
+                >
                   SLAs
                 </a>
               </p>
               <p>
-                <a id="contacto">
+                <a href="#" id="contacto" style={{ textDecoration: "none" }}>
                   <NavDropdown title="Compartir Aiding" id="nav-dropdown">
                     <NavDropdown.Item
                       href={urlT}
@@ -104,7 +111,12 @@ function Footer() {
               </p>
               <p>
                 <BsFillSendFill />{" "}
-                <a onClick={handleContact} id="contacto">
+                <a
+                  href="#"
+                  onClick={handleContact}
+                  id="contacto"
+                  style={{ textDecoration: "none" }}
+                >
                   Contacta con nosotros
                 </a>
               </p>

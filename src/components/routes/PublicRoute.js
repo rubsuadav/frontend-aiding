@@ -1,13 +1,11 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { useAuthContext } from "./authContext";
+import { Outlet } from "react-router-dom";
 
-import React from 'react'
+import React from "react";
 
 export default function PublicRoute() {
-
   return (
     <div>
-        <Outlet />
+      <Outlet />
     </div>
-  )
+  );
 }

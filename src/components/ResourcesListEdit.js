@@ -50,24 +50,9 @@ export default function ResourcesListEdit() {
   const customIcon = new L.Icon({
     iconUrl: require("../images/marker.png"),
     iconRetinaUrl: require("../images/marker.png"),
-    //iconAnchor: null,
-    //popupAnchor: null,
-    //shadowUrl: null,
-    //shadowSize: null,
     shadowAnchor: null,
     iconSize: new L.Point(20, 30),
-    //className: 'leaflet-div-icon'
   });
-
-  const markers = [
-    { position: [37.3910271, -5.994537], title: "Centro de costura" },
-    { position: [36.7195609, -4.4214742], title: "Merienda con nosotros" },
-    { position: [36.7128403, -6.1034092], title: "¿Juegas a la petanca?" },
-    {
-      position: [40.402842872713414, -3.6873832954404344],
-      title: "Artesanía para mayores",
-    },
-  ];
 
   resources_data.map((item) => ({ position: [item.latitude, item.longitude] }));
 
@@ -127,7 +112,8 @@ export default function ResourcesListEdit() {
                           <Accordion.Body>
                             <div class="izquierda">
                               <h5>Descripción: </h5> <p> {item.description}</p>
-                              <h5>Teléfono de contacto: </h5> <p> {item.contact_phone}</p>
+                              <h5>Teléfono de contacto: </h5>{" "}
+                              <p> {item.contact_phone}</p>
                               <h5>Dirección : </h5>{" "}
                               <p>
                                 {" "}

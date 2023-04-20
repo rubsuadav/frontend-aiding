@@ -233,7 +233,7 @@ export default function App() {
 
                   {/* Capitan/supervsior routes ============================================*/}
                   <Route path="/roles" element={<ProtectedRoute />}>
-                  <Route path="/roles/notification/create" element={ <AdminCreateNotification/> } />
+                    <Route path="/roles/notification/create" element={ <AdminCreateNotification/> } />
                     {/* Volunteers */}
                     <Route path="volunteers" element={<ListVolunteers />} />
                     <Route
