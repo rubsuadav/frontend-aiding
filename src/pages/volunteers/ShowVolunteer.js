@@ -20,7 +20,7 @@ export default function Details() {
   const [user, setUser] = useState({
     name: "",
     last_name: "",
-    num_volunteer: "",
+    id: "",
     nif: "",
     place: "",
     phone: "",
@@ -98,11 +98,11 @@ export default function Details() {
                     <MDBCardBody>
                       <MDBRow>
                         <MDBCol sm="3">
-                          <MDBCardText>Número de Voluntario</MDBCardText>
+                          <MDBCardText>ID del Voluntario</MDBCardText>
                         </MDBCol>
                         <MDBCol sm="9" className="align-items-center d-flex justify-content-center">
                           <MDBCardText className="text-muted">
-                            {user.num_volunteer}
+                            {user.id}
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>

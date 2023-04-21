@@ -129,8 +129,8 @@ const Volunteers = () => {
   const columns = [
     {
       title: "ID del Voluntario",
-      dataIndex: "num_volunteer",
-      ...getColumnSearchProps("num_volunteer"),
+      dataIndex: "id",
+      ...getColumnSearchProps("id"),
     },
     {
       title: "NIF",
@@ -176,7 +176,7 @@ const Volunteers = () => {
   /*DATOS*/
   const [volunteers_data, setVolunteersData] = React.useState([
     {
-      num_volunteer: "...",
+      id: "...",
       nif: "...",
       name: "...",
       last_name: "...",
@@ -208,7 +208,7 @@ const Volunteers = () => {
 
   const [filteredVol, setFilteredVol] = useState([
     {
-      num_volunteer: "...",
+      id: "...",
       nif: "...",
       name: "...",
       last_name: "...",

@@ -88,10 +88,6 @@ function CreateVolunteer() {
       error_msgs.phone = "El teléfono no puede estar vacío";
     }
 
-    if (num_volunteer === "" || num_volunteer === null) {
-      error_msgs.num_volunteer = "El número de socio no puede estar vacío";
-    }
-
     if (place === "" || place === null) {
       error_msgs.place = "La dirección no puede estar vacía";
     }
@@ -147,7 +143,6 @@ function CreateVolunteer() {
     const {
       name,
       last_name,
-      num_volunteer,
       nif,
       place,
       phone,
@@ -208,18 +203,6 @@ function CreateVolunteer() {
                 </Form.Group>
                 {errors.last_name && (
                     <p className="text-danger">{errors.last_name}</p>
-                  )}
-                <Form.Group className="mb-3">
-                  <Form.Label>Número de voluntario</Form.Label>
-                  <Form.Control
-                    onChange={(e) => onInputChange(e)}
-                    value={num_volunteer}
-                    name="num_volunteer"
-                    placeholder="Número de volutario"
-                  />
-                </Form.Group>
-                  {errors.phone && (
-                    <p className="text-danger">{errors.phone}</p>
                   )}
                 <Form.Group className="mb-3">
                   <Form.Label>NIF</Form.Label>

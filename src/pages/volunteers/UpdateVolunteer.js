@@ -33,7 +33,6 @@ function UpdateVolunteer() {
   const [volunteer, setVolunteer] = useState({
     name: "",
     last_name: "",
-    num_volunteer: "",
     nif: "",
     place: "",
     phone: "",
@@ -53,7 +52,6 @@ function UpdateVolunteer() {
     const {
       name,
       last_name,
-      num_volunteer,
       nif,
       place,
       phone,
@@ -87,7 +85,7 @@ function UpdateVolunteer() {
       })
       .catch((error) => {
         if (error.response && error.response.status === 409) {
-          let error_msgs = {general: "Ya existe un voluntario con ese numero de voluntario, NIF, teléfono o email"};
+          let error_msgs = {general: "Ya existe un voluntario con ese NIF, teléfono o email"};
           setErrors(error_msgs);
         }else {
           swal(errorMsg);
@@ -156,10 +154,6 @@ function UpdateVolunteer() {
       error_msgs.phone = "El teléfono no puede estar vacío";
     }
 
-    if (num_volunteer === "" || num_volunteer === null) {
-      error_msgs.num_volunteer = "El número de socio no puede estar vacío";
-    }
-
     if (place === "" || place === null) {
       error_msgs.place = "La dirección no puede estar vacía";
     }
@@ -194,7 +188,7 @@ function UpdateVolunteer() {
   
   return (
     <div className="container my-5 shadow">
-      <h1 className="pt-3">Actualizando voluntario Nº{volunteer.num_volunteer}</h1> 
+      <h1 className="pt-3">Actualizando voluntario</h1> 
       <h1 className="pt-3">{volunteer.name}{volunteer.last_name}</h1>
       <Form className="" onSubmit={(e) => onSubmit(e)}>
         <div className="row justify-content-evenly">
@@ -222,18 +216,6 @@ function UpdateVolunteer() {
               </Form.Group>
                 {errors.last_name && (
                   <p className="text-danger">{errors.last_name}</p>
-                  )}
-                <Form.Group className="mb-3">
-                  <Form.Label>Número de voluntario</Form.Label>
-                  <Form.Control
-                    onChange={(e) => onInputChange(e)}
-                    value={num_volunteer}
-                    name="num_volunteer"
-                    placeholder="Número de volutario"
-                  />
-                </Form.Group>
-                  {errors.phone && (
-                    <p className="text-danger">{errors.phone}</p>
                   )}
                 <Form.Group className="mb-3">
                   <Form.Label>NIF</Form.Label>
