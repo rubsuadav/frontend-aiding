@@ -433,7 +433,21 @@ export default function Details() {
           </MDBCol>
           <MDBCol lg="2">
             <MDBCard className="mb-4">
-              <MDBCardBody>
+              <MDBCardBody>   
+                <MDBRow>
+                  <MDBCol>
+                    <MDBCardText className="text-muted w-auto">
+                      <Button
+                        onClick={() => {navigate(`/admin/partners/update/${id}`)}}
+                        type="button" id="button" 
+                        className="btn btn-light w-100"
+                      >
+                        Editar socio
+                      </Button>
+                    </MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr /> 
                 <MDBRow>
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
@@ -450,20 +464,6 @@ export default function Details() {
                     <Button  onClick={()=> handleClick(user.language)} type="button" id="button" className="btn btn-light w-100">
                       Generar certificado
                     </Button>
-                    </MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />    
-                <MDBRow>
-                  <MDBCol>
-                    <MDBCardText className="text-muted w-auto">
-                      <Button
-                        onClick={() => {navigate(`/admin/partners/update/${id}`)}}
-                        type="button" id="button" 
-                        className="btn btn-light w-100"
-                      >
-                        Editar socio
-                      </Button>
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>

@@ -195,8 +195,8 @@ function UpdateVolunteer() {
   
   return (
     <div className="container my-5 shadow">
-      <h1 className="pt-3">Actualizando voluntario</h1> 
-      <h1 className="pt-3">{volunteer.name}{volunteer.last_name}</h1>
+      <h1 className="pt-3">Actualizando voluntario Nº {id}</h1> 
+      <h1 className="pt-3">{volunteer.name} {volunteer.last_name}</h1>
       <Form className="" onSubmit={(e) => onSubmit(e)}>
         <div className="row justify-content-evenly">
           <div className="col-md-5">

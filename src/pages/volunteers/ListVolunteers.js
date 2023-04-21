@@ -13,6 +13,19 @@ import { useNotificationContext } from "../../components/notificationContext.js"
 const Volunteers = () => {
   let navigate = useNavigate();
 
+  /*LIMPIEZA*/
+  const [filteredInfo, setFilteredInfo] = useState({});
+
+  const handleChange = (pagination, filters, sorter) => {
+    console.log('Various parameters', pagination, filters, sorter);
+    setFilteredInfo(filters);
+  };
+
+  const clearFilters = () => {
+    setFilteredInfo({});
+    setSearchText("");
+  };
+  
   /*BUSCADOR*/
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
@@ -24,6 +37,7 @@ const Volunteers = () => {
   };
   const handleReset = (clearFilters) => {
     clearFilters();
+    setFilteredInfo({});
     setSearchText("");
   };
   const getColumnSearchProps = (dataIndex) => ({
@@ -42,7 +56,7 @@ const Volunteers = () => {
       >
         <Input
           ref={searchInput}
-          placeholder={`Search ${dataIndex}`}
+          placeholder={`Búsqueda`}
           value={selectedKeys[0]}
           onChange={(e) =>
             setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -70,7 +84,7 @@ const Volunteers = () => {
               width: 90,
             }}
           >
-            Search
+            Buscar
           </Button>
           <Button
             onClick={() => clearFilters && handleReset(clearFilters)}
@@ -79,7 +93,7 @@ const Volunteers = () => {
               width: 90,
             }}
           >
-            Reset
+            Resetear
           </Button>
           <Button
             type="link"
@@ -92,7 +106,7 @@ const Volunteers = () => {
               setSearchedColumn(dataIndex);
             }}
           >
-            Filter
+            Filtrar
           </Button>
         </Space>
       </div>
@@ -130,21 +144,25 @@ const Volunteers = () => {
     {
       title: "ID del Voluntario",
       dataIndex: "id",
+      filteredValue: filteredInfo.id || null,
       ...getColumnSearchProps("id"),
     },
     {
       title: "NIF",
       dataIndex: "nif",
+      filteredValue: filteredInfo.nif || null,
       ...getColumnSearchProps("nif"),
     },
     {
       title: "Nombre",
       dataIndex: "name",
+      filteredValue: filteredInfo.name || null,
       ...getColumnSearchProps("name"),
     },
     {
       title: "Apellidos",
       dataIndex: "last_name",
+      filteredValue: filteredInfo.last_name || null,
       ...getColumnSearchProps("last_name"),
     },
     {
@@ -164,6 +182,7 @@ const Volunteers = () => {
           value: "Inactivo",
         },
       ],
+      filteredValue: filteredInfo.state || null,
       onFilter: (value, record) => record.state.includes(value),
       render: (state) => (
         <Tag color={state === "Activo" ? "green" : "red"} key={state}>
@@ -230,13 +249,15 @@ const Volunteers = () => {
             Crear voluntario
           </Button>
         </Col>
-        <Col md="auto">
+      </Row>
+      <Button onClick={clearFilters} id="boton-socio">
+        Limpiar filtros
+      </Button>
+      <Col md="auto">
           <Button id="boton-importar" onClick={() => notifyVol()}>
             Notificar voluntarios seleccionados
           </Button>
         </Col>
-      </Row>
-      <br></br>
       <Table
         id="table"
         onRow={(record, rowIndex) => {
@@ -248,7 +269,7 @@ const Volunteers = () => {
         }}
         columns={columns}
         dataSource={volunteers_data}
-        onChange={onChange}
+        onChange={onChange && handleChange}
         scroll={{ y: 400 }}
         pagination={{ pageSize: 20 }}
       />

@@ -144,10 +144,6 @@ var navLinksAdmin = [
     title: "Inventario",
     path: "admin/stock/items"
   },
-  {
-    title: "Postear",
-    path: "sdmin/post",
-  },
 ];
 
 var navLinksCaptainSupervisor = [
