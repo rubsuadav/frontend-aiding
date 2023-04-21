@@ -85,9 +85,14 @@ function AdminCreateEvent() {
         swal(successMsg);
         navigate("/admin/events");
       }).catch((error) => {
-        console.log(error);
-        console.log(event);
-        swal(errorMsg);
+        if(error.response.status === 400) {
+          let error_msgs = {general: "La dirección es inválida"};
+          setErrors(error_msgs);
+        } else{
+          console.log(error);
+          console.log(event);
+          swal(errorMsg);
+        }
       });
     };
 
@@ -289,7 +294,7 @@ function AdminCreateEvent() {
                 )}
 
               </div>
-  
+              {errors.general && (<p className="text-danger">{errors.general}</p>)}
               <div className="row justify-content-evenly">
                 <Button className="col mb-4 mx-2" variant="primary" type="submit">
                   Guardar evento
