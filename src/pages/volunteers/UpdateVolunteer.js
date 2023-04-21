@@ -112,6 +112,11 @@ function UpdateVolunteer() {
     /* Validators */
   const [errors, setErrors] = useState({});
 
+  function validatePlace(place) {
+    const regex = /^[a-zA-Z]*$/;
+    return regex.test(place);
+  }
+
   function validateEmail(email) {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return regex.test(email);
@@ -155,7 +160,9 @@ function UpdateVolunteer() {
     }
 
     if (place === "" || place === null) {
-      error_msgs.place = "La dirección no puede estar vacía";
+      error_msgs.place = "La población no puede estar vacía";
+    }else if(!validatePlace(place)){
+      error_msgs.place="La población no puede contener números o carácteres especiales";
     }
     
     if (email === "" || email === null) {

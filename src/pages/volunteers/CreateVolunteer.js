@@ -35,7 +35,7 @@ function CreateVolunteer() {
             navigate("/admin/volunteers");
         }).catch((error) => {
             if (error.response && error.response.status === 409) {
-              let error_msgs = {general: "Ya existe un voluntario con ese numero de voluntario, NIF, teléfono o email"};
+              let error_msgs = {general: "Ya existe un voluntario con ese NIF, teléfono o email"};
               setErrors(error_msgs);
             }else {
               swal(errorMsg);
@@ -45,6 +45,11 @@ function CreateVolunteer() {
 
     /* Validator */
   const [errors, setErrors] = useState({});
+
+  function validatePlace(place) {
+    const regex = /^[a-zA-Z]*$/;
+    return regex.test(place);
+  }
 
   function validateEmail(email) {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -89,7 +94,9 @@ function CreateVolunteer() {
     }
 
     if (place === "" || place === null) {
-      error_msgs.place = "La dirección no puede estar vacía";
+      error_msgs.place = "La población no puede estar vacía";
+    } else if(!validatePlace(place)){
+      error_msgs.place="La población no puede contener números o carácteres especiales";
     }
     
     if (email === "" || email === null) {
