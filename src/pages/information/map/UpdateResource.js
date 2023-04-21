@@ -69,11 +69,12 @@ export default function UpdateResource() {
         navigate(`/admin/information/resources/${id}`);
       })
       .catch((error) => {
-        if (error.response) {
-         let error_msgs = {general: "No ha rellenado correctamente."};
-         setErrors(error_msgs);
-       }
-       swal(errorMsg);
+        if(error.response.status === 400) {
+          let error_msgs = {general: "La dirección es inválida"};
+          setErrors(error_msgs);
+        } else {
+            swal(errorMsg);
+        }
      });
   }
 
@@ -222,7 +223,7 @@ export default function UpdateResource() {
                 </Form.Select>
               </Form.Group>
             </div>
-
+            {errors.general && (<p className="text-danger">{errors.general}</p>)}
             <div className="row justify-content-evenly">
               <Button className="col mb-4 mx-2" variant="primary" type="submit">
                 Guardar recurso
