@@ -74,7 +74,7 @@ const Items = () => {
       >
         <Input
           ref={searchInput}
-          placeholder={`Search ${dataIndex}`}
+          placeholder={`Búsqueda`}
           value={selectedKeys[0]}
           onChange={(e) =>
             setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -102,7 +102,7 @@ const Items = () => {
               width: 90,
             }}
           >
-            Search
+            Buscar
           </Button>
           <Button
             onClick={() => clearFilters && handleReset(clearFilters)}
@@ -111,7 +111,7 @@ const Items = () => {
               width: 90,
             }}
           >
-            Reset
+            Resetear
           </Button>
           <Button
             type="link"
@@ -124,7 +124,7 @@ const Items = () => {
               setSearchedColumn(dataIndex);
             }}
           >
-            Filter
+            Filtrar
           </Button>
         </Space>
       </div>

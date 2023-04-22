@@ -20,7 +20,7 @@ export default function Details() {
   const [user, setUser] = useState({
     name: "",
     last_name: "",
-    num_volunteer: "",
+    id: "",
     nif: "",
     place: "",
     phone: "",
@@ -82,13 +82,26 @@ export default function Details() {
   const rol = volunteerFormatter(user.rol);
   const role = localStorage.getItem("role");
 
+  function handleClickReturn(){
+    navigate(`/admin/volunteers`);
+  }
+
   return (
     <section>
       <MDBContainer className="py-5">
-        <center>
-        <h2>
-          {user.name} {user.last_name}
-          </h2></center>
+      <MDBRow>
+          <MDBCol lg="1"> 
+            <Button  onClick={()=> handleClickReturn() } type="button" id="button" className="btn btn-light w-100">
+              Volver
+            </Button>
+          </MDBCol>
+          <MDBCol lg="10"> 
+          <center>
+          <h2>
+            {user.name} {user.last_name}
+            </h2></center>
+            </MDBCol>
+        </MDBRow>
         <hr />
         <MDBRow>
           <MDBCol lg="10"> 
@@ -99,11 +112,11 @@ export default function Details() {
                     <MDBCardBody>
                       <MDBRow>
                         <MDBCol sm="3">
-                          <MDBCardText>Número de Voluntario</MDBCardText>
+                          <MDBCardText>ID del Voluntario</MDBCardText>
                         </MDBCol>
                         <MDBCol sm="9" className="align-items-center d-flex justify-content-center">
                           <MDBCardText className="text-muted">
-                            {user.num_volunteer}
+                            {user.id}
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
@@ -273,7 +286,6 @@ export default function Details() {
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
-                <hr />
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

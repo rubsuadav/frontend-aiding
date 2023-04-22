@@ -33,7 +33,6 @@ function UpdateVolunteer() {
   const [volunteer, setVolunteer] = useState({
     name: "",
     last_name: "",
-    num_volunteer: "",
     nif: "",
     place: "",
     phone: "",
@@ -53,7 +52,6 @@ function UpdateVolunteer() {
     const {
       name,
       last_name,
-      num_volunteer,
       nif,
       place,
       phone,
@@ -88,7 +86,7 @@ function UpdateVolunteer() {
       })
       .catch((error) => {
         if (error.response && error.response.status === 409) {
-          let error_msgs = {general: "Ya existe un voluntario con ese numero de voluntario, NIF, teléfono o email"};
+          let error_msgs = {general: "Ya existe un voluntario con ese NIF, teléfono o email"};
           setErrors(error_msgs);
         }else {
           swal(errorMsg);
@@ -136,15 +134,34 @@ function UpdateVolunteer() {
   }
 
 
+  function validateName(valor) {
+    const regex = /^[a-zA-ZÀ-ÿ]+(([',. -][a-zA-ZÀ-ÿ ])?[a-zA-ZÀ-ÿ]*)*$/;
+    return regex.test(valor);
+  }
+
+  function validatePostalCode(valor) {
+    const regex = /^[0-9]{5}$/;
+    return regex.test(valor);
+  }
+
+  function validateTelefone(valor) {
+    const regex = /^(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}$/;
+    return regex.test(valor);
+  }
+
   function validateForm() {
     let error_msgs = {};
 
     if (name === "" || name === null) {
       error_msgs.name = "El nombre no puede estar vacío";
+    } else if(!validateName(name)){
+      error_msgs.name="El nombre no puede contener números o carácteres especiales";
     }
 
     if (last_name === "" || last_name === null) {
       error_msgs.last_name = "Los apellidos no pueden estar vacío";
+    } else if(!validateName(last_name)){
+      error_msgs.last_name="Los apellidos no pueden contener números o carácteres especiales";
     }
 
     if ( nif === "" || nif === null) {
@@ -155,14 +172,14 @@ function UpdateVolunteer() {
 
     if (phone === "" || phone === null) {
       error_msgs.phone = "El teléfono no puede estar vacío";
-    }
-
-    if (num_volunteer === "" || num_volunteer === null) {
-      error_msgs.num_volunteer = "El número de socio no puede estar vacío";
+    } else if (!validateTelefone(phone)) {
+      error_msgs.phone = "Este no es un teléfono válido";
     }
 
     if (place === "" || place === null) {
-      error_msgs.place = "La dirección no puede estar vacía";
+      error_msgs.place = "La población no puede estar vacía";
+    } else if(!validateName(place)){
+      error_msgs.place="La población no puede contener números o carácteres especiales";
     }
     
     if (email === "" || email === null) {
@@ -178,12 +195,17 @@ function UpdateVolunteer() {
     if (rol === "" || rol === null) {
       error_msgs.rol = "Por favor, indique el rol del voluntario";
     }
+
     if (observations.length>250) {
       error_msgs.observations = "Las observaciones no pueden tener más de 250 caracteres";
     }
+
     if (postal_code === "" || postal_code === null) {
       error_msgs.postal_code = "El código postal no puede estar vacío";
+    } else if (!validatePostalCode(postal_code)) {
+      error_msgs.postal_code = "Este no es un código postal válido";
     }
+
     setErrors(error_msgs);
 
     if (Object.keys(error_msgs).length === 0) {
@@ -192,11 +214,15 @@ function UpdateVolunteer() {
       return false;
     }
   }
+
+  function handleClickReturn(){
+    navigate(`/admin/volunteers/${id}`);
+  }
   
   return (
     <div className="container my-5 shadow">
-      <h1 className="pt-3">Actualizando voluntario Nº{volunteer.num_volunteer}</h1> 
-      <h1 className="pt-3">{volunteer.name}{volunteer.last_name}</h1>
+      <h1 className="pt-3">Actualizando voluntario Nº {id}</h1> 
+      <h1 className="pt-3">{volunteer.name} {volunteer.last_name}</h1>
       <Form className="" onSubmit={(e) => onSubmit(e)}>
         <div className="row justify-content-evenly">
           <div className="col-md-5">
@@ -223,18 +249,6 @@ function UpdateVolunteer() {
               </Form.Group>
                 {errors.last_name && (
                   <p className="text-danger">{errors.last_name}</p>
-                  )}
-                <Form.Group className="mb-3">
-                  <Form.Label>Número de voluntario</Form.Label>
-                  <Form.Control
-                    onChange={(e) => onInputChange(e)}
-                    value={num_volunteer}
-                    name="num_volunteer"
-                    placeholder="Número de volutario"
-                  />
-                </Form.Group>
-                  {errors.phone && (
-                    <p className="text-danger">{errors.phone}</p>
                   )}
                 <Form.Group className="mb-3">
                   <Form.Label>NIF</Form.Label>
@@ -396,8 +410,11 @@ function UpdateVolunteer() {
           </div>
           {errors.general && (<p className="text-danger">{errors.general}</p>)}
           <div className="row justify-content-evenly">
-            <Button className="col mb-4 mx-5" variant="outline-success" type="submit">
+            <Button className="col mb-4 mx-2" variant="outline-success" type="submit">
               Guardar voluntario
+            </Button>
+            <Button className="col mb-4 mx-2" variant="outline-danger" onClick={()=> handleClickReturn() }>
+              Cancelar
             </Button>
           </div>
         </Form>

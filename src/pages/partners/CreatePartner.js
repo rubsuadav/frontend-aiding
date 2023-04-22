@@ -1,14 +1,12 @@
 import React from "react";
 import {partners} from "./services/backend.js";
 import swal from 'sweetalert';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import IBAN from 'iban';
 import { parseISO, differenceInYears } from 'date-fns';
-
-
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -25,7 +23,6 @@ const errorMsg = {
   button: "Aceptar",
   timer: "5000",
 }
-
 
 function CreatePartner() {
     let navigate = useNavigate();
@@ -91,7 +88,7 @@ function CreatePartner() {
   }
   
   function validateName(valor) {
-    const regex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+    const regex = /^[a-zA-ZÀ-ÿ]+(([',. -][a-zA-ZÀ-ÿ ])?[a-zA-ZÀ-ÿ]*)*$/;
     return regex.test(valor);
   }
 
@@ -470,9 +467,15 @@ function CreatePartner() {
           </div>
           {errors.general && (<p className="text-danger">{errors.general}</p>)}
           <div className="row justify-content-evenly">
-            <Button className="col mb-4 mx-5" variant="outline-success" type="submit">
+            <Button className="col mb-4 mx-2" variant="outline-success" type="submit">
               Guardar socio
             </Button>
+            <Link
+              className="btn btn-outline-danger col mb-4 mx-2"
+              to="/admin/partners/"
+            >
+              Cancelar
+            </Link>
           </div>
         </Form>
       </div>

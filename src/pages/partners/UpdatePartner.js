@@ -261,6 +261,10 @@ function UpdatePartner() {
     }
   }
 
+  function handleClickReturn(){
+    navigate(`/admin/partners/${id}`);
+  }
+
   return (
     <div className="container my-5 shadow">
       <h1 className="pt-3">Actualizando socio Nº{id} {partner.name} {partner.last_name}</h1>
@@ -480,6 +484,9 @@ function UpdatePartner() {
           <div className="row justify-content-evenly">
             <Button className="col mb-4 mx-5" variant="outline-success" type="submit">
               Guardar socio
+            </Button>
+            <Button className="col mb-4 mx-2" variant="outline-danger" onClick={()=> handleClickReturn() }>
+              Cancelar
             </Button>
           </div>
         </Form>

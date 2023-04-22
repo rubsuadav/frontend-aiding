@@ -41,7 +41,7 @@ function AdminUpdateEvent() {
         city: '...',
         }
       );
-
+    const [errors, setErrors] = React.useState({});
     const { title, description, start_date, end_date, places, street,number,city } = event;
 
       useEffect(() => {
@@ -101,12 +101,15 @@ function AdminUpdateEvent() {
             navigate(`/events/${id}`);
           })
           .catch((error) => {
+            if(error.response.status === 400) {
+              let error_msgs = {general: "La dirección es inválida"};
+              setErrors(error_msgs);
+            } else{
             console.log(error);
             swal(errorMsg);
+            }
           });
-      }
-
-    
+      }    
 
     return (
         <div className="container my-5">
@@ -198,7 +201,7 @@ function AdminUpdateEvent() {
               </Form.Group>
   
               </div>
-  
+              {errors.general && (<p className="text-danger">{errors.general}</p>)}
               <div className="row justify-content-evenly">
                 <Button className="col mb-4 mx-2" variant="primary" type="submit">
                   Guardar evento

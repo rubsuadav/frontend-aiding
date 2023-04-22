@@ -1,7 +1,7 @@
 import React from "react";
 import { base } from "./services/backend.js";
 import swal from "sweetalert";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
@@ -177,12 +177,18 @@ export default function CreateUser() {
 
         <div className="row justify-content-evenly">
           <Button
-            className="col mb-4 mx-5"
+            className="col mb-4 mx-2"
             variant="outline-success"
             type="submit"
           >
             Guardar usuario
           </Button>
+          <Link
+            className="btn btn-outline-danger col mb-4 mx-2"
+            to="/admin/base/users"
+          >
+            Cancelar
+          </Link>
         </div>
       </Form>
     </div>

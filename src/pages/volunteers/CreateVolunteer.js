@@ -1,12 +1,10 @@
 import React from "react";
 import {volunteers} from "./services/backend.js";
 import swal from 'sweetalert';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-
-
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -36,7 +34,7 @@ function CreateVolunteer() {
             navigate(role === 'admin' ? "/admin/volunteers" : "/roles/volunteers");
         }).catch((error) => {
             if (error.response && error.response.status === 409) {
-              let error_msgs = {general: "Ya existe un voluntario con ese numero de voluntario, NIF, teléfono o email"};
+              let error_msgs = {general: "Ya existe un voluntario con ese NIF, teléfono o email"};
               setErrors(error_msgs);
             }else {
               swal(errorMsg);
@@ -67,16 +65,34 @@ function CreateVolunteer() {
     }return true;
   }
 
+  function validateName(valor) {
+    const regex = /^[a-zA-ZÀ-ÿ]+(([',. -][a-zA-ZÀ-ÿ ])?[a-zA-ZÀ-ÿ]*)*$/;
+    return regex.test(valor);
+  }
+
+  function validatePostalCode(valor) {
+    const regex = /^[0-9]{5}$/;
+    return regex.test(valor);
+  }
+
+  function validateTelefone(valor) {
+    const regex = /^(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}$/;
+    return regex.test(valor);
+  }
 
   function validateForm() {
     let error_msgs = {};
 
     if (name === "" || name === null) {
       error_msgs.name = "El nombre no puede estar vacío";
+    } else if(!validateName(name)){
+      error_msgs.name="El nombre no puede contener números o carácteres especiales";
     }
 
     if (last_name === "" || last_name === null) {
       error_msgs.last_name = "Los apellidos no pueden estar vacío";
+    } else if(!validateName(last_name)){
+      error_msgs.last_name="Los apellidos no pueden contener números o carácteres especiales";
     }
 
     if ( nif === "" || nif === null) {
@@ -87,14 +103,14 @@ function CreateVolunteer() {
 
     if (phone === "" || phone === null) {
       error_msgs.phone = "El teléfono no puede estar vacío";
-    }
-
-    if (num_volunteer === "" || num_volunteer === null) {
-      error_msgs.num_volunteer = "El número de socio no puede estar vacío";
+    } else if (!validateTelefone(phone)) {
+      error_msgs.phone = "Este no es un teléfono válido";
     }
 
     if (place === "" || place === null) {
-      error_msgs.place = "La dirección no puede estar vacía";
+      error_msgs.place = "La población no puede estar vacía";
+    } else if(!validateName(place)){
+      error_msgs.place="La población no puede contener números o carácteres especiales";
     }
     
     if (email === "" || email === null) {
@@ -115,7 +131,10 @@ function CreateVolunteer() {
     }
     if (postal_code === "" || postal_code === null) {
       error_msgs.postal_code = "El código postal no puede estar vacío";
+    } else if (!validatePostalCode(postal_code)) {
+      error_msgs.postal_code = "Este no es un código postal válido";
     }
+
     setErrors(error_msgs);
 
     if (Object.keys(error_msgs).length === 0) {
@@ -148,7 +167,6 @@ function CreateVolunteer() {
     const {
       name,
       last_name,
-      num_volunteer,
       nif,
       place,
       phone,
@@ -209,18 +227,6 @@ function CreateVolunteer() {
                 </Form.Group>
                 {errors.last_name && (
                     <p className="text-danger">{errors.last_name}</p>
-                  )}
-                <Form.Group className="mb-3">
-                  <Form.Label>Número de voluntario</Form.Label>
-                  <Form.Control
-                    onChange={(e) => onInputChange(e)}
-                    value={num_volunteer}
-                    name="num_volunteer"
-                    placeholder="Número de volutario"
-                  />
-                </Form.Group>
-                  {errors.phone && (
-                    <p className="text-danger">{errors.phone}</p>
                   )}
                 <Form.Group className="mb-3">
                   <Form.Label>NIF</Form.Label>
@@ -385,6 +391,12 @@ function CreateVolunteer() {
             <Button className="col mb-4 mx-5" variant="outline-success" type="submit">
               Guardar voluntario
             </Button>
+            <Link
+            className="btn btn-outline-danger col mb-4 mx-2"
+            to="/admin/volunteers"
+          >
+            Cancelar
+          </Link>
           </div>
         </Form>
       </div>
