@@ -19,7 +19,8 @@ const NavigationBar = ({
   navLinksCaptainSupervisor,
   logo,
 }) => {
-  const { logout, isAuthenticated } = useAuthContext();
+  const { logout, isAuthenticated, isCaptain, isSupervisor, isAdmin } =
+    useAuthContext();
 
   /** Logout logic */
   const logoutApi = axios.create({
@@ -42,8 +43,9 @@ const NavigationBar = ({
     return null;
   }
 
-  const role = localStorage.getItem("role");
-
+  const role = localStorage.getItem('role');
+  console.log(isAuthenticated && (role === 'capitán' || role === 'supervisor'));
+  
   return (
     <Navbar className="navbar" expand="sm">
       <Container>
@@ -86,7 +88,7 @@ const NavigationBar = ({
             </NavDropdown>
 
             {/** Dropdown menu for admin */}
-            {isAuthenticated && role === "admin" && (
+            {isAuthenticated && role === 'admin' && (
               <NavDropdown title="Administración" id="basic-nav-dropdown">
                 {navLinksAdmin.map((link) => (
                   <NavDropdown.Item key={link.path} as={Link} to={link.path}>
@@ -96,19 +98,18 @@ const NavigationBar = ({
               </NavDropdown>
             )}
             {/** Dropdown menu for captain and supervisor*/}
-            {isAuthenticated &&
-              (role === "capitán" || role === "supervisor") && (
-                <NavDropdown
-                  title="Menú para capitanes/supervisores"
-                  id="basic-nav-dropdown"
-                >
-                  {navLinksCaptainSupervisor.map((link) => (
-                    <NavDropdown.Item key={link.path} as={Link} to={link.path}>
-                      {link.title}
-                    </NavDropdown.Item>
-                  ))}
-                </NavDropdown>
-              )}
+            {isAuthenticated && (role === 'capitán' || role === 'supervisor' || role === 'admin') && (
+              <NavDropdown
+                title="Menú para capitanes/supervisores"
+                id="basic-nav-dropdown"
+              >
+                {navLinksCaptainSupervisor.map((link) => (
+                  <NavDropdown.Item key={link.path} as={Link} to={link.path}>
+                    {link.title}
+                  </NavDropdown.Item>
+                ))}
+              </NavDropdown>
+            )}
           </Nav>
         </Navbar.Collapse>
         {/** Login and logout buttons */}

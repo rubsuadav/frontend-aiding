@@ -1,11 +1,12 @@
 import React from "react";
 import { base } from "./services/backend.js";
 import swal from "sweetalert";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
 import { rolesBE } from "./services/backend.js";
+import { isAntispam } from "../../components/AntiSpam.js";
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -63,7 +64,6 @@ export default function CreateUser() {
     }
   };
 
-
   /* Validator */
   const [errors, setErrors] = useState({});
 
@@ -72,6 +72,8 @@ export default function CreateUser() {
 
     if (username === "" || username === null) {
       error_msgs.username = "El nombre de usuario no puede estar vacío";
+    } else if (!isAntispam(username)) {
+      error_msgs.username = "El nombre de usuario no puede contener spam";
     }
 
     if (password === "" || password === null) {
@@ -91,18 +93,16 @@ export default function CreateUser() {
     const aux = base
       .post("users/", user)
       .then((response) => {
-        console.log(response.data);
         swal(successMsg);
         navigate("/admin/base/users");
       })
       .catch((error) => {
-        if (errors.response && errors.response.status === 404) {
-          let error_msgs = { roles: "Debe de seleccionar un rol" };
+        if (error.response && error.response.status === 409) {
+          let error_msgs = { username: "El nombre de usuario ya existe" };
           setErrors(error_msgs);
         } else {
           swal(errorMsg);
         }
-        console.log(errors);
       });
   }
 
@@ -112,15 +112,12 @@ export default function CreateUser() {
       .then((response) => {
         setRoles(response.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }
 
   useEffect(() => {
     getRoles();
   }, []);
-
 
   return (
     <div className="container my-5 shadow">
@@ -136,10 +133,11 @@ export default function CreateUser() {
                 value={username}
                 name="username"
                 placeholder="Nombre del usuario"
-                required={true}
               />
             </Form.Group>
-
+            {errors.username && (
+                    <p className="text-danger">{errors.username}</p>
+                  )}
             <Form.Group className="mb-3">
               <Form.Label>Contraseña</Form.Label>
               <Form.Control
@@ -148,9 +146,11 @@ export default function CreateUser() {
                 type="password"
                 name="password"
                 placeholder="Contraseña"
-                required={true}
               />
             </Form.Group>
+            {errors.password && (
+                    <p className="text-danger">{errors.password}</p>
+                  )}
 
             <Form.Group className="mb-3">
               <Form.Label>Administrador</Form.Label>
@@ -181,12 +181,18 @@ export default function CreateUser() {
 
         <div className="row justify-content-evenly">
           <Button
-            className="col mb-4 mx-5"
+            className="col mb-4 mx-2"
             variant="outline-success"
             type="submit"
           >
             Guardar usuario
           </Button>
+          <Link
+            className="btn btn-outline-danger col mb-4 mx-2"
+            to="/admin/base/users"
+          >
+            Cancelar
+          </Link>
         </div>
       </Form>
     </div>
