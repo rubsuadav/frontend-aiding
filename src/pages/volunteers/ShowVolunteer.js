@@ -81,13 +81,26 @@ export default function Details() {
   const situation = volunteerFormatter(user.situation);
   const rol = volunteerFormatter(user.rol);
 
+  function handleClickReturn(){
+    navigate(`/admin/volunteers`);
+  }
+
   return (
     <section>
       <MDBContainer className="py-5">
-        <center>
-        <h2>
-          {user.name} {user.last_name}
-          </h2></center>
+      <MDBRow>
+          <MDBCol lg="1"> 
+            <Button  onClick={()=> handleClickReturn() } type="button" id="button" className="btn btn-light w-100">
+              Volver
+            </Button>
+          </MDBCol>
+          <MDBCol lg="10"> 
+          <center>
+          <h2>
+            {user.name} {user.last_name}
+            </h2></center>
+            </MDBCol>
+        </MDBRow>
         <hr />
         <MDBRow>
           <MDBCol lg="10"> 
@@ -271,7 +284,6 @@ export default function Details() {
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
-                <hr />
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

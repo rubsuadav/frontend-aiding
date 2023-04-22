@@ -213,6 +213,10 @@ function UpdateVolunteer() {
       return false;
     }
   }
+
+  function handleClickReturn(){
+    navigate(`/admin/volunteers/${id}`);
+  }
   
   return (
     <div className="container my-5 shadow">
@@ -405,8 +409,11 @@ function UpdateVolunteer() {
           </div>
           {errors.general && (<p className="text-danger">{errors.general}</p>)}
           <div className="row justify-content-evenly">
-            <Button className="col mb-4 mx-5" variant="outline-success" type="submit">
+            <Button className="col mb-4 mx-2" variant="outline-success" type="submit">
               Guardar voluntario
+            </Button>
+            <Button className="col mb-4 mx-2" variant="outline-danger" onClick={()=> handleClickReturn() }>
+              Cancelar
             </Button>
           </div>
         </Form>

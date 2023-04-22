@@ -260,7 +260,7 @@ export default function CreateResource() {
             </div>
             {errors.general && (<p className="text-danger">{errors.general}</p>)}
             <div className="row justify-content-evenly">
-              <Button className="col mb-4 mx-2" variant="primary" type="submit">
+              <Button className="col mb-4 mx-2" variant="outline-success" type="submit">
                 Guardar recurso
               </Button>
               <Link

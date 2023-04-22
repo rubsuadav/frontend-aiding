@@ -173,6 +173,8 @@ function AdminCreateEvent() {
         error_msgs.end_date = "La fecha de fin no puede estar vacía";
       } else if (!validateDate()){
         error_msgs.end_date = "La fecha de fin no puede ser anterior a la de inicio";
+      } else if (!validateStartDate(end_date)){
+        error_msgs.end_date = "La fecha de fin no puede ser anterior a la actual";
       }
 
       setErrors(error_msgs);

@@ -314,6 +314,17 @@ function ShowEvent() {
             </MDBCard>
           </MDBCol>
         </MDBRow>
+        <hr></hr>
+        <Button
+          onClick={() => {
+            navigate(`/admin/events`);
+          }}
+          type="button"
+          className="btn btn-light w-100"
+        >
+          {" "}
+          Volver al listado
+        </Button>
       </MDBContainer>
     </section>
   );

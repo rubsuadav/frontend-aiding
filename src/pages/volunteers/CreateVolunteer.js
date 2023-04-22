@@ -1,12 +1,10 @@
 import React from "react";
 import {volunteers} from "./services/backend.js";
 import swal from 'sweetalert';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-
-
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -392,6 +390,12 @@ function CreateVolunteer() {
             <Button className="col mb-4 mx-5" variant="outline-success" type="submit">
               Guardar voluntario
             </Button>
+            <Link
+            className="btn btn-outline-danger col mb-4 mx-2"
+            to="/admin/volunteers"
+          >
+            Cancelar
+          </Link>
           </div>
         </Form>
       </div>
