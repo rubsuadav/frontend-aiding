@@ -29,6 +29,7 @@ export default function EditUser() {
   const [user, setUser] = useState({
     username: "",
     password: "",
+    new_password: "",
     is_admin: "",
     roles_id: "",
   });
@@ -40,7 +41,7 @@ export default function EditUser() {
     },
   ]);
 
-  const { username, password, is_admin, roles_id } = user;
+  const { username, password, new_password, is_admin, roles_id } = user;
 
   function getRoles() {
     rolesBE
@@ -127,13 +128,22 @@ export default function EditUser() {
                   )}
 
             <Form.Group className="mb-12">
-              <Form.Label>Contraseña</Form.Label>
+              <Form.Label>Contraseña actual</Form.Label>
               <Form.Control
                 onChange={onInputChange}
-                value={password}
                 type="password"
                 name="password"
-                placeholder="Contraseña"
+                placeholder="Debe introducir su actual contraseña para confirmar cualquier cambio"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-12">
+              <Form.Label>Nueva Contraseña</Form.Label>
+              <Form.Control
+                onChange={onInputChange}
+                type="password"
+                name="new_password"
+                placeholder="Introduzca su nueva contraseña si desea modificarla"
               />
             </Form.Group>
 

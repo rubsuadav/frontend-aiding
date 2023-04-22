@@ -37,14 +37,15 @@ export function isAntispam(inputValue) {
   const forbiddenWords = [
     ...blacklist,
     ...blacklistInterleaved,
-    ...interleavedBlacklist
+    ...interleavedBlacklist,
   ];
 
-  const hasForbiddenWord = allWords.some(word => {
+  const hasForbiddenWord = allWords.some((word) => {
     const regex = new RegExp(`\\b${word.split("").join("*")}\\b`);
-    const forbiddenWord = forbiddenWords.some(forbiddenWord => regex.test(forbiddenWord))
+    const forbiddenWord = forbiddenWords.some((forbiddenWord) =>
+      regex.test(forbiddenWord)
+    );
     return forbiddenWord;
-    
   });
 
   return !hasForbiddenWord;
