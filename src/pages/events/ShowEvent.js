@@ -315,6 +315,7 @@ function ShowEvent() {
           </MDBCol>
         </MDBRow>
         <hr></hr>
+        {isAuthenticated && (
         <Button
           onClick={() => {
             navigate(`/admin/events`);
@@ -324,7 +325,17 @@ function ShowEvent() {
         >
           {" "}
           Volver al listado
-        </Button>
+        </Button>)}
+        {(isAuthenticated == false) && (
+          <Button
+            onClick={() => {
+              window.history.back();
+            }}
+            type="button"
+            className="btn btn-light w-100"
+          >
+            Volver al listado
+          </Button>)}
       </MDBContainer>
     </section>
   );
