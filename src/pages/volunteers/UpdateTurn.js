@@ -5,8 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
-import IBAN from 'iban';
-import { parseISO, differenceInYears } from 'date-fns';
+import moment from "moment";
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -83,23 +82,49 @@ function UpdateTurn() {
   /* Validator */
   const [errors, setErrors] = useState({});
 
+  function validateName(valor) {
+    const regex = /^[a-zA-ZÀ-ÿ]+(([',. -][a-zA-ZÀ-ÿ ])?[a-zA-ZÀ-ÿ]*)*$/;
+    return regex.test(valor);
+  }
+
+  function validateDate(date){
+    let today = moment((new Date()).toISOString()).format('YYYY-MM-DD');
+    console.log(today);
+    console.log(date);
+    if (date < today){
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   function validateForm() {
     let error_msgs = {};
 
     if (title === "" || title === null) {
       error_msgs.name = "El título del turno no puede estar vacío";
+    } else if (title.length > 100) {
+      error_msgs.name = "El título del turno no puede tener más de 100 caracteres";
+    } else if (!validateName(title)) {
+      error_msgs.name = "El título del turno no puede contener números";
     }
 
     if (date === "" || date === null) {
       error_msgs.name = "La fecha del turno no puede estar vacía";
+    } else if (!validateDate(date)) {
+      error_msgs.name = "La fecha del turno no puede ser anterior a la fecha actual";
     }
 
     if (startTime === "" || startTime === null) {
       error_msgs.last_name = "La hora de comienzo no puede estar vacía";
+    } else if (startTime > endTime) {
+      error_msgs.last_name = "La hora de comienzo debe ser anterior a la de finalización";
     }
 
     if (endTime === "" || endTime === null) {
       error_msgs.dni = "La hora de finalización no puede estar vacía";
+    } else if (endTime < startTime) {
+      error_msgs.dni = "La hora de finalización debe ser posterior a la de comienzo";
     }
 
     setErrors(error_msgs);

@@ -71,33 +71,67 @@ export default function CreateResource() {
 
     /* Validator */
    const [errors, setErrors] = useState({});
-
-   function validateTLF(contact_phone) {
-     const tlfRegex = /^\d{9}$/;
-     if (!tlfRegex.test(contact_phone)) {
-       return false;
-     }
-     return true;
-   }
  
+   function validateTelefone(valor) {
+    const regex = /^(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}$/;
+    return regex.test(valor);
+  }
+
+  function validateName(valor) {
+    const regex = /^[a-zA-ZÀ-ÿ]+(([',. -][a-zA-ZÀ-ÿ ])?[a-zA-ZÀ-ÿ]*)*$/;
+    return regex.test(valor);
+  }
+
    function validateForm() {
      let error_msgs = {};
  
-     if (title === "" || title === null) {
-       error_msgs.title = "El título no puede estar vacío";
-     }
- 
-     if (street === "" || street === null) {
-       error_msgs.street = "La calle no puede estar vacía";
-     }
- 
-     if (!validateTLF(contact_phone)) {
-       error_msgs.contact_phone = "Este no es un teléfono válido";
-     }
- 
-     if (city === "" || city === null) {
-       error_msgs.city = "La ciudad no puede estar vacía";
-     }
+    if (title === "" || title === null) {
+      error_msgs.title = "El título no puede estar vacío";
+    } else if (title.length > 100) {
+      error_msgs.title = "El título no puede tener más de 100 caracteres";
+    } else if (!validateName(title)) {
+      error_msgs.title = "El título no puede contener números ni caracteres especiales";
+    }
+  
+    if (description === "" || description === null) {
+      error_msgs.description = "La descripción no puede estar vacía";
+    } else if (description.length > 255) {
+      error_msgs.description = "La descripción no puede tener más de 255 caracteres";
+    }
+
+    if (street === "" || street === null) {
+      error_msgs.street = "La calle no puede estar vacía";
+    } else if (street.length > 255) {
+      error_msgs.street = "La calle no puede tener más de 255 caracteres";
+    } else if (!validateName(street)) {
+      error_msgs.street = "La calle no puede contener números ni caracteres especiales";
+    }
+
+    if (contact_phone === "" || contact_phone === null) {
+      error_msgs.contact_phone = "El teléfono no puede estar vacío";
+    } else if (!validateTelefone(contact_phone)) {
+      error_msgs.contact_phone = "Este no es un teléfono válido";
+    }
+
+    if (number === "" || number === null) {
+      error_msgs.number = "El número no puede estar vacío";
+    } else if (number.length > 10) {
+      error_msgs.number = "El número no puede tener más de 10 caracteres";
+    } else if (number < 1) {
+      error_msgs.number = "El número no puede ser negativo";
+    }
+
+    if (city === "" || city === null) {
+      error_msgs.city = "La ciudad no puede estar vacía";
+    } else if (city.length > 100) {
+      error_msgs.city = "La ciudad no puede tener más de 100 caracteres";
+    } else if (!validateName(city)) {
+      error_msgs.city = "La ciudad no puede contener números ni caracteres especiales";
+    }
+
+    if (additional_comments <= 255) {
+      error_msgs.additional_comments = "Los comentarios no pueden tener más de 255 caracteres";
+    }
  
      setErrors(error_msgs);
  
@@ -139,7 +173,9 @@ export default function CreateResource() {
                   maxlength={255}
                 />
               </Form.Group>
-              
+              {errors.description && (
+                  <p className="text-danger">{errors.description}</p>
+                )}
               <Form.Group className="mb-3">
                 <Form.Label>Teléfono</Form.Label>
                 <Form.Control
@@ -152,7 +188,6 @@ export default function CreateResource() {
               {errors.contact_phone && (
                   <p className="text-danger">{errors.contact_phone}</p>
                 )}
-
 
               <Form.Group className="mb-3">
                 <Form.Label>Calle</Form.Label>
@@ -178,6 +213,9 @@ export default function CreateResource() {
                   maxlength={10}
                 />
               </Form.Group>
+              {errors.number && (
+                  <p className="text-danger">{errors.number}</p>
+                )}
 
               <Form.Group className="mb-3">
                 <Form.Label>Ciudad</Form.Label>
@@ -203,7 +241,9 @@ export default function CreateResource() {
                   maxlength={255}
                 />
               </Form.Group>
-
+              {errors.additional_comments && (
+                  <p className="text-danger">{errors.additional_comments}</p>
+                )}
               <Form.Group className="mb-3">
                 <Form.Label>Tipo de recurso</Form.Label>
                 <Form.Select

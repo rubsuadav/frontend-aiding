@@ -47,19 +47,32 @@ function CreateItem() {
   /* Validator */
   const [errors, setErrors] = useState({});
 
+  function validateName(valor) {
+    const regex = /^[a-zA-ZÀ-ÿ]+(([',. -][a-zA-ZÀ-ÿ ])?[a-zA-ZÀ-ÿ]*)*$/;
+    return regex.test(valor);
+  }
+
   function validateForm() {
     let error_msgs = {};
 
     if (name === "" || name === null) {
       error_msgs.name = "El nombre no puede estar vacío";
+    } else if (name.length < 100) {
+      error_msgs.name = "El nombre no puede tener más de 100 caracteres";
+    } else if (!validateName(name)) {
+      error_msgs.name = "El nombre no puede contener números";
     }
 
     if (description === "" || description === null) {
       error_msgs.description = "La descripción no puede estar vacía";
+    } else if (description.length < 150) {
+      error_msgs.description = "La descripción no puede tener más de 150 caracteres";
     }
 
     if (quantity === "" || quantity === null) {
       error_msgs.quantity = "La cantidad no puede estar vacía";
+    } else if (quantity < 0) {
+      error_msgs.quantity = "La cantidad no puede ser negativa";
     }
 
     if (type_id === "" || type_id === null) {

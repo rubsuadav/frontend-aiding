@@ -229,6 +229,10 @@ const AdminListAdvertisement = () => {
 
     if (name === "" || name === null) {
       error_msgs.name = "El nombre no puede estar vacío";
+    } else if (name.length < 3) {
+      error_msgs.name = "El nombre debe tener al menos 3 caracteres";
+    } else if (name.length > 100) {
+      error_msgs.name = "El nombre debe tener menos de 100 caracteres";
     }
 
     setErrors(error_msgs);

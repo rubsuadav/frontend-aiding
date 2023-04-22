@@ -46,11 +46,6 @@ function CreateVolunteer() {
     /* Validator */
   const [errors, setErrors] = useState({});
 
-  function validatePlace(place) {
-    const regex = /^[a-zA-Z]*$/;
-    return regex.test(place);
-  }
-
   function validateEmail(email) {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return regex.test(email);
@@ -71,16 +66,34 @@ function CreateVolunteer() {
     }return true;
   }
 
+  function validateName(valor) {
+    const regex = /^[a-zA-ZÀ-ÿ]+(([',. -][a-zA-ZÀ-ÿ ])?[a-zA-ZÀ-ÿ]*)*$/;
+    return regex.test(valor);
+  }
+
+  function validatePostalCode(valor) {
+    const regex = /^[0-9]{5}$/;
+    return regex.test(valor);
+  }
+
+  function validateTelefone(valor) {
+    const regex = /^(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}$/;
+    return regex.test(valor);
+  }
 
   function validateForm() {
     let error_msgs = {};
 
     if (name === "" || name === null) {
       error_msgs.name = "El nombre no puede estar vacío";
+    } else if(!validateName(name)){
+      error_msgs.name="El nombre no puede contener números o carácteres especiales";
     }
 
     if (last_name === "" || last_name === null) {
       error_msgs.last_name = "Los apellidos no pueden estar vacío";
+    } else if(!validateName(last_name)){
+      error_msgs.last_name="Los apellidos no pueden contener números o carácteres especiales";
     }
 
     if ( nif === "" || nif === null) {
@@ -91,11 +104,13 @@ function CreateVolunteer() {
 
     if (phone === "" || phone === null) {
       error_msgs.phone = "El teléfono no puede estar vacío";
+    } else if (!validateTelefone(phone)) {
+      error_msgs.phone = "Este no es un teléfono válido";
     }
 
     if (place === "" || place === null) {
       error_msgs.place = "La población no puede estar vacía";
-    } else if(!validatePlace(place)){
+    } else if(!validateName(place)){
       error_msgs.place="La población no puede contener números o carácteres especiales";
     }
     
@@ -117,7 +132,10 @@ function CreateVolunteer() {
     }
     if (postal_code === "" || postal_code === null) {
       error_msgs.postal_code = "El código postal no puede estar vacío";
+    } else if (!validatePostalCode(postal_code)) {
+      error_msgs.postal_code = "Este no es un código postal válido";
     }
+
     setErrors(error_msgs);
 
     if (Object.keys(error_msgs).length === 0) {

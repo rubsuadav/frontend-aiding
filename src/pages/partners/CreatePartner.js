@@ -8,8 +8,6 @@ import { useState } from "react";
 import IBAN from 'iban';
 import { parseISO, differenceInYears } from 'date-fns';
 
-
-
 const successMsg = {
   title: "Mensaje de confirmación",
   text: "Te confirmamos que el socio se ha creado correctamente",
@@ -25,7 +23,6 @@ const errorMsg = {
   button: "Aceptar",
   timer: "5000",
 }
-
 
 function CreatePartner() {
     let navigate = useNavigate();
@@ -91,7 +88,7 @@ function CreatePartner() {
   }
   
   function validateName(valor) {
-    const regex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+    const regex = /^[a-zA-ZÀ-ÿ]+(([',. -][a-zA-ZÀ-ÿ ])?[a-zA-ZÀ-ÿ]*)*$/;
     return regex.test(valor);
   }
 
