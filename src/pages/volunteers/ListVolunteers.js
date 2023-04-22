@@ -193,7 +193,8 @@ const Volunteers = () => {
   }, []);
 
   function createVolunteerRedirect() {
-    navigate("/admin/volunteers/create");
+    const role = localStorage.getItem("role");
+    navigate(role === 'admin' ? "/admin/volunteers/create" : "/roles/volunteers/create");
   }
 
   /* NOTIFICATIONS */
@@ -203,7 +204,8 @@ const Volunteers = () => {
   function notifyVol() {
     let emails_aux = filteredVol.map((obj) => obj.email).join(" ");
     setFilteredEmails(emails_aux);
-    navigate("/admin/notification/create");
+    const role = localStorage.getItem("role");
+    navigate(role === 'admin' ? "/admin/notification/create" : "/roles/notification/create");
   }
 
   const [filteredVol, setFilteredVol] = useState([
@@ -242,7 +244,8 @@ const Volunteers = () => {
         onRow={(record, rowIndex) => {
           return {
             onClick: (event) => {
-              navigate("/admin/volunteers/" + record.id);
+              const role = localStorage.getItem("role");
+              navigate(role === 'admin' ? "/admin/volunteers/" + record.id : "/roles/volunteers/" + record.id);
             },
           };
         }}

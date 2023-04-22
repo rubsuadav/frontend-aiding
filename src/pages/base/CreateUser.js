@@ -63,7 +63,6 @@ export default function CreateUser() {
     }
   };
 
-
   /* Validator */
   const [errors, setErrors] = useState({});
 
@@ -91,18 +90,16 @@ export default function CreateUser() {
     const aux = base
       .post("users/", user)
       .then((response) => {
-        console.log(response.data);
         swal(successMsg);
         navigate("/admin/base/users");
       })
       .catch((error) => {
-        if (errors.response && errors.response.status === 404) {
-          let error_msgs = { roles: "Debe de seleccionar un rol" };
+        if (error.response && error.response.status === 409) {
+          let error_msgs = { username: "El nombre de usuario ya existe" };
           setErrors(error_msgs);
         } else {
           swal(errorMsg);
         }
-        console.log(errors);
       });
   }
 
@@ -112,15 +109,12 @@ export default function CreateUser() {
       .then((response) => {
         setRoles(response.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }
 
   useEffect(() => {
     getRoles();
   }, []);
-
 
   return (
     <div className="container my-5 shadow">
@@ -136,9 +130,11 @@ export default function CreateUser() {
                 value={username}
                 name="username"
                 placeholder="Nombre del usuario"
-                required={true}
               />
             </Form.Group>
+            {errors.username && (
+              <p className="text-danger">{errors.username}</p>
+            )}
 
             <Form.Group className="mb-3">
               <Form.Label>Contraseña</Form.Label>

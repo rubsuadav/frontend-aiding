@@ -80,6 +80,7 @@ export default function Details() {
   }
   const situation = volunteerFormatter(user.situation);
   const rol = volunteerFormatter(user.rol);
+  const role = localStorage.getItem("role");
 
   return (
     <section>
@@ -262,7 +263,8 @@ export default function Details() {
                   <MDBCol>
                     <MDBCardText className="text-muted w-auto">
                       <Button
-                        onClick={() => {navigate(`/admin/volunteers/update/${id}`)}}
+                        onClick={() => 
+                          {role === 'admin' ? navigate(`/admin/volunteers/update/${id}`) : navigate(`/roles/volunteers/update/${id}`)}}
                         type="button" id="button" 
                         className="btn btn-light w-100"
                       >

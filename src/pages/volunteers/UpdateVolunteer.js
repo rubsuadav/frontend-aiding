@@ -83,7 +83,8 @@ function UpdateVolunteer() {
       .put(`/${id}`, volunteer)
       .then((response) => {
         swal(successMsg);
-        navigate(`/admin/volunteers/${id}`);
+        const role = localStorage.getItem("role");
+        navigate(role === 'admin' ? `/admin/volunteers/${id}` : `/roles/volunteers/${id}`);
       })
       .catch((error) => {
         if (error.response && error.response.status === 409) {
