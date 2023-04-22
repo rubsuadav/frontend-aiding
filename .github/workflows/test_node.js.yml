@@ -29,6 +29,8 @@ jobs:
           command: npm run start
           env: |
             CYPRESS_baseUrl=http://localhost:3000
+            CYPRESS_backendUrl=https://firee.pythonanywhere.com/
           wait-on: |
+            https://firee.pythonanywhere.com/
             http://localhost:3000
           test-command: npm run test

@@ -14,18 +14,20 @@ describe("Footer", () => {
   });
 });
 
-/*describe("Login", () => {
+describe("Login", () => {
   it("can login", () => {
-    cy.get(".login").click();
-    cy.get('input[name="username"]').type("ruben");
-    cy.get('input[name="password"]').type("ruben");
+    cy.get(".login").click({ multiple: true });
+    cy.get('.login').first().click();
+    cy.get('input[name="username"]').type("rub");
+    cy.get('input[name="password"]').type("rub");
     cy.get('button[type="submit"]').click();
     cy.get(".swal-modal").should("be.visible");
     cy.get(".swal-button").click();
   });
 
   it("cannot login", () => {
-    cy.get(".login").click();
+    cy.get(".login").click({ multiple: true });
+    cy.get('.login').first().click();
     cy.get('input[name="username"]').type("aiding");
     cy.get('input[name="password"]').type("wdwe3");
     cy.get('button[type="submit"]').click();
@@ -35,9 +37,10 @@ describe("Footer", () => {
 
 describe("Logout", () => {
   it("can logout", () => {
-    cy.get(".login").click();
-    cy.get('input[name="username"]').type("ruben");
-    cy.get('input[name="password"]').type("ruben");
+    cy.get(".login").click({ multiple: true });
+    cy.get('.login').first().click();
+    cy.get('input[name="username"]').type("rub");
+    cy.get('input[name="password"]').type("rub");
     cy.get('button[type="submit"]').click();
     cy.get(".swal-modal").should("be.visible");
     cy.get(".swal-button").click();
@@ -50,15 +53,15 @@ describe("Logout", () => {
 
 describe("Resources", () => {
   it("can list resources", () => {
-    const path = "information/map-resources";
-    cy.visit(baseUrl + path);
+    cy.get(".me-auto").click();
+    cy.wait(1000);
     cy.get(".accordion-button").click({ multiple: true });
     cy.get(".accordion-button")
       .first()
       .click()
       .then(() => {
         cy.get("#boton").should("exist");
-        cy.get("#boton").click({force: true});
+        cy.get("#boton").click({ force: true });
       });
     cy.get("#retorno").should("be.visible");
     cy.wait(2000);
@@ -68,20 +71,14 @@ describe("Resources", () => {
 
 describe("Events and Sections", () => {
   it("can list programed events", () => {
-    const path = "events/programed";
-    cy.visit(baseUrl + path);
+    cy.get("#nav-dropdown").click();
     cy.wait(1000);
     cy.get(".shadow").last().click();
+    cy.wait(1000);
   });
 
   it("can list started events", () => {
-    const path = "events/started";
-    cy.request({
-      url: baseUrl + path,
-      failOnStatusCode: false,
-    }).then((response) => {
-      expect(response.status).to.eq(200)
-    })
+    cy.get("#nav-dropdown").last().click({ failOnStatusCode: false });
     cy.wait(2000);
   });
 
@@ -89,6 +86,22 @@ describe("Events and Sections", () => {
     const path = "information/sections";
     cy.visit(baseUrl + path);
     cy.wait(1000);
-    cy.get(".m-1").first().click();
+    cy.get(".card-body").first().click();
+    cy.wait(1000);
   });
-});*/
+});
+
+describe("Create Contact", () => {
+  it("can create contact", () => {
+    const path = "base/contacts/CreateContact";
+    cy.visit(baseUrl + path);
+    cy.get('input[name="name"]').type("Ruben");
+    cy.get('input[name="email"]').type("rsuarezdavid@gmail.com");
+    cy.get('input[name="subject"]').type("Test");
+    cy.get('textarea[name="message"]').type("Test");
+    cy.get('button[type="submit"]').click();
+    cy.wait(1000);
+    cy.get(".swal-modal").should("be.visible");
+    cy.get(".swal-button").click();
+  });
+});

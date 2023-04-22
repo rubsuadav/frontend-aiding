@@ -46,7 +46,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "cypress open",
+    "test": "cypress run --headed --browser electron --env coverage=true",
+    "cy:open": "cypress open",
     "cy:run": "cypress run --env coverage=true",
     "eject": "react-scripts eject"
   },
