@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import moment from "moment";
+import { isAntispam } from "../../components/AntiSpam.js";
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -51,8 +52,6 @@ function CreateTurn() {
 
   function validateDate(date){
     let today = moment((new Date()).toISOString()).format('YYYY-MM-DD');
-    console.log(today);
-    console.log(date);
     if (date < today){
       return false;
     } else {
@@ -64,29 +63,31 @@ function CreateTurn() {
     let error_msgs = {};
 
     if (title === "" || title === null) {
-      error_msgs.name = "El título del turno no puede estar vacío";
+      error_msgs.title = "El título del turno no puede estar vacío";
     } else if (title.length > 100) {
-      error_msgs.name = "El título del turno no puede tener más de 100 caracteres";
+      error_msgs.title = "El título del turno no puede tener más de 100 caracteres";
     } else if (!validateName(title)) {
-      error_msgs.name = "El título del turno no puede contener números";
+      error_msgs.title = "El título del turno no puede contener números";
+    } else if (!isAntispam(title)) {
+      error_msgs.title = "El título del turno no puede contener spam";
     }
 
     if (date === "" || date === null) {
-      error_msgs.name = "La fecha del turno no puede estar vacía";
+      error_msgs.date = "La fecha del turno no puede estar vacía";
     } else if (!validateDate(date)) {
-      error_msgs.name = "La fecha del turno no puede ser anterior a la fecha actual";
+      error_msgs.date = "La fecha del turno no puede ser anterior a la fecha actual";
     }
 
     if (startTime === "" || startTime === null) {
-      error_msgs.last_name = "La hora de comienzo no puede estar vacía";
+      error_msgs.startTime = "La hora de comienzo no puede estar vacía";
     } else if (startTime > endTime) {
-      error_msgs.last_name = "La hora de comienzo debe ser anterior a la de finalización";
+      error_msgs.startTime = "La hora de comienzo debe ser anterior a la de finalización";
     }
 
     if (endTime === "" || endTime === null) {
-      error_msgs.dni = "La hora de finalización no puede estar vacía";
+      error_msgs.endTime = "La hora de finalización no puede estar vacía";
     } else if (endTime < startTime) {
-      error_msgs.dni = "La hora de finalización debe ser posterior a la de comienzo";
+      error_msgs.endTime = "La hora de finalización debe ser posterior a la de comienzo";
     }
 
     setErrors(error_msgs);

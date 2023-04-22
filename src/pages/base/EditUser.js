@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { base, rolesBE } from "./services/backend.js";
 import swal from 'sweetalert';
+import { isAntispam } from "../../components/AntiSpam.js";
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -69,16 +70,39 @@ export default function EditUser() {
     }
   };
 
+  /* Validator */
+  const [errors, setErrors] = useState({});
+
+  function validateForm() {
+    let error_msgs = {};
+
+    if (username === "" || username === null) {
+      error_msgs.username = "El nombre de usuario no puede estar vacío";
+    } else if (!isAntispam(username)) {
+      error_msgs.username = "El nombre de usuario no puede contener spam";
+    }
+
+    if (password === "" || password === null) {
+      error_msgs.password = "La contraseña no puede estar vacía";
+    }
+
+    setErrors(error_msgs);
+
+    if (Object.keys(error_msgs).length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    try {
+    if (validateForm()) {
       await base.put(`/users/${id}`, user);
       swal(successMsg);
       navigate("/admin/base/users");
-    } catch (error) {
-      console.error(error);
-      swal(errorMsg);
     }
+
   };
 
   return (
@@ -98,6 +122,10 @@ export default function EditUser() {
               />
             </Form.Group>
 
+            {errors.username && (
+                    <p className="text-danger">{errors.username}</p>
+                  )}
+
             <Form.Group className="mb-12">
               <Form.Label>Contraseña</Form.Label>
               <Form.Control
@@ -108,6 +136,10 @@ export default function EditUser() {
                 placeholder="Contraseña"
               />
             </Form.Group>
+
+            {errors.password && (
+                    <p className="text-danger">{errors.password}</p>
+                  )}
 
               <Form.Group className="mb-12">
                 <Form.Label>Administrador</Form.Label>

@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
 import { rolesBE } from "./services/backend.js";
+import { isAntispam } from "../../components/AntiSpam.js";
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -72,6 +73,8 @@ export default function CreateUser() {
 
     if (username === "" || username === null) {
       error_msgs.username = "El nombre de usuario no puede estar vacío";
+    } else if (!isAntispam(username)) {
+      error_msgs.username = "El nombre de usuario no puede contener spam";
     }
 
     if (password === "" || password === null) {
@@ -136,10 +139,11 @@ export default function CreateUser() {
                 value={username}
                 name="username"
                 placeholder="Nombre del usuario"
-                required={true}
               />
             </Form.Group>
-
+            {errors.username && (
+                    <p className="text-danger">{errors.username}</p>
+                  )}
             <Form.Group className="mb-3">
               <Form.Label>Contraseña</Form.Label>
               <Form.Control
@@ -148,9 +152,11 @@ export default function CreateUser() {
                 type="password"
                 name="password"
                 placeholder="Contraseña"
-                required={true}
               />
             </Form.Group>
+            {errors.password && (
+                    <p className="text-danger">{errors.password}</p>
+                  )}
 
             <Form.Group className="mb-3">
               <Form.Label>Administrador</Form.Label>

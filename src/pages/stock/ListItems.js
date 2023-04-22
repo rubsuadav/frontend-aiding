@@ -13,6 +13,7 @@ import swal from "sweetalert";
 import TableReact from "react-bootstrap/Table";
 import ButtonReact from "react-bootstrap/Button";
 import { Col, Row } from "react-bootstrap";
+import { isAntispam } from "../../components/AntiSpam.js";
 
 const successMsg_delete = {
   title: "Mensaje de confirmación",
@@ -217,6 +218,8 @@ const Items = () => {
 
     if (name === "" || name === null) {
       error_msgs.name = "El nombre no puede estar vacío";
+    } else if (!isAntispam(name)) {
+      error_msgs.name = "El nombre no puede contener spam";
     }
 
     setErrors(error_msgs);
@@ -361,7 +364,6 @@ const Items = () => {
           >
             <Row className="justify-content-evenly">
               <Form.Group className="mb-3">
-                {errors.name && <p className="text-danger">{errors.name}</p>}
                 <Form.Control
                   onChange={(e) => onInputChange(e)}
                   value={name}
@@ -370,6 +372,7 @@ const Items = () => {
                   placeholder="Nombre del tipo de item"
                 />
               </Form.Group>
+              {errors.name && <p className="text-danger">{errors.name}</p>}
             </Row>
             <ButtonReact
               className="col mb-4 mx-2"

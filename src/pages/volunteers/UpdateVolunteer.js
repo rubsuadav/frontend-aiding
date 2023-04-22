@@ -5,8 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
-
-
+import { isAntispam } from "../../components/AntiSpam.js";
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -155,12 +154,16 @@ function UpdateVolunteer() {
       error_msgs.name = "El nombre no puede estar vacío";
     } else if(!validateName(name)){
       error_msgs.name="El nombre no puede contener números o carácteres especiales";
+    } else if (!isAntispam(name)) {
+      error_msgs.name="El nombre no puede contener palabras prohibidas";
     }
 
     if (last_name === "" || last_name === null) {
       error_msgs.last_name = "Los apellidos no pueden estar vacío";
     } else if(!validateName(last_name)){
       error_msgs.last_name="Los apellidos no pueden contener números o carácteres especiales";
+    } else if (!isAntispam(last_name)) {
+      error_msgs.last_name="Los apellidos no pueden contener palabras prohibidas";
     }
 
     if ( nif === "" || nif === null) {
@@ -179,12 +182,16 @@ function UpdateVolunteer() {
       error_msgs.place = "La población no puede estar vacía";
     } else if(!validateName(place)){
       error_msgs.place="La población no puede contener números o carácteres especiales";
+    } else if (!isAntispam(place)) {
+      error_msgs.place="La población no puede contener palabras prohibidas";
     }
     
     if (email === "" || email === null) {
       error_msgs.email = "El email no puede estar vacío";
     }else if (!validateEmail(email)) {
       error_msgs.email = "Este no es un email válido";
+    } else if (!isAntispam(email)) {
+      error_msgs.email="El email no puede contener palabras prohibidas";
     }
 
     if (situation === "" || situation === null) {
@@ -194,9 +201,13 @@ function UpdateVolunteer() {
     if (rol === "" || rol === null) {
       error_msgs.rol = "Por favor, indique el rol del voluntario";
     }
-
-    if (observations.length>250) {
-      error_msgs.observations = "Las observaciones no pueden tener más de 250 caracteres";
+    
+    if (!(observations === "" || observations === null)) {
+      if (observations.length>250) {
+        error_msgs.observations = "Las observaciones no pueden tener más de 250 caracteres";
+      } else if (!isAntispam(observations)) {
+        error_msgs.observations="Las observaciones no pueden contener palabras prohibidas";
+      }
     }
 
     if (postal_code === "" || postal_code === null) {

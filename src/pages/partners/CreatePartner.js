@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import IBAN from 'iban';
 import { parseISO, differenceInYears } from 'date-fns';
+import { isAntispam } from "../../components/AntiSpam.js";
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -119,12 +120,16 @@ function CreatePartner() {
       error_msgs.name = "El nombre no puede estar vacío";
     } else if (!validateName(name)) {
       error_msgs.name = "El nombre no puede contener números o caracteres especiales";
+    } else if (!isAntispam(name)) {
+      error_msgs.name = "El nombre de usuario no puede contener spam";
     }
 
     if (last_name === "" || last_name === null) {
       error_msgs.last_name = "Los apellidos no pueden estar vacío";
     } else if (!validateName(last_name)) {
       error_msgs.last_name = "Los apellidos no pueden contener números o caracteres especiales";
+    } else if (!isAntispam(last_name)) {
+      error_msgs.last_name = "Los apellidos no pueden contener spam";
     }
 
     if (dni === "" || dni === null) {
@@ -153,6 +158,8 @@ function CreatePartner() {
       error_msgs.address = "La dirección no puede estar vacía";
     } else if(!validateAdress(address)){
       error_msgs.address = "La dirección no puede contener caracteres especiales";
+    } else if (!isAntispam(address)) {
+      error_msgs.address = "La dirección no puede contener spam";
     }
 
     if (postal_code === "" || postal_code === null) {
@@ -165,18 +172,24 @@ function CreatePartner() {
       error_msgs.township = "La ciudad no puede estar vacía";
     } else if (!validateText(township)) {
       error_msgs.township = "La ciudad no puede contener números o caracteres especiales";
+    } else if (!isAntispam(township)) {
+      error_msgs.township = "La ciudad no puede contener spam";
     }
 
     if (province === "" || province === null) {
       error_msgs.province = "La provincia no puede estar vacía";
     } else if (!validateText(province)) {
       error_msgs.province = "La provincia no puede contener números o caracteres especiales";
+    } else if (!isAntispam(province)) {
+      error_msgs.province = "La provincia no puede contener spam";
     }
     
     if (email === "" || email === null) {
       error_msgs.email = "El email no puede estar vacío";
     }else if (!validateEmail(email)) {
       error_msgs.email = "Este no es un email válido";
+    } else if (!isAntispam(email)) {
+      error_msgs.email = "El email no puede contener spam";
     }
 
     if (iban === "" || iban === null) {
@@ -189,6 +202,8 @@ function CreatePartner() {
       error_msgs.account_holder = "El titular de la cuenta no puede estar vacío";
     } else if (!validateName(account_holder)) {
       error_msgs.account_holder = "El titular de la cuenta no puede contener números o caracteres especiales";
+    } else if (!isAntispam(account_holder)) {
+      error_msgs.account_holder = "El titular de la cuenta no puede contener spam";
     }
 
     setErrors(error_msgs);

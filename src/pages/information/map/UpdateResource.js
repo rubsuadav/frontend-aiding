@@ -4,6 +4,7 @@ import swal from "sweetalert";
 import resourcesApi from "./services/backend.js";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { isAntispam } from "../../../components/AntiSpam.js";
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -94,18 +95,23 @@ export default function UpdateResource() {
   function validateForm() {
      let error_msgs = {};
  
-    if (title === "" || title === null) {
+ 
+     if (title === "" || title === null) {
       error_msgs.title = "El título no puede estar vacío";
     } else if (title.length > 100) {
       error_msgs.title = "El título no puede tener más de 100 caracteres";
     } else if (!validateName(title)) {
       error_msgs.title = "El título no puede contener números ni caracteres especiales";
+    } else if (!isAntispam(title)) {
+      error_msgs.title = "El título no puede contener palabras prohibidas";
     }
   
     if (description === "" || description === null) {
       error_msgs.description = "La descripción no puede estar vacía";
     } else if (description.length > 255) {
       error_msgs.description = "La descripción no puede tener más de 255 caracteres";
+    } else if (!isAntispam(description)) {
+      error_msgs.description = "La descripción no puede contener palabras prohibidas";
     }
 
     if (street === "" || street === null) {
@@ -114,6 +120,8 @@ export default function UpdateResource() {
       error_msgs.street = "La calle no puede tener más de 255 caracteres";
     } else if (!validateName(street)) {
       error_msgs.street = "La calle no puede contener números ni caracteres especiales";
+    } else if (!isAntispam(street)) {
+      error_msgs.street = "La calle no puede contener palabras prohibidas";
     }
 
     if (contact_phone === "" || contact_phone === null) {
@@ -136,10 +144,16 @@ export default function UpdateResource() {
       error_msgs.city = "La ciudad no puede tener más de 100 caracteres";
     } else if (!validateName(city)) {
       error_msgs.city = "La ciudad no puede contener números ni caracteres especiales";
+    } else if (!isAntispam(city)) {
+      error_msgs.city = "La ciudad no puede contener palabras prohibidas";
     }
 
-    if (additional_comments <= 255) {
-      error_msgs.additional_comments = "Los comentarios no pueden tener más de 255 caracteres";
+    if (!(additional_comments === "" || additional_comments === null)) {
+      if (additional_comments > 255) {
+        error_msgs.additional_comments = "Los comentarios no pueden tener más de 255 caracteres";
+      } else if (!isAntispam(additional_comments)) {
+        error_msgs.additional_comments = "Los comentarios no pueden contener palabras prohibidas";
+      }
     }
  
     setErrors(error_msgs);
