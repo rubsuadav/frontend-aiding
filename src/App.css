@@ -76,6 +76,18 @@
   font-size: medium;
 }
 
+#navlink:hover {
+  color: var(--boton);
+}
+
+#navlink:active,
+#navlink:focus {
+  color: var(--boton);
+}
+
+
+
+
 /* Estilo para el contenedor principal */
 .container-principal {
   min-height: 100vh;
@@ -237,7 +249,7 @@
   background:
     linear-gradient(140deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.07) 43%, transparent 44%, transparent 100%),
     linear-gradient(105deg, transparent 0%, transparent 40%, rgba(0, 0, 0, 0.06) 41%, rgba(0, 0, 0, 0.07) 76%, transparent 77%, transparent 100%),
-    linear-gradient(to right, #b6afee, #7600dd);
+    linear-gradient(to right, #8c0046, #a30365);
 }
 
 .error-container > span.four::before,
@@ -256,7 +268,7 @@
   background:
     linear-gradient(128deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.07) 40%, transparent 41%, transparent 100%),
     linear-gradient(116deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.07) 50%, transparent 51%, transparent 100%),
-    linear-gradient(to top, #a661e3, #b6afee, #aba2ec, #a196ef, #a661e3);
+    linear-gradient(to top, #5d002f, #8b0247, #b00d5f, #be1e6e, #cd2b7c);
 }
 
 .error-container > span.four::after {
@@ -265,7 +277,7 @@
   transform: rotate(-49.5deg);
   left: -18px;
   bottom: 36px;
-  background: linear-gradient(to right, #cdc9ed, #b6afee, #aba2ec, #a196ef, #a661e3);
+  background: linear-gradient(to right, #9b3d6c, #99215d, #991657, #880c4a, #5d002f);
 }
 
 .error-container > span.zero {
@@ -275,7 +287,7 @@
   border-radius: 999px;
   background:
     linear-gradient(-45deg, transparent 0%, rgba(0, 0, 0, 0.06) 50%, transparent 51%, transparent 100%),
-    linear-gradient(to top right, #678edf, #6187d9, #5a80d2, #577ed2, #537bd1, #4c75ce, #4670cb);
+    linear-gradient(to top right, #9b3d6c, #99215d, #991657, #880c4a, #5d002f);
   overflow: hidden;
   animation: bgshadow 5s infinite;
 }
@@ -314,7 +326,7 @@
   border-radius: 999px;
   background:
     linear-gradient(-45deg, transparent 0%, rgba(0, 0, 0, 0.06) 50%, transparent 51%, transparent 100%),
-    linear-gradient(to top right, #7600dd, #8218df, #877bde, #a196ef, #998eed, #998eed, #877bde);
+    linear-gradient(to top right, #9b3d6c, #99215d, #991657, #880c4a, #5d002f);
   overflow: hidden;
 }
 

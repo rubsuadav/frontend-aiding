@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
-
+import { useState } from "react";
 // React Bootstrap imports
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -46,6 +46,13 @@ const NavigationBar = ({
   const role = localStorage.getItem("role");
   console.log(isAuthenticated && (role === "capitán" || role === "supervisor"));
 
+  const [activeLink, setActiveLink] = useState("");
+
+  const handleClick = (event) => {
+    setActiveLink(event.target.pathname);
+  };
+
+
   return (
     <Navbar className="navbar" expand="sm">
       <Container>
@@ -65,14 +72,22 @@ const NavigationBar = ({
           <Nav className="me-auto">
             {/** Public links */}
             {navLinksPublic.map((link) => (
-              <Nav.Link key={link.path} as={Link} to={link.path}>
+              <Nav.Link
+                key={link.path}
+                as={Link}
+                to={link.path}
+                className={link.path === activeLink ? "active" : ""}
+                onClick={handleClick}
+                id="navlink"
+              >
                 <strong>{link.title}</strong>
               </Nav.Link>
             ))}
 
+
             <NavDropdown
               title="Eventos"
-              id="nav-dropdown"
+              id="navlink"
               style={{ fontWeight: "bold" }}
             >
               <NavDropdown.Item>
@@ -95,7 +110,7 @@ const NavigationBar = ({
             {isAuthenticated && role === "admin" && (
               <NavDropdown
                 title="Administración"
-                id="basic-nav-dropdown"
+                id="navlink"
                 style={{ fontWeight: "bold" }}
               >
                 {navLinksAdmin.map((link) => (
