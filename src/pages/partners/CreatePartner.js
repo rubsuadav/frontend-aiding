@@ -103,11 +103,6 @@ function CreatePartner() {
     return regex.test(valor);
   }
 
-  function validateNumber(valor) {
-    const regex = /^[0-9]*$/;
-    return regex.test(valor);
-  }
-
   function validatePostalCode(valor) {
     const regex = /^[0-9]{5}$/;
     return regex.test(valor);
