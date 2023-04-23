@@ -110,7 +110,7 @@ function UpdateTurn() {
     } else if (!validateName(title)) {
       error_msgs.title = "El título del turno no puede contener números";
     } else if (!isAntispam(title)) {
-      error_msgs.title = "El título del turno no puede contener spam";
+      error_msgs.title = "El título del turno no puede contener palabras prohibidas";
     }
 
     if (date === "" || date === null) {
