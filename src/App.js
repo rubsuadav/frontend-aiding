@@ -108,10 +108,10 @@ var navLinksPublic = [
 ];
 
 var navLinksAdmin = [
-  {
+  /*{
     title: "Socios",
     path: "admin/partners",
-  },
+  },*/
   {
     title: "Usuarios",
     path: "admin/base/users",
@@ -120,10 +120,10 @@ var navLinksAdmin = [
     title: "Recursos",
     path: "admin/information/resources",
   },
-  {
+  /*{
     title: "Voluntarios",
     path: "admin/volunteers",
-  },
+  },*/
   {
     title: "Noticias",
     path: "admin/information/advertisements",
@@ -140,10 +140,10 @@ var navLinksAdmin = [
     title: "Crear Notificación",
     path: "admin/notification/create"
   },
-  {
+  /*{
     title: "Inventario",
     path: "admin/stock/items"
-  },
+  },*/
 ];
 
 var navLinksCaptainSupervisor = [
@@ -231,10 +231,10 @@ export default function App() {
                     <Route path="base/register" element={<Register />} />
                   </Route>
 
-                  {/* Capitan/supervsior routes ============================================*/}
+                  {/* Capitan/supervsior routes ============================================
                   <Route path="/roles" element={<ProtectedRoute />}>
                   <Route path="/roles/notification/create" element={ <AdminCreateNotification/> } />
-                    {/* Volunteers */}
+                    
                     <Route path="volunteers" element={<ListVolunteers />} />
                     <Route
                       path="volunteers/create"
@@ -245,7 +245,7 @@ export default function App() {
                       path="volunteers/update/:id"
                       element={<UpdateVolunteer />}
                     />
-                    {/* Turns */}
+                    
                     <Route path="volunteers/turns" element={ <ListTurn/>} />
                     <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
                     <Route path="volunteers/turns/:id/draft" element={ <ShowTurnDraft/>} />
@@ -253,6 +253,7 @@ export default function App() {
                     <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
                     <Route path="volunteers/volunteerTurns/create/:id" element={ <CreateVolunteerTurn/>} />
                   </Route>
+                  */}
                                       
                   {/* Admin routes ============================================*/}
                   <Route path="/admin" element={<PrivateRoute />}>
@@ -312,7 +313,7 @@ export default function App() {
                     <Route path="policies/terms" element={<TermsAndPolicies />} />
                     <Route path="policies/slas" element={<SLAs />} />
                     
-                    {/* Partner*/}
+                    {/* Partner
                     <Route path="partners" element={<ListPartner />} />
                     <Route path="partners/:id" element={<ShowPartner />} />
                     <Route path="partners/create" element={<CreatePartner />} />
@@ -337,7 +338,8 @@ export default function App() {
                       path="partners/:id/donation/update"
                       element={<UpdateDonation />}
                     />
-                    {/* Volunteers */}
+                    */}
+                    {/* Volunteers 
                     <Route path="volunteers" element={<ListVolunteers />} />
                     <Route
                       path="volunteers/create"
@@ -348,7 +350,9 @@ export default function App() {
                       path="volunteers/update/:id"
                       element={<UpdateVolunteer />}
                     />
+                    */}
 
+                    {/* Events */}
                     <Route path="/admin/events/" element={<AdminListEvent />} />
 
                     <Route
@@ -362,6 +366,7 @@ export default function App() {
                     />
 
 
+                    {/* Turns 
                     <Route path="volunteers/turns" element={<ListTurn />} />
                     <Route
                       path="volunteers/turns/create"
@@ -377,13 +382,16 @@ export default function App() {
                       path="volunteers/volunteerTurns/create/:id"
                       element={<CreateVolunteerTurn />}
                     />
+                    */}
 
                     <Route path="/admin/notification/create" element={ <AdminCreateNotification/> } />
                     
+                    {/* Stock 
                     <Route path="stock/items" element={<ListItems />} />
                     <Route path="stock/items/create" element={<CreateItem />} />
                     <Route path="stock/items/:id" element={<ShowItem />} />
                     <Route path="stock/items/update/:id" element={<UpdateItem />} />
+                    */}
 
                   </Route>
                   <Route path="*" element={<Error404 />} />

@@ -38,12 +38,12 @@ const Users = () => {
       title: "Administrador/Usuario",
       dataIndex: 'is_admin',
       render:(is_admin) => is_admin ? 'ADMINISTRADOR' : 'USUARIO',
-    },
+    },/*
     {
       title: 'Rol del usuario',
       dataIndex: 'roles_id',
       render: (rolesId) => getRoleName(rolesId),
-    },
+    },*/
   ];
 
   function getRoleName(rolesId) {
