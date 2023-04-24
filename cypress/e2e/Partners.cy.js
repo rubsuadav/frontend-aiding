@@ -11,7 +11,7 @@ beforeEach(() => {
 describe("CRU Partners", () => {
   it("can create partners?", () => {
     cy.get(".login").click({ multiple: true });
-    cy.get('.login').first().click();
+    cy.get(".login").first().click();
     cy.get('input[name="username"]').type("rub");
     cy.get('input[name="password"]').type("rub");
     cy.get('button[type="submit"]').click();
@@ -30,7 +30,7 @@ describe("CRU Partners", () => {
       .invoke("text")
       .then((text) => {
         if (text === "Eugenio") {
-          //Antes de crear el mismo socio se debe de comprobar si existe o no 
+          //Antes de crear el mismo socio se debe de comprobar si existe o no
           cy.get("#boton-socio").click();
           cy.fixture("partners.json").then((datos) => {
             datos.partners.forEach((partner) => {
