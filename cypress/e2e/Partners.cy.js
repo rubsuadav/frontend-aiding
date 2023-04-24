@@ -50,7 +50,7 @@ describe("CRU Partners", () => {
               cy.get('input[name = "email"]').type(partner.email);
               cy.get('input[name="province"]').type(partner.province);
               cy.get('input[name="iban"]').type(partner.iban);
-              cy.get('button[type="submit"]').click(); //comprobamos la existencia de errores de validación
+              cy.get('button[type="submit"]').click(); //comprobamos la existencia de errores de validación en el formulario
               cy.wait(1000);
             });
           });
