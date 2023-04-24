@@ -71,7 +71,7 @@ describe("CRU Partners", () => {
           cy.get('input[name="iban"]').type("ES9720809927289474577294");
           cy.get('button[type="submit"]').click();
           cy.get(".swal-modal").should("be.visible");
-          cy.get(".swal-button").click(); //se crea correctamente
+          cy.get(".swal-button").click(); //se crea correctamente el socio
         }
       });
   });
