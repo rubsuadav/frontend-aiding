@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import moment from "moment";
 import { userTimezone  } from "../../config";
+import { isAntispam } from "../../components/AntiSpam.js";
 
 const errorMsg = {
   title: "Mensaje de error",
@@ -119,8 +120,12 @@ function AdminCreateEvent() {
         return true;
       }
     }
-    
 
+    function validarCampoNumerico(valor) {
+      const regex = /^[0-9]*$/;
+      return regex.test(valor);
+    }
+    
     function validateForm() {
       let error_msgs = {};
 
@@ -128,44 +133,55 @@ function AdminCreateEvent() {
         error_msgs.title = "El nombre no puede estar vacío";
       } else if (title.length >= 100){
         error_msgs.title = "El nombre no puede tener más de 100 caracteres";
+      } else if (!isAntispam(title)){
+        error_msgs.title = "El nombre no puede contener palabras prohibidas";
       }
       
       if (description === "" || description === null) {
         error_msgs.description = "La descripción no puede estar vacía";
       } else if (description.length >= 500){
         error_msgs.description = "La descripción no puede tener más de 500 caracteres";
+      } else if (!isAntispam(description)){
+        error_msgs.description = "La descripción no puede contener palabras prohibidas";
       }
 
       if (places === "" || places === null) {
         error_msgs.places = "Las plazas no pueden estar vacías";
       } else if (places.length <= 0){
         error_msgs.places = "Las plazas no pueden ser negativas";
+      } else if (!validarCampoNumerico(places)){
+        error_msgs.places = "Las plazas deben ser un número";
       }
 
       if (street === "" || street === null) {
         error_msgs.street = "La calle no puede estar vacía";
       } else if (street.length >= 255){
         error_msgs.street = "La calle no puede tener más de 255 caracteres";
+      } else if (!isAntispam(street)){
+        error_msgs.street = "La calle no puede contener palabras prohibidas";
       }
 
       if (number === "" || number === null) {
         error_msgs.number = "El número no puede estar vacío";
       } else if (number.length >= 10){
         error_msgs.number = "El número no puede tener más de 10 caracteres";
+      } else if (!validarCampoNumerico(number)){
+        error_msgs.number = "El número debe ser un número";
       }
 
       if (city === "" || city === null) {
         error_msgs.city = "La ciudad no puede estar vacía";
       } else if (city.length >= 100){
         error_msgs.city = "La ciudad no puede tener más de 100 caracteres";
+      } else if (!isAntispam(city)){
+        error_msgs.city = "La ciudad no puede contener palabras prohibidas";
       }
 
       if (start_date === "" || start_date === null) {
         error_msgs.start_date = "La fecha de inicio no puede estar vacía";
       } else if (!validateStartDate(start_date)){
         error_msgs.start_date = "La fecha de inicio no puede ser anterior a la actual";
-      }
-      else if (!validateDate()){
+      } else if (!validateDate()){
         error_msgs.start_date = "La fecha de fin no puede ser anterior a la de inicio";
       }
 

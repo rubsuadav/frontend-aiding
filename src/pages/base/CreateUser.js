@@ -73,7 +73,7 @@ export default function CreateUser() {
     if (username === "" || username === null) {
       error_msgs.username = "El nombre de usuario no puede estar vacío";
     } else if (!isAntispam(username)) {
-      error_msgs.username = "El nombre de usuario no puede contener spam";
+      error_msgs.username = "El nombre de usuario no puede contener palabras prohibidas";
     }
 
     if (password === "" || password === null) {

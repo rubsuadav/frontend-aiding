@@ -72,7 +72,7 @@ function CreateCommunication() {
       } else if (description.length > 255) {
         error_msgs.description = "La descripción debe tener menos de 255 caracteres";
       } else if (!isAntispam(description)) {
-        error_msgs.description = "La descripción no puede contener spam";
+        error_msgs.description = "La descripción no puede contener palabras prohibidas";
       }
 
       setErrors(error_msgs);
