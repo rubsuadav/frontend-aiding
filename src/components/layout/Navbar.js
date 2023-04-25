@@ -70,7 +70,7 @@ const NavigationBar = ({
               </Nav.Link>
             ))}
 
-            <NavDropdown title="Eventos" id="nav-dropdown">
+            {/*<NavDropdown title="Eventos" id="nav-dropdown">
               <NavDropdown.Item>
                 {
                   <Nav.Link as={Link} to="/events/programed">
@@ -85,7 +85,7 @@ const NavigationBar = ({
                   </Nav.Link>
                 }
               </NavDropdown.Item>
-            </NavDropdown>
+              </NavDropdown>*/}
 
             {/** Dropdown menu for admin */}
             {isAuthenticated && role === 'admin' && (

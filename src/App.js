@@ -97,45 +97,45 @@ var navLinksPublic = [
     title: "Inicio",
     path: "/",
   },
-  {
+  /*{
     title: "Noticias",
     path: "information/sections",
   },
   {
     title: "Recursos",
     path: "information/map-resources",
-  },
+  },*/
 ];
 
 var navLinksAdmin = [
-  {
+  /*{
     title: "Socios",
     path: "admin/partners",
-  },
+  },*/
   {
     title: "Usuarios",
     path: "admin/base/users",
   },
-  {
+  /*{
     title: "Recursos",
     path: "admin/information/resources",
-  },
+  },*/
   {
     title: "Voluntarios",
     path: "admin/volunteers",
   },
-  {
+  /*{
     title: "Noticias",
     path: "admin/information/advertisements",
-  },
+  },*/
   {
     title: "Atención al cliente",
     path: "admin/base/contacts",
   },
-  {
+  /*{
     title: "Eventos",
     path: "admin/events",
-  },
+  },*/
   {
     title: "Crear Notificación",
     path: "admin/notification/create"
@@ -188,7 +188,7 @@ export default function App() {
                       element={<CreateContact />}
                     />
 
-                    {/* Information */}
+                    {/* Information 
                     <Route
                       path="information/sections"
                       element={<ListAdvertisement />}
@@ -209,12 +209,12 @@ export default function App() {
                     <Route
                       path="information/map-resources/:id"
                       element={<ShowResourceUser />}
-                    />
+                    />*/}
 
                     <Route path="policies/terms" element={<TermsAndPolicies />} />
                     <Route path="policies/slas" element={<SLAs />} />
 
-                    {/* Events */}
+                    {/* Events 
                     <Route
                       path="/events/programed"
                       element={<ProgramedEvent />}
@@ -224,7 +224,7 @@ export default function App() {
 
                     <Route path="/events/:id" element={<ShowEvent />} />
 
-                    <Route path="/events/:id/booking" element={<BookingEvents />} />
+                    <Route path="/events/:id/booking" element={<BookingEvents />} />*/}
 
                     {/* Login and register */}
                     <Route path="base/login" element={<Login />} />
@@ -276,7 +276,7 @@ export default function App() {
                       element={<EditUser />}
                     />
 
-                    {/* Information */}
+                    {/* Information 
                     <Route
                       path="information/advertisements/create"
                       element={<AdminCreateAdvertisement />}
@@ -307,12 +307,12 @@ export default function App() {
                       exact
                       path="information/resources"
                       element={<ResourcesTable />}
-                    />
+                    />*/}
 
                     <Route path="policies/terms" element={<TermsAndPolicies />} />
                     <Route path="policies/slas" element={<SLAs />} />
                     
-                    {/* Partner*/}
+                    {/* Partner
                     <Route path="partners" element={<ListPartner />} />
                     <Route path="partners/:id" element={<ShowPartner />} />
                     <Route path="partners/create" element={<CreatePartner />} />
@@ -336,7 +336,7 @@ export default function App() {
                     <Route
                       path="partners/:id/donation/update"
                       element={<UpdateDonation />}
-                    />
+                    />*/}
                     {/* Volunteers */}
                     <Route path="volunteers" element={<ListVolunteers />} />
                     <Route

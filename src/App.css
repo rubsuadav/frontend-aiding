@@ -1,6 +1,6 @@
 /* COLORES DE LA APLICACIÓN */
 :root {
-  --nav: #b6afee;
+  --nav: #F6F1F1;
   --fondo: rgb(252, 252, 252);
   --boton: #7600dd;
   --color: #678edf;
@@ -75,6 +75,18 @@
 #cardit {
   font-size: medium;
 }
+
+#navlink:hover {
+  color: var(--boton);
+}
+
+#navlink:active,
+#navlink:focus {
+  color: var(--boton);
+}
+
+
+
 
 /* Estilo para el contenedor principal */
 .container-principal {
@@ -237,7 +249,7 @@
   background:
     linear-gradient(140deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.07) 43%, transparent 44%, transparent 100%),
     linear-gradient(105deg, transparent 0%, transparent 40%, rgba(0, 0, 0, 0.06) 41%, rgba(0, 0, 0, 0.07) 76%, transparent 77%, transparent 100%),
-    linear-gradient(to right, #b6afee, #7600dd);
+    linear-gradient(to right, #146C94, #19A7CE);
 }
 
 .error-container > span.four::before,
@@ -256,7 +268,7 @@
   background:
     linear-gradient(128deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.07) 40%, transparent 41%, transparent 100%),
     linear-gradient(116deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.07) 50%, transparent 51%, transparent 100%),
-    linear-gradient(to top, #a661e3, #b6afee, #aba2ec, #a196ef, #a661e3);
+    linear-gradient(to top, #084f6f, #146C94, #2c81a8, #4590b3, #659eb9);
 }
 
 .error-container > span.four::after {
@@ -265,7 +277,7 @@
   transform: rotate(-49.5deg);
   left: -18px;
   bottom: 36px;
-  background: linear-gradient(to right, #cdc9ed, #b6afee, #aba2ec, #a196ef, #a661e3);
+  background: linear-gradient(to right, #659eb9, #4590b3, #2c81a8, #146C94, #084f6f);
 }
 
 .error-container > span.zero {
@@ -275,7 +287,7 @@
   border-radius: 999px;
   background:
     linear-gradient(-45deg, transparent 0%, rgba(0, 0, 0, 0.06) 50%, transparent 51%, transparent 100%),
-    linear-gradient(to top right, #678edf, #6187d9, #5a80d2, #577ed2, #537bd1, #4c75ce, #4670cb);
+    linear-gradient(to top right, #84b9c8, #6ab6cb, #4cb0cc, #33aed0, #19A7CE);
   overflow: hidden;
   animation: bgshadow 5s infinite;
 }
@@ -314,7 +326,7 @@
   border-radius: 999px;
   background:
     linear-gradient(-45deg, transparent 0%, rgba(0, 0, 0, 0.06) 50%, transparent 51%, transparent 100%),
-    linear-gradient(to top right, #7600dd, #8218df, #877bde, #a196ef, #998eed, #998eed, #877bde);
+    linear-gradient(to top right, #659eb9, #4590b3, #2c81a8, #146C94, #084f6f);
   overflow: hidden;
 }
 
