@@ -5,7 +5,7 @@ export default function PublicRoute() {
   const { isAuthenticated } = useAuthContext();
 
   if (!isAuthenticated || localStorage.getItem("role") !== "admin") {
-    return <Navigate to="/" />;
+    return <Navigate to="/base/login" />;
   }
 
   return (

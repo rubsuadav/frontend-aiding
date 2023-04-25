@@ -29,11 +29,11 @@ function Footer() {
   }
 
   function handleTerms() {
-    navigate("policies/terms");
+    navigate("base/policies/terms");
   }
 
   function handleSLAs() {
-    navigate("policies/slas");
+    navigate("base/policies/slas");
   }
 
   /*  Compartir Aiding */
@@ -64,7 +64,7 @@ function Footer() {
                 </a>
               </p>
               <p>
-                <a id="contacto">
+                {/* <a id="contacto">
                   <NavDropdown title="Compartir Aiding" id="nav-dropdown">
                     <NavDropdown.Item
                       href={urlT}
@@ -84,7 +84,7 @@ function Footer() {
                       <FaWhatsapp /> En WhatsApp
                     </NavDropdown.Item>
                   </NavDropdown>
-                </a>
+                </a> */}
               </p>
             </MDBCol>
 

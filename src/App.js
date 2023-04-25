@@ -82,13 +82,13 @@ import AdminListEvent from "./pages/events/AdminListEvents";
 import AdminUpdateEvent from "./pages/events/AdminUpdateEvents";
 import BookingEvents from "./pages/events/BookingEvents";
 
-import AdminCreateNotification from './pages/base/AdminCreateNotification';
+import AdminCreateNotification from "./pages/base/AdminCreateNotification";
 
 // Stock
-import ListItems from './pages/stock/ListItems';
-import CreateItem from './pages/stock/CreateItem';
-import ShowItem from './pages/stock/ShowItem';
-import UpdateItem from './pages/stock/UpdateItem';
+import ListItems from "./pages/stock/ListItems";
+import CreateItem from "./pages/stock/CreateItem";
+import ShowItem from "./pages/stock/ShowItem";
+import UpdateItem from "./pages/stock/UpdateItem";
 
 import Error404 from "./pages/Error404";
 
@@ -98,66 +98,67 @@ var navLinksPublic = [
     path: "/",
   },
   {
-    title: "Noticias",
-    path: "information/sections",
-  },
-  {
-    title: "Recursos",
-    path: "information/map-resources",
-  },
-];
-
-var navLinksAdmin = [
-  {
-    title: "Socios",
-    path: "admin/partners",
-  },
-  {
-    title: "Usuarios",
-    path: "admin/base/users",
-  },
-  {
-    title: "Recursos",
-    path: "admin/information/resources",
-  },
-  {
     title: "Voluntarios",
     path: "admin/volunteers",
   },
   {
+    title: "Socios",
+    path: "admin/partners",
+  },
+  /* {
+    title: "Noticias",
+    path: "information/sections",
+  }, */
+  /* {
+    title: "Recursos",
+    path: "information/map-resources",
+  }, */
+];
+
+var navLinksAdmin = [
+  {
+    title: "Usuarios",
+    path: "admin/base/users",
+  },
+  /* {
+    title: "Recursos",
+    path: "admin/information/resources",
+  }, */
+
+  /* {
     title: "Noticias",
     path: "admin/information/advertisements",
-  },
+  }, */
   {
     title: "Atención al cliente",
     path: "admin/base/contacts",
   },
-  {
+  /* {
     title: "Eventos",
     path: "admin/events",
-  },
+  }, */
   {
     title: "Crear Notificación",
-    path: "admin/notification/create"
+    path: "admin/notification/create",
   },
-  {
+  /* {
     title: "Inventario",
-    path: "admin/stock/items"
-  },
+    path: "admin/stock/items",
+  }, */
 ];
 
 var navLinksCaptainSupervisor = [
-  {
+  /* {
     title: "Turnos",
     path: "roles/volunteers/turns",
-  },
+  }, */
   {
     title: "Voluntarios",
     path: "roles/volunteers",
   },
   {
     title: "Crear Notificación",
-    path: "roles/notification/create"
+    path: "roles/notification/create",
   },
 ];
 
@@ -179,16 +180,14 @@ export default function App() {
                 />
                 <Routes>
                   {/* Public routes ===========================================*/}
-                  <Route path="/" element={<PublicRoute />}>
-                    {/* Home */}
-                    <Route index element={<Home />} />
+                  <Route path="/base" element={<PublicRoute />}>
                     {/* Contacto */}
                     <Route
-                      path="base/contacts/CreateContact"
+                      path="contacts/CreateContact"
                       element={<CreateContact />}
                     />
 
-                    {/* Information */}
+                    {/* Information 
                     <Route
                       path="information/sections"
                       element={<ListAdvertisement />}
@@ -209,12 +208,15 @@ export default function App() {
                     <Route
                       path="information/map-resources/:id"
                       element={<ShowResourceUser />}
-                    />
+                    />*/}
 
-                    <Route path="policies/terms" element={<TermsAndPolicies />} />
+                    <Route
+                      path="policies/terms"
+                      element={<TermsAndPolicies />}
+                    />
                     <Route path="policies/slas" element={<SLAs />} />
 
-                    {/* Events */}
+                    {/* Events 
                     <Route
                       path="/events/programed"
                       element={<ProgramedEvent />}
@@ -224,16 +226,23 @@ export default function App() {
 
                     <Route path="/events/:id" element={<ShowEvent />} />
 
-                    <Route path="/events/:id/booking" element={<BookingEvents />} />
+                    <Route path="/events/:id/booking" element={<BookingEvents />} />*/}
 
                     {/* Login and register */}
-                    <Route path="base/login" element={<Login />} />
-                    <Route path="base/register" element={<Register />} />
+                    <Route path="login" element={<Login />} />
+                    {/* <Route path="base/register" element={<Register />} />*/}
                   </Route>
 
                   {/* Capitan/supervsior routes ============================================*/}
+                  <Route path="/" element={<ProtectedRoute />}>
+                    {/* Home */}
+                    <Route index element={<Home />} />
+                  </Route>
                   <Route path="/roles" element={<ProtectedRoute />}>
-                  <Route path="/roles/notification/create" element={ <AdminCreateNotification/> } />
+                    <Route
+                      path="/roles/notification/create"
+                      element={<AdminCreateNotification />}
+                    />
                     {/* Volunteers */}
                     <Route path="volunteers" element={<ListVolunteers />} />
                     <Route
@@ -245,20 +254,23 @@ export default function App() {
                       path="volunteers/update/:id"
                       element={<UpdateVolunteer />}
                     />
-                    {/* Turns */}
+                    {/* Turns 
                     <Route path="volunteers/turns" element={ <ListTurn/>} />
                     <Route path="volunteers/turns/create" element={ <CreateTurn/>} />
                     <Route path="volunteers/turns/:id/draft" element={ <ShowTurnDraft/>} />
                     <Route path="volunteers/turns/:id" element={ <ShowTurnFinished/>} />
                     <Route path="volunteers/turns/update/:id" element={ <UpdateTurn/>} />
-                    <Route path="volunteers/volunteerTurns/create/:id" element={ <CreateVolunteerTurn/>} />
+                    <Route path="volunteers/volunteerTurns/create/:id" element={ <CreateVolunteerTurn/>} />*/}
                   </Route>
-                                      
+
                   {/* Admin routes ============================================*/}
                   <Route path="/admin" element={<PrivateRoute />}>
                     {/* Base */}
                     <Route path="base/contacts" element={<ListContact />} />
-                    <Route path="base/contacts/:id" element={<ContactDetail />} />
+                    <Route
+                      path="base/contacts/:id"
+                      element={<ContactDetail />}
+                    />
                     <Route exact path="base/users" element={<Users />} />
                     <Route
                       exact
@@ -276,7 +288,7 @@ export default function App() {
                       element={<EditUser />}
                     />
 
-                    {/* Information */}
+                    {/* Information 
                     <Route
                       path="information/advertisements/create"
                       element={<AdminCreateAdvertisement />}
@@ -307,11 +319,14 @@ export default function App() {
                       exact
                       path="information/resources"
                       element={<ResourcesTable />}
-                    />
+                    />*/}
 
-                    <Route path="policies/terms" element={<TermsAndPolicies />} />
+                    <Route
+                      path="policies/terms"
+                      element={<TermsAndPolicies />}
+                    />
                     <Route path="policies/slas" element={<SLAs />} />
-                    
+
                     {/* Partner*/}
                     <Route path="partners" element={<ListPartner />} />
                     <Route path="partners/:id" element={<ShowPartner />} />
@@ -349,6 +364,7 @@ export default function App() {
                       element={<UpdateVolunteer />}
                     />
 
+                    {/* Events 
                     <Route path="/admin/events/" element={<AdminListEvent />} />
 
                     <Route
@@ -360,15 +376,22 @@ export default function App() {
                       path="/admin/events/:id/update"
                       element={<AdminUpdateEvent />}
                     />
+                    */}
 
-
+                    {/* Turns 
                     <Route path="volunteers/turns" element={<ListTurn />} />
                     <Route
                       path="volunteers/turns/create"
                       element={<CreateTurn />}
                     />
-                    <Route path="volunteers/turns/:id/draft" element={<ShowTurnDraft />} />
-                    <Route path="volunteers/turns/:id" element={<ShowTurnFinished />} />
+                    <Route
+                      path="volunteers/turns/:id/draft"
+                      element={<ShowTurnDraft />}
+                    />
+                    <Route
+                      path="volunteers/turns/:id"
+                      element={<ShowTurnFinished />}
+                    />
                     <Route
                       path="volunteers/turns/update/:id"
                       element={<UpdateTurn />}
@@ -376,15 +399,21 @@ export default function App() {
                     <Route
                       path="volunteers/volunteerTurns/create/:id"
                       element={<CreateVolunteerTurn />}
+                    />*/}
+
+                    <Route
+                      path="/admin/notification/create"
+                      element={<AdminCreateNotification />}
                     />
 
-                    <Route path="/admin/notification/create" element={ <AdminCreateNotification/> } />
-                    
+                    {/* Stock 
                     <Route path="stock/items" element={<ListItems />} />
                     <Route path="stock/items/create" element={<CreateItem />} />
                     <Route path="stock/items/:id" element={<ShowItem />} />
-                    <Route path="stock/items/update/:id" element={<UpdateItem />} />
-
+                    <Route
+                      path="stock/items/update/:id"
+                      element={<UpdateItem />}
+                    />*/}
                   </Route>
                   <Route path="*" element={<Error404 />} />
                 </Routes>

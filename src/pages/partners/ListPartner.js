@@ -33,11 +33,6 @@ const Partners = () => {
   /*LIMPIEZA*/
   const [filteredInfo, setFilteredInfo] = useState({});
 
-  const handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
-    setFilteredInfo(filters);
-  };
-
   const clearFilters = () => {
     setFilteredInfo({});
     setSearchText("");
@@ -281,6 +276,7 @@ const Partners = () => {
 
 
   const onChange = (pagination, filters, sorter, extra) => {
+    setFilteredInfo(filters);
     setFilteredPartners(extra.currentDataSource);
   };
 
@@ -420,7 +416,7 @@ const Partners = () => {
         }}
         columns={columns}
         dataSource={partners_data}
-        onChange={onChange && handleChange}
+        onChange={onChange}
         scroll={{ y: 400 }}
         pagination={{ pageSize: 20 }}
       />
