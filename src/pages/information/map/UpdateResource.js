@@ -196,7 +196,9 @@ export default function UpdateResource() {
                   maxLength={255}
                 />
               </Form.Group>
-
+              {errors.description && (
+                  <p className="text-danger">{errors.description}</p>
+                )}
               <Form.Group className="mb-3">
                 <Form.Label>Teléfono</Form.Label>
                 <Form.Control
