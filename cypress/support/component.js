@@ -15,15 +15,13 @@
 
 // Import commands.js using ES2015 syntax:
 import "./commands";
-require("cypress");
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
 const { mount } = require("cypress/react18");
-const cypress = require("cypress");
 
-cypress.Commands.add("mount", mount);
+Cypress.Commands.add("mount", mount);
 
 // Example use:
 // cy.mount(<MyComponent />)

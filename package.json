@@ -27,6 +27,7 @@
     "iban": "^0.0.14",
     "leaflet": "^1.9.3",
     "mdb-react-ui-kit": "^5.1.0",
+    "mochawesome": "^7.1.3",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
@@ -46,7 +47,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "cypress run --headed --browser electron --env coverage=true",
+    "test": "cypress run --headed --browser electron --reporter mochawesome --record --key 017d3b6b-4fc4-4caf-af05-9498765fd07d --tag 'test,production'",
     "cy:open": "cypress open",
     "cy:run": "cypress run --env coverage=true",
     "eject": "react-scripts eject"
