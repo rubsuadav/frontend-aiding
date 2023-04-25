@@ -1,12 +1,11 @@
 import React from "react";
 import {volunteers} from "./services/backend.js";
 import swal from 'sweetalert';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-
-
+import { isAntispam } from "../../components/AntiSpam.js";
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -32,10 +31,11 @@ function CreateVolunteer() {
         const aux = volunteers.post('',volunteer).then((response) => {
             console.log(response);
             swal(successMsg);
-            navigate("/admin/volunteers");
+            const role = localStorage.getItem("role");
+            navigate(role === 'admin' ? "/admin/volunteers" : "/roles/volunteers");
         }).catch((error) => {
             if (error.response && error.response.status === 409) {
-              let error_msgs = {general: "Ya existe un voluntario con ese numero de voluntario, NIF, teléfono o email"};
+              let error_msgs = {general: "Ya existe un voluntario con ese NIF, teléfono o email"};
               setErrors(error_msgs);
             }else {
               swal(errorMsg);
@@ -66,16 +66,38 @@ function CreateVolunteer() {
     }return true;
   }
 
+  function validateName(valor) {
+    const regex = /^[a-zA-ZÀ-ÿ]+(([',. -][a-zA-ZÀ-ÿ ])?[a-zA-ZÀ-ÿ]*)*$/;
+    return regex.test(valor);
+  }
+
+  function validatePostalCode(valor) {
+    const regex = /^[0-9]{5}$/;
+    return regex.test(valor);
+  }
+
+  function validateTelefone(valor) {
+    const regex = /^(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}$/;
+    return regex.test(valor);
+  }
 
   function validateForm() {
     let error_msgs = {};
 
     if (name === "" || name === null) {
       error_msgs.name = "El nombre no puede estar vacío";
+    } else if(!validateName(name)){
+      error_msgs.name="El nombre no puede contener números o carácteres especiales";
+    } else if (!isAntispam(name)) {
+      error_msgs.name="El nombre no puede contener palabras prohibidas";
     }
 
     if (last_name === "" || last_name === null) {
       error_msgs.last_name = "Los apellidos no pueden estar vacío";
+    } else if(!validateName(last_name)){
+      error_msgs.last_name="Los apellidos no pueden contener números o carácteres especiales";
+    } else if (!isAntispam(last_name)) {
+      error_msgs.last_name="Los apellidos no pueden contener palabras prohibidas";
     }
 
     if ( nif === "" || nif === null) {
@@ -86,20 +108,24 @@ function CreateVolunteer() {
 
     if (phone === "" || phone === null) {
       error_msgs.phone = "El teléfono no puede estar vacío";
-    }
-
-    if (num_volunteer === "" || num_volunteer === null) {
-      error_msgs.num_volunteer = "El número de socio no puede estar vacío";
+    } else if (!validateTelefone(phone)) {
+      error_msgs.phone = "Este no es un teléfono válido";
     }
 
     if (place === "" || place === null) {
-      error_msgs.place = "La dirección no puede estar vacía";
+      error_msgs.place = "La población no puede estar vacía";
+    } else if(!validateName(place)){
+      error_msgs.place="La población no puede contener números o carácteres especiales";
+    } else if (!isAntispam(place)) {
+      error_msgs.place="La población no puede contener palabras prohibidas";
     }
     
     if (email === "" || email === null) {
       error_msgs.email = "El email no puede estar vacío";
     }else if (!validateEmail(email)) {
       error_msgs.email = "Este no es un email válido";
+    } else if (!isAntispam(email)) {
+      error_msgs.email="El email no puede contener palabras prohibidas";
     }
 
     if (situation === "" || situation === null) {
@@ -109,12 +135,21 @@ function CreateVolunteer() {
     if (rol === "" || rol === null) {
       error_msgs.rol = "Por favor, indique el rol del voluntario";
     }
-    if (observations.length>250) {
-      error_msgs.observations = "Las observaciones no pueden tener más de 250 caracteres";
+
+    if (!(observations === "" || observations === null)) {
+      if (observations.length>250) {
+        error_msgs.observations = "Las observaciones no pueden tener más de 250 caracteres";
+      } else if (!isAntispam(observations)) {
+        error_msgs.observations="Las observaciones no pueden contener palabras prohibidas";
+      }
     }
+
     if (postal_code === "" || postal_code === null) {
       error_msgs.postal_code = "El código postal no puede estar vacío";
+    } else if (!validatePostalCode(postal_code)) {
+      error_msgs.postal_code = "Este no es un código postal válido";
     }
+
     setErrors(error_msgs);
 
     if (Object.keys(error_msgs).length === 0) {
@@ -147,7 +182,6 @@ function CreateVolunteer() {
     const {
       name,
       last_name,
-      num_volunteer,
       nif,
       place,
       phone,
@@ -208,18 +242,6 @@ function CreateVolunteer() {
                 </Form.Group>
                 {errors.last_name && (
                     <p className="text-danger">{errors.last_name}</p>
-                  )}
-                <Form.Group className="mb-3">
-                  <Form.Label>Número de voluntario</Form.Label>
-                  <Form.Control
-                    onChange={(e) => onInputChange(e)}
-                    value={num_volunteer}
-                    name="num_volunteer"
-                    placeholder="Número de volutario"
-                  />
-                </Form.Group>
-                  {errors.phone && (
-                    <p className="text-danger">{errors.phone}</p>
                   )}
                 <Form.Group className="mb-3">
                   <Form.Label>NIF</Form.Label>
@@ -384,6 +406,12 @@ function CreateVolunteer() {
             <Button className="col mb-4 mx-5" variant="outline-success" type="submit">
               Guardar voluntario
             </Button>
+            <Link
+            className="btn btn-outline-danger col mb-4 mx-2"
+            to="/admin/volunteers"
+          >
+            Cancelar
+          </Link>
           </div>
         </Form>
       </div>
