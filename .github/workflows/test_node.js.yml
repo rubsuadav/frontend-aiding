@@ -34,7 +34,3 @@ jobs:
             https://firee.pythonanywhere.com/
             http://localhost:3000
           test-command: npm run test
-      - name: Upload test results
-        uses: cypress-io/github-action@v4
-        with:
-          record-key: ${{ secrets.CYPRESS_RECORD_KEY }}
