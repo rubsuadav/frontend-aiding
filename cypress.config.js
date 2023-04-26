@@ -6,7 +6,7 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents() {
       // implement node event listeners here
-      this.baseUrl = "http://localhost:3000";
+      this.baseUrl = "https://firee.pythonanywhere.com/";
     },
   },
   component: {
