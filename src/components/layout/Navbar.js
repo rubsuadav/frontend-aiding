@@ -121,7 +121,7 @@ const NavigationBar = ({
 
             {/** Login and logout buttons */}
             {isAuthenticated && (
-              <Button variant="light" onClick={Logout} className="logout">
+              <Button variant="dark" onClick={Logout} className="logout ms-2 me-2">
                 Cerrar sesión
               </Button>
             )}
