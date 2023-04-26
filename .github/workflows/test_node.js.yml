@@ -22,14 +22,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Start React server
+      - name: Install dependencies
         run: |
-          npm ci
-          npm start &
+          npm install
+          npm install -g concurrently wait-on
 
-      - name: Wait for React server to start
+      - name: Start React server and wait for it to start
         run: |
-          npx wait-on http://localhost:3000
+          concurrently "npm run start" "wait-on http://localhost:3000"
+
       - name: Wait for PythonAnywhere to start
         run: |
           npx wait-on https://firee.pythonanywhere.com/
