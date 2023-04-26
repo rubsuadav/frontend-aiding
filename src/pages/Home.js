@@ -13,9 +13,10 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
   let navigate = useNavigate();
+  const role = localStorage.getItem("role") === "admin";
 
   function redirectNoticias() {
-    navigate("/information/sections");
+    role ? navigate("/admin/stock/items") : navigate("/base/login");
   }
 
   function redirectRecursos() {
@@ -23,7 +24,7 @@ function Home() {
   }
 
   function redirectMayores() {
-    navigate("/events/programed");
+    role ? navigate("/admin/volunteers") : navigate("/base/login");
   }
 
   return (

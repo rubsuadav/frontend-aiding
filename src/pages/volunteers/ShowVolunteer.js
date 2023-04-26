@@ -107,7 +107,7 @@ export default function Details() {
           <MDBCol lg="10"> 
             <MDBRow>
               <MDBCol lg="6">
-                <Badge.Ribbon text="Información" color="purple">
+                <Badge.Ribbon text="Información" color="#146C94">
                   <MDBCard className="mb-4">
                     <MDBCardBody>
                       <MDBRow>
@@ -156,7 +156,7 @@ export default function Details() {
                 </Badge.Ribbon>
               </MDBCol>
               <MDBCol lg="6">
-                <Badge.Ribbon text="Conocimientos" color="purple">
+                <Badge.Ribbon text="Conocimientos" color="#146C94">
                   <MDBCard className="mb-4">
                     <MDBCardBody>
                     <MDBRow>
@@ -192,7 +192,7 @@ export default function Details() {
                 </Badge.Ribbon>
               </MDBCol>
               <MDBCol lg="12">
-                <Badge.Ribbon text="Datos personales" color="purple">
+                <Badge.Ribbon text="Datos personales" color="#146C94">
                   <MDBCard className="mb-4">
                     <MDBCardBody>
                       
