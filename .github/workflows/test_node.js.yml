@@ -30,10 +30,10 @@ jobs:
           timeout: 60
 
       - name: Wait for PythonAnywhere app to start
-        uses: agauniyal/wait-for-url@v1.2.0
+        uses: cypress-io/github-action@v5
         with:
-          url: https://firee.pythonanywhere.com/
-          timeout: 60
+          wait-on: "https://firee.pythonanywhere.com/"
+          wait-on-timeout: 60000
 
       - name: Cypress run
         uses: cypress-io/github-action@v5
