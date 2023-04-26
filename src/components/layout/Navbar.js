@@ -120,9 +120,9 @@ const NavigationBar = ({
                 ))}
               </NavDropdown>
             )}
-            {/** Dropdown menu for captain and supervisor*/}
+            {/** Dropdown menu for captain and supervisor
             {isAuthenticated &&
-              (role === "capitán" || role === "supervisor") && (
+              (role === "capitán" || role === "supervisor" || role === 'admin') && (
                 <NavDropdown
                   title="Menú para capitanes/supervisores"
                   id="basic-nav-dropdown"
@@ -134,11 +134,11 @@ const NavigationBar = ({
                     </NavDropdown.Item>
                   ))}
                 </NavDropdown>
-              )}
+              )}*/}
 
             {/** Login and logout buttons */}
             {isAuthenticated && (
-              <Button variant="light" onClick={Logout} className="logout">
+              <Button variant="dark" onClick={Logout} className="logout ms-2">
                 Cerrar sesión
               </Button>
             )}

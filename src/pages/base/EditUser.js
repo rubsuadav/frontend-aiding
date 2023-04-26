@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { base, rolesBE } from "./services/backend.js";
 import swal from 'sweetalert';
+import { isAntispam } from "../../components/AntiSpam.js";
 
 const successMsg = {
   title: "Mensaje de confirmación",
@@ -28,6 +29,7 @@ export default function EditUser() {
   const [user, setUser] = useState({
     username: "",
     password: "",
+    new_password: "",
     is_admin: "",
     roles_id: "",
   });
@@ -39,7 +41,7 @@ export default function EditUser() {
     },
   ]);
 
-  const { username, password, is_admin, roles_id } = user;
+  const { username, password, new_password, is_admin, roles_id } = user;
 
   function getRoles() {
     rolesBE
@@ -69,16 +71,39 @@ export default function EditUser() {
     }
   };
 
+  /* Validator */
+  const [errors, setErrors] = useState({});
+
+  function validateForm() {
+    let error_msgs = {};
+
+    if (username === "" || username === null) {
+      error_msgs.username = "El nombre de usuario no puede estar vacío";
+    } else if (!isAntispam(username)) {
+      error_msgs.username = "El nombre de usuario no puede contener palabras prohibidas";
+    }
+
+    if (password === "" || password === null) {
+      error_msgs.password = "La contraseña no puede estar vacía";
+    }
+
+    setErrors(error_msgs);
+
+    if (Object.keys(error_msgs).length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    try {
+    if (validateForm()) {
       await base.put(`/users/${id}`, user);
       swal(successMsg);
       navigate("/admin/base/users");
-    } catch (error) {
-      console.error(error);
-      swal(errorMsg);
     }
+
   };
 
   return (
@@ -98,16 +123,33 @@ export default function EditUser() {
               />
             </Form.Group>
 
+            {errors.username && (
+                    <p className="text-danger">{errors.username}</p>
+                  )}
+
             <Form.Group className="mb-12">
-              <Form.Label>Contraseña</Form.Label>
+              <Form.Label>Contraseña actual</Form.Label>
               <Form.Control
                 onChange={onInputChange}
-                value={password}
                 type="password"
                 name="password"
-                placeholder="Contraseña"
+                placeholder="Debe introducir su actual contraseña para confirmar cualquier cambio"
               />
             </Form.Group>
+
+            <Form.Group className="mb-12">
+              <Form.Label>Nueva Contraseña</Form.Label>
+              <Form.Control
+                onChange={onInputChange}
+                type="password"
+                name="new_password"
+                placeholder="Introduzca su nueva contraseña si desea modificarla"
+              />
+            </Form.Group>
+
+            {errors.password && (
+                    <p className="text-danger">{errors.password}</p>
+                  )}
 
               <Form.Group className="mb-12">
                 <Form.Label>Administrador</Form.Label>
@@ -136,9 +178,15 @@ export default function EditUser() {
         </div>
 
         <div className="row justify-content-evenly">
-          <Button className="col mb-4 mx-5" variant="outline-success" type="submit">
+          <Button className="col mb-4 mx-2" variant="outline-success" type="submit">
             Guardar cambios
           </Button>
+          <Link
+            className="btn btn-outline-danger col mb-4 mx-2"
+            to="/admin/base/users"
+          >
+            Cancelar
+          </Link>
         </div>
       </Form>
     </div>
