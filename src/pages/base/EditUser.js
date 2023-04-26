@@ -161,7 +161,7 @@ export default function EditUser() {
                   onChange={(e) => onInputChange(e)}
                 />
               </Form.Group>
-              <Form.Group className="mb-3">
+             {/*  <Form.Group className="mb-3">
               <Form.Label>Roles</Form.Label>
               <Form.Select
                 onChange={(e) => onInputChange(e)}
@@ -173,7 +173,7 @@ export default function EditUser() {
                   <option value={rol.id}>{rol.name}</option>
                 ))}
               </Form.Select>
-            </Form.Group>
+            </Form.Group>*/}
           </div>
         </div>
 

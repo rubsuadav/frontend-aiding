@@ -152,14 +152,14 @@ var navLinksCaptainSupervisor = [
     title: "Turnos",
     path: "roles/volunteers/turns",
   }, */
-  {
+  /* {
     title: "Voluntarios",
     path: "roles/volunteers",
-  },
-  {
+  }, */
+  /* {
     title: "Crear Notificación",
     path: "roles/notification/create",
-  },
+  }, */
 ];
 
 var logo = ["./logo.png"];

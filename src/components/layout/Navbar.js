@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
+import { useState } from "react";
 
 // React Bootstrap imports
 import Container from "react-bootstrap/Container";
@@ -12,6 +13,7 @@ import Button from "react-bootstrap/Button";
 // Local imports
 import { backendUrl } from "../../config";
 import { useAuthContext } from "../routes/authContext";
+import React from "react";
 
 const NavigationBar = ({
   navLinksPublic,
@@ -43,6 +45,12 @@ const NavigationBar = ({
     return null;
   }
 
+  const [activeLink, setActiveLink] = useState("");
+
+  const handleClick = (event) => {
+    setActiveLink(event.target.pathname);
+  };
+
   const role = localStorage.getItem("role");
   console.log(isAuthenticated && (role === "capitán" || role === "supervisor"));
 
@@ -64,11 +72,20 @@ const NavigationBar = ({
         <Navbar.Collapse className="justify-content-end">
           <Nav className="me-auto">
             {/** Public links */}
-            {isAuthenticated && role === "admin" && (navLinksPublic.map((link) => (
-              <Nav.Link key={link.path} as={Link} to={link.path}>
-                <strong>{link.title}</strong>
-              </Nav.Link>
-            )))}
+            {isAuthenticated &&
+              role === "admin" &&
+              navLinksPublic.map((link) => (
+                <Nav.Link
+                  key={link.path}
+                  as={Link}
+                  to={link.path}
+                  className={link.path === activeLink ? "active" : ""}
+                  onClick={handleClick}
+                  id="navlink"
+                >
+                  <strong>{link.title}</strong>
+                </Nav.Link>
+              ))}
 
             {/** Dropdown menu for admin */}
             {isAuthenticated && role === "admin" && (
@@ -85,7 +102,7 @@ const NavigationBar = ({
               </NavDropdown>
             )}
             {/** Dropdown menu for captain and supervisor*/}
-            {isAuthenticated &&
+            {/* {isAuthenticated &&
               (role === "capitán" ||
                 role === "supervisor" ||
                 role === "admin") && (
@@ -100,7 +117,7 @@ const NavigationBar = ({
                     </NavDropdown.Item>
                   ))}
                 </NavDropdown>
-              )}
+              )}*/}
 
             {/** Login and logout buttons */}
             {isAuthenticated && (
