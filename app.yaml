@@ -1,6 +1,6 @@
 runtime: nodejs18 # or another supported version
 instance_class: F1
-service: default
+service: fundomar
 
 handlers:
 - url: /(.*\..+)$
