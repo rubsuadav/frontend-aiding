@@ -26,6 +26,10 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           start: npm start
+          env: |
+            CYPRESS_baseUrl=http://localhost:3000
+            CYPRESS_backendUrl=https://firee.pythonanywhere.com/
+          wait-on: http://localhost:3000
           record: true
           tag: node-${{ matrix.node }}
         env:
