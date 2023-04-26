@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
-
+import { useState } from "react";
 // React Bootstrap imports
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -43,17 +43,23 @@ const NavigationBar = ({
     return null;
   }
 
-  const role = localStorage.getItem('role');
-  console.log(isAuthenticated && (role === 'capitán' || role === 'supervisor'));
-  
+  const role = localStorage.getItem("role");
+  console.log(isAuthenticated && (role === "capitán" || role === "supervisor"));
+
+  const [activeLink, setActiveLink] = useState("");
+
+  const handleClick = (event) => {
+    setActiveLink(event.target.pathname);
+  };
+
   return (
-    <Navbar className="navbar" expand="sm">
+    <Navbar className="navbar border-bottom" expand="sm">
       <Container>
         <Navbar.Brand as={Link} to="/">
           <img
             src={logo}
-            width="180"
-            height="80"
+            width="220"
+            height="60"
             className="d-inline-block align-top"
             alt="Logo"
             loading="lazy"
@@ -65,8 +71,15 @@ const NavigationBar = ({
           <Nav className="me-auto">
             {/** Public links */}
             {navLinksPublic.map((link) => (
-              <Nav.Link key={link.path} as={Link} to={link.path}>
-                {link.title}
+              <Nav.Link
+                key={link.path}
+                as={Link}
+                to={link.path}
+                className={link.path === activeLink ? "active" : ""}
+                onClick={handleClick}
+                id="navlink"
+              >
+                <strong>{link.title}</strong>
               </Nav.Link>
             ))}
 
@@ -88,8 +101,12 @@ const NavigationBar = ({
               </NavDropdown>*/}
 
             {/** Dropdown menu for admin */}
-            {isAuthenticated && role === 'admin' && (
-              <NavDropdown title="Administración" id="basic-nav-dropdown">
+            {isAuthenticated && role === "admin" && (
+              <NavDropdown
+                title="Administración"
+                id="basic-nav-dropdown"
+                style={{ fontWeight: "bold" }}
+              >
                 {navLinksAdmin.map((link) => (
                   <NavDropdown.Item key={link.path} as={Link} to={link.path}>
                     {link.title}
@@ -98,23 +115,27 @@ const NavigationBar = ({
               </NavDropdown>
             )}
             {/** Dropdown menu for captain and supervisor*/}
-            {isAuthenticated && (role === 'capitán' || role === 'supervisor' || role === 'admin') && (
-              <NavDropdown
-                title="Menú para capitanes/supervisores"
-                id="basic-nav-dropdown"
-              >
-                {navLinksCaptainSupervisor.map((link) => (
-                  <NavDropdown.Item key={link.path} as={Link} to={link.path}>
-                    {link.title}
-                  </NavDropdown.Item>
-                ))}
-              </NavDropdown>
-            )}
+            {isAuthenticated &&
+              (role === "capitán" ||
+                role === "supervisor" ||
+                role === "admin") && (
+                <NavDropdown
+                  title="Menú para capitanes/supervisores"
+                  id="basic-nav-dropdown"
+                  style={{ fontWeight: "bold" }}
+                >
+                  {navLinksCaptainSupervisor.map((link) => (
+                    <NavDropdown.Item key={link.path} as={Link} to={link.path}>
+                      {link.title}
+                    </NavDropdown.Item>
+                  ))}
+                </NavDropdown>
+              )}
           </Nav>
         </Navbar.Collapse>
         {/** Login and logout buttons */}
         {isAuthenticated && (
-          <Button variant="light" onClick={Logout} className="logout">
+          <Button variant="dark" onClick={Logout} className="logout">
             Cerrar sesión
           </Button>
         )}
@@ -126,7 +147,7 @@ const NavigationBar = ({
               to="base/login"
               className="login"
             >
-              Iniciar sesión
+              <strong>Iniciar sesión</strong>
             </Nav.Link>
             <Nav.Link
               key="base/register"
@@ -134,7 +155,7 @@ const NavigationBar = ({
               to="base/register"
               className="login ms-3"
             >
-              Registrarse
+              <strong>Registrarse</strong>
             </Nav.Link>
           </>
         )}

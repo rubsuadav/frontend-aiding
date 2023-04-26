@@ -1,9 +1,9 @@
 /* COLORES DE LA APLICACIÓN */
 :root {
-  --nav: #F6F1F1;
+  --nav: #fefdfd;
   --fondo: rgb(252, 252, 252);
-  --boton: #7600dd;
-  --color: #678edf;
+  --boton: #146C94;
+  --color: #19A7CE;
 }
 
 .App {

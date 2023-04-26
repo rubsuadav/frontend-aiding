@@ -16,10 +16,6 @@ const Volunteers = () => {
   /*LIMPIEZA*/
   const [filteredInfo, setFilteredInfo] = useState({});
 
-  const handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
-    setFilteredInfo(filters);
-  };
 
   const clearFilters = () => {
     setFilteredInfo({});
@@ -239,6 +235,7 @@ const Volunteers = () => {
   ]);
 
   const onChange = (pagination, filters, sorter, extra) => {
+    setFilteredInfo(filters);
     setFilteredVol(extra.currentDataSource);
   };
 
@@ -272,7 +269,7 @@ const Volunteers = () => {
         }}
         columns={columns}
         dataSource={volunteers_data}
-        onChange={onChange && handleChange}
+        onChange={onChange}
         scroll={{ y: 400 }}
         pagination={{ pageSize: 20 }}
       />
