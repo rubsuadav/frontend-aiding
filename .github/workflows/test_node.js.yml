@@ -28,6 +28,6 @@ jobs:
           start: npm start
           record: true
           tag: node-${{ matrix.node }}
-          env: |
+          env:
             CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
             GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
