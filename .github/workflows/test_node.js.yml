@@ -1,5 +1,4 @@
-name: Testing CI
-
+name: Test CI
 on:
   push:
     branches: ["main", "develop", "feature-issue#81"]
@@ -7,30 +6,34 @@ on:
     branches: ["main", "develop"]
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-
+  cypress-run:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node: [19]
+    name: E2E on Node v${{ matrix.node }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Use Node.js 19.7.0
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 19.7.0
-          cache: "npm"
+          node-version: ${{ matrix.node }}
+      - run: node -v
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Start server and run tests
+      - name: Wait for React server to start
+        run: |
+          npx wait-on http://localhost:3000
+      - name: Wait for PythonAnywhere to start
+        run: |
+          npx wait-on https://firee.pythonanywhere.com/
+
+      - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          command: npm run start
-          env: |
-            CYPRESS_baseUrl=http://localhost:3000
-            CYPRESS_backendUrl=https://firee.pythonanywhere.com/
-          wait-on: |
-            https://firee.pythonanywhere.com/
-            http://localhost:3000
-          test-command: npm run test
+          record: true
+          tag: node-${{ matrix.node }}
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
