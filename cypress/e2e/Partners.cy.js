@@ -75,7 +75,7 @@ describe("CRU Partners", () => {
         }
       });
   });
-  /*it("can update partners?", () => {
+  it("can update partners?", () => {
     cy.get(".login").click();
     cy.get('input[name="username"]').type("rub");
     cy.get('input[name="password"]').type("rub");
@@ -123,5 +123,5 @@ describe("CRU Partners", () => {
             });
         }
       });
-  });*/
+  });
 });
