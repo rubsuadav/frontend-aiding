@@ -22,6 +22,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Start React server
+        run: |
+          npm ci
+          npm start &
+
       - name: Wait for React server to start
         run: |
           npx wait-on http://localhost:3000
