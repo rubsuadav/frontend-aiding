@@ -22,22 +22,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Wait for React app to start
+      - name: Wait for React app to start and PythonAnywhere app to start
         uses: cypress-io/github-action@v5
         with:
           start: npm start
-          wait-on: http://localhost:3000
-
-      - name: Wait for PythonAnywhere app to start
-        uses: cypress-io/github-action@v5
-        with:
-          wait-on: https://firee.pythonanywhere.com/
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
-        with:
+          wait-on: |
+            https://firee.pythonanywhere.com/
+            http://localhost:3000
           record: true
           tag: node-${{ matrix.node }}
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          env: |
+            CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+            GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
