@@ -1,36 +1,32 @@
-name: Testing CI
-
+name: Tests CI
 on:
   push:
     branches: ["main", "develop", "feature-issue#81"]
   pull_request:
     branches: ["main", "develop"]
-
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    
+  cypress-run:
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
-        node-version: [19.7.0]
-
+        node: [19]
+    name: E2E on Node v${{ matrix.node }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Start server and run tests
-        uses: actions/setup-node@v3
+          node-version: ${{ matrix.node }}
+      - run: node -v
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
         with:
-          command: npm run start
+          start: npm start
           env: |
             CYPRESS_baseUrl=http://localhost:3000
-          wait-on: |
-            http://localhost:3000
-      - run: npm test
+          wait-on: http://localhost:3000
+          record: true
+          tag: node-${{ matrix.node }}
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
