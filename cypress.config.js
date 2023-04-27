@@ -2,7 +2,7 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   env: {
-    API_URL: process.env.REACT_APP_BACKEND_URL,
+    API_URL: Cypress.env("REACT_APP_BACKEND_URL"),
   },
   projectId: "5jcwhm",
   reporter: "mochawesome",
