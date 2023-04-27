@@ -30,7 +30,7 @@ jobs:
         with:
           command: npm run start
           env: |
-            CYPRESS_baseUrl=https://firee.pythonanywhere.com/
+            CYPRESS_baseUrl=http://localhost:3000
           wait-on: |
             http://localhost:3000
       - run: npm test
