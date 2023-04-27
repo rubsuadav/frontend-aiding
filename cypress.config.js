@@ -1,6 +1,9 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
+  env: {
+    CYPRESS_backendUrl: "https://firee.pythonanywhere.com/",
+  },
   projectId: "5jcwhm",
   reporter: "mochawesome",
   e2e: {
