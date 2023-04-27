@@ -1,2 +1,2 @@
-baseUrl: https://firee.pythonanywhere.com/
+baseUrl: http://localhost:3000
 backendUrl: https://firee.pythonanywhere.com/

@@ -2,14 +2,14 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   env: {
-    CYPRESS_backendUrl: "https://firee.pythonanywhere.com/",
+    API_URL: process.env.REACT_APP_BACKEND_URL,
   },
   projectId: "5jcwhm",
   reporter: "mochawesome",
   e2e: {
     setupNodeEvents() {
       // implement node event listeners here
-      this.baseUrl = "https://firee.pythonanywhere.com/";
+      this.baseUrl = "http://localhost:3000";
     },
   },
   component: {

@@ -13,6 +13,10 @@ jobs:
         node: [19]
     name: E2E on Node v${{ matrix.node }}
     steps:
+      - name: Set API URL
+        env:
+          API_URL: "https://firee.pythonanywhere.com/"
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -28,7 +32,7 @@ jobs:
           start: npm start
           env: |
             CYPRESS_baseUrl=http://localhost:3000
-            CYPRESS_backendUrl=https://firee.pythonanywhere.com/
+            API_URL=${{ env.API_URL }}
           wait-on: http://localhost:3000
           record: true
           tag: node-${{ matrix.node }}
