@@ -22,10 +22,11 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          start: npm start
+          start: npm start &
           env: |
             CYPRESS_baseUrl=http://localhost:3000
           wait-on: http://localhost:3000
+          start: npm test
           record: true
           tag: node-${{ matrix.node }}
         env:
