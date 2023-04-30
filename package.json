@@ -45,7 +45,7 @@
     "yup": "^1.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "export REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL} && react-scripts start",
     "build": "react-scripts build",
     "test": "cypress run --headed --browser electron --reporter mochawesome --record --key 017d3b6b-4fc4-4caf-af05-9498765fd07d --tag 'test,production' -- --env REACT_APP_BACKEND_URL=https://firee.pythonanywhere.com/",
     "cy:open": "cypress open",
