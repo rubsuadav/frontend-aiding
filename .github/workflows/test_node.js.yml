@@ -27,7 +27,7 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           REACT_APP_BACKEND_URL: ${{ secrets.REACT_APP_BACKEND_URL }}
         with:
-          start: npm run start
+          start: npm run start:s
           wait-on: http://localhost:3000
           record: true
           tag: node-${{ matrix.node }}
