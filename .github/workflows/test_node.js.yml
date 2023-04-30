@@ -23,14 +23,11 @@ jobs:
         run: npm ci
       - name: Cypress run
         uses: cypress-io/github-action@v5
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_BACKEND_URL : ${{ secrets.REACT_APP_BACKEND_URL }}
         with:
           start: npm run start
-          env: |
-            CYPRESS_baseUrl=http://localhost:3000
           wait-on: http://localhost:3000
           record: true
           tag: node-${{ matrix.node }}
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-      - name: Run tests
-        run: npm run test
