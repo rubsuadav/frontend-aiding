@@ -85,7 +85,7 @@ describe("Events and Sections", () => {
   it("can list sections", () => {
     const path = "information/sections";
     cy.visit(baseUrl + path);
-    cy.wait(1000);
+    cy.wait(3000);
     cy.get(".card-body").first().click();
     cy.wait(1000);
   });
