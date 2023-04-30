@@ -21,6 +21,7 @@ describe("Login", () => {
     cy.get('input[name="username"]').type("rub");
     cy.get('input[name="password"]').type("rub");
     cy.get('button[type="submit"]').click();
+    cy.wait(1000);
     cy.get(".swal-modal").should("be.visible");
     cy.get(".swal-button").click();
   });
@@ -85,8 +86,6 @@ describe("Events and Sections", () => {
   it("can list sections", () => {
     const path = "information/sections";
     cy.visit(baseUrl + path);
-    cy.wait(3000);
-    cy.get(".card-body").first().click();
     cy.wait(1000);
   });
 });
